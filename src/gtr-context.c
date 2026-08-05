@@ -76,6 +76,7 @@ typedef struct
   GtkTextBuffer *previous_source_buffer;
 
   // paths
+  GtkWidget *paths_group;
   GtkWidget *paths;
 } GtrContextPanelPrivate;
 
@@ -286,6 +287,7 @@ clean_paths (GtrContextPanel *panel)
   GtrContextPanelPrivate *priv = gtr_context_panel_get_instance_private (panel);
 
   gtk_list_box_remove_all (GTK_LIST_BOX (priv->paths));
+  gtk_widget_set_visible (priv->paths_group, FALSE);
 }
 
 static void
@@ -475,6 +477,7 @@ gtr_context_panel_class_init (GtrContextPanelClass * klass)
   gtk_widget_class_bind_template_child_private (widget_class, GtrContextPanel, previous_source);
   gtk_widget_class_bind_template_child_private (widget_class, GtrContextPanel, previous_source_buffer);
 
+  gtk_widget_class_bind_template_child_private (widget_class, GtrContextPanel, paths_group);
   gtk_widget_class_bind_template_child_private (widget_class, GtrContextPanel, paths);
 }
 
@@ -594,4 +597,5 @@ gtr_context_add_path (GtrContextPanel *panel,
     }
 
   gtk_list_box_append (GTK_LIST_BOX (priv->paths), row);
+  gtk_widget_set_visible (priv->paths_group, TRUE);
 }
