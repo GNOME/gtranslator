@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2026-06-29 14:48+0000\n"
-"PO-Revision-Date: 2026-06-30 02:30+0200\n"
+"POT-Creation-Date: 2026-08-03 18:32+0000\n"
+"PO-Revision-Date: 2026-08-05 05:20+0200\n"
 "Last-Translator: Ekaterine Papava <papava.e@gtu.ge>\n"
 "Language-Team: Georgian <(nothing)>\n"
 "Language: ka\n"
@@ -193,6 +193,12 @@ msgstr ""
 msgid "Translator's main interface"
 msgstr "მთარგმნელის მთავარი ინტერფეისი"
 
+#. developer_name tag deprecated with Appstream 1.0
+#: data/org.gnome.Gtranslator.metainfo.xml.in.in:323
+#: data/org.gnome.Gtranslator.metainfo.xml.in.in:325
+msgid "Daniel García Moreno"
+msgstr "Daniel García Moreno"
+
 #: src/gtr-actions-app.c:86
 msgid ""
 "Translation file editing suite for localization of applications and "
@@ -317,7 +323,7 @@ msgstr "ფაილის შენახვა როგორც…"
 msgid "Fixed plurals"
 msgstr "გასწორდა მრავლობითი ფორმები"
 
-#: src/gtr-close-confirmation-dialog.c:121 src/gtr-context.c:164
+#: src/gtr-close-confirmation-dialog.c:121 src/gtr-context.c:169
 #: src/gtr-preferences-dialog.c:452 src/gtr-profile-dialog.ui:15
 #: src/gtr-upload-dialog.ui:20
 msgid "_Cancel"
@@ -327,7 +333,7 @@ msgstr "_გაუქმება"
 msgid "Close _Without Saving"
 msgstr "დახურვა _შენახვის გარეშე"
 
-#: src/gtr-close-confirmation-dialog.c:123 src/gtr-context.c:165
+#: src/gtr-close-confirmation-dialog.c:123 src/gtr-context.c:170
 msgid "_Save"
 msgstr "_შენახვა"
 
@@ -351,11 +357,11 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/gtr-context.c:181
+#: src/gtr-context.c:186
 msgid "Edit Notes"
 msgstr "შენიშვნების ჩასწორება"
 
-#: src/gtr-context.c:549
+#: src/gtr-context.c:581
 msgid "Open in Browser"
 msgstr "ბრაუზერში გახსნა"
 
@@ -368,10 +374,14 @@ msgid "Edit"
 msgstr "ჩასწორება"
 
 #: src/gtr-context.ui:59
-msgid "Extracted comments"
-msgstr "მოპოვებული კომენტარები"
+msgid "Extracted Comments"
+msgstr "ამოღებული კომენტარები"
 
 #: src/gtr-context.ui:84
+msgid "Previous Source Text"
+msgstr "წინა წყარო ტექსტი"
+
+#: src/gtr-context.ui:112
 msgid "Paths"
 msgstr "ბილიკები"
 
@@ -711,27 +721,27 @@ msgstr "საწყისი შეტყობინება"
 msgid "Translated Message"
 msgstr "თარგმნილი შეტყობინება"
 
-#: src/gtr-po.c:469
+#: src/gtr-po.c:465
 #, c-format
 msgid "The file is empty"
 msgstr "ფაილი ცარიელია"
 
-#: src/gtr-po.c:478
+#: src/gtr-po.c:474
 #, c-format
 msgid "Failed opening file “%s”: %s"
 msgstr "ფაილის \"%s\" გახსნის შეცდომა: %s"
 
-#: src/gtr-po.c:549
+#: src/gtr-po.c:545
 #, c-format
 msgid "Could not convert from charset “%s” to UTF-8"
 msgstr ""
 
-#: src/gtr-po.c:563 src/gtr-po.c:581
+#: src/gtr-po.c:559 src/gtr-po.c:577
 #, c-format
 msgid "Could not store temporary file for encoding conversion"
 msgstr ""
 
-#: src/gtr-po.c:605
+#: src/gtr-po.c:601
 #, c-format
 msgid ""
 "All attempt to convert the file to UTF-8 has failed, use the msgconv or "
@@ -739,17 +749,17 @@ msgid ""
 "Editor"
 msgstr ""
 
-#: src/gtr-po.c:670
+#: src/gtr-po.c:666
 #, c-format
 msgid "Gettext returned a null message domain list."
 msgstr ""
 
-#: src/gtr-po.c:717
+#: src/gtr-po.c:713
 #, c-format
 msgid "No messages obtained from parser."
 msgstr "დამმუშავებლიდან შეტყობინებები მიღებული არაა."
 
-#: src/gtr-po.c:783
+#: src/gtr-po.c:779
 #, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
@@ -757,17 +767,17 @@ msgid ""
 "Your file should likely be named “%s.po”."
 msgstr ""
 
-#: src/gtr-po.c:813
+#: src/gtr-po.c:809
 #, c-format
 msgid "The file %s is read-only, and can not be overwritten"
 msgstr ""
 
-#: src/gtr-po.c:832 src/gtr-po.c:1183
+#: src/gtr-po.c:828 src/gtr-po.c:1179
 #, c-format
 msgid "There is an error in the PO file: %s"
 msgstr "შეცდომა PO ფაილში: %s"
 
-#: src/gtr-po.c:843
+#: src/gtr-po.c:839
 #, c-format
 msgid "There was an error writing the PO file: %s"
 msgstr "შეცდომა PO ფაილის ჩაწერისას: %s"
@@ -968,35 +978,35 @@ msgstr "ნათარგმნი ტექსტი"
 msgid "There is an error in the message"
 msgstr "შეტყობინება შეცდომას შეიცავს"
 
-#: src/gtr-tab.c:571 src/gtr-tab.c:708
+#: src/gtr-tab.c:571 src/gtr-tab.c:715
 msgid "fuzzy"
 msgstr "გადღაბნილი"
 
-#: src/gtr-tab.c:738
+#: src/gtr-tab.c:745
 #, c-format
 msgid "Plural %d"
 msgstr "მრავლობითი %d"
 
-#: src/gtr-tab.c:1470
+#: src/gtr-tab.c:1480
 msgid "Copied original to clipboard"
 msgstr "ორიგინალი ტექსტი დაკოპირდა ბუფერში"
 
-#: src/gtr-tab.c:1682
+#: src/gtr-tab.c:1692
 #, c-format
 msgid "Translated: %0.2f%%"
 msgstr "თარგმნილია: %0.2f%%"
 
-#: src/gtr-tab.c:1683
+#: src/gtr-tab.c:1693
 #, c-format
 msgid "Translated: %d"
 msgstr "თარგმნილია: %d"
 
-#: src/gtr-tab.c:1684
+#: src/gtr-tab.c:1694
 #, c-format
 msgid "Untranslated: %d"
 msgstr "უთარგმნელი: %d"
 
-#: src/gtr-tab.c:1685
+#: src/gtr-tab.c:1695
 #, c-format
 msgid "Fuzzy: %d"
 msgstr "ბუნდოვანი: %d"
@@ -1402,9 +1412,6 @@ msgstr ""
 
 #~ msgid "Gtranslator"
 #~ msgstr "Gtranslator"
-
-#~ msgid "Daniel García Moreno"
-#~ msgstr "Daniel García Moreno"
 
 #~ msgid "Undo"
 #~ msgstr "დაბრუნება"
