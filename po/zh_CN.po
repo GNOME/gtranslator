@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2026-06-29 14:48+0000\n"
-"PO-Revision-Date: 2026-07-01 08:08+0800\n"
+"POT-Creation-Date: 2026-08-03 18:32+0000\n"
+"PO-Revision-Date: 2026-08-05 09:01+0800\n"
 "Last-Translator: lumingzh <lumingzh@qq.com>\n"
 "Language-Team: Chinese (China) <i18n-zh@googlegroups.com>\n"
 "Language: zh_CN\n"
@@ -209,6 +209,12 @@ msgstr ""
 msgid "Translator's main interface"
 msgstr "翻译者的主界面"
 
+#. developer_name tag deprecated with Appstream 1.0
+#: data/org.gnome.Gtranslator.metainfo.xml.in.in:323
+#: data/org.gnome.Gtranslator.metainfo.xml.in.in:325
+msgid "Daniel García Moreno"
+msgstr "Daniel García Moreno"
+
 #: src/gtr-actions-app.c:86
 msgid ""
 "Translation file editing suite for localization of applications and "
@@ -349,7 +355,7 @@ msgstr "文件另存为…"
 msgid "Fixed plurals"
 msgstr "已修复复数形式"
 
-#: src/gtr-close-confirmation-dialog.c:121 src/gtr-context.c:164
+#: src/gtr-close-confirmation-dialog.c:121 src/gtr-context.c:169
 #: src/gtr-preferences-dialog.c:452 src/gtr-profile-dialog.ui:15
 #: src/gtr-upload-dialog.ui:20
 msgid "_Cancel"
@@ -359,7 +365,7 @@ msgstr "取消(_C)"
 msgid "Close _Without Saving"
 msgstr "不保存关闭(_W)"
 
-#: src/gtr-close-confirmation-dialog.c:123 src/gtr-context.c:165
+#: src/gtr-close-confirmation-dialog.c:123 src/gtr-context.c:170
 msgid "_Save"
 msgstr "保存(_S)"
 
@@ -381,11 +387,11 @@ msgid_plural ""
 "There are %d documents with unsaved changes. Save changes before closing?"
 msgstr[0] "有 %d 份含有未保存的改动的文档。要在关闭前保存吗？"
 
-#: src/gtr-context.c:181
+#: src/gtr-context.c:186
 msgid "Edit Notes"
 msgstr "编辑备注"
 
-#: src/gtr-context.c:549
+#: src/gtr-context.c:581
 msgid "Open in Browser"
 msgstr "在浏览器中打开"
 
@@ -398,10 +404,14 @@ msgid "Edit"
 msgstr "编辑"
 
 #: src/gtr-context.ui:59
-msgid "Extracted comments"
+msgid "Extracted Comments"
 msgstr "提取的注释"
 
 #: src/gtr-context.ui:84
+msgid "Previous Source Text"
+msgstr "之前的源文本"
+
+#: src/gtr-context.ui:112
 msgid "Paths"
 msgstr "路径"
 
@@ -746,27 +756,27 @@ msgstr "原始消息"
 msgid "Translated Message"
 msgstr "翻译消息"
 
-#: src/gtr-po.c:469
+#: src/gtr-po.c:465
 #, c-format
 msgid "The file is empty"
 msgstr "文件为空"
 
-#: src/gtr-po.c:478
+#: src/gtr-po.c:474
 #, c-format
 msgid "Failed opening file “%s”: %s"
 msgstr "打开文件“%s”失败：%s"
 
-#: src/gtr-po.c:549
+#: src/gtr-po.c:545
 #, c-format
 msgid "Could not convert from charset “%s” to UTF-8"
 msgstr "无法从字符集“%s”转换到 UTF-8"
 
-#: src/gtr-po.c:563 src/gtr-po.c:581
+#: src/gtr-po.c:559 src/gtr-po.c:577
 #, c-format
 msgid "Could not store temporary file for encoding conversion"
 msgstr "无法存储编码转换的临时文件"
 
-#: src/gtr-po.c:605
+#: src/gtr-po.c:601
 #, c-format
 msgid ""
 "All attempt to convert the file to UTF-8 has failed, use the msgconv or "
@@ -776,17 +786,17 @@ msgstr ""
 "所有转换文件为 UTF-8 的尝试均失败，在用 GNOME 翻译编辑器打开此文件前使用 "
 "msgconv 或 iconv 命令行工具转换"
 
-#: src/gtr-po.c:670
+#: src/gtr-po.c:666
 #, c-format
 msgid "Gettext returned a null message domain list."
 msgstr "Gettext 返回了一个空的消息域列表。"
 
-#: src/gtr-po.c:717
+#: src/gtr-po.c:713
 #, c-format
 msgid "No messages obtained from parser."
 msgstr "没有从解析器获得任何消息。"
 
-#: src/gtr-po.c:783
+#: src/gtr-po.c:779
 #, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
@@ -797,17 +807,17 @@ msgstr ""
 "POT 文件是在编译过程中生成的。\n"
 "您的文件应该命名为“%s.po”。"
 
-#: src/gtr-po.c:813
+#: src/gtr-po.c:809
 #, c-format
 msgid "The file %s is read-only, and can not be overwritten"
 msgstr "%s 是只读文件，无法被覆盖"
 
-#: src/gtr-po.c:832 src/gtr-po.c:1183
+#: src/gtr-po.c:828 src/gtr-po.c:1179
 #, c-format
 msgid "There is an error in the PO file: %s"
 msgstr "该 PO 文件存在错误：%s"
 
-#: src/gtr-po.c:843
+#: src/gtr-po.c:839
 #, c-format
 msgid "There was an error writing the PO file: %s"
 msgstr "写入 PO 文件时发生错误：%s"
@@ -1008,35 +1018,35 @@ msgstr "翻译文本"
 msgid "There is an error in the message"
 msgstr "消息中存在错误"
 
-#: src/gtr-tab.c:571 src/gtr-tab.c:708
+#: src/gtr-tab.c:571 src/gtr-tab.c:715
 msgid "fuzzy"
 msgstr "模糊"
 
-#: src/gtr-tab.c:738
+#: src/gtr-tab.c:745
 #, c-format
 msgid "Plural %d"
 msgstr "复数 %d"
 
-#: src/gtr-tab.c:1470
+#: src/gtr-tab.c:1480
 msgid "Copied original to clipboard"
 msgstr "已将原始内容复制到剪贴板"
 
-#: src/gtr-tab.c:1682
+#: src/gtr-tab.c:1692
 #, c-format
 msgid "Translated: %0.2f%%"
 msgstr "已翻译：%0.2f%%"
 
-#: src/gtr-tab.c:1683
+#: src/gtr-tab.c:1693
 #, c-format
 msgid "Translated: %d"
 msgstr "已翻译：%d"
 
-#: src/gtr-tab.c:1684
+#: src/gtr-tab.c:1694
 #, c-format
 msgid "Untranslated: %d"
 msgstr "未翻译：%d"
 
-#: src/gtr-tab.c:1685
+#: src/gtr-tab.c:1695
 #, c-format
 msgid "Fuzzy: %d"
 msgstr "模糊：%d"
@@ -1475,9 +1485,6 @@ msgstr "显示的消息与翻译记忆匹配的消息的最大长度差。"
 
 #~ msgid "Gtranslator"
 #~ msgstr "Gtranslator"
-
-#~ msgid "Daniel García Moreno"
-#~ msgstr "Daniel García Moreno"
 
 #~ msgid "Undo"
 #~ msgstr "撤消"
@@ -2444,9 +2451,6 @@ msgstr "显示的消息与翻译记忆匹配的消息的最大长度差。"
 
 #~ msgid "Close all open files"
 #~ msgstr "关闭所有已打开文件"
-
-#~ msgid "_Previous Document"
-#~ msgstr "上一个文档(_P)"
 
 #~ msgid "Activate previous document"
 #~ msgstr "激活上一篇文档"
