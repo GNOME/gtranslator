@@ -227,8 +227,7 @@ find_in_selection_model (GtrWindow *window, GtrSearchBar *searchbar,
 gboolean
 find_in_list (GtrWindow *window, GtrSearchBar *searchbar)
 {
-  GList *views, *list;
-  g_autofree char *search_text = NULL;
+  g_autoptr (GPtrArray) views = NULL;
   const char *entry_text;
   gboolean original_text;
   gboolean translated_text;
@@ -238,7 +237,7 @@ find_in_list (GtrWindow *window, GtrSearchBar *searchbar)
   unsigned int old_flags = 0;
 
   // Use static to keep the search state between different calls
-  static GList *viewsaux = NULL;
+  static GPtrArray *viewsaux = NULL;
   // offset of last found word in textview
   static int offset = 0;
 
@@ -257,43 +256,40 @@ find_in_list (GtrWindow *window, GtrSearchBar *searchbar)
 
   // Search the word in gtr-views widgets
   views = gtr_window_get_all_views (window, original_text, translated_text);
-  list = views;
 
   GTR_SEARCH_SET_CASE_SENSITIVE (flags, match_case);
   GTR_SEARCH_SET_ENTIRE_WORD (flags, entire_word);
 
   // Set the search options in all views
-  while (list != NULL)
+  for (int i = 0; i < views->len; i++)
     {
-      search_text =
-        gtr_view_get_search_text (GTR_VIEW (list->data), &old_flags);
+      g_autofree char *search_text = NULL;
+      GtrView *view = g_ptr_array_index (views, i);
+
+      search_text = gtr_view_get_search_text (view, &old_flags);
 
       if ((search_text == NULL) ||
           (g_strcmp0 (search_text, entry_text) != 0) || (flags != old_flags))
         {
-          gtr_view_set_search_text (GTR_VIEW (list->data), entry_text, flags);
+          gtr_view_set_search_text (view, entry_text, flags);
         }
-
-      list = list->next;
     }
 
   // Do the search in all views, keeping the state from previous calls.
   if (viewsaux == NULL)
-    viewsaux = views;
-  else
-    g_clear_list (&views, NULL);
+    viewsaux = g_steal_pointer (&views);
 
-  while (viewsaux != NULL)
+  while (viewsaux->len > 0)
     {
-      offset = run_search (GTR_VIEW (viewsaux->data), offset);
+      GtrView *view = g_ptr_array_steal_index (viewsaux, 0);
+
+      offset = run_search (view, offset);
       if (offset > 0)
         return TRUE;
-
-      if (viewsaux->next != NULL)
-        viewsaux = viewsaux->next;
-      else
-        g_clear_list (&viewsaux, NULL);
     }
+
+  g_clear_pointer (&viewsaux, g_ptr_array_unref);
+  offset = 0;
 
   return FALSE;
 }
@@ -415,8 +411,7 @@ void
 do_replace_all (GtrSearchBar *searchbar, GtrWindow * window)
 {
   GtrTab *tab;
-  g_autoptr (GList) views = NULL;
-  GList *l;
+  g_autoptr (GPtrArray) views = NULL;
   GList *current_msg, *aux;
   const char *search_entry_text;
   const char *replace_entry_text;
@@ -435,7 +430,6 @@ do_replace_all (GtrSearchBar *searchbar, GtrWindow * window)
   g_return_if_fail (views != NULL);
   g_return_if_fail (current_msg != NULL);
 
-  l = views;
   aux = current_msg;
 
   search_entry_text = gtr_search_bar_get_search_text (searchbar);
@@ -455,15 +449,13 @@ do_replace_all (GtrSearchBar *searchbar, GtrWindow * window)
 
   do
     {
-      while (l)
+      for (int i = 0; i < views->len; i++)
         {
-          gtr_view_replace_all (GTR_VIEW (l->data),
+          GtrView *view = g_ptr_array_index (views, i);
+          gtr_view_replace_all (view,
                                 search_entry_text,
                                 replace_entry_text, flags);
-          l = l->next;
         }
-
-      l = views;
 
       if (aux->next == NULL)
         aux = g_list_first (aux);

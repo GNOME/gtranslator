@@ -1153,10 +1153,10 @@ gtr_tab_get_active_view (GtrTab * tab)
  * Returns: (transfer container) (element-type Gtranslator.View):
  *          a newly allocated list of #GtranslationTab objects
  */
-GList *
+GPtrArray *
 gtr_tab_get_all_views (GtrTab * tab, gboolean original, gboolean translated)
 {
-  GList *ret = NULL;
+  g_autoptr (GPtrArray) ret = g_ptr_array_new ();
   GtrTabPrivate *priv;
   int i = 0;
 
@@ -1165,8 +1165,8 @@ gtr_tab_get_all_views (GtrTab * tab, gboolean original, gboolean translated)
   priv = gtr_tab_get_instance_private (tab);
   if (original)
     {
-      ret = g_list_append (ret, priv->text_msgid);
-      ret = g_list_append (ret, priv->text_msgid_plural);
+      g_ptr_array_add (ret, priv->text_msgid);
+      g_ptr_array_add (ret, priv->text_msgid_plural);
     }
 
   if (translated)
@@ -1174,14 +1174,14 @@ gtr_tab_get_all_views (GtrTab * tab, gboolean original, gboolean translated)
       while (i < MAX_PLURALS)
         {
           if (priv->trans_msgstr[i])
-            ret = g_list_append (ret, priv->trans_msgstr[i]);
+            g_ptr_array_add (ret, priv->trans_msgstr[i]);
           else
             break;
           i++;
         }
     }
 
-  return ret;
+  return g_steal_pointer (&ret);
 }
 
 /**

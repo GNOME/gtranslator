@@ -576,7 +576,7 @@ gtr_window_get_active_view (GtrWindow * window)
  * Return value: (transfer container) (element-type Gtranslator.View):
  * a newly allocated list of #GtranslationWindow objects
  **/
-GList *
+GPtrArray *
 gtr_window_get_all_views (GtrWindow * window,
                           gboolean original, gboolean translated)
 {

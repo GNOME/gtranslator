@@ -72,8 +72,8 @@ GtrContextPanel *gtr_tab_get_context_panel (GtrTab * tab);
 
 GtrView *gtr_tab_get_active_view (GtrTab * tab);
 
-GList *gtr_tab_get_all_views (GtrTab * tab,
-                            gboolean original, gboolean translated);
+GPtrArray *gtr_tab_get_all_views (GtrTab * tab,
+                                  gboolean original, gboolean translated);
 
 void gtr_tab_message_go_to (GtrTab * tab,
                             GtrMsg * to_go,

@@ -45,8 +45,8 @@ GtrTab *gtr_window_get_active_tab (GtrWindow * window);
 
 GtrView *gtr_window_get_active_view (GtrWindow * window);
 
-GList *gtr_window_get_all_views (GtrWindow * window,
-                               gboolean original, gboolean translated);
+GPtrArray *gtr_window_get_all_views (GtrWindow * window,
+                                     gboolean original, gboolean translated);
 
 void gtr_window_remove_tab (GtrWindow * window);
 
