@@ -67,6 +67,7 @@ typedef struct
   GtkWidget *edit_notes;
 
   // comments
+  GtkWidget *comments_group;
   GtkWidget *comments;
   GtkTextBuffer *commentsbuffer;
 
@@ -253,10 +254,13 @@ add_extracted_comments (GtrContextPanel *panel, GtrMsg *msg)
   gtk_text_buffer_get_start_iter (priv->commentsbuffer, &iter);
 
   comments = gtr_msg_get_extracted_comments (msg);
-  if (comments == NULL || *comments == '\0')
+  if (comments == NULL || *comments == '\0') {
     gtk_text_buffer_insert (priv->commentsbuffer, &iter, "", -1);
-  else
+    gtk_widget_set_visible (priv->comments_group, FALSE);
+  } else {
     gtk_text_buffer_insert (priv->commentsbuffer, &iter, comments, -1);
+    gtk_widget_set_visible (priv->comments_group, TRUE);
+  }
 }
 
 static void
@@ -470,6 +474,7 @@ gtr_context_panel_class_init (GtrContextPanelClass * klass)
   gtk_widget_class_bind_template_child_private (widget_class, GtrContextPanel, notesbuffer);
   gtk_widget_class_bind_template_child_private (widget_class, GtrContextPanel, edit_notes);
 
+  gtk_widget_class_bind_template_child_private (widget_class, GtrContextPanel, comments_group);
   gtk_widget_class_bind_template_child_private (widget_class, GtrContextPanel, comments);
   gtk_widget_class_bind_template_child_private (widget_class, GtrContextPanel, commentsbuffer);
 
