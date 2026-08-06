@@ -75,14 +75,14 @@ struct _GtrCloseConfirmationDialogClass
 typedef struct
 {
   gboolean logout_mode;
-  GList *unsaved_documents;
-  GList *selected_documents;
+  GPtrArray *unsaved_documents;
+  GPtrArray *selected_documents;
 
   gboolean disable_save_to_disk;
 } GtrCloseConfirmationDialogPrivate;
 
 #define GET_MODE(priv) (((priv->unsaved_documents != NULL) && \
-                         (priv->unsaved_documents->next == NULL)) ? \
+                         (priv->unsaved_documents->len == 1)) ? \
                           SINGLE_DOC_MODE : MULTIPLE_DOCS_MODE)
 
 G_DEFINE_FINAL_TYPE_WITH_PRIVATE (GtrCloseConfirmationDialog,
@@ -90,7 +90,7 @@ G_DEFINE_FINAL_TYPE_WITH_PRIVATE (GtrCloseConfirmationDialog,
                             ADW_TYPE_ALERT_DIALOG);
 
 static void set_unsaved_document (GtrCloseConfirmationDialog *dlg,
-                                  const GList * list);
+                                  GPtrArray                  *array);
 
 /*  Since we connect in the constructor we are sure this handler will be called
  *  before the user ones
@@ -105,10 +105,10 @@ response_cb (GtrCloseConfirmationDialog *dlg,
 
   g_return_if_fail (GTR_IS_CLOSE_CONFIRMATION_DIALOG (dlg));
 
-  g_clear_list (&priv->selected_documents, NULL);
+  g_clear_pointer (&priv->selected_documents, g_ptr_array_unref);
 
   if (g_strcmp0 (response, "yes") == 0)
-    priv->selected_documents = g_list_copy (priv->unsaved_documents);
+    priv->selected_documents = g_ptr_array_copy (priv->unsaved_documents, NULL, NULL);
 }
 
 static void
@@ -144,8 +144,8 @@ gtr_close_confirmation_dialog_finalize (GObject * object)
   GtrCloseConfirmationDialogPrivate *priv;
   priv = gtr_close_confirmation_dialog_get_instance_private (GTR_CLOSE_CONFIRMATION_DIALOG (object));
 
-  g_clear_list (&priv->unsaved_documents, NULL);
-  g_clear_list (&priv->selected_documents, NULL);
+  g_clear_pointer (&priv->unsaved_documents, g_ptr_array_unref);
+  g_clear_pointer (&priv->selected_documents, g_ptr_array_unref);
 
   /* Call the parent's destructor */
   G_OBJECT_CLASS (gtr_close_confirmation_dialog_parent_class)->finalize
@@ -227,19 +227,26 @@ static void
   g_object_class_install_properties (gobject_class, N_PROPS, props);
 }
 
-GList *gtr_close_confirmation_dialog_get_selected_documents
+/**
+ * gtr_close_confirmation_dialog_get_selected_documents:
+ * @dlg: a close confirmation dialog
+ *
+ * Returns: (transfer container) (element-type GtrPo):
+ *   a newly allocated list of po files
+ */
+GPtrArray *gtr_close_confirmation_dialog_get_selected_documents
   (GtrCloseConfirmationDialog * dlg)
 {
   GtrCloseConfirmationDialogPrivate *priv;
   priv = gtr_close_confirmation_dialog_get_instance_private (dlg);
   g_return_val_if_fail (GTR_IS_CLOSE_CONFIRMATION_DIALOG (dlg), NULL);
 
-  return g_list_copy (priv->selected_documents);
+  return g_ptr_array_copy (priv->selected_documents, NULL, NULL);
 }
 
 GtkWidget *
-gtr_close_confirmation_dialog_new (GList * unsaved_documents,
-                                   gboolean logout_mode)
+gtr_close_confirmation_dialog_new (GPtrArray *unsaved_documents,
+                                   gboolean   logout_mode)
 {
   GtkWidget *dlg;
   g_return_val_if_fail (unsaved_documents != NULL, NULL);
@@ -262,8 +269,9 @@ build_single_doc_dialog (GtrCloseConfirmationDialog * dlg)
 
   priv = gtr_close_confirmation_dialog_get_instance_private (dlg);
 
-  g_return_if_fail (priv->unsaved_documents->data != NULL);
-  doc = GTR_PO (priv->unsaved_documents->data);
+  g_return_if_fail (priv->unsaved_documents != NULL && priv->unsaved_documents->len != 0);
+
+  doc = g_ptr_array_index (priv->unsaved_documents, 0);
   location = gtr_po_get_location (doc);
   doc_name = g_file_get_basename (location);
 
@@ -284,8 +292,8 @@ build_multiple_docs_dialog (GtrCloseConfirmationDialog * dlg)
       g_strdup_printf (ngettext
                        ("Changes to %d document will be permanently lost.",
                         "Changes to %d documents will be permanently lost.",
-                        g_list_length (priv->unsaved_documents)),
-                       g_list_length (priv->unsaved_documents));
+                        priv->unsaved_documents->len),
+                       priv->unsaved_documents->len);
   else
     str =
       g_strdup_printf (ngettext
@@ -293,23 +301,24 @@ build_multiple_docs_dialog (GtrCloseConfirmationDialog * dlg)
                         "Save changes before closing?",
                         "There are %d documents with unsaved changes. "
                         "Save changes before closing?",
-                        g_list_length (priv->unsaved_documents)),
-                       g_list_length (priv->unsaved_documents));
+                        priv->unsaved_documents->len),
+                       priv->unsaved_documents->len);
 
   adw_alert_dialog_set_body (ADW_ALERT_DIALOG (dlg), str);
 }
 
 static void
-set_unsaved_document (GtrCloseConfirmationDialog * dlg, const GList * list)
+set_unsaved_document (GtrCloseConfirmationDialog *dlg,
+                      GPtrArray                  *array)
 {
   GtrCloseConfirmationDialogPrivate *priv;
   priv = gtr_close_confirmation_dialog_get_instance_private (dlg);
 
-  g_return_if_fail (list != NULL);
+  g_return_if_fail (array != NULL);
 
   g_return_if_fail (priv->unsaved_documents == NULL);
 
-  priv->unsaved_documents = g_list_copy ((GList *) list);
+  priv->unsaved_documents = g_ptr_array_copy (array, NULL, NULL);
 
   adw_alert_dialog_set_heading (ADW_ALERT_DIALOG (dlg), _("Unsaved Changes"));
   if (GET_MODE (priv) == SINGLE_DOC_MODE)

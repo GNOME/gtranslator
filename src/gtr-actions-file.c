@@ -46,7 +46,7 @@
 #define GTR_TAB_SAVE_AS "gtr-tab-save-as"
 
 static void load_file_list (GtrWindow *window, GSList *uris);
-static GList *get_modified_documents (GtrWindow *window);
+static GPtrArray *get_modified_documents (GtrWindow *window);
 
 typedef struct
 {
@@ -296,9 +296,9 @@ gtr_update_from_pot_dialog_nocheck (GtrWindow *window)
 void
 gtr_update_from_pot_dialog (GtrWindow *window)
 {
-  g_autoptr (GList) list = NULL;
-  list = get_modified_documents (window);
-  if (list != NULL)
+  g_autoptr (GPtrArray) array = get_modified_documents (window);
+
+  if (array != NULL && array->len > 0)
     {
       /* Merging on top of unsaved changes would discard them. Require the
        * user to save first so the merge always starts from a clean state. */
@@ -411,9 +411,9 @@ gtr_open_file_dialog_nocheck (GtrWindow *window)
 void
 gtr_open_file_dialog (GtrWindow *window)
 {
-  g_autoptr (GList) list = NULL;
-  list = get_modified_documents (window);
-  if (list != NULL)
+  g_autoptr (GPtrArray) array = get_modified_documents (window);
+
+  if (array != NULL && array->len > 0)
     gtr_want_to_save_current_dialog (window, gtr_open_file_dialog_nocheck);
   else
     gtr_open_file_dialog_nocheck (window);
@@ -747,14 +747,14 @@ close_all_tabs (GtrWindow *window)
 }
 
 static void
-save_and_close_all_documents (GList *unsaved_documents, GtrWindow *window)
+save_and_close_all_documents (GPtrArray *unsaved_documents, GtrWindow *window)
 {
   g_autoptr (GError) error = NULL;
 
-  if (unsaved_documents == NULL)
+  if (unsaved_documents == NULL || unsaved_documents->len == 0)
     return;
 
-  gtr_po_save_file (unsaved_documents->data, &error);
+  gtr_po_save_file (g_ptr_array_index (unsaved_documents, 0), &error);
 
   if (error)
     {
@@ -774,7 +774,7 @@ static void
 close_confirmation_dialog_response_handler (GtrCloseConfirmationDialog *dlg,
                                             char *response, GtrWindow *window)
 {
-  GList *selected_documents;
+  g_autoptr (GPtrArray) selected_documents = NULL;
 
   adw_dialog_close (ADW_DIALOG (dlg));
   if (g_strcmp0 (response, "yes") == 0)
@@ -782,7 +782,7 @@ close_confirmation_dialog_response_handler (GtrCloseConfirmationDialog *dlg,
       /* Save and Close */
       selected_documents
           = gtr_close_confirmation_dialog_get_selected_documents (dlg);
-      if (selected_documents == NULL)
+      if (selected_documents == NULL || selected_documents->len == 0)
         {
           close_all_tabs (window);
         }
@@ -790,7 +790,6 @@ close_confirmation_dialog_response_handler (GtrCloseConfirmationDialog *dlg,
         {
           save_and_close_all_documents (selected_documents, window);
         }
-      g_list_free (selected_documents);
     }
   else if (g_strcmp0 (response, "no") == 0)
     {
@@ -798,57 +797,43 @@ close_confirmation_dialog_response_handler (GtrCloseConfirmationDialog *dlg,
     }
 }
 
-static GList *
+/**
+ * get_modified_documents:
+ * @window: a window
+ *
+ * Returns: (transfer container) (element-type GtrPo):
+ *   and array of po files
+ */
+static GPtrArray *
 get_modified_documents (GtrWindow *window)
 {
-  // GtrNotebook *nb;
   GtrTab *tab;
-  GtrPo *po;
-  GList *list = NULL;
-
-  /*nb = gtr_window_get_notebook (window);
-  pages = gtk_notebook_get_n_pages (GTK_NOTEBOOK (nb));
-
-  while (pages > 0)
-    {
-      tab = GTR_TAB (gtk_notebook_get_nth_page (GTK_NOTEBOOK (nb),
-                                                pages - 1));
-
-      po = gtr_tab_get_po (tab);
-      if (gtr_po_get_state (po) == GTR_PO_STATE_MODIFIED)
-        list = g_list_prepend (list, po);
-
-      pages--;
-    }*/
+  g_autoptr (GPtrArray) array = g_ptr_array_new ();
 
   tab = gtr_window_get_active_tab (window);
   if (tab != NULL)
     {
-      po = gtr_tab_get_po (tab);
+      GtrPo *po = gtr_tab_get_po (tab);
       if (gtr_po_get_state (po) == GTR_PO_STATE_MODIFIED)
-        list = g_list_prepend (list, po);
+        g_ptr_array_insert (array, 0, po);
     }
-  return list;
+  return g_steal_pointer (&array);
 }
 
 static void
 close_all_documents (GtrWindow *window, gboolean logout_mode)
 {
-  GList *list;
+  g_autoptr (GPtrArray) array = get_modified_documents (window);
 
-  list = get_modified_documents (window);
-
-  if (list != NULL)
+  if (array != NULL && array->len > 0)
     {
       GtkWidget *dlg;
 
-      dlg = gtr_close_confirmation_dialog_new (list, logout_mode);
+      dlg = gtr_close_confirmation_dialog_new (array, logout_mode);
 
       g_signal_connect (
           dlg, "response",
           G_CALLBACK (close_confirmation_dialog_response_handler), window);
-
-      g_list_free (list);
 
       adw_dialog_present (ADW_DIALOG (dlg), GTK_WIDGET (window));
     }
