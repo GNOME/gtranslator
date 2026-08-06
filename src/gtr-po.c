@@ -67,7 +67,7 @@ typedef struct
   po_message_iterator_t iter;
 
   /* The message domains in this file */
-  GList *domains;
+  GPtrArray *domains;
 
   /* Parsed list of GtrMsgs for the current domains' messagelist */
   GPtrArray *messages;
@@ -221,6 +221,7 @@ gtr_po_init (GtrPo * po)
   priv->dl_state = NULL;
   priv->dl_vcs_web = NULL;
   priv->messages = NULL;
+  priv->domains = NULL;
 }
 
 static void
@@ -230,7 +231,7 @@ gtr_po_finalize (GObject * object)
   GtrPoPrivate *priv = gtr_po_get_instance_private (po);
 
   g_clear_pointer (&priv->messages, g_ptr_array_unref);
-  g_clear_list (&priv->domains, g_free);
+  g_clear_pointer (&priv->domains, g_ptr_array_unref);
 
   g_clear_pointer (&priv->obsolete, g_free);
 
@@ -637,7 +638,8 @@ gtr_po_parse (GtrPo * po, GFile * location, GError ** error)
     }
   g_clear_pointer (&message_error, g_free);
 
-  g_clear_list (&priv->domains, g_free);
+  g_clear_pointer (&priv->domains, g_ptr_array_unref);
+  priv->domains = g_ptr_array_new_with_free_func (g_free);
 
   /*
    * Determine the message domains to track
@@ -654,7 +656,7 @@ gtr_po_parse (GtrPo * po, GFile * location, GError ** error)
     }
   while (domains[i])
     {
-      priv->domains = g_list_append (priv->domains, g_strdup (domains[i]));
+      g_ptr_array_add (priv->domains, g_strdup (domains[i]));
       i++;
     }
 
