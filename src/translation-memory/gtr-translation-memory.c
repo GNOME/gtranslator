@@ -85,7 +85,7 @@ gtr_translation_memory_store_list_default (GtrTranslationMemory *obj,
  *
  * Returns: a list of #GtrTranslationMemoryMatch.
  */
-GList *
+GPtrArray *
 gtr_translation_memory_lookup (GtrTranslationMemory *obj,
                                const char           *phrase)
 {
@@ -94,7 +94,7 @@ gtr_translation_memory_lookup (GtrTranslationMemory *obj,
 }
 
 /* Default implementation */
-static GList *
+static GPtrArray *
 gtr_translation_memory_lookup_default (GtrTranslationMemory *obj,
                                        const char           *phrase)
 {

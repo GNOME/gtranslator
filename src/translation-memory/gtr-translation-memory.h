@@ -35,7 +35,7 @@ struct _GtrTranslationMemoryInterface
   void (*remove) (GtrTranslationMemory *obj,
                   gint                 translation_id);
 
-  GList *(*lookup) (GtrTranslationMemory * obj, const gchar * phrase);
+  GPtrArray *(*lookup) (GtrTranslationMemory * obj, const gchar * phrase);
   void (*set_max_omits) (GtrTranslationMemory * obj, gsize omits);
   void (*set_max_delta) (GtrTranslationMemory * obj, gsize delta);
   void (*set_max_items) (GtrTranslationMemory * obj, gint items);
@@ -55,7 +55,7 @@ gboolean        gtr_translation_memory_store            (GtrTranslationMemory   
 gboolean        gtr_translation_memory_store_list       (GtrTranslationMemory   *obj,
                                                          GPtrArray              *array);
 
-GList          *gtr_translation_memory_lookup           (GtrTranslationMemory   *obj,
+GPtrArray      *gtr_translation_memory_lookup           (GtrTranslationMemory   *obj,
                                                          const char             *phrase);
 
 void            gtr_translation_memory_set_max_omits    (GtrTranslationMemory   *obj,

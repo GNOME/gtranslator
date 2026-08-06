@@ -605,14 +605,14 @@ gtr_gda_get_lookup_statement (GtrGda       *self,
   return stmt;
 }
 
-static GList *
+static GPtrArray *
 gtr_gda_lookup (GtrTranslationMemory *tm,
                 const char           *phrase)
 {
   GtrGda *self = GTR_GDA (tm);
   g_auto(GStrv) words = NULL;
   unsigned int cnt = 0;
-  g_autolist (GtrTranslationMemoryMatch) matches = NULL;
+  g_autoptr (GPtrArray) matches = g_ptr_array_new_with_free_func ((GDestroyNotify) gtr_translation_memory_match_free);
   g_autoptr (GError) inner_error = NULL;
   sqlite3_stmt *stmt = NULL;
   int rc;
@@ -647,7 +647,7 @@ gtr_gda_lookup (GtrTranslationMemory *tm,
       match->match = g_strdup ((const char *)val);
       match->level = score;
       match->id = id;
-      matches = g_list_prepend (matches, match);
+      g_ptr_array_add (matches, match);
     }
 
   sqlite3_reset (stmt);
@@ -670,7 +670,6 @@ gtr_gda_lookup (GtrTranslationMemory *tm,
       return NULL;
     }
 
-  matches = g_list_reverse (matches);
   return g_steal_pointer (&matches);
 }
 

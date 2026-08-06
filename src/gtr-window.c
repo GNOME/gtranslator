@@ -664,7 +664,7 @@ gtr_window_tm_keybind (GtrWindow *window,
 {
   GtrWindowPrivate *priv = gtr_window_get_instance_private (window);
   GtrTranslationMemory *tm = priv->translation_memory;
-  g_autolist (GtrTranslationMemoryMatch) tm_list = NULL;
+  g_autoptr (GPtrArray) tm_list = NULL;
   const char *msgid;
   GtrTab *tab = gtr_window_get_active_tab (window);
   GtrMsg *msg;
@@ -707,7 +707,7 @@ gtr_window_tm_keybind (GtrWindow *window,
   else if (g_strcmp0 (action_name, "tm_9") == 0)
     index = 8;
 
-  match = (GtrTranslationMemoryMatch *) g_list_nth_data (tm_list, index);
+  match = g_ptr_array_index (tm_list, index);
   if (match)
     {
       gtk_text_buffer_begin_user_action (buffer);
