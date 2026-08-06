@@ -31,7 +31,7 @@ struct _GtrTranslationMemoryInterface
   GTypeInterface g_iface;
 
   gboolean (*store) (GtrTranslationMemory * obj, GtrMsg * msg);
-  gboolean (*store_list) (GtrTranslationMemory * obj, GList * msgs);
+  gboolean (*store_list) (GtrTranslationMemory * obj, GPtrArray * array);
   void (*remove) (GtrTranslationMemory *obj,
                   gint                 translation_id);
 
@@ -53,7 +53,7 @@ gboolean        gtr_translation_memory_store            (GtrTranslationMemory   
                                                          GtrMsg                 *msg);
 
 gboolean        gtr_translation_memory_store_list       (GtrTranslationMemory   *obj,
-                                                         GList                  *msg);
+                                                         GPtrArray              *array);
 
 GList          *gtr_translation_memory_lookup           (GtrTranslationMemory   *obj,
                                                          const char             *phrase);

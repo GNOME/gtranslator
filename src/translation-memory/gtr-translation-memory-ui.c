@@ -116,7 +116,6 @@ choose_translation (GtrTranslationMemoryUi *tm_ui,
   GtrView *view;
   GtkTextBuffer *buffer;
   GtrPo *po;
-  GList *current_msg = NULL;
   GtrMsg *msg;
   GtrTranslationMemoryUiPrivate *priv = gtr_translation_memory_ui_get_instance_private (tm_ui);
 
@@ -124,9 +123,7 @@ choose_translation (GtrTranslationMemoryUi *tm_ui,
   buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (view));
 
   po = gtr_tab_get_po (priv->tab);
-  current_msg = gtr_po_get_current_message (po);
-
-  msg = GTR_MSG (current_msg->data);
+  msg = gtr_po_get_current_message (po);
 
   gtr_msg_set_msgstr (msg, translation);
 

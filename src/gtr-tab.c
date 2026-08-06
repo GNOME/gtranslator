@@ -372,7 +372,6 @@ gtr_message_translation_update (GtkTextBuffer * textbuffer, GtrTab * tab)
   GtrHeader *header;
   GtkTextIter start, end;
   GtkTextBuffer *buf;
-  GList *msg_aux;
   GtrMsg *msg;
   GtrTabPrivate *priv;
   const char *check;
@@ -385,8 +384,7 @@ gtr_message_translation_update (GtkTextBuffer * textbuffer, GtrTab * tab)
   /* Work out which message this is associated with */
   header = gtr_po_get_header (priv->po);
 
-  msg_aux = gtr_po_get_current_message (priv->po);
-  msg = msg_aux->data;
+  msg = gtr_po_get_current_message (priv->po);
   buf = gtk_text_view_get_buffer (GTK_TEXT_VIEW (priv->trans_msgstr[0]));
   unmark_fuzzy = g_settings_get_boolean (priv->editor_settings,
                                          GTR_SETTINGS_UNMARK_FUZZY_WHEN_CHANGED);
@@ -609,13 +607,13 @@ gtr_tab_show_message (GtrTab * tab, GtrMsg * msg)
 static void
 emit_message_changed_signal (GtkTextBuffer * buf, GtrTab * tab)
 {
-  GList *msg;
+  GtrMsg *msg;
   GtrTabPrivate *priv;
 
   priv = gtr_tab_get_instance_private (tab);
   msg = gtr_po_get_current_message (priv->po);
 
-  g_signal_emit (G_OBJECT (tab), signals[MESSAGE_CHANGED], 0, msg->data);
+  g_signal_emit (G_OBJECT (tab), signals[MESSAGE_CHANGED], 0, msg);
 }
 
 static void
@@ -1496,7 +1494,7 @@ gtr_tab_unblock_movement (GtrTab * tab)
 static gboolean
 _gtr_tab_finish_edition (GtrTab * tab)
 {
-  GList *current_msg;
+  GtrMsg *current_msg;
   GtrTabPrivate *priv;
 
   priv = gtr_tab_get_instance_private (tab);
@@ -1504,7 +1502,7 @@ _gtr_tab_finish_edition (GtrTab * tab)
   current_msg = gtr_po_get_current_message (priv->po);
 
   /* movement is blocked/unblocked within the handler */
-  gtr_tab_edition_finished (tab, GTR_MSG (current_msg->data));
+  gtr_tab_edition_finished (tab, GTR_MSG (current_msg));
 
   return !priv->blocking;
 }
@@ -1546,7 +1544,7 @@ gtr_tab_go_to_next_plural_form (GtrTab * tab)
       int current_page = gtk_notebook_get_current_page (GTK_NOTEBOOK (priv->trans_notebook));
       int n_pages = gtk_notebook_get_n_pages (GTK_NOTEBOOK (priv->trans_notebook));
       GtrTabMove move;
-      GtrMsg *current_msg = GTR_MSG (gtr_po_get_current_message (priv->po)->data);
+      GtrMsg *current_msg = gtr_po_get_current_message (priv->po);
       bool has_plurals = gtr_msg_get_msgid_plural (current_msg) != NULL;
 
       if (has_plurals && current_page + 1 < n_pages)
@@ -1578,7 +1576,7 @@ gtr_tab_go_to_prev_plural_form (GtrTab * tab)
     {
       int current_page = gtk_notebook_get_current_page (GTK_NOTEBOOK (priv->trans_notebook));
       GtrTabMove move;
-      GtrMsg *current_msg = GTR_MSG (gtr_po_get_current_message (priv->po)->data);
+      GtrMsg *current_msg = gtr_po_get_current_message (priv->po);
       bool has_plurals = gtr_msg_get_msgid_plural (current_msg) != NULL;
 
       if (has_plurals && 0 < current_page)
@@ -1709,12 +1707,10 @@ GtrMsg *
 gtr_tab_get_msg (GtrTab *tab)
 {
   GtrTabPrivate *priv;
-  GList *msg_aux;
   GtrMsg *msg;
 
   priv = gtr_tab_get_instance_private (tab);
-  msg_aux = gtr_po_get_current_message (priv->po);
-  msg = msg_aux->data;
+  msg = gtr_po_get_current_message (priv->po);
 
   return msg;
 }

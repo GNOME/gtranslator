@@ -103,9 +103,9 @@ GFile *gtr_po_get_location (GtrPo *po);
 
 void gtr_po_set_location (GtrPo *po, GFile * location);
 
-GList *gtr_po_get_messages (GtrPo *po);
+GPtrArray *gtr_po_get_messages (GtrPo *po);
 
-GList *gtr_po_get_current_message (GtrPo *po);
+GtrMsg *gtr_po_get_current_message (GtrPo *po);
 
 void gtr_po_update_current_message (GtrPo *po, GtrMsg * msg);
 
@@ -119,7 +119,7 @@ int gtr_po_get_fuzzy_count (GtrPo *po);
 
 int gtr_po_get_untranslated_count (GtrPo *po);
 
-int gtr_po_get_messages_count (GtrPo *po);
+unsigned int gtr_po_get_messages_count (GtrPo *po);
 
 void gtr_po_check_po_file (GtrPo *po, GError **error);
 

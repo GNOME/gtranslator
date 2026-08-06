@@ -70,10 +70,10 @@ typedef struct
   GList *domains;
 
   /* Parsed list of GtrMsgs for the current domains' messagelist */
-  GList *messages;
+  GPtrArray *messages;
 
   /* A pointer to the currently displayed message */
-  GList *current;
+  GtrMsg *current;
 
   /* The obsolete messages are stored within this gchar. */
   char *obsolete;
@@ -202,7 +202,7 @@ gtr_po_update_translated_count (GtrPo * po)
   GtrPoPrivate *priv = gtr_po_get_instance_private (po);
   priv->translated = 0;
   priv->fuzzy = 0;
-  g_list_foreach (priv->messages,
+  g_ptr_array_foreach (priv->messages,
                   (GFunc) determine_translation_status, po);
 }
 
@@ -220,6 +220,7 @@ gtr_po_init (GtrPo * po)
   priv->dl_domain = NULL;
   priv->dl_state = NULL;
   priv->dl_vcs_web = NULL;
+  priv->messages = NULL;
 }
 
 static void
@@ -228,7 +229,7 @@ gtr_po_finalize (GObject * object)
   GtrPo *po = GTR_PO (object);
   GtrPoPrivate *priv = gtr_po_get_instance_private (po);
 
-  g_clear_list (&priv->messages, g_object_unref);
+  g_clear_pointer (&priv->messages, g_ptr_array_unref);
   g_clear_list (&priv->domains, g_free);
 
   g_clear_pointer (&priv->obsolete, g_free);
@@ -269,35 +270,24 @@ gtr_po_message_container_get_message (GtrMessageContainer *container,
   GtrPo *po = GTR_PO (container);
   GtrPoPrivate *priv = gtr_po_get_instance_private (po);
 
-  return g_list_nth_data (priv->messages, number);
+  g_return_val_if_fail (number < priv->messages->len, NULL);
+
+  return g_ptr_array_index (priv->messages, number);
 }
 
-static int
-gtr_po_message_container_get_message_number (GtrMessageContainer * container,
-                                             GtrMsg * msg)
-{
-  GtrPo *po = GTR_PO (container);
-  GList *list;
-  GtrPoPrivate *priv = gtr_po_get_instance_private (po);
-
-  list = g_list_find (priv->messages, msg);
-  return g_list_position (priv->messages, list);
-}
-
-static int
+static unsigned int
 gtr_po_message_container_get_count (GtrMessageContainer * container)
 {
   GtrPo *po = GTR_PO (container);
   GtrPoPrivate *priv = gtr_po_get_instance_private (po);
 
-  return g_list_length (priv->messages);
+  return priv->messages->len;
 }
 
 static void
 gtr_po_message_container_init (GtrMessageContainerInterface * iface)
 {
   iface->get_message = gtr_po_message_container_get_message;
-  iface->get_message_number = gtr_po_message_container_get_message_number;
   iface->get_count = gtr_po_message_container_get_count;
 }
 
@@ -673,7 +663,9 @@ gtr_po_parse (GtrPo * po, GFile * location, GError ** error)
    * if so, process it separately. Otherwise, treat as a normal
    * message.
    */
-  g_clear_list (&priv->messages, g_object_unref);
+  g_clear_pointer (&priv->messages, g_ptr_array_unref);
+  priv->messages = g_ptr_array_new_with_free_func (g_object_unref);
+
   priv->po_contains_obsolete_entries = FALSE;
   iter = priv->iter;
 
@@ -693,7 +685,7 @@ gtr_po_parse (GtrPo * po, GFile * location, GError ** error)
           gtr_msg_set_po_position (msg, pos++);
 
           /* Build up messages */
-          priv->messages = g_list_prepend (priv->messages, msg);
+          g_ptr_array_add (priv->messages, msg);
         }
       else
         priv->po_contains_obsolete_entries = TRUE;
@@ -710,12 +702,10 @@ gtr_po_parse (GtrPo * po, GFile * location, GError ** error)
       return FALSE;
     }
 
-  priv->messages = g_list_reverse (priv->messages);
-
   /*
    * Set the current message to the first message.
    */
-  priv->current = g_list_first (priv->messages);
+  priv->current = g_ptr_array_index (priv->messages, 0);
 
   gtr_po_update_translated_count (po);
 
@@ -980,7 +970,7 @@ gtr_po_set_dl_info (GtrPo      *po,
  * Return value: (transfer none) (element-type Gtranslator.Msg):
  *               a pointer to the messages list
  **/
-GList *
+GPtrArray *
 gtr_po_get_messages (GtrPo * po)
 {
   GtrPoPrivate *priv = gtr_po_get_instance_private (po);
@@ -996,7 +986,7 @@ gtr_po_get_messages (GtrPo * po)
  * Return value: (transfer none) (element-type Gtranslator.Msg):
  *               a pointer to the current message
  **/
-GList *
+GtrMsg *
 gtr_po_get_current_message (GtrPo * po)
 {
   GtrPoPrivate *priv = gtr_po_get_instance_private (po);
@@ -1014,10 +1004,12 @@ gtr_po_get_current_message (GtrPo * po)
 void
 gtr_po_update_current_message (GtrPo * po, GtrMsg * msg)
 {
-  int i;
+  unsigned int i;
   GtrPoPrivate *priv = gtr_po_get_instance_private (po);
-  i = g_list_index (priv->messages, msg);
-  priv->current = g_list_nth (priv->messages, i);
+  if (g_ptr_array_find (priv->messages, msg, &i))
+    priv->current = g_ptr_array_index (priv->messages, i);
+  else
+    priv->current = NULL;
 }
 
 /**
@@ -1126,8 +1118,7 @@ gtr_po_get_untranslated_count (GtrPo * po)
   GtrPoPrivate *priv = gtr_po_get_instance_private (po);
   g_return_val_if_fail (GTR_IS_PO (po), -1);
 
-  return (g_list_length (priv->messages) - priv->translated -
-          priv->fuzzy);
+  return (priv->messages->len - priv->translated - priv->fuzzy);
 }
 
 /**
@@ -1136,13 +1127,13 @@ gtr_po_get_untranslated_count (GtrPo * po)
  *
  * Return value: the number of messages messages.
  **/
-int
+unsigned int
 gtr_po_get_messages_count (GtrPo * po)
 {
   GtrPoPrivate *priv = gtr_po_get_instance_private (po);
   g_return_val_if_fail (GTR_IS_PO (po), -1);
 
-  return g_list_length (priv->messages);
+  return priv->messages->len;
 }
 
 /**

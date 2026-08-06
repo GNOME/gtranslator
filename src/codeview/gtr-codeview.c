@@ -173,7 +173,7 @@ gtr_code_view_new (GtrWindow *window)
                                     "window", window, NULL);
   GtrCodeViewPrivate *priv = gtr_code_view_get_instance_private (self);
   GtrPo *po;
-  GList *msg;
+  GtrMsg *msg;
 
   priv->tab = gtr_window_get_active_tab (priv->window);
 
@@ -187,7 +187,7 @@ gtr_code_view_new (GtrWindow *window)
   g_signal_connect_swapped (priv->panel, "reloaded",
                             G_CALLBACK (update_filename), self);
 
-  update_filename (self, msg->data);
+  update_filename (self, msg);
 
   return self;
 }

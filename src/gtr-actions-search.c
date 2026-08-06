@@ -412,7 +412,8 @@ do_replace_all (GtrSearchBar *searchbar, GtrWindow * window)
 {
   GtrTab *tab;
   g_autoptr (GPtrArray) views = NULL;
-  GList *current_msg, *aux;
+  GPtrArray *msgs;
+  GtrMsg *current_msg;
   const char *search_entry_text;
   const char *replace_entry_text;
   gboolean match_case;
@@ -425,12 +426,11 @@ do_replace_all (GtrSearchBar *searchbar, GtrWindow * window)
   /* Get only translated textviews */
   views = gtr_window_get_all_views (window, FALSE, TRUE);
 
+  msgs = gtr_po_get_messages (gtr_tab_get_po (tab));
   current_msg = gtr_po_get_current_message (gtr_tab_get_po (tab));
 
   g_return_if_fail (views != NULL);
   g_return_if_fail (current_msg != NULL);
-
-  aux = current_msg;
 
   search_entry_text = gtr_search_bar_get_search_text (searchbar);
   g_return_if_fail ((search_entry_text) != NULL);
@@ -446,9 +446,11 @@ do_replace_all (GtrSearchBar *searchbar, GtrWindow * window)
   GTR_SEARCH_SET_CASE_SENSITIVE (flags, match_case);
   GTR_SEARCH_SET_ENTIRE_WORD (flags, entire_word);
 
-
-  do
+  for (int j = 0; j < msgs->len; j++)
     {
+      GtrMsg *msg = g_ptr_array_index (msgs, j);
+      gtr_tab_message_go_to (tab, msg, TRUE, GTR_TAB_MOVE_NONE);
+
       for (int i = 0; i < views->len; i++)
         {
           GtrView *view = g_ptr_array_index (views, i);
@@ -456,16 +458,9 @@ do_replace_all (GtrSearchBar *searchbar, GtrWindow * window)
                                 search_entry_text,
                                 replace_entry_text, flags);
         }
-
-      if (aux->next == NULL)
-        aux = g_list_first (aux);
-      else
-        aux = aux->next;
-      gtr_tab_message_go_to (tab, aux->data, TRUE, GTR_TAB_MOVE_NONE);
     }
-  while (current_msg != aux);
 
-  gtr_tab_message_go_to (tab, aux->data, FALSE, GTR_TAB_MOVE_NONE);
+  gtr_tab_message_go_to (tab, current_msg, FALSE, GTR_TAB_MOVE_NONE);
 
   restore_last_searched_data (searchbar, tab);
   gtr_tab_find_replace (tab, FALSE);

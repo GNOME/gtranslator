@@ -160,7 +160,7 @@ add_to_database (gpointer data_pointer)
 
   if (l)
     {
-      GList *msg_list = NULL;
+      GPtrArray *msg_list = NULL;
       GFile *location;
       g_autoptr(GError) error = NULL;
       g_autoptr(GtrPo) po = NULL;

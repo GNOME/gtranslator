@@ -48,7 +48,8 @@ gtr_translation_memory_store_default (GtrTranslationMemory * obj, GtrMsg * msg)
  * Stores the messages from @msgs in the database.
  */
 gboolean
-gtr_translation_memory_store_list (GtrTranslationMemory * obj, GList * msgs)
+gtr_translation_memory_store_list (GtrTranslationMemory *obj,
+                                   GPtrArray            *msgs)
 {
   g_return_val_if_fail (GTR_IS_TRANSLATION_MEMORY (obj), FALSE);
   return GTR_TRANSLATION_MEMORY_GET_IFACE (obj)->store_list (obj, msgs);
@@ -56,14 +57,12 @@ gtr_translation_memory_store_list (GtrTranslationMemory * obj, GList * msgs)
 
 /* Default implementation */
 static gboolean
-gtr_translation_memory_store_list_default (GtrTranslationMemory * obj,
-                                           GList * msgs)
+gtr_translation_memory_store_list_default (GtrTranslationMemory *obj,
+                                           GPtrArray            *msgs)
 {
-  GList * l;
-
-  for (l = msgs; l; l = g_list_next (l))
+  for (int i = 0; i < msgs->len; i++)
     {
-      GtrMsg *msg = GTR_MSG (l->data);
+      GtrMsg *msg = g_ptr_array_index (msgs, i);
       gboolean result;
 
       if (!gtr_msg_is_translated (msg))

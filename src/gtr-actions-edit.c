@@ -66,21 +66,21 @@ gtr_message_status_toggle_fuzzy (GtrWindow * window)
 {
   GtrTab *current;
   GtrPo *po;
-  GList *msg;
+  GtrMsg *msg;
 
   current = gtr_window_get_active_tab (window);
   po = gtr_tab_get_po (current);
   msg = gtr_po_get_current_message (po);
 
-  if (gtr_msg_is_fuzzy (msg->data))
-    gtr_msg_set_fuzzy (msg->data, FALSE);
+  if (gtr_msg_is_fuzzy (msg))
+    gtr_msg_set_fuzzy (msg, FALSE);
   else
-    gtr_msg_set_fuzzy (msg->data, TRUE);
+    gtr_msg_set_fuzzy (msg, TRUE);
 
   /*
    * Emit that message was changed.
    */
-  g_signal_emit_by_name (current, "message-changed", msg->data);
+  g_signal_emit_by_name (current, "message-changed", msg);
 }
 
 void
@@ -106,7 +106,7 @@ gtr_actions_fix_plurals (GtrWindow *window)
 {
   GtrTab *current = NULL;
   GtrPo *po = NULL;
-  GList *msg_list = NULL;
+  GPtrArray *msg_list = NULL;
   GtrHeader *header = NULL;
   int plurals = 0;
 
@@ -118,9 +118,9 @@ gtr_actions_fix_plurals (GtrWindow *window)
 
   // TODO: Show a confirmation dialog
 
-  for (; msg_list; msg_list = g_list_next (msg_list))
+  for (int i = 0; i < msg_list->len; i++)
     {
-      GtrMsg *msg = GTR_MSG (msg_list->data);
+      GtrMsg *msg = g_ptr_array_index (msg_list, i);
       if (gtr_msg_fix_plurals (msg, plurals))
         gtk_widget_action_set_enabled (GTK_WIDGET (window),
                                        "win.save", TRUE);

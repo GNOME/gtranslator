@@ -463,11 +463,11 @@ gtr_gda_store (GtrTranslationMemory * tm, GtrMsg * msg)
 }
 
 static gboolean
-gtr_gda_store_list (GtrTranslationMemory * tm, GList * msgs)
+gtr_gda_store_list (GtrTranslationMemory *tm,
+                    GPtrArray            *msgs)
 {
   GtrGda *self = GTR_GDA (tm);
   gboolean result = TRUE;
-  GList *l;
   GError *error = NULL;
   GtrGdaPrivate *priv = gtr_gda_get_instance_private (self);
 
@@ -482,9 +482,9 @@ gtr_gda_store_list (GtrTranslationMemory * tm, GList * msgs)
       return FALSE;
     }
 
-  for (l = msgs; l; l = g_list_next (l))
+  for (int i = 0; i < msgs->len; i++)
     {
-      GtrMsg *msg = GTR_MSG (l->data);
+      GtrMsg *msg = g_ptr_array_index (msgs, i);
 
       if (!gtr_msg_is_translated (msg) || gtr_msg_is_fuzzy (msg))
         continue;
