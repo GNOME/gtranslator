@@ -30,6 +30,7 @@
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
 
+#include "gtr-marshal.h"
 #include "gtr-utils.h"
 
 typedef struct
@@ -123,11 +124,14 @@ gtr_upload_dialog_class_init (GtrUploadDialogClass *klass)
   // Custom signals
   signals[RESPONSE] =
     g_signal_new ("response",
-                  G_OBJECT_CLASS_TYPE (klass),
+                  G_TYPE_FROM_CLASS (klass),
                   G_SIGNAL_RUN_LAST,
                   0, NULL, NULL,
-                  g_cclosure_marshal_VOID__VOID,
+                  gtr_marshal_VOID__VOID,
                   G_TYPE_NONE, 0);
+  g_signal_set_va_marshaller (signals[RESPONSE],
+                              G_TYPE_FROM_CLASS (klass),
+                              gtr_marshal_VOID__VOIDv);
 }
 
 static void

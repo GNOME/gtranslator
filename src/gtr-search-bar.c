@@ -23,6 +23,7 @@
 #include <glib/gi18n.h>
 
 #include "gtr-actions.h"
+#include "gtr-marshal.h"
 #include "gtr-tab.h"
 #include "gtr-utils.h"
 #include "gtr-window.h"
@@ -563,8 +564,12 @@ gtr_search_bar_class_init (GtrSearchBarClass *klass)
                   G_TYPE_FROM_CLASS (klass),
                   G_SIGNAL_RUN_LAST | G_SIGNAL_ACTION,
                   0,
-                  NULL, NULL, NULL,
+                  NULL, NULL,
+                  gtr_marshal_VOID__VOID,
                   G_TYPE_NONE, 0);
+  g_signal_set_va_marshaller (signals[STOP_SEARCH],
+                              G_TYPE_FROM_CLASS (klass),
+                              gtr_marshal_VOID__VOIDv);
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/Gtranslator/gtr-search-bar.ui");
   gtk_widget_class_bind_template_child (widget_class, GtrSearchBar, replace_all_button);

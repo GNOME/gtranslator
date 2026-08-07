@@ -26,6 +26,7 @@
 
 #include "gtr-dirs.h"
 #include "gtr-marshal.h"
+#include "gtr-marshal.h"
 #include "gtr-profile.h"
 
 typedef struct
@@ -85,37 +86,52 @@ gtr_profile_manager_class_init (GtrProfileManagerClass *klass)
   /* Signals */
   signals[ACTIVE_PROFILE_CHANGED] =
     g_signal_new ("active-profile-changed",
-                  G_OBJECT_CLASS_TYPE (klass),
+                  G_TYPE_FROM_CLASS (klass),
                   G_SIGNAL_RUN_LAST,
                   0,
                   NULL, NULL,
-                  g_cclosure_marshal_VOID__OBJECT,
+                  gtr_marshal_VOID__OBJECT,
                   G_TYPE_NONE, 1, GTR_TYPE_PROFILE);
+  g_signal_set_va_marshaller (signals[ACTIVE_PROFILE_CHANGED],
+                              G_TYPE_FROM_CLASS (klass),
+                              gtr_marshal_VOID__OBJECTv);
+
   signals[PROFILE_ADDED] =
     g_signal_new ("profile-added",
-                  G_OBJECT_CLASS_TYPE (klass),
+                  G_TYPE_FROM_CLASS (klass),
                   G_SIGNAL_RUN_LAST,
                   0,
                   NULL, NULL,
-                  g_cclosure_marshal_VOID__OBJECT,
+                  gtr_marshal_VOID__OBJECT,
                   G_TYPE_NONE, 1, GTR_TYPE_PROFILE);
+  g_signal_set_va_marshaller (signals[PROFILE_ADDED],
+                              G_TYPE_FROM_CLASS (klass),
+                              gtr_marshal_VOID__OBJECTv);
+
   signals[PROFILE_REMOVED] =
     g_signal_new ("profile-removed",
-                  G_OBJECT_CLASS_TYPE (klass),
+                  G_TYPE_FROM_CLASS (klass),
                   G_SIGNAL_RUN_LAST,
                   0,
                   NULL, NULL,
-                  g_cclosure_marshal_VOID__OBJECT,
+                  gtr_marshal_VOID__OBJECT,
                   G_TYPE_NONE, 1, GTR_TYPE_PROFILE);
+  g_signal_set_va_marshaller (signals[PROFILE_REMOVED],
+                              G_TYPE_FROM_CLASS (klass),
+                              gtr_marshal_VOID__OBJECTv);
+
   signals[PROFILE_MODIFIED] =
     g_signal_new ("profile-modified",
-                  G_OBJECT_CLASS_TYPE (klass),
+                  G_TYPE_FROM_CLASS (klass),
                   G_SIGNAL_RUN_LAST,
                   0,
                   NULL, NULL,
                   gtr_marshal_VOID__OBJECT_OBJECT,
                   G_TYPE_NONE,
                   2, GTR_TYPE_PROFILE, GTR_TYPE_PROFILE);
+  g_signal_set_va_marshaller (signals[PROFILE_MODIFIED],
+                              G_TYPE_FROM_CLASS (klass),
+                              gtr_marshal_VOID__OBJECT_OBJECTv);
 }
 
 static void

@@ -25,6 +25,7 @@
 #include "gtr-dirs.h"
 #include "gtr-lang-combo-row.h"
 #include "gtr-language.h"
+#include "gtr-marshal.h"
 #include "gtr-utils.h"
 
 typedef struct
@@ -79,11 +80,15 @@ gtr_languages_fetcher_class_init (GtrLanguagesFetcherClass *klass)
   object_class->finalize = gtr_languages_fetcher_finalize;
 
   signals[CHANGED] =
-    g_signal_newv ("changed",
-                   G_OBJECT_CLASS_TYPE (object_class),
-                   G_SIGNAL_RUN_LAST,
-                   NULL, NULL, NULL, NULL,
-                   G_TYPE_NONE, 0, NULL);
+    g_signal_new ("changed",
+                  G_TYPE_FROM_CLASS (klass),
+                  G_SIGNAL_RUN_LAST,
+                  0, NULL, NULL,
+                  gtr_marshal_VOID__VOID,
+                  G_TYPE_NONE, 0);
+  g_signal_set_va_marshaller (signals[CHANGED],
+                              G_TYPE_FROM_CLASS (klass),
+                              gtr_marshal_VOID__VOIDv);
 
   gtk_widget_class_set_template_from_resource (widget_class,
                                                "/org/gnome/Gtranslator/gtr-languages-fetcher.ui");

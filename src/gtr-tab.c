@@ -41,6 +41,7 @@
 #include "gtr-context.h"
 #include "gtr-dirs.h"
 #include "gtr-io-error-info-bar.h"
+#include "gtr-marshal.h"
 #include "gtr-msg.h"
 #include "gtr-po.h"
 #include "gtr-profile-manager.h"
@@ -928,30 +929,39 @@ gtr_tab_class_init (GtrTabClass * klass)
   /* Signals */
   signals[SHOWED_MESSAGE] =
     g_signal_new ("showed-message",
-                  G_OBJECT_CLASS_TYPE (klass),
+                  G_TYPE_FROM_CLASS (klass),
                   G_SIGNAL_RUN_LAST,
                   0,
                   NULL, NULL,
-                  g_cclosure_marshal_VOID__OBJECT,
+                  gtr_marshal_VOID__OBJECT,
                   G_TYPE_NONE, 1, GTR_TYPE_MSG);
+  g_signal_set_va_marshaller (signals[SHOWED_MESSAGE],
+                              G_TYPE_FROM_CLASS (klass),
+                              gtr_marshal_VOID__OBJECTv);
 
   signals[MESSAGE_CHANGED] =
     g_signal_new ("message-changed",
-                  G_OBJECT_CLASS_TYPE (klass),
+                  G_TYPE_FROM_CLASS (klass),
                   G_SIGNAL_RUN_LAST,
                   0,
                   NULL, NULL,
-                  g_cclosure_marshal_VOID__OBJECT,
+                  gtr_marshal_VOID__OBJECT,
                   G_TYPE_NONE, 1, GTR_TYPE_MSG);
+  g_signal_set_va_marshaller (signals[MESSAGE_CHANGED],
+                              G_TYPE_FROM_CLASS (klass),
+                              gtr_marshal_VOID__OBJECTv);
 
   signals[SEARCHBAR_TOGGLED] =
     g_signal_new ("searchbar-toggled",
-                  G_OBJECT_CLASS_TYPE (klass),
+                  G_TYPE_FROM_CLASS (klass),
                   G_SIGNAL_RUN_LAST,
                   0,
                   NULL, NULL,
-                  g_cclosure_marshal_VOID__BOOLEAN,
+                  gtr_marshal_VOID__BOOLEAN,
                   G_TYPE_NONE, 1, G_TYPE_BOOLEAN);
+  g_signal_set_va_marshaller (signals[SEARCHBAR_TOGGLED],
+                              G_TYPE_FROM_CLASS (klass),
+                              gtr_marshal_VOID__BOOLEANv);
 
   /* Properties */
   props[PROP_AUTOSAVE] = g_param_spec_boolean ("autosave",
