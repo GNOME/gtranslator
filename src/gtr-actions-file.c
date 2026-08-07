@@ -72,7 +72,6 @@ typedef struct
   int prev_fuzzy;
   int prev_untranslated;
   int prev_total;
-  GSubprocess *proc;
 } UpdateFromPotCtx;
 
 static void
@@ -83,7 +82,6 @@ update_from_pot_ctx_free (UpdateFromPotCtx *ctx)
 
   g_clear_object (&ctx->window);
   g_clear_object (&ctx->po_location);
-  g_clear_object (&ctx->proc);
   g_clear_pointer (&ctx->pot_path, g_free);
   g_free (ctx);
 }
@@ -190,6 +188,8 @@ _update_from_pot_finish (GObject *source, GAsyncResult *res,
   g_autoptr (GError) dlg_err = NULL;
   g_autoptr (GFile) pot_file
       = gtk_file_dialog_open_finish (dialog, res, &dlg_err);
+  g_autoptr (GSubprocess) proc = NULL;
+
   if (!pot_file)
     return; /* cancelled or error shown by GTK */
 
@@ -237,18 +237,18 @@ _update_from_pot_finish (GObject *source, GAsyncResult *res,
   const char *argv[]
       = { "msgmerge", "-U", "--previous", po_path, ctx->pot_path, NULL };
   g_autoptr (GError) spawn_error = NULL;
-  ctx->proc = g_subprocess_newv (
+  proc = g_subprocess_newv (
       argv, G_SUBPROCESS_FLAGS_STDOUT_SILENCE | G_SUBPROCESS_FLAGS_STDERR_PIPE,
       &spawn_error);
 
-  if (!ctx->proc)
+  if (proc == NULL)
     {
       show_update_error (window, spawn_error ? spawn_error->message
                                              : _("Failed to start msgmerge"));
       return;
     }
 
-  g_subprocess_communicate_utf8_async (ctx->proc, NULL, NULL,
+  g_subprocess_communicate_utf8_async (proc, NULL, NULL,
                                        _msgmerge_finished, g_steal_pointer (&ctx));
 }
 
