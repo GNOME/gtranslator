@@ -27,6 +27,7 @@
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
 
+#include "gtr-marshal.h"
 #include "gtr-tab.h"
 #include "gtr-utils.h"
 #include "gtr-window.h"
@@ -46,8 +47,6 @@ struct _GtrContextPanel
 struct _GtrContextPanelClass
 {
   GtkBoxClass parent_class;
-  void (* reloaded) (GtrContextPanel *panel,
-                     GtrMsg          *msg);
 };
 
 typedef struct
@@ -447,14 +446,17 @@ gtr_context_panel_class_init (GtrContextPanelClass * klass)
 
   signals[RELOADED] =
     g_signal_new ("reloaded",
-                  G_OBJECT_CLASS_TYPE (object_class),
+                  G_TYPE_FROM_CLASS (klass),
                   G_SIGNAL_RUN_LAST,
-                  G_STRUCT_OFFSET (struct _GtrContextPanelClass, reloaded),
+                  0,
                   NULL, NULL,
-                  g_cclosure_marshal_VOID__OBJECT,
+                  gtr_marshal_VOID__OBJECT,
                   G_TYPE_NONE,
                   1,
                   GTR_TYPE_MSG);
+  g_signal_set_va_marshaller (signals[RELOADED],
+                              G_TYPE_FROM_CLASS (klass),
+                              gtr_marshal_VOID__OBJECTv);
 
   props[PROP_TAB] =
     g_param_spec_object ("tab",

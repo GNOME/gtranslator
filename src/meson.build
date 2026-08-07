@@ -71,6 +71,7 @@ sources += gnome.genmarshal(
   sources: marshal + '.list',
   prefix: marshal.underscorify(),
   internal: true,
+  valist_marshallers: true,
 )
 
 enum_types = 'gtr-enum-types'
