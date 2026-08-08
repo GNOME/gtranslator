@@ -133,7 +133,7 @@ _msgmerge_finished (GObject *source, GAsyncResult *res, gpointer user_data)
    * if the user closes without saving. */
   {
     g_autoptr (GError) parse_err = NULL;
-    GtrPo *po_after = gtr_po_new_from_file (ctx->po_location, &parse_err);
+    g_autoptr (GtrPo) po_after = gtr_po_new_from_file (ctx->po_location, &parse_err);
     if (po_after)
       {
         const int after_translated = gtr_po_get_translated_count (po_after);

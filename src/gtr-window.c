@@ -451,6 +451,7 @@ gtr_window_create_tab (GtrWindow * window, GtrPo * po)
     }
 
   // code view
+  g_clear_object (&priv->codeview);
   priv->codeview = gtr_code_view_new (window);
 
   g_signal_connect_after (po,
