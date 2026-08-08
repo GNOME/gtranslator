@@ -339,14 +339,14 @@ remove_autosave_timeout (GtrTab * tab)
 static void
 gtr_tab_edition_finished (GtrTab * tab, GtrMsg * msg)
 {
-  char *message_error;
+  g_autofree char *message_error = NULL;
 
   /*
    * Checking message
    */
   message_error = gtr_msg_check (msg);
 
-  if (message_error != NULL)
+  if (gtr_msg_is_translated(msg) && message_error != NULL)
     {
       AdwDialog *dialog = adw_alert_dialog_new (
         _("There is an error in the message"), message_error);
@@ -355,7 +355,6 @@ gtr_tab_edition_finished (GtrTab * tab, GtrMsg * msg)
       adw_alert_dialog_add_response (ADW_ALERT_DIALOG (dialog), "ok", _("OK"));
       adw_alert_dialog_set_default_response (ADW_ALERT_DIALOG (dialog), "ok");
       adw_dialog_present (dialog, GTK_WIDGET (tab));
-      g_free (message_error);
     }
   else
     {
