@@ -46,7 +46,7 @@ copy_lang (gconstpointer src,
   GtrLanguage *lang = (GtrLanguage *)src;
   const char *langname = gtr_language_get_name (lang);
 
-  return g_strdup ((char *)langname);
+  return g_strdup (langname);
 }
 
 static void
@@ -73,15 +73,14 @@ gtr_lang_combo_row_class_init (GtrLangComboRowClass *klass)
 static void
 gtr_lang_combo_row_init (GtrLangComboRow *self)
 {
-  const GSList *languages;
-  const GSList *o;
-  GSList *langs;
+  const GPtrArray *languages;
+  g_autoptr (GPtrArray) langs = NULL;
   GtrLangComboRowPrivate *priv = gtr_lang_combo_row_get_instance_private (self);
   g_autoptr(GtkExpression) expression = NULL;
 
   languages = gtr_language_get_languages ();
-  langs = g_slist_copy_deep ((GSList *)languages, copy_lang, NULL);
-  langs = g_slist_sort (langs, (GCompareFunc)g_utf8_collate);
+  langs = g_ptr_array_new_from_array (languages->pdata, languages->len, copy_lang, NULL, g_free);
+  g_ptr_array_sort_values (langs, (GCompareFunc) g_utf8_collate);
 
   expression = gtk_property_expression_new (GTR_TYPE_DROP_DOWN_OPTION, NULL, "name");
   priv->model = g_list_store_new (GTR_TYPE_DROP_DOWN_OPTION);
@@ -90,15 +89,12 @@ gtr_lang_combo_row_init (GtrLangComboRow *self)
   adw_preferences_row_set_title (ADW_PREFERENCES_ROW (self), _("Languages"));
   adw_combo_row_set_enable_search (ADW_COMBO_ROW (self), TRUE);
 
-  for (o = langs; o != NULL; o = g_slist_next (o))
+  for (int i = 0; i < langs->len; i++)
     {
-      const char *lang = (char *)o->data;
+      const char *lang = g_ptr_array_index (langs, i);
       g_autoptr (GtrDropDownOption) option = gtr_drop_down_option_new (lang, NULL);
       g_list_store_append (priv->model, option);
     }
-
-  if (langs)
-    g_slist_free_full (langs, g_free);
 }
 
 GtrLangComboRow*

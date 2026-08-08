@@ -37,7 +37,7 @@ GType                    gtr_language_get_type           (void);
 GtrLanguage             *gtr_language_copy               (GtrLanguage       *lang);
 void                     gtr_language_free               (GtrLanguage       *lang);
 
-const GSList            *gtr_language_get_languages      (void);
+const GPtrArray         *gtr_language_get_languages      (void);
 
 const char              *gtr_language_get_code           (const GtrLanguage *lang);
 

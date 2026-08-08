@@ -128,18 +128,20 @@ compare_languages_code (gconstpointer a,
 static void
 append_from_languages (GtrLanguagesFetcher *fetcher)
 {
-  const GSList *languages, *l;
+  const GPtrArray *languages;
+  g_autoptr (GPtrArray) sorted_langs = NULL;
   g_autoptr (GHashTable) plurals = NULL;
   GtrLanguagesFetcherPrivate *priv = gtr_languages_fetcher_get_instance_private (fetcher);
 
   plurals = g_hash_table_new_full (g_str_hash, g_int_equal, g_free, NULL);
 
   languages = gtr_language_get_languages ();
-  languages = g_slist_sort ((GSList *)languages, compare_languages_code);
+  sorted_langs = g_ptr_array_copy ((GPtrArray *) languages, (GCopyFunc) gtr_language_copy, NULL);
+  g_ptr_array_sort_values (sorted_langs, compare_languages_code);
 
-  for (l = languages; l != NULL; l = g_slist_next (l))
+  for (int i = 0; i < sorted_langs->len; i++)
     {
-      GtrLanguage *lang = (GtrLanguage *)l->data;
+      GtrLanguage *lang = g_ptr_array_index (sorted_langs, i);
       const char *plural_form;
 
       gtk_string_list_append (GTK_STRING_LIST (priv->code_store),
@@ -200,13 +202,11 @@ update_language (GtrLanguagesFetcher *fetcher)
 {
   GtrLanguagesFetcherPrivate *priv = gtr_languages_fetcher_get_instance_private (fetcher);
   const char *text = gtr_lang_combo_row_get_lang (GTR_LANG_COMBO_ROW (priv->language));
-  GtrLanguage *lang;
-  const GSList *l;
-  const GSList *languages = gtr_language_get_languages ();
+  const GPtrArray *languages = gtr_language_get_languages ();
 
-  for (l = languages; l != NULL; l = g_slist_next (l))
+  for (int i = 0; i < languages->len; i++)
     {
-      lang = (GtrLanguage*)l->data;
+      GtrLanguage *lang = g_ptr_array_index (languages, i);
       const char *langname = gtr_language_get_name (lang);
       if (text != NULL && g_strcmp0 (langname, text) == 0)
         {

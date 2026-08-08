@@ -42,7 +42,7 @@ struct _GtrLanguage
 
 static gboolean initialized = FALSE;
 static GKeyFile *plurals_file = NULL;
-static GSList *languages = NULL;
+static GPtrArray *languages = NULL;
 
 G_DEFINE_BOXED_TYPE (GtrLanguage, gtr_language,
                      gtr_language_copy,
@@ -124,9 +124,12 @@ gtr_language_lazy_init (void)
 {
   char *filename;
   g_autoptr (GKeyFile) lang_file = NULL;
+  g_autoptr (GPtrArray) languages_aux = NULL;
   g_auto (GStrv) langs = NULL;
   char *lang;
   size_t n, i;
+
+  languages_aux = g_ptr_array_new_with_free_func ((GDestroyNotify) gtr_language_free);
 
   if (initialized)
     return;
@@ -162,18 +165,17 @@ gtr_language_lazy_init (void)
       gtr_lang = gtr_language_new (g_strdup (lang),
                                    g_key_file_get_string (lang_file, "Languages", lang, NULL));
       load_plural_form (gtr_lang);
-      languages = g_slist_prepend (languages, gtr_lang);
+      g_ptr_array_add (languages_aux, gtr_lang);
     }
-
-  languages = g_slist_reverse (languages);
 
   /* free the file, not needed anymore */
   g_key_file_free (plurals_file);
 
+  languages = g_steal_pointer (&languages_aux);
   initialized = TRUE;
 }
 
-const GSList *
+const GPtrArray *
 gtr_language_get_languages (void)
 {
   gtr_language_lazy_init ();
@@ -214,5 +216,5 @@ gtr_language_get_plural_form (const GtrLanguage *lang)
 void
 gtr_languages_finalize (void)
 {
-  g_slist_free_full (languages, (GDestroyNotify) gtr_language_free);
+  g_ptr_array_free (languages, TRUE);
 }
