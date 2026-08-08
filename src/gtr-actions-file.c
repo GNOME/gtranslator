@@ -235,7 +235,7 @@ _update_from_pot_finish (GObject *source, GAsyncResult *res,
 
   /* Launch msgmerge asynchronously so the UI stays responsive */
   const char *argv[]
-      = { "msgmerge", "-U", "--previous", po_path, ctx->pot_path, NULL };
+      = { "msgmerge", "--update", "--previous", "--quiet", po_path, ctx->pot_path, NULL };
   g_autoptr (GError) spawn_error = NULL;
   proc = g_subprocess_newv (
       argv, G_SUBPROCESS_FLAGS_STDOUT_SILENCE | G_SUBPROCESS_FLAGS_STDERR_PIPE,
