@@ -237,7 +237,7 @@ find_in_list (GtrWindow *window, GtrSearchBar *searchbar)
   unsigned int old_flags = 0;
 
   // Use static to keep the search state between different calls
-  static GPtrArray *viewsaux = NULL;
+  static int last_index = 0;
   // offset of last found word in textview
   static int offset = 0;
 
@@ -275,21 +275,18 @@ find_in_list (GtrWindow *window, GtrSearchBar *searchbar)
         }
     }
 
-  // Do the search in all views, keeping the state from previous calls.
-  if (viewsaux == NULL)
-    viewsaux = g_steal_pointer (&views);
-
-  while (viewsaux->len > 0)
+  for (int i = last_index; i < views->len; i++)
     {
-      GtrView *view = g_ptr_array_steal_index (viewsaux, 0);
+      GtrView *view = g_ptr_array_index (views, i);
 
+      last_index = i;
       offset = run_search (view, offset);
       if (offset > 0)
         return TRUE;
     }
 
-  g_clear_pointer (&viewsaux, g_ptr_array_unref);
   offset = 0;
+  last_index = 0;
 
   return FALSE;
 }
