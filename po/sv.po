@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2026-06-29 14:48+0000\n"
-"PO-Revision-Date: 2026-06-29 21:33+0200\n"
+"POT-Creation-Date: 2026-08-03 16:50+0000\n"
+"PO-Revision-Date: 2026-08-03 21:13+0200\n"
 "Last-Translator: Anders Jonsson <anders.jonsson@norsjovallen.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "Language: sv\n"
@@ -224,6 +224,12 @@ msgstr ""
 msgid "Translator's main interface"
 msgstr "Översättarens huvudgränssnitt"
 
+#. developer_name tag deprecated with Appstream 1.0
+#: data/org.gnome.Gtranslator.metainfo.xml.in.in:323
+#: data/org.gnome.Gtranslator.metainfo.xml.in.in:325
+msgid "Daniel García Moreno"
+msgstr "Daniel García Moreno"
+
 # src/about.c:60
 #: src/gtr-actions-app.c:86
 msgid ""
@@ -371,7 +377,7 @@ msgstr "Spara fil som…"
 msgid "Fixed plurals"
 msgstr "Fixade pluralformer"
 
-#: src/gtr-close-confirmation-dialog.c:121 src/gtr-context.c:164
+#: src/gtr-close-confirmation-dialog.c:121 src/gtr-context.c:169
 #: src/gtr-preferences-dialog.c:452 src/gtr-profile-dialog.ui:15
 #: src/gtr-upload-dialog.ui:20
 msgid "_Cancel"
@@ -381,7 +387,7 @@ msgstr "A_vbryt"
 msgid "Close _Without Saving"
 msgstr "Stäng _utan att spara"
 
-#: src/gtr-close-confirmation-dialog.c:123 src/gtr-context.c:165
+#: src/gtr-close-confirmation-dialog.c:123 src/gtr-context.c:170
 msgid "_Save"
 msgstr "_Spara"
 
@@ -409,11 +415,11 @@ msgstr[1] ""
 "Det finns %d dokument med osparade ändringar. Spara ändringar innan "
 "stängning?"
 
-#: src/gtr-context.c:181
+#: src/gtr-context.c:186
 msgid "Edit Notes"
 msgstr "Redigera anteckningar"
 
-#: src/gtr-context.c:549
+#: src/gtr-context.c:581
 msgid "Open in Browser"
 msgstr "Öppna i bläddrare"
 
@@ -428,10 +434,14 @@ msgstr "Redigera"
 
 # src/sidebar.c:107
 #: src/gtr-context.ui:59
-msgid "Extracted comments"
+msgid "Extracted Comments"
 msgstr "Extraherade kommentarer"
 
 #: src/gtr-context.ui:84
+msgid "Previous Source Text"
+msgstr "Föregående källtext"
+
+#: src/gtr-context.ui:112
 msgid "Paths"
 msgstr "Sökvägar"
 
@@ -818,27 +828,27 @@ msgstr "Källtext"
 msgid "Translated Message"
 msgstr "Översatt text"
 
-#: src/gtr-po.c:469
+#: src/gtr-po.c:465
 #, c-format
 msgid "The file is empty"
 msgstr "Filen är tom"
 
-#: src/gtr-po.c:478
+#: src/gtr-po.c:474
 #, c-format
 msgid "Failed opening file “%s”: %s"
 msgstr "Misslyckades med att öppna filen ”%s”: %s"
 
-#: src/gtr-po.c:549
+#: src/gtr-po.c:545
 #, c-format
 msgid "Could not convert from charset “%s” to UTF-8"
 msgstr "Kunde inte konvertera teckentabell ”%s” till UTF-8"
 
-#: src/gtr-po.c:563 src/gtr-po.c:581
+#: src/gtr-po.c:559 src/gtr-po.c:577
 #, c-format
 msgid "Could not store temporary file for encoding conversion"
 msgstr "Kunde inte lagra temporär fil för teckentabellskonvertering"
 
-#: src/gtr-po.c:605
+#: src/gtr-po.c:601
 #, c-format
 msgid ""
 "All attempt to convert the file to UTF-8 has failed, use the msgconv or "
@@ -849,17 +859,17 @@ msgstr ""
 "kommandoradsverktygen msgconv eller iconv, innan filen öppnas med GNOME "
 "Översättningsredigerare"
 
-#: src/gtr-po.c:670
+#: src/gtr-po.c:666
 #, c-format
 msgid "Gettext returned a null message domain list."
 msgstr "Gettext returnerade ett noll meddelande domänlista."
 
-#: src/gtr-po.c:717
+#: src/gtr-po.c:713
 #, c-format
 msgid "No messages obtained from parser."
 msgstr "Inga meddelanden hämtades från tolkare."
 
-#: src/gtr-po.c:783
+#: src/gtr-po.c:779
 #, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
@@ -870,17 +880,17 @@ msgstr ""
 "Pot-filer genereras av kompileringsprocessen.\n"
 "Din fil bör troligtvis kallas ”%s.po”."
 
-#: src/gtr-po.c:813
+#: src/gtr-po.c:809
 #, c-format
 msgid "The file %s is read-only, and can not be overwritten"
 msgstr "Filen %s är skrivskyddad och kan inte skrivas över"
 
-#: src/gtr-po.c:832 src/gtr-po.c:1183
+#: src/gtr-po.c:828 src/gtr-po.c:1179
 #, c-format
 msgid "There is an error in the PO file: %s"
 msgstr "Det finns ett fel i PO-filen: %s"
 
-#: src/gtr-po.c:843
+#: src/gtr-po.c:839
 #, c-format
 msgid "There was an error writing the PO file: %s"
 msgstr "Det inträffade ett fel vid skrivning av PO-filen: %s"
@@ -1591,9 +1601,6 @@ msgstr ""
 # src/prefs.c:239
 #~ msgid "Gtranslator"
 #~ msgstr "Gtranslator"
-
-#~ msgid "Daniel García Moreno"
-#~ msgstr "Daniel García Moreno"
 
 #~ msgid "Undo"
 #~ msgstr "Ångra"
