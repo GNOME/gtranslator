@@ -314,13 +314,11 @@ save_profiles (GtrProfileManager *manager)
 {
   xmlDocPtr  doc;
   xmlNodePtr root;
-  char *file_name;
+  g_autofree char *file_name = NULL;
   GSList *l;
   GtrProfileManagerPrivate *priv = gtr_profile_manager_get_instance_private (manager);
 
   g_return_if_fail (GTR_IS_PROFILE_MANAGER (manager));
-
-  xmlIndentTreeOutput = TRUE;
 
   doc = xmlNewDoc ((const xmlChar *)"1.0");
   if (doc == NULL)
@@ -336,16 +334,24 @@ save_profiles (GtrProfileManager *manager)
   file_name = get_profile_filename ();
   if (file_name != NULL)
     {
+      xmlSaveCtxt *save_ctx;
+      xmlParserErrors save_err;
       const char *config_dir;
       int res;
 
       /* make sure the config dir exists */
       config_dir = gtr_dirs_get_user_config_dir ();
       res = g_mkdir_with_parents (config_dir, 0755);
-      if (res != -1)
-        xmlSaveFormatFile (file_name, doc, 1);
 
-      g_free (file_name);
+      save_ctx = xmlSaveToFilename (file_name, "UTF-8", XML_SAVE_FORMAT);
+
+      if (res != -1)
+        if (xmlSaveDoc (save_ctx, doc) != 0)
+          g_warning ("Could not save profiles.xml to %s", file_name);
+
+      save_err = xmlSaveFinish (save_ctx);
+      if (save_err != XML_ERR_OK)
+        g_warning ("Could not finish saving profiles.xml: %d", save_err);
     }
 
   xmlFreeDoc (doc);
