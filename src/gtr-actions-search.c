@@ -423,7 +423,6 @@ do_replace_all (GtrSearchBar *searchbar, GtrWindow * window)
   gboolean match_case;
   gboolean entire_word;
   unsigned int flags = 0;
-  int count = 0;
 
   tab = gtr_window_get_active_tab (window);
   gtr_tab_find_replace (tab, TRUE);
@@ -458,9 +457,9 @@ do_replace_all (GtrSearchBar *searchbar, GtrWindow * window)
     {
       while (l)
         {
-          count += gtr_view_replace_all (GTR_VIEW (l->data),
-                                         search_entry_text,
-                                         replace_entry_text, flags);
+          gtr_view_replace_all (GTR_VIEW (l->data),
+                                search_entry_text,
+                                replace_entry_text, flags);
           l = l->next;
         }
 
