@@ -24,7 +24,6 @@
 
 #include <gio/gio.h>
 #include <gtk/gtk.h>
-#include <libxml/tree.h>
 
      char *gtr_utils_escape_search_text (const char *text);
 
