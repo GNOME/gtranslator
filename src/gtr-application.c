@@ -153,7 +153,7 @@ gtr_application_init (GtrApplication *application)
 
   /* If the config folder exists but there is no profile */
   gtr_folder = gtr_dirs_get_user_config_dir ();
-  profiles_file = g_build_filename (gtr_folder, "profiles.xml", NULL);
+  profiles_file = g_build_filename (gtr_folder, "profiles.ini", NULL);
   if (!g_file_test (profiles_file, G_FILE_TEST_EXISTS))
     priv->first_run = TRUE;
   g_free (profiles_file);

@@ -20,10 +20,6 @@
 
 #include "gtr-profile-manager.h"
 
-#include <libxml/tree.h>
-#include <libxml/xmlreader.h>
-#include <libxml/xmlsave.h>
-
 #include "gtr-dirs.h"
 #include "gtr-marshal.h"
 #include "gtr-marshal.h"
@@ -60,7 +56,7 @@ get_profile_filename (void)
   char *file_name;
 
   user_dir = gtr_dirs_get_user_config_dir ();
-  file_name = g_build_filename (user_dir, "profiles.xml", NULL);
+  file_name = g_build_filename (user_dir, "profiles.ini", NULL);
 
   return file_name;
 }
@@ -136,225 +132,213 @@ gtr_profile_manager_class_init (GtrProfileManagerClass *klass)
 
 static void
 parse_profile (GtrProfileManager *manager,
-               xmlDocPtr          doc,
-               xmlNodePtr         cur)
+               GKeyFile          *key_file,
+               const char        *group)
 {
-  GtrProfile *profile;
   GtrProfileManagerPrivate *priv = gtr_profile_manager_get_instance_private (manager);
+  g_autoptr (GtrProfile) profile = NULL;
+  g_autoptr (GError) error = NULL;
+  g_autofree char *profile_name = NULL;
+  g_autofree char *auth_token = NULL;
+  g_autofree char *author_name = NULL;
+  g_autofree char *author_email = NULL;
+  g_autofree char *language_name = NULL;
+  g_autofree char *language_code = NULL;
+  g_autofree char *charset = NULL;
+  g_autofree char *encoding = NULL;
+  g_autofree char *group_email = NULL;
+  g_autofree char *plural_forms = NULL;
 
-  if (xmlStrcmp (cur->name, (const xmlChar *)"profile") != 0)
-    return;
+  g_return_if_fail (group && g_strcmp0 (group, "") != 0);
 
   profile = gtr_profile_new ();
 
-  if (xmlHasProp (cur, (const xmlChar *)"active"))
+  gtr_profile_set_name (profile, group);
+
+  if (g_key_file_get_boolean (key_file, group, "active", &error))
     priv->active_profile = profile;
 
-  cur = cur->xmlChildrenNode;
+  if (error &&!g_error_matches (error, G_KEY_FILE_ERROR, G_KEY_FILE_ERROR_KEY_NOT_FOUND))
+    return g_warning ("Could not parse profile %s's 'active' key: %s", group, error->message);
 
-  while (cur != NULL)
-    {
-      xmlChar *content = NULL;
+  g_clear_error (&error);
 
-      if (xmlStrcmp (cur->name, (const xmlChar *)"profile_name") == 0)
-        {
-          content = xmlNodeGetContent (cur);
-          gtr_profile_set_name (profile, (const gchar *)content);
-        }
-      else if (xmlStrcmp (cur->name, (const xmlChar *)"auth_token") == 0)
-        {
-          content = xmlNodeGetContent (cur);
-          gtr_profile_set_auth_token (profile, (const gchar *)content);
-        }
-      else if (xmlStrcmp (cur->name, (const xmlChar *)"author_name") == 0)
-        {
-          content = xmlNodeGetContent (cur);
-          gtr_profile_set_author_name (profile, (const gchar *)content);
-        }
-      else if (xmlStrcmp (cur->name, (const xmlChar *)"author_email") == 0)
-        {
-          content = xmlNodeGetContent (cur);
-          gtr_profile_set_author_email (profile, (const gchar *)content);
-        }
-      else if (xmlStrcmp (cur->name, (const xmlChar *)"language_name") == 0)
-        {
-          content = xmlNodeGetContent (cur);
-          gtr_profile_set_language_name (profile, (const gchar *)content);
-        }
-      else if (xmlStrcmp (cur->name, (const xmlChar *)"language_code") == 0)
-        {
-          content = xmlNodeGetContent (cur);
-          gtr_profile_set_language_code (profile, (const gchar *)content);
-        }
-      else if (xmlStrcmp (cur->name, (const xmlChar *)"charset") == 0)
-        {
-          content = xmlNodeGetContent (cur);
-          gtr_profile_set_charset (profile, (const gchar *)content);
-        }
-      else if (xmlStrcmp (cur->name, (const xmlChar *)"encoding") == 0)
-        {
-          content = xmlNodeGetContent (cur);
-          gtr_profile_set_encoding (profile, (const gchar *)content);
-        }
-      else if (xmlStrcmp (cur->name, (const xmlChar *)"group_email") == 0)
-        {
-          content = xmlNodeGetContent (cur);
-          gtr_profile_set_group_email (profile, (const gchar *)content);
-        }
-      else if (xmlStrcmp (cur->name, (const xmlChar *)"plural_forms") == 0)
-        {
-          content = xmlNodeGetContent (cur);
-          gtr_profile_set_plural_forms (profile, (const gchar *)content);
-        }
+  auth_token = g_key_file_get_string (key_file, group, "auth_token", &error);
+  if (auth_token && g_strcmp0 (auth_token, "") != 0)
+    gtr_profile_set_auth_token (profile, auth_token);
 
-      if (content != NULL)
-        xmlFree (content);
+  if (error &&!g_error_matches (error, G_KEY_FILE_ERROR, G_KEY_FILE_ERROR_KEY_NOT_FOUND))
+    return g_warning ("Could not parse profile %s's 'auth_token' key: %s", group, error->message);
 
-      cur = cur->next;
-    }
+  g_clear_error (&error);
 
-  priv->profiles = g_slist_append (priv->profiles,
-                                            profile);
+  author_name = g_key_file_get_string (key_file, group, "author_name", &error);
+  if (author_name && g_strcmp0 (author_name, "") != 0)
+    gtr_profile_set_author_name (profile, author_name);
+
+  if (error &&!g_error_matches (error, G_KEY_FILE_ERROR, G_KEY_FILE_ERROR_KEY_NOT_FOUND))
+    return g_warning ("Could not parse profile %s's 'author_name' key: %s", group, error->message);
+
+  g_clear_error (&error);
+
+  author_email = g_key_file_get_string (key_file, group, "author_email", &error);
+  if (author_email && g_strcmp0 (author_email, "") != 0)
+    gtr_profile_set_author_email (profile, author_email);
+
+  if (error &&!g_error_matches (error, G_KEY_FILE_ERROR, G_KEY_FILE_ERROR_KEY_NOT_FOUND))
+    return g_warning ("Could not parse profile %s's 'author_email' key: %s", group, error->message);
+
+  g_clear_error (&error);
+
+  language_name = g_key_file_get_string (key_file, group, "language_name", &error);
+  if (language_name && g_strcmp0 (language_name, "") != 0)
+    gtr_profile_set_language_name (profile, language_name);
+
+  if (error &&!g_error_matches (error, G_KEY_FILE_ERROR, G_KEY_FILE_ERROR_KEY_NOT_FOUND))
+    return g_warning ("Could not parse profile %s's 'language_name' key: %s", group, error->message);
+
+  g_clear_error (&error);
+
+  language_code = g_key_file_get_string (key_file, group, "language_code", &error);
+  if (language_code && g_strcmp0 (language_code, "") != 0)
+    gtr_profile_set_language_code (profile, language_code);
+
+  if (error &&!g_error_matches (error, G_KEY_FILE_ERROR, G_KEY_FILE_ERROR_KEY_NOT_FOUND))
+    return g_warning ("Could not parse profile %s's 'language_code' key: %s", group, error->message);
+
+  g_clear_error (&error);
+
+  charset = g_key_file_get_string (key_file, group, "charset", &error);
+  if (charset && g_strcmp0 (charset, "") != 0)
+    gtr_profile_set_charset (profile, charset);
+
+  if (error &&!g_error_matches (error, G_KEY_FILE_ERROR, G_KEY_FILE_ERROR_KEY_NOT_FOUND))
+    return g_warning ("Could not parse profile %s's 'charset' key: %s", group, error->message);
+
+  g_clear_error (&error);
+
+  encoding = g_key_file_get_string (key_file, group, "encoding", &error);
+  if (encoding && g_strcmp0 (encoding, "") != 0)
+    gtr_profile_set_encoding (profile, encoding);
+
+  if (error &&!g_error_matches (error, G_KEY_FILE_ERROR, G_KEY_FILE_ERROR_KEY_NOT_FOUND))
+    return g_warning ("Could not parse profile %s's 'encoding' key: %s", group, error->message);
+
+  g_clear_error (&error);
+
+  group_email = g_key_file_get_string (key_file, group, "group_email", &error);
+  if (group_email && g_strcmp0 (group_email, "") != 0)
+    gtr_profile_set_group_email (profile, group_email);
+
+  if (error &&!g_error_matches (error, G_KEY_FILE_ERROR, G_KEY_FILE_ERROR_KEY_NOT_FOUND))
+    return g_warning ("Could not parse profile %s's 'group_email' key: %s", group, error->message);
+
+  g_clear_error (&error);
+
+  plural_forms = g_key_file_get_string (key_file, group, "plural_forms", &error);
+  if (plural_forms && g_strcmp0 (plural_forms, "") != 0)
+    gtr_profile_set_plural_forms (profile, plural_forms);
+
+  if (error &&!g_error_matches (error, G_KEY_FILE_ERROR, G_KEY_FILE_ERROR_KEY_NOT_FOUND))
+    return g_warning ("Could not parse profile %s's 'plural_forms' key: %s", group, error->message);
+
+  priv->profiles = g_slist_append (priv->profiles, g_steal_pointer (&profile));
 }
 
 static gboolean
 load_profiles (GtrProfileManager *manager)
 {
-  char *file_name;
-  xmlDocPtr doc;
-  xmlNodePtr cur;
+  g_autofree char *file_name = NULL;
+  g_auto (GStrv) groups = NULL;
+  size_t n_groups = 0;
 
-  xmlKeepBlanksDefault (0);
+  g_autoptr(GError) error = NULL;
+  g_autoptr(GKeyFile) key_file = g_key_file_new ();
 
   file_name = get_profile_filename ();
   if ((file_name == NULL) ||
       (!g_file_test (file_name, G_FILE_TEST_EXISTS)))
-    {
-      g_free (file_name);
-      return TRUE;
-    }
+    return TRUE;
 
-  doc = xmlParseFile (file_name);
-  g_free (file_name);
+  if (!g_key_file_load_from_file (key_file, file_name, G_KEY_FILE_NONE, &error))  {
+    if (!g_error_matches (error, G_FILE_ERROR, G_FILE_ERROR_NOENT))
+      g_warning ("Error loading key file: %s", error->message);
+    return FALSE;
+  }
 
-  if (doc == NULL)
-    {
-      return FALSE;
-    }
+  groups = g_key_file_get_groups (key_file, &n_groups);
 
-  cur = xmlDocGetRootElement (doc);
-  if (cur == NULL)
-    {
-      g_message ("The profiles file is empty");
-      xmlFreeDoc (doc);
-
-      return FALSE;
-    }
-
-  if (xmlStrcmp (cur->name, (const xmlChar *) "profiles"))
-    {
-      g_message ("Profiles file is of the wrong type");
-      xmlFreeDoc (doc);
-
-      return FALSE;
-    }
-
-  cur = xmlDocGetRootElement (doc);
-  cur = cur->xmlChildrenNode;
-
-  while (cur != NULL)
-    {
-      parse_profile (manager, doc, cur);
-
-      cur = cur->next;
-    }
-
-  xmlFreeDoc (doc);
+  for (int i = 0; i < n_groups; i++)
+    parse_profile (manager, key_file, groups[i]);
 
   return TRUE;
 }
 
 static void
 save_profile (GtrProfileManager *manager,
-              GtrProfile        *profile,
-              xmlNodePtr         parent)
+              GKeyFile          *key_file,
+              GtrProfile        *profile)
 {
-  xmlNodePtr profile_node;
   GtrProfileManagerPrivate *priv = gtr_profile_manager_get_instance_private (manager);
-
-  profile_node = xmlNewChild (parent, NULL, (const xmlChar *)"profile", NULL);
+  const char *group = gtr_profile_get_name (profile);
 
   if (priv->active_profile == profile)
-    xmlSetProp (profile_node, (const xmlChar *)"active", (const xmlChar *)"TRUE");
+    g_key_file_set_boolean (key_file, group, "active", true);
 
-  xmlNewTextChild (profile_node, NULL, (const xmlChar *)"profile_name",
-                   (const xmlChar *)gtr_profile_get_name (profile));
-  xmlNewTextChild (profile_node, NULL, (const xmlChar *)"auth_token",
-                   (const xmlChar *)gtr_profile_get_auth_token (profile));                
-  xmlNewTextChild (profile_node, NULL, (const xmlChar *)"author_name",
-                   (const xmlChar *)gtr_profile_get_author_name (profile));
-  xmlNewTextChild (profile_node, NULL, (const xmlChar *)"author_email",
-                   (const xmlChar *)gtr_profile_get_author_email (profile));
-  xmlNewTextChild (profile_node, NULL, (const xmlChar *)"language_name",
-                   (const xmlChar *)gtr_profile_get_language_name (profile));
-  xmlNewTextChild (profile_node, NULL, (const xmlChar *)"language_code",
-                   (const xmlChar *)gtr_profile_get_language_code (profile));
-  xmlNewTextChild (profile_node, NULL, (const xmlChar *)"charset",
-                   (const xmlChar *)gtr_profile_get_charset (profile));
-  xmlNewTextChild (profile_node, NULL, (const xmlChar *)"encoding",
-                   (const xmlChar *)gtr_profile_get_encoding (profile));
-  xmlNewTextChild (profile_node, NULL, (const xmlChar *)"group_email",
-                   (const xmlChar *)gtr_profile_get_group_email (profile));
-  xmlNewTextChild (profile_node, NULL, (const xmlChar *)"plural_forms",
-                   (const xmlChar *)gtr_profile_get_plural_forms (profile));
+  const char *auth_token = gtr_profile_get_auth_token (profile);
+  if (auth_token && g_strcmp0 (auth_token, "") != 0)
+    g_key_file_set_string (key_file, group, "auth_token", auth_token);
+
+  const char *author_name = gtr_profile_get_author_name (profile);
+  if (author_name && g_strcmp0 (author_name, "") != 0)
+    g_key_file_set_string (key_file, group, "author_name", author_name);
+
+  const char *author_email = gtr_profile_get_author_email (profile);
+  if (author_email && g_strcmp0 (author_email, "") != 0)
+    g_key_file_set_string (key_file, group, "author_email", author_email);
+
+  const char *language_name = gtr_profile_get_language_name (profile);
+  if (language_name && g_strcmp0 (language_name, "") != 0)
+    g_key_file_set_string (key_file, group, "language_name", language_name);
+
+  const char *language_code = gtr_profile_get_language_code (profile);
+  if (language_code && g_strcmp0 (language_code, "") != 0)
+    g_key_file_set_string (key_file, group, "language_code", language_code);
+
+  const char *charset = gtr_profile_get_charset (profile);
+  if (charset && g_strcmp0 (charset, "") != 0)
+    g_key_file_set_string (key_file, group, "charset", charset);
+
+  const char *encoding = gtr_profile_get_encoding (profile);
+  if (encoding && g_strcmp0 (encoding, "") != 0)
+    g_key_file_set_string (key_file, group, "encoding", encoding);
+
+  const char *group_email = gtr_profile_get_group_email (profile);
+  if (group_email && g_strcmp0 (group_email, "") != 0)
+    g_key_file_set_string (key_file, group, "group_email", group_email);
+
+  const char *plural_forms = gtr_profile_get_plural_forms (profile);
+  if (plural_forms && g_strcmp0 (plural_forms, "") != 0)
+    g_key_file_set_string (key_file, group, "plural_forms", plural_forms);
 }
 
 static void
 save_profiles (GtrProfileManager *manager)
 {
-  xmlDocPtr  doc;
-  xmlNodePtr root;
   g_autofree char *file_name = NULL;
   GSList *l;
   GtrProfileManagerPrivate *priv = gtr_profile_manager_get_instance_private (manager);
+  g_autoptr (GKeyFile) key_file = g_key_file_new ();
+  g_autoptr (GError) error = NULL;
 
   g_return_if_fail (GTR_IS_PROFILE_MANAGER (manager));
 
-  doc = xmlNewDoc ((const xmlChar *)"1.0");
-  if (doc == NULL)
-    return;
-
-  /* Create metadata root */
-  root = xmlNewDocNode (doc, NULL, (const xmlChar *)"profiles", NULL);
-  xmlDocSetRootElement (doc, root);
-
   for (l = priv->profiles; l != NULL; l = g_slist_next (l))
-    save_profile (manager, GTR_PROFILE (l->data), root);
+    save_profile (manager, key_file, GTR_PROFILE (l->data));
 
   file_name = get_profile_filename ();
-  if (file_name != NULL)
-    {
-      xmlSaveCtxt *save_ctx;
-      xmlParserErrors save_err;
-      const char *config_dir;
-      int res;
-
-      /* make sure the config dir exists */
-      config_dir = gtr_dirs_get_user_config_dir ();
-      res = g_mkdir_with_parents (config_dir, 0755);
-
-      save_ctx = xmlSaveToFilename (file_name, "UTF-8", XML_SAVE_FORMAT);
-
-      if (res != -1)
-        if (xmlSaveDoc (save_ctx, doc) != 0)
-          g_warning ("Could not save profiles.xml to %s", file_name);
-
-      save_err = xmlSaveFinish (save_ctx);
-      if (save_err != XML_ERR_OK)
-        g_warning ("Could not finish saving profiles.xml: %d", save_err);
-    }
-
-  xmlFreeDoc (doc);
+  if (file_name != NULL && !g_key_file_save_to_file (key_file, file_name, &error))
+    g_warning ("Could not save profiles.ini: %s", error->message);
 }
 
 static void
