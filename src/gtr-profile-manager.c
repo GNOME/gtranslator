@@ -52,13 +52,12 @@ static unsigned int signals[LAST_SIGNAL];
 static char *
 get_profile_filename (void)
 {
-  const char *user_dir;
-  char *file_name;
+  g_auto (GPathBuf) path = G_PATH_BUF_INIT;
 
-  user_dir = gtr_dirs_get_user_config_dir ();
-  file_name = g_build_filename (user_dir, "profiles.ini", NULL);
+  g_path_buf_push (&path, gtr_dirs_get_user_config_dir ());
+  g_path_buf_push (&path, "profiles.ini");
 
-  return file_name;
+  return g_path_buf_to_path (&path);
 }
 
 static void
