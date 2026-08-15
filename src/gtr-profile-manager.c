@@ -20,6 +20,8 @@
 
 #include "gtr-profile-manager.h"
 
+#include <gio/gio.h>
+
 #include "gtr-dirs.h"
 #include "gtr-marshal.h"
 #include "gtr-marshal.h"
@@ -56,6 +58,20 @@ get_profile_filename (void)
 
   g_path_buf_push (&path, gtr_dirs_get_user_config_dir ());
   g_path_buf_push (&path, "profiles.ini");
+
+  return g_path_buf_to_path (&path);
+}
+
+static char *
+get_legacy_profile_filename (bool backup)
+{
+  g_auto (GPathBuf) path = G_PATH_BUF_INIT;
+
+  g_path_buf_push (&path, gtr_dirs_get_user_config_dir ());
+  if (backup)
+    g_path_buf_push (&path, "profiles.backup.xml");
+  else
+    g_path_buf_push (&path, "profiles.xml");
 
   return g_path_buf_to_path (&path);
 }
@@ -478,4 +494,55 @@ gtr_profile_manager_get_profile (GtrProfileManager *manager,
     }
 
   return NULL;
+}
+
+void
+gtr_migrate_profiles (void)
+{
+  g_autofree char *legacy_path = get_legacy_profile_filename (false);
+  g_autofree char *target_path = get_profile_filename ();
+  g_autofree char *script_path = NULL;
+  g_autofree char *stderr_str = NULL;
+  g_autoptr (GFile) legacy_file = g_file_new_for_path (legacy_path);
+  g_autoptr (GError) spawn_error = NULL;
+  g_autoptr (GError) communicate_error = NULL;
+  g_autoptr (GSubprocess) proc = NULL;
+  g_auto (GPathBuf) path = G_PATH_BUF_INIT;
+
+  if (!g_file_query_exists (legacy_file, NULL))
+    return;
+
+  g_path_buf_push (&path, gtr_dirs_get_gtr_data_dir ());
+  g_path_buf_push (&path, "scripts");
+  g_path_buf_push (&path, "migrate_profiles.py");
+
+  script_path = g_path_buf_to_path (&path);
+
+  const char *argv[]
+    = { script_path, legacy_path, "--output", target_path, NULL };
+
+  proc = g_subprocess_newv (argv, G_SUBPROCESS_FLAGS_STDOUT_SILENCE | G_SUBPROCESS_FLAGS_STDERR_PIPE,
+                            &spawn_error);
+
+  if (spawn_error)
+    {
+      g_warning ("error while migrating %s", spawn_error->message);
+      return;
+    }
+
+  if (g_subprocess_communicate_utf8 (proc, NULL, NULL, NULL, &stderr_str, &communicate_error))
+    {
+      g_autofree char *legacy_path_backup = get_legacy_profile_filename (true);
+      g_autoptr (GFile) legacy_file_backup = g_file_new_for_path (legacy_path_backup);
+      g_autoptr (GError) move_error = NULL;
+
+      if (g_file_move (legacy_file, legacy_file_backup, G_FILE_COPY_NONE, NULL, NULL, NULL, &move_error))
+        g_info ("migration finished, old profiles backup at %s", legacy_path_backup);
+      else
+        g_warning ("failed to create profiles backup: %s", move_error->message);
+    }
+  else
+    {
+      g_warning ("migration failed: %s", communicate_error->message);
+    }
 }

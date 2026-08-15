@@ -85,6 +85,12 @@ install_data(
 )
 
 install_data(
+  'scripts/migrate_profiles.py',
+  install_mode: 'rwxr-xr-x',
+  install_dir: gtr_pkgdatadir / 'scripts',
+)
+
+install_data(
   'sourceview/gtranslator.lang',
   install_dir: join_paths(gtr_datadir, 'gtksourceview-5', 'language-specs'),
 )

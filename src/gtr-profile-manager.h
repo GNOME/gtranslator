@@ -52,4 +52,6 @@ void                   gtr_profile_manager_modify_profile     (GtrProfileManager
 GtrProfile            *gtr_profile_manager_get_profile        (GtrProfileManager *manager,
                                                                const char        *name);
 
+void                   gtr_migrate_profiles                   (void);
+
 G_END_DECLS

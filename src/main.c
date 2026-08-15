@@ -33,6 +33,7 @@
 
 #include "gtr-application.h"
 #include "gtr-dirs.h"
+#include "gtr-profile-manager.h"
 
 #ifdef G_OS_WIN32
 #define SAVE_DATADIR DATADIR
@@ -75,6 +76,9 @@ main (int argc, char *argv[])
   int status;
 
   gtr_dirs_init ();
+
+  // FIXME Remove for GNOME 53. The whole commit should be reverted.
+  gtr_migrate_profiles ();
 
   /* Initialize gettext. */
   setlocale (LC_ALL, "");
