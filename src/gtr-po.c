@@ -410,8 +410,6 @@ is_read_only (const char *filename)
   return ret;
 }
 
-/***************************** Public funcs ***********************************/
-
 /**
  * gtr_po_new:
  *
@@ -419,15 +417,13 @@ is_read_only (const char *filename)
  *
  * Returns: a new #GtrPo object
  **/
-GtrPo *
+static GtrPo *
 gtr_po_new (void)
 {
-  GtrPo *po;
-
-  po = g_object_new (GTR_TYPE_PO, NULL);
-
-  return po;
+  return g_object_new (GTR_TYPE_PO, NULL);
 }
+
+/***************************** Public funcs ***********************************/
 
 static gboolean
 _gtr_po_load (GtrPo * po, GFile * location, GError ** error)

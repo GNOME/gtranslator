@@ -50,7 +50,7 @@ G_DEFINE_BOXED_TYPE (GtrLanguage, gtr_language,
 
 G_DEFINE_AUTOPTR_CLEANUP_FUNC (GtrLanguage, gtr_language_free);
 
-GtrLanguage *
+static GtrLanguage *
 gtr_language_new (char *code,
                   char *name)
 {

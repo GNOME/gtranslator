@@ -31,7 +31,7 @@
 #include <gtk/gtk.h>
 
 
-static const GStrv badwords = (char *[]) {
+static const GStrv badwords = (GStrv) (const char *[]) {
   "a",
   //"all",
   "an",

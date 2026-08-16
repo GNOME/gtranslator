@@ -668,7 +668,7 @@ on_gettext_po_xerror2 (int           severity,
   g_warning ("Error: %s.\n %s", message_text1, message_text2);
 }
 
-char *
+static char *
 gtr_msg_check_format (GtrMsg * msg)
 {
   char *error = NULL;
@@ -690,7 +690,7 @@ gtr_msg_check_format (GtrMsg * msg)
   return error;
 }
 
-char *
+static char *
 gtr_msg_check_all (GtrMsg * msg)
 {
   char *error = NULL;
