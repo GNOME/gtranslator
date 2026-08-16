@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: gtranslator master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
 "POT-Creation-Date: 2024-12-01 21:15+0000\n"
-"PO-Revision-Date: 2026-03-14 23:10+0500\n"
+"PO-Revision-Date: 2026-08-16 08:02+0500\n"
 "Last-Translator: Baurzhan Muftakhidinov <baurthefirst@gmail.com>\n"
 "Language-Team: Kazakh <Kazakh>\n"
 "Language: kk\n"
@@ -18,33 +18,48 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Poedit 3.9\n"
 
-#: data/org.gnome.Gtranslator.appdata.xml.in.in:7 data/org.gnome.Gtranslator.desktop.in.in:2 src/gtr-actions-app.c:89 src/gtr-application.c:517
-#: src/gtr-window.c:204 src/gtr-window.c:433
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:7
+#: data/org.gnome.Gtranslator.desktop.in.in:2 src/gtr-actions-app.c:89
+#: src/gtr-application.c:517 src/gtr-window.c:204 src/gtr-window.c:433
 msgid "Translation Editor"
 msgstr "Аударма редакторы"
 
-#: data/org.gnome.Gtranslator.appdata.xml.in.in:8 data/org.gnome.Gtranslator.desktop.in.in:4
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:8
+#: data/org.gnome.Gtranslator.desktop.in.in:4
 msgid "Translate and localize applications and libraries"
 msgstr "Бағдарламалар мен кітапханаларды аудару және локализациялау"
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:10
 msgid ""
-"Gtranslator is an enhanced gettext po file editor for the GNOME desktop environment. It handles all forms of gettext po files and includes very "
-"useful features like find/replace, translation memory, different translator profiles, messages table (for having an overview of the translations/"
-"messages in the po file), easy navigation and editing of translation messages and comments of the translation where accurate."
+"Gtranslator is an enhanced gettext po file editor for the GNOME desktop "
+"environment. It handles all forms of gettext po files and includes very "
+"useful features like find/replace, translation memory, different translator "
+"profiles, messages table (for having an overview of the translations/"
+"messages in the po file), easy navigation and editing of translation "
+"messages and comments of the translation where accurate."
 msgstr ""
-"Gtranslator — GNOME жұмыс үстелі ортасына арналған жақсартылған gettext po файлдарының редакторы. Ол gettext po файлдарының барлық түрлерімен "
-"жұмыс істейді және іздеу/алмастыру, аударма жады, әртүрлі аудармашы профильдері, хабарламалар кестесі (po файлындағы аудармалар мен "
-"хабарламаларды шолу үшін), аударма хабарламаларын оңай шарлау мен түзету және аударма туралы түсініктемелер сияқты өте пайдалы мүмкіндіктерді "
-"қамтиды."
+"Gtranslator — GNOME жұмыс үстелі ортасына арналған жақсартылған gettext po "
+"файлдарының редакторы. Ол gettext po файлдарының барлық түрлерімен жұмыс "
+"істейді және іздеу/алмастыру, аударма жады, әртүрлі аудармашы профильдері, "
+"хабарламалар кестесі (po файлындағы аудармалар мен хабарламаларды шолу "
+"үшін), аударма хабарламаларын оңай шарлау мен түзету және аударма туралы "
+"түсініктемелер сияқты өте пайдалы мүмкіндіктерді қамтиды."
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:19
 msgid ""
-"Gtranslator includes also a plugin system with many interesting plugins like alternate language, insert tags, integration with subversion and a "
-"source code viewer."
+"Gtranslator includes also a plugin system with many interesting plugins like "
+"alternate language, insert tags, integration with subversion and a source "
+"code viewer."
 msgstr ""
-"Сонымен қатар Gtranslator-да балама тіл, таңбаларды кірістіру, subversion-мен интеграция және бастапқы кодты қарау құралы сияқты көптеген қызықты "
+"Сонымен қатар Gtranslator-да балама тіл, таңбаларды кірістіру, subversion-"
+"мен интеграция және бастапқы кодты қарау құралы сияқты көптеген қызықты "
 "плагиндері бар плагин жүйесі бар."
+
+#. developer_name tag deprecated with Appstream 1.0
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:269
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:271
+msgid "Daniel García Moreno"
+msgstr "Daniel García Moreno"
 
 #: data/org.gnome.Gtranslator.desktop.in.in:3
 msgid "PO File Editor"
@@ -54,7 +69,8 @@ msgstr "PO файлын түзету"
 msgid "Gtranslator;Translation;Editor;Gettext;Write;"
 msgstr "Gtranslator;Аударма;Редактор;Gettext;Жазу;"
 
-#: data/org.gnome.Gtranslator.desktop.in.in:18 src/gtr-dl-teams.ui:7 src/gtr-projects.ui:7 src/gtr-tab.ui:329
+#: data/org.gnome.Gtranslator.desktop.in.in:18 src/gtr-dl-teams.ui:7
+#: src/gtr-projects.ui:7 src/gtr-tab.ui:329
 msgid "New Window"
 msgstr "Жаңа терезе"
 
@@ -63,16 +79,22 @@ msgid "Warn if file contains fuzzy translations"
 msgstr "Егер файлда дәлсіз аудармалар болса, ескерту"
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:23
-msgid "If true, warn the user when saving a PO translation file containing fuzzy strings."
-msgstr "Егер ақиқат болса, дәлсіз жолдары бар PO аударма файлын сақтау кезінде пайдаланушыға ескерту жасалады."
+msgid ""
+"If true, warn the user when saving a PO translation file containing fuzzy "
+"strings."
+msgstr ""
+"Егер ақиқат болса, дәлсіз жолдары бар PO аударма файлын сақтау кезінде "
+"пайдаланушыға ескерту жасалады."
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:30
 msgid "Whether to remove the obsolete entries upon saving"
 msgstr "Сақтау кезінде ескірген жазбаларды өшіру керек пе"
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:31
-msgid "If true, the obsolete entries will be removed from the file after saving"
-msgstr "Егер ақиқат болса, сақтағаннан кейін ескірген жазбалар файлдан өшіріледі"
+msgid ""
+"If true, the obsolete entries will be removed from the file after saving"
+msgstr ""
+"Егер ақиқат болса, сақтағаннан кейін ескірген жазбалар файлдан өшіріледі"
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:37
 msgid "Auto save files"
@@ -80,7 +102,8 @@ msgstr "Файлдарды автоматты сақтау"
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:38
 msgid "If true, automatically save files at specified intervals."
-msgstr "Егер ақиқат болса, файлдарды көрсетілген аралықтарда автоматты түрде сақтау."
+msgstr ""
+"Егер ақиқат болса, файлдарды көрсетілген аралықтарда автоматты түрде сақтау."
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:44
 msgid "Auto save interval"
@@ -103,8 +126,12 @@ msgid "Use profile values for header"
 msgstr "Тақырыптама үшін профиль мәндерін пайдалану"
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:59
-msgid "If true, overwrite the values in the PO header with those in the active profile."
-msgstr "Егер ақиқат болса, PO тақырыптамасындағы мәндерді белсенді профильдегі мәндермен алмастыру."
+msgid ""
+"If true, overwrite the values in the PO header with those in the active "
+"profile."
+msgstr ""
+"Егер ақиқат болса, PO тақырыптамасындағы мәндерді белсенді профильдегі "
+"мәндермен алмастыру."
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:68
 msgid "Highlight syntax in edit fields"
@@ -112,7 +139,9 @@ msgstr "Түзету өрістерінде синтаксисті түспен 
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:69
 msgid "If true, apply syntax highlighting to strings in edit fields."
-msgstr "Егер ақиқат болса, түзету өрістеріндегі жолдарға синтаксисті түспен ерекшелеуді қолдану."
+msgstr ""
+"Егер ақиқат болса, түзету өрістеріндегі жолдарға синтаксисті түспен "
+"ерекшелеуді қолдану."
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:75
 msgid "Make whitespace visible"
@@ -120,7 +149,8 @@ msgstr "Бос орындарды көрінетін ету"
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:76
 msgid "If true, display whitespace in strings as representative symbols."
-msgstr "Егер ақиқат болса, жолдардағы бос орындарды арнайы таңбалар ретінде көрсету."
+msgstr ""
+"Егер ақиқат болса, жолдардағы бос орындарды арнайы таңбалар ретінде көрсету."
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:82
 msgid "Remove fuzzy status when message is changed"
@@ -128,7 +158,8 @@ msgstr "Хабарлама өзгертілген кезде дәлсіз күй
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:83
 msgid "If true, remove fuzzy status from translations when they are changed."
-msgstr "Егер ақиқат болса, аудармалар өзгертілген кезде олардан дәлсіз күйін өшіру."
+msgstr ""
+"Егер ақиқат болса, аудармалар өзгертілген кезде олардан дәлсіз күйін өшіру."
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:89
 msgid "Check spelling"
@@ -143,8 +174,12 @@ msgid "Message list sort order"
 msgstr "Хабарламалар тізімін сұрыптау реті"
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:102
-msgid "Sort order to use in the message list. Possible values are “status”, “id”, “original-text” and “translated-text”."
-msgstr "Хабарламалар тізімінде пайдаланылатын сұрыптау реті. Мүмкін мәндер: «status», «id», «original-text» және «translated-text»."
+msgid ""
+"Sort order to use in the message list. Possible values are “status”, “id”, "
+"“original-text” and “translated-text”."
+msgstr ""
+"Хабарламалар тізімінде пайдаланылатын сұрыптау реті. Мүмкін мәндер: "
+"«status», «id», «original-text» және «translated-text»."
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:115
 msgid "Window maximized"
@@ -158,10 +193,14 @@ msgstr "Терезенің жазық етілген күйі"
 msgid "Source Viewer"
 msgstr "Бастапқы кодты қарау құралы"
 
-#: src/codeview/gtr-viewer.c:185 src/gtr-actions-file.c:279 src/gtr-actions-file.c:298 src/gtr-actions-file.c:336 src/gtr-actions-file.c:363
-#: src/gtr-actions-file.c:537 src/gtr-actions-file.c:580 src/gtr-actions-file.c:748 src/gtr-dl-teams.c:157 src/gtr-dl-teams.c:218
-#: src/gtr-dl-teams.c:334 src/gtr-dl-teams.c:418 src/gtr-dl-teams.c:543 src/gtr-dl-teams.c:554 src/gtr-dl-teams.c:565 src/gtr-dl-teams.c:596
-#: src/gtr-dl-teams.c:663 src/gtr-profile-dialog.ui:20 src/gtr-tab.c:348 src/gtr-window.c:158 src/gtr-window.c:331
+#: src/codeview/gtr-viewer.c:185 src/gtr-actions-file.c:279
+#: src/gtr-actions-file.c:298 src/gtr-actions-file.c:336
+#: src/gtr-actions-file.c:363 src/gtr-actions-file.c:537
+#: src/gtr-actions-file.c:580 src/gtr-actions-file.c:748 src/gtr-dl-teams.c:157
+#: src/gtr-dl-teams.c:218 src/gtr-dl-teams.c:334 src/gtr-dl-teams.c:418
+#: src/gtr-dl-teams.c:543 src/gtr-dl-teams.c:554 src/gtr-dl-teams.c:565
+#: src/gtr-dl-teams.c:596 src/gtr-dl-teams.c:663 src/gtr-profile-dialog.ui:20
+#: src/gtr-tab.c:348 src/gtr-window.c:158 src/gtr-window.c:331
 msgid "OK"
 msgstr "ОК"
 
@@ -170,11 +209,17 @@ msgid "Source code"
 msgstr "Бастапқы код"
 
 #: src/gtr-actions-app.c:86
-msgid "Translation file editing suite for localization of applications and libraries."
-msgstr "Қолданбалар мен кітапханаларды локализациялауға арналған аударма файлдарын түзету жиынтығы."
+msgid ""
+"Translation file editing suite for localization of applications and "
+"libraries."
+msgstr ""
+"Қолданбалар мен кітапханаларды локализациялауға арналған аударма файлдарын "
+"түзету жиынтығы."
 
+#.
 #. * Note to translators: put here your name and email so it will show
 #. * up in the "about" box
+#.
 #: src/gtr-actions-app.c:103
 msgid "translator-credits"
 msgstr "Baurzhan Muftakhidinov <baurthefirst@gmail.com>"
@@ -188,7 +233,8 @@ msgstr "Сақталмаған өзгерістер"
 msgid "Do you want to write all the changes done to %s?"
 msgstr "%s файлына енгізілген барлық өзгерістерді жазғыңыз келе ме?"
 
-#: src/gtr-actions-file.c:212 src/gtr-context.c:157 src/gtr-profile-dialog.ui:15 src/gtr-upload-dialog.ui:18
+#: src/gtr-actions-file.c:212 src/gtr-context.c:157
+#: src/gtr-profile-dialog.ui:15 src/gtr-upload-dialog.ui:18
 msgid "Cancel"
 msgstr "Бас тарту"
 
@@ -220,10 +266,13 @@ msgstr "Файлды жүктеп салу мүмкін болмады"
 #, c-format
 msgid ""
 "%s\n"
-"Maybe you've not configured your <i>l10n.gnome.org</i> <b>token</b> correctly in your profile or you don't have permissions to upload this module."
+"Maybe you've not configured your <i>l10n.gnome.org</i> <b>token</b> "
+"correctly in your profile or you don't have permissions to upload this "
+"module."
 msgstr ""
 "%s\n"
-"Мүмкін, сіз профиліңізде <i>l10n.gnome.org</i> <b>токенін</b> дұрыс баптамаған боларсыз немесе бұл модульді жүктеп салуға рұқсатыңыз жоқ."
+"Мүмкін, сіз профиліңізде <i>l10n.gnome.org</i> <b>токенін</b> дұрыс "
+"баптамаған боларсыз немесе бұл модульді жүктеп салуға рұқсатыңыз жоқ."
 
 #: src/gtr-actions-file.c:362
 msgid "The file has been uploaded!"
@@ -263,8 +312,11 @@ msgstr[0] "Өзгерістерге ұшыраған %d құжаттағы тү�
 #: src/gtr-close-confirmation-dialog.c:316
 #, c-format
 msgid "There is %d document with unsaved changes. Save changes before closing?"
-msgid_plural "There are %d documents with unsaved changes. Save changes before closing?"
-msgstr[0] "Сақталмаған өзгерістері бар %d құжат бар. Жабу алдында өзгерістерді сақтау керек пе?"
+msgid_plural ""
+"There are %d documents with unsaved changes. Save changes before closing?"
+msgstr[0] ""
+"Сақталмаған өзгерістері бар %d құжат бар. Жабу алдында өзгерістерді сақтау "
+"керек пе?"
 
 #: src/gtr-context.c:158 src/gtr-tab.ui:279
 msgid "Save"
@@ -322,10 +374,12 @@ msgstr "Модульді брондау мүмкін болмады"
 #, c-format
 msgid ""
 "%s\n"
-"Maybe you've not configured your l10n.gnome.org token correctly in your profile or you don't have permissions to reserve this module."
+"Maybe you've not configured your l10n.gnome.org token correctly in your "
+"profile or you don't have permissions to reserve this module."
 msgstr ""
 "%s\n"
-"Мүмкін, сіз профиліңізде l10n.gnome.org токенін дұрыс баптамаған боларсыз немесе бұл модульді резервтеуге рұқсатыңыз жоқ."
+"Мүмкін, сіз профиліңізде l10n.gnome.org токенін дұрыс баптамаған боларсыз "
+"немесе бұл модульді резервтеуге рұқсатыңыз жоқ."
 
 #: src/gtr-dl-teams.c:679
 msgid "The file has been successfully reserved"
@@ -351,7 +405,8 @@ msgstr "Damned Lies-тан жүктеп алу"
 msgid "Main Menu"
 msgstr "Негізгі мәзір"
 
-#: src/gtr-dl-teams.ui:70 src/gtr-languages-fetcher.ui:5 src/gtr-languages-fetcher.ui:8
+#: src/gtr-dl-teams.ui:70 src/gtr-languages-fetcher.ui:5
+#: src/gtr-languages-fetcher.ui:8
 msgid "Language"
 msgstr "Тіл"
 
@@ -416,8 +471,12 @@ msgid "Welcome"
 msgstr "Қош келдіңіз"
 
 #: src/gtr-greeter.ui:39
-msgid "Before start to use the application, a profile should be created, but don't worry, the app will guide you to do it in a minute."
-msgstr "Қолданбаны пайдалануды бастамас бұрын профиль жасау керек, бірақ уайымдамаңыз, қолданба сізге оны бір минут ішінде жасауға көмектеседі."
+msgid ""
+"Before start to use the application, a profile should be created, but don't "
+"worry, the app will guide you to do it in a minute."
+msgstr ""
+"Қолданбаны пайдалануды бастамас бұрын профиль жасау керек, бірақ "
+"уайымдамаңыз, қолданба сізге оны бір минут ішінде жасауға көмектеседі."
 
 #: src/gtr-greeter.ui:51
 msgid "Create Profile"
@@ -483,7 +542,8 @@ msgstr "Тақырыптаманы түзету"
 msgid "Translator"
 msgstr "Аудармашы"
 
-#: src/gtr-header-dialog.ui:14 src/gtr-header-dialog.ui:80 src/gtr-header-dialog.ui:140 src/gtr-preferences-dialog.ui:13
+#: src/gtr-header-dialog.ui:14 src/gtr-header-dialog.ui:80
+#: src/gtr-header-dialog.ui:140 src/gtr-preferences-dialog.ui:13
 msgid "General"
 msgstr "Жалпы"
 
@@ -606,10 +666,12 @@ msgstr "Кодтауды түрлендіру үшін уақытша файлд
 #: src/gtr-po.c:635
 #, c-format
 msgid ""
-"All attempt to convert the file to UTF-8 has failed, use the msgconv or iconv command line tools before opening this file with GNOME Translation "
+"All attempt to convert the file to UTF-8 has failed, use the msgconv or "
+"iconv command line tools before opening this file with GNOME Translation "
 "Editor"
 msgstr ""
-"Файлды UTF-8 форматына түрлендірудің барлық әрекеттері сәтсіз аяқталды, бұл файлды GNOME аударма редакторымен ашпас бұрын msgconv немесе iconv "
+"Файлды UTF-8 форматына түрлендірудің барлық әрекеттері сәтсіз аяқталды, бұл "
+"файлды GNOME аударма редакторымен ашпас бұрын msgconv немесе iconv "
 "командалық жол саймандарын пайдаланыңыз"
 
 #: src/gtr-po.c:703
@@ -777,8 +839,12 @@ msgid "Damned Lies Integration"
 msgstr "Damned Lies интеграциясы"
 
 #: src/gtr-profile-dialog.ui:85
-msgid "GNOME Damned Lies integration token, go to your profile in https://l10n.gnome.org/ to get it"
-msgstr "GNOME Damned Lies интеграция токені, оны алу үшін https://l10n.gnome.org/ сайтындағы профиліңізге өтіңіз"
+msgid ""
+"GNOME Damned Lies integration token, go to your profile in https://"
+"l10n.gnome.org/ to get it"
+msgstr ""
+"GNOME Damned Lies интеграция токені, оны алу үшін https://l10n.gnome.org/ "
+"сайтындағы профиліңізге өтіңіз"
 
 #: src/gtr-profile-dialog.ui:90
 msgid "_Damned Lies auth token"
@@ -1160,7 +1226,8 @@ msgid ""
 "Run “%s --help” to see a full list of available command line options.\n"
 msgstr ""
 "%s\n"
-"Қолжетімді командалық жол опцияларының толық тізімін көру үшін «%s --help» орындаңыз.\n"
+"Қолжетімді командалық жол опцияларының толық тізімін көру үшін «%s --help» "
+"орындаңыз.\n"
 
 #: src/translation-memory/gtr-translation-memory-dialog.c:77
 msgid "Select PO directory"
@@ -1199,15 +1266,20 @@ msgid "Restrict search by filename"
 msgstr "Іздеуді файл аты бойынша шектеу"
 
 #: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:13
-msgid "If true, only include files with a specified filename when searching the translation memory."
-msgstr "Егер ақиқат болса, аударма жадын іздеу кезінде тек көрсетілген файл аты бар файлдар қосылады."
+msgid ""
+"If true, only include files with a specified filename when searching the "
+"translation memory."
+msgstr ""
+"Егер ақиқат болса, аударма жадын іздеу кезінде тек көрсетілген файл аты бар "
+"файлдар қосылады."
 
 #: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:20
 msgid "Filename to restrict search to"
 msgstr "Іздеу шектелетін файл аты"
 
 #: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:21
-msgid "Filename to which searching of the translation memory should be restricted."
+msgid ""
+"Filename to which searching of the translation memory should be restricted."
 msgstr "Аударма жадын іздеу шектелуі тиіс файл аты."
 
 #: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:28
@@ -1215,16 +1287,24 @@ msgid "Maximum number of missing words"
 msgstr "Жетіспейтін сөздердің максималды саны"
 
 #: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:29
-msgid "Maximum number of words that can be missing from a message displayed as a match by the translation memory."
-msgstr "Аударма жады тарапынан сәйкестік ретінде көрсетілетін хабарламада жетіспеуі мүмкін сөздердің максималды саны."
+msgid ""
+"Maximum number of words that can be missing from a message displayed as a "
+"match by the translation memory."
+msgstr ""
+"Аударма жады тарапынан сәйкестік ретінде көрсетілетін хабарламада жетіспеуі "
+"мүмкін сөздердің максималды саны."
 
 #: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:36
 msgid "Maximum difference in message length"
 msgstr "Хабарлама ұзындығының максималды айырмашылығы"
 
 #: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:37
-msgid "Maximum difference in length between messages displayed as matches by the translation memory."
-msgstr "Аударма жады тарапынан сәйкестік ретінде көрсетілетін хабарламалар арасындағы ұзындықтың максималды айырмашылығы."
+msgid ""
+"Maximum difference in length between messages displayed as matches by the "
+"translation memory."
+msgstr ""
+"Аударма жады тарапынан сәйкестік ретінде көрсетілетін хабарламалар "
+"арасындағы ұзындықтың максималды айырмашылығы."
 
 #~ msgid "Translate apps in your language"
 #~ msgstr "Қолданбаларды өз тіліңізге аударыңыз"
@@ -1235,14 +1315,19 @@ msgstr "Аударма жады тарапынан сәйкестік ретін
 #~ msgid "Omit credits in header"
 #~ msgstr "Тақырыптамада авторлық құқықтарды қалдырып кету"
 
-#~ msgid "If true, the 'author <email> year' comment won't be added to the PO header's copyright."
-#~ msgstr "Егер ақиқат болса, 'автор <электрондық пошта> жыл' түсініктемесі PO тақырыптамасының авторлық құқығына қосылмайды."
+#~ msgid ""
+#~ "If true, the 'author <email> year' comment won't be added to the PO "
+#~ "header's copyright."
+#~ msgstr ""
+#~ "Егер ақиқат болса, 'автор <электрондық пошта> жыл' түсініктемесі PO "
+#~ "тақырыптамасының авторлық құқығына қосылмайды."
 
 #~ msgid "Show ID column"
 #~ msgstr "ID бағанын көрсету"
 
 #~ msgid "If true, displays a column with the id of the message on the editor."
-#~ msgstr "Егер ақиқат болса, редакторда хабарламаның ID-і бар бағанды көрсетеді."
+#~ msgstr ""
+#~ "Егер ақиқат болса, редакторда хабарламаның ID-і бар бағанды көрсетеді."
 
 #~ msgid "Could not update from template"
 #~ msgstr "Үлгіден жаңарту мүмкін болмады"
@@ -1265,8 +1350,11 @@ msgstr "Аударма жады тарапынан сәйкестік ретін
 #~ "Дәлсіз: %d → %d (%+d)\n"
 #~ "Аударылмаған: %d → %d (%+d)"
 
-#~ msgid "msgmerge not found on PATH. Install gettext (msgmerge) and try again."
-#~ msgstr "PATH ішінен msgmerge табылмады. gettext (msgmerge) орнатып, қайталап көріңіз."
+#~ msgid ""
+#~ "msgmerge not found on PATH. Install gettext (msgmerge) and try again."
+#~ msgstr ""
+#~ "PATH ішінен msgmerge табылмады. gettext (msgmerge) орнатып, қайталап "
+#~ "көріңіз."
 
 #~ msgid "Failed to start msgmerge"
 #~ msgstr "msgmerge іске қосу сәтсіз аяқталды"
