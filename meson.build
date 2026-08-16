@@ -115,6 +115,33 @@ if gtr_debug
     '-Wuninitialized',
     '-Wunused',
   ]
+  extra_warnings = [
+    '-Werror=address',
+    '-Werror=array-bounds',
+    '-Werror=empty-body',
+    '-Werror=enum-int-mismatch',
+    '-Werror=implicit',
+    '-Werror=implicit-fallthrough',   # For non-gcc
+    '-Werror=implicit-fallthrough=5', # For GCC, only recognize the attribute and no comments
+    '-Werror=init-self',
+    '-Werror=int-to-pointer-cast',
+    '-Werror=main',
+    '-Werror=missing-braces',
+    '-Werror=missing-declarations',
+    '-Werror=missing-prototypes',
+    '-Werror=nonnull',
+    '-Werror=override-init',
+    '-Werror=pointer-to-int-cast',
+    '-Werror=redundant-decls',
+    '-Werror=return-type',
+    '-Werror=sequence-point',
+    '-Werror=trigraphs',
+    '-Werror=vla',
+    '-Werror=write-strings',
+  ]
+  if get_option('buildtype').startswith('debug')
+    test_cflags += extra_warnings
+  endif
   common_flags += cc.get_supported_arguments(test_cflags)
 else
   common_flags += [
