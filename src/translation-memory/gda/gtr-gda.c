@@ -276,7 +276,6 @@ gtr_gda_split_string_in_words (const char *phrase)
   GStrv words = gtr_gda_utils_split_string_in_words (phrase);
   size_t count = g_strv_length (words);
   int w;
-  int r;
 
   if (count <= 1)
     return words;
@@ -284,8 +283,7 @@ gtr_gda_split_string_in_words (const char *phrase)
   qsort (words, count, sizeof (gchar *), string_comparator);
 
   w = 1;
-  r = 1;
-  for (; r < count; ++r)
+  for (size_t r = 1; r < count; ++r)
     {
       if (0 == g_strcmp0 (words[r], words[w-1]))
         {
@@ -636,7 +634,7 @@ gtr_gda_lookup (GtrTranslationMemory *tm,
 
   bind_text (stmt, 1, phrase);
 
-  for (int i = 0; i < cnt; ++i)
+  for (unsigned int i = 0; i < cnt; ++i)
     bind_text (stmt, i + 2, words[i]);
 
   while ((rc = sqlite3_step (stmt)) == SQLITE_ROW)

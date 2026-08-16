@@ -201,7 +201,6 @@ gtr_dl_teams_parse_module_details (GObject *object, GAsyncResult *result, gpoint
 {
   GtrDlTeams *self = GTR_DL_TEAMS (user_data);
   GtrDlTeamsPrivate *priv = gtr_dl_teams_get_instance_private (self);
-  int i;
   JsonNode *node = NULL;
   JsonObject *jobject;
   JsonNode *branchesNode;
@@ -255,7 +254,7 @@ gtr_dl_teams_parse_module_details (GObject *object, GAsyncResult *result, gpoint
       JsonNode *branch_element;
       JsonObject *branch_object;
 
-      for (i=0; i < json_array_get_length (branchesArray); i++)
+      for (unsigned int i =0; i < json_array_get_length (branchesArray); i++)
         {
           const char *name = NULL;
           branch_element = json_array_get_element (branchesArray, i);
@@ -277,7 +276,7 @@ gtr_dl_teams_parse_module_details (GObject *object, GAsyncResult *result, gpoint
       JsonNode *domain_element;
       JsonObject *domain_object;
 
-      for (i=0; i < json_array_get_length (domains_array); i++)
+      for (unsigned int i = 0; i < json_array_get_length (domains_array); i++)
         {
           g_autoptr(GtrDlTeamsDomain) teams_domain = NULL;
 

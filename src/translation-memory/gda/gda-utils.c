@@ -104,7 +104,7 @@ gtr_gda_utils_split_string_in_words (const char *string)
     {
       g_autoptr (GStrvBuilder) badwords_builder = g_strv_builder_new ();
 
-      for (int i = 0; i < g_strv_length (badwords); i++)
+      for (unsigned int i = 0; i < g_strv_length (badwords); i++)
         g_strv_builder_take (badwords_builder, g_utf8_collate_key (badwords[i], -1));
 
       badwords_collate = g_strv_builder_end (badwords_builder);
