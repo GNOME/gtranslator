@@ -575,6 +575,7 @@ gtr_tab_show_message (GtrTab * tab, GtrMsg * msg)
       }
     }
   msgid_plural = gtr_msg_get_msgid_plural (msg);
+  gtk_notebook_set_current_page (GTK_NOTEBOOK (priv->trans_notebook), 0);
   if (!msgid_plural)
     {
       msgstr = gtr_msg_get_msgstr (msg);
@@ -583,7 +584,6 @@ gtr_tab_show_message (GtrTab * tab, GtrMsg * msg)
        */
       gtk_widget_set_visible (priv->text_plural_scroll, FALSE);
       gtk_notebook_set_show_tabs (GTK_NOTEBOOK (priv->trans_notebook), FALSE);
-      gtk_notebook_set_current_page (GTK_NOTEBOOK (priv->trans_notebook), 0);
       if (msgstr)
         {
           buf = gtk_text_view_get_buffer (GTK_TEXT_VIEW (priv->trans_msgstr[0]));
@@ -1229,30 +1229,11 @@ gtr_tab_message_go_to (GtrTab * tab,
       if ((plurals == TRUE) && (move != GTR_TAB_MOVE_NONE))
         {
           if ((n_pages - 1) == current_page && move == GTR_TAB_MOVE_NEXT)
-            {
-              gtk_notebook_set_current_page (GTK_NOTEBOOK
-                                             (priv->trans_notebook), 0);
-              gtr_tab_show_message (tab, to_go);
-            }
+            gtr_tab_show_message (tab, to_go);
           else if (current_page == 0 && move == GTR_TAB_MOVE_PREV)
-            {
-              gtk_notebook_set_current_page (GTK_NOTEBOOK
-                                             (priv->trans_notebook),
-                                             n_pages - 1);
-              gtr_tab_show_message (tab, to_go);
-            }
+            gtr_tab_show_message (tab, to_go);
           else
-            {
-              if (move == GTR_TAB_MOVE_NEXT)
-                gtk_notebook_set_current_page (GTK_NOTEBOOK
-                                               (priv->trans_notebook),
-                                               current_page + 1);
-              else
-                gtk_notebook_set_current_page (GTK_NOTEBOOK
-                                               (priv->trans_notebook),
-                                               current_page - 1);
-              return;
-            }
+            return;
         }
       else
         gtr_tab_show_message (tab, to_go);
