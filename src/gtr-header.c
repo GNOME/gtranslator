@@ -311,15 +311,13 @@ gtr_header_set_translator (GtrHeader  *header,
                            const char *name,
                            const char *email)
 {
-  char *translator;
+  g_autofree char *translator = NULL;
 
   g_return_if_fail (GTR_IS_HEADER (header));
 
   translator = g_strconcat (name, " <", email, ">", NULL);
 
   gtr_header_set_field (header, "Last-Translator", translator);
-
-  g_free (translator);
 }
 
 char *
@@ -436,15 +434,13 @@ void
 gtr_header_set_charset (GtrHeader  *header,
                         const char *charset)
 {
-  char *set;
+  g_autofree char *set = NULL;
 
   g_return_if_fail (GTR_IS_HEADER (header));
 
   set = g_strconcat ("text/plain;", " charset=", charset, NULL);
 
   gtr_header_set_field (header, "Content-Type", set);
-
-  g_free (set);
 }
 
 char *
@@ -674,21 +670,16 @@ set_profile_values (GtrHeader *header)
 static void
 update_po_date (GtrHeader * header)
 {
-  char *current_date;
-  char *current_time;
-  char *new_date;
+  g_autofree char *current_date = NULL;
+  g_autofree char *current_time = NULL;
+  g_autofree char *new_date = NULL;
 
   current_date = gtr_utils_get_current_date ();
   current_time = gtr_utils_get_current_time ();
 
   new_date = g_strconcat (current_date, " ", current_time, NULL);
 
-  g_free (current_date);
-  g_free (current_time);
-
   gtr_header_set_po_date (header, new_date);
-
-  g_free (new_date);
 }
 
 static void

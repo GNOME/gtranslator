@@ -48,23 +48,19 @@
 static void
 setup_path (void)
 {
-  char *path;
-  char *installdir;
-  char *bin;
+  g_autofree char *path = NULL;
+  g_autofree char *installdir = NULL;
+  g_autofree char *bin = NULL;
 
   installdir = g_win32_get_package_installation_directory_of_module (NULL);
 
   bin = g_build_filename (installdir, "bin", NULL);
-  g_free (installdir);
 
   /* Set PATH to include the gedit executable's folder */
   path = g_build_path (";", bin, g_getenv ("PATH"), NULL);
-  g_free (bin);
 
   if (!g_setenv ("PATH", path, TRUE))
     g_warning ("Could not set PATH for Translation Editor");
-
-  g_free (path);
 }
 #endif
 

@@ -129,7 +129,7 @@ static void
 gtr_application_init (GtrApplication *application)
 {
   const char *gtr_folder;
-  char *profiles_file;
+  g_autofree char *profiles_file = NULL;
   GtrApplicationPrivate *priv
       = gtr_application_get_instance_private (application);
 
@@ -156,7 +156,6 @@ gtr_application_init (GtrApplication *application)
   profiles_file = g_build_filename (gtr_folder, "profiles.ini", NULL);
   if (!g_file_test (profiles_file, G_FILE_TEST_EXISTS))
     priv->first_run = TRUE;
-  g_free (profiles_file);
 }
 
 static void

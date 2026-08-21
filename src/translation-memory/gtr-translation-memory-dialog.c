@@ -321,7 +321,7 @@ gtr_translation_memory_dialog_init (GtrTranslationMemoryDialog *dlg)
   GtrProfileManager *prof_manager;
   GtrProfile *profile;
   const char *language_code;
-  char *filename = NULL;
+  g_autofree char *filename = NULL;
 
   priv->tm_settings = g_settings_new ("org.gnome.Gtranslator.plugins.translation-memory");
 
@@ -344,8 +344,6 @@ gtr_translation_memory_dialog_init (GtrTranslationMemoryDialog *dlg)
     g_settings_set_string (priv->tm_settings,
                            "filename-restriction",
                            filename);
-
-  g_free (filename);
 
   g_settings_bind (priv->tm_settings,
                    "restrict-to-filename",

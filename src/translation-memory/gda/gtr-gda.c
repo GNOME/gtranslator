@@ -797,7 +797,7 @@ gtr_gda_init (GtrGda * self)
 {
   g_autoptr (GError) error = NULL;
   GtrGdaPrivate *priv = gtr_gda_get_instance_private (self);
-  g_auto (GPathBuf) path;
+  g_auto (GPathBuf) path = G_PATH_BUF_INIT;
   g_autofree char *db_filepath = NULL;
   const char *config_dir;
 
