@@ -1200,12 +1200,40 @@ gtr_tab_message_go_to (GtrTab    *tab,
                        GtrTabMove move)
 {
   GtrTabPrivate *priv = gtr_tab_get_instance_private (tab);
+  int page_to = 0;
 
   if (priv->blocking)
     return;
 
   gtr_tab_show_message (tab, to_go);
-  gtk_notebook_set_current_page (GTK_NOTEBOOK (priv->trans_notebook), 0);
+
+  bool has_plurals = gtr_msg_get_msgid_plural (to_go) != NULL;
+  int current_page = gtk_notebook_get_current_page (GTK_NOTEBOOK (priv->trans_notebook));
+  int n_pages = gtk_notebook_get_n_pages (GTK_NOTEBOOK (priv->trans_notebook));
+
+  switch (move)
+    {
+    case GTR_TAB_MOVE_NEXT:
+      break;
+    case GTR_TAB_MOVE_PREV:
+      break;
+    case GTR_TAB_MOVE_NEXT_PLURAL_FORM:
+      if (has_plurals && current_page + 1 < n_pages)
+        page_to = current_page + 1;
+      break;
+    case GTR_TAB_MOVE_PREV_PLURAL_FORM:
+      if (has_plurals && 0 < current_page)
+        page_to = current_page - 1;
+      else if (n_pages > 0)
+        page_to = n_pages - 1;
+      break;
+    case GTR_TAB_MOVE_NONE:
+      break;
+    default:
+      g_return_if_reached ();
+    }
+
+  gtk_notebook_set_current_page (GTK_NOTEBOOK (priv->trans_notebook), page_to);
 
   if (!searching)
     {
@@ -1502,6 +1530,71 @@ gtr_tab_go_to_next (GtrTab * tab)
       if (msg)
         gtr_tab_message_go_to (tab, msg,
                                FALSE, GTR_TAB_MOVE_NEXT);
+    }
+}
+
+void
+gtr_tab_go_to_next_plural_form (GtrTab * tab)
+{
+  g_autoptr(GtrMsg) msg = NULL;
+  GtrTabPrivate *priv;
+
+  priv = gtr_tab_get_instance_private (tab);
+
+  if (_gtr_tab_finish_edition (tab))
+    {
+      int current_page = gtk_notebook_get_current_page (GTK_NOTEBOOK (priv->trans_notebook));
+      int n_pages = gtk_notebook_get_n_pages (GTK_NOTEBOOK (priv->trans_notebook));
+      GtrTabMove move;
+      GtrMsg *current_msg = GTR_MSG (gtr_po_get_current_message (priv->po)->data);
+      bool has_plurals = gtr_msg_get_msgid_plural (current_msg) != NULL;
+
+      if (has_plurals && current_page + 1 < n_pages)
+        {
+          g_set_object (&msg, current_msg);
+          move = GTR_TAB_MOVE_NEXT_PLURAL_FORM;
+        }
+      else
+        {
+          msg = gtr_message_table_navigate (GTR_MESSAGE_TABLE (priv->message_table),
+                                            GTR_NAVIGATE_NEXT, NULL);
+          move = GTR_TAB_MOVE_NEXT;
+        }
+
+      if (msg)
+        gtr_tab_message_go_to (tab, msg, FALSE, move);
+    }
+}
+
+void
+gtr_tab_go_to_prev_plural_form (GtrTab * tab)
+{
+  g_autoptr(GtrMsg) msg = NULL;
+  GtrTabPrivate *priv;
+
+  priv = gtr_tab_get_instance_private (tab);
+
+  if (_gtr_tab_finish_edition (tab))
+    {
+      int current_page = gtk_notebook_get_current_page (GTK_NOTEBOOK (priv->trans_notebook));
+      GtrTabMove move;
+      GtrMsg *current_msg = GTR_MSG (gtr_po_get_current_message (priv->po)->data);
+      bool has_plurals = gtr_msg_get_msgid_plural (current_msg) != NULL;
+
+      if (has_plurals && 0 < current_page)
+        {
+          g_set_object (&msg, current_msg);
+          move = GTR_TAB_MOVE_PREV_PLURAL_FORM;
+        }
+      else
+        {
+          msg = gtr_message_table_navigate (GTR_MESSAGE_TABLE (priv->message_table),
+                                            GTR_NAVIGATE_PREV, NULL);
+          move = GTR_TAB_MOVE_PREV;
+        }
+
+      if (msg)
+        gtr_tab_message_go_to (tab, msg, FALSE, move);
     }
 }
 

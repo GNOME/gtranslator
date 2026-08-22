@@ -43,7 +43,9 @@ typedef enum
 {
   GTR_TAB_MOVE_NONE,
   GTR_TAB_MOVE_NEXT,
-  GTR_TAB_MOVE_PREV
+  GTR_TAB_MOVE_PREV,
+  GTR_TAB_MOVE_NEXT_PLURAL_FORM,
+  GTR_TAB_MOVE_PREV_PLURAL_FORM,
 } GtrTabMove;
 
 typedef enum
@@ -98,6 +100,10 @@ void gtr_tab_unblock_movement (GtrTab * tab);
 void gtr_tab_go_to_next (GtrTab * tab);
 
 void gtr_tab_go_to_prev (GtrTab * tab);
+
+void gtr_tab_go_to_next_plural_form (GtrTab * tab);
+
+void gtr_tab_go_to_prev_plural_form (GtrTab * tab);
 
 gboolean gtr_tab_go_to_next_fuzzy_or_untrans (GtrTab * tab);
 

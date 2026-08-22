@@ -75,6 +75,10 @@ void gtr_message_go_to_previous (GtrWindow * window);
 
 void gtr_message_go_to_next (GtrWindow * window);
 
+void gtr_message_go_to_previous_plural_form (GtrWindow * window);
+
+void gtr_message_go_to_next_plural_form (GtrWindow * window);
+
 void gtr_message_go_to_next_fuzzy_or_untranslated (GtrWindow * window);
 
 void gtr_message_go_to_prev_fuzzy_or_untranslated (GtrWindow * window);

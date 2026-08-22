@@ -393,6 +393,20 @@ next_activated (GSimpleAction *action, GVariant *parameter, gpointer user_data)
 }
 
 static void
+next_plural_form_activated (GSimpleAction *action, GVariant *parameter, gpointer user_data)
+{
+  GtrApplication *app = GTR_APPLICATION (user_data);
+  gtr_message_go_to_next_plural_form (get_active_window (app));
+}
+
+static void
+prev_plural_form_activated (GSimpleAction *action, GVariant *parameter, gpointer user_data)
+{
+  GtrApplication *app = GTR_APPLICATION (user_data);
+  gtr_message_go_to_previous_plural_form (get_active_window (app));
+}
+
+static void
 prev_no_activated (GSimpleAction *action, GVariant *parameter,
                    gpointer user_data)
 {
@@ -455,6 +469,9 @@ static GActionEntry app_entries[]
 
         { "prev", prev_activated, NULL, NULL, NULL },
         { "next", next_activated, NULL, NULL, NULL },
+
+        { "prev_plural_form", prev_plural_form_activated, NULL, NULL, NULL },
+        { "next_plural_form", next_plural_form_activated, NULL, NULL, NULL },
 
         { "prev_no", prev_no_activated, NULL, NULL, NULL },
         { "next_no", next_no_activated, NULL, NULL, NULL },
@@ -525,8 +542,10 @@ gtr_application_startup (GApplication *application)
 
   set_kb (application, "app.clear_msgstr", "<Ctrl>k");
 
-  set_kb (application, "app.prev", "<Alt>Left");
-  set_kb (application, "app.next", "<Alt>Right");
+  set_kb (application, "app.prev", "<Alt>Up");
+  set_kb (application, "app.next", "<Alt>Down");
+  set_kb (application, "app.prev_plural_form", "<Alt>Left");
+  set_kb (application, "app.next_plural_form", "<Alt>Right");
   set_kb (application, "app.prev_no", "<Alt>Page_Up");
   set_kb (application, "app.next_no", "<Alt>Page_Down");
 

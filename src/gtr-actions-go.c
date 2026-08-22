@@ -48,6 +48,20 @@ gtr_message_go_to_next (GtrWindow * window)
 }
 
 void
+gtr_message_go_to_previous_plural_form (GtrWindow * window)
+{
+  GtrTab *current = gtr_window_get_active_tab (window);
+  gtr_tab_go_to_prev_plural_form (current);
+}
+
+void
+gtr_message_go_to_next_plural_form (GtrWindow * window)
+{
+  GtrTab *current = gtr_window_get_active_tab (window);
+  gtr_tab_go_to_next_plural_form (current);
+}
+
+void
 gtr_message_go_to_next_fuzzy_or_untranslated (GtrWindow * window)
 {
   GtrTab *current;
