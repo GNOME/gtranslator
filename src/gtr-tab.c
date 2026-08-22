@@ -575,7 +575,6 @@ gtr_tab_show_message (GtrTab * tab, GtrMsg * msg)
       }
     }
   msgid_plural = gtr_msg_get_msgid_plural (msg);
-  gtk_notebook_set_current_page (GTK_NOTEBOOK (priv->trans_notebook), 0);
   if (!msgid_plural)
     {
       msgstr = gtr_msg_get_msgstr (msg);
@@ -1195,62 +1194,24 @@ gtr_tab_get_all_views (GtrTab * tab, gboolean original, gboolean translated)
  * in the #GtrView.
 **/
 void
-gtr_tab_message_go_to (GtrTab * tab,
-                       GtrMsg * to_go,
-                       gboolean searching,
+gtr_tab_message_go_to (GtrTab    *tab,
+                       GtrMsg    *to_go,
+                       gboolean   searching,
                        GtrTabMove move)
 {
-  static gboolean first_msg = TRUE;
   GtrTabPrivate *priv = gtr_tab_get_instance_private (tab);
 
-  if (!priv->blocking || first_msg)
-    {
-      gboolean plurals;
-      int current_page, n_pages;
-      /*
-       * If the current message is plural and we press next/prev
-       * we have to change to the next/prev plural tab in case is not
-       * the last
-       * To implement that:
-       * if the tabs are showed then we check if we want prev or
-       * next and then if we need to change the tab we change it
-       * in other case we show the message
-       *
-       * I don't like too much this implementation so if anybody can
-       * rewrite this is a better way would be great.
-       */
-      plurals =
-        gtk_notebook_get_show_tabs (GTK_NOTEBOOK (priv->trans_notebook));
-      current_page =
-        gtk_notebook_get_current_page (GTK_NOTEBOOK
-                                       (priv->trans_notebook));
-      n_pages =
-        gtk_notebook_get_n_pages (GTK_NOTEBOOK (priv->trans_notebook));
-      if ((plurals == TRUE) && (move != GTR_TAB_MOVE_NONE))
-        {
-          if ((n_pages - 1) == current_page && move == GTR_TAB_MOVE_NEXT)
-            gtr_tab_show_message (tab, to_go);
-          else if (current_page == 0 && move == GTR_TAB_MOVE_PREV)
-            gtr_tab_show_message (tab, to_go);
-          else
-            return;
-        }
-      else
-        gtr_tab_show_message (tab, to_go);
-      first_msg = FALSE;
-    }
-  else
+  if (priv->blocking)
     return;
 
-  /*
-   * Emitting showed-message signal
-   */
+  gtr_tab_show_message (tab, to_go);
+  gtk_notebook_set_current_page (GTK_NOTEBOOK (priv->trans_notebook), 0);
+
   if (!searching)
     {
-      gtr_message_table_select (GTR_MESSAGE_TABLE (priv->message_table), GTR_MSG (to_go));
+      gtr_message_table_select (GTR_MESSAGE_TABLE (priv->message_table), to_go);
 
       g_signal_emit (G_OBJECT (tab), signals[SHOWED_MESSAGE], 0, to_go);
-
 
       // Grabbing the focus in the GtrView to edit the message
       // This is done in the idle add to avoid the focus grab from the
