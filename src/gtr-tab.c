@@ -346,7 +346,7 @@ gtr_tab_edition_finished (GtrTab * tab, GtrMsg * msg)
    */
   message_error = gtr_msg_check (msg);
 
-  if (gtr_msg_is_translated(msg) && message_error != NULL)
+  if (message_error && (gtr_msg_is_translated (msg) && !gtr_msg_is_fuzzy (msg)))
     {
       AdwDialog *dialog = adw_alert_dialog_new (
         _("There is an error in the message"), message_error);
