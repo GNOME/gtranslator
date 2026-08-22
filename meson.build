@@ -43,7 +43,6 @@ gtr_debug = get_option('profile') == 'development'
 
 if gtr_debug
   profile = 'Devel'
-  name_suffix = ' (Development)'
   vcs_tag = run_command(
     find_program('git'),
     'rev-parse',
@@ -54,7 +53,6 @@ if gtr_debug
   version_suffix = '-' + (vcs_tag == '' ? 'devel' : vcs_tag)
 else
   profile = ''
-  name_suffix = ''
   version_suffix = ''
 endif
 
