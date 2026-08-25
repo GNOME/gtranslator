@@ -38,7 +38,6 @@
 typedef struct
 {
   GtrWindow *window;
-  GSList *tags;
   GtrTab *tab;
   GtrContextPanel *panel;
 } GtrCodeViewPrivate;
