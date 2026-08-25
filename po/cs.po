@@ -8,22 +8,22 @@
 # Petr Kovar <pknbe@volny.cz>, 2010.
 # Marek Černocký <marek@manet.cz>, 2009, 2010, 2011, 2012, 2013, 2015, 2017, 2018, 2019, 2020, 2021.
 # Dagobert Janota <janotadag@gmail.com>, 2026.
-# Patrik Sivek <sivekpatrik@gmail.com>, 2026.
 # Václav Koterec <kot.va@centrum.cz>, 2026.
+# Patrik Sivek <patriksivek@gnome.org>, 2026.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2026-06-29 14:48+0000\n"
-"PO-Revision-Date: 2026-07-10 12:19+0200\n"
-"Last-Translator: Václav Koterec <kot.va@centrum.cz>\n"
+"POT-Creation-Date: 2026-08-24 15:21+0000\n"
+"PO-Revision-Date: 2026-08-25 15:54+0200\n"
+"Last-Translator: Patrik Sivek <patriksivek@gnome.org>\n"
 "Language-Team: Czech\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 "X-Generator: Gtranslator 50.0\n"
 "X-DL-VCS-Web: https://gitlab.gnome.org/GNOME/gtranslator/\n"
 "X-DL-Lang: cs\n"
@@ -34,7 +34,7 @@ msgstr ""
 
 #: data/org.gnome.Gtranslator.desktop.in.in:2
 #: data/org.gnome.Gtranslator.metainfo.xml.in.in:7 src/gtr-actions-app.c:89
-#: src/gtr-application.c:505 src/gtr-window.c:196 src/gtr-window.c:442
+#: src/gtr-application.c:519 src/gtr-window.c:196 src/gtr-window.c:442
 msgid "Translation Editor"
 msgstr "Editor překladů"
 
@@ -226,6 +226,12 @@ msgstr ""
 msgid "Translator's main interface"
 msgstr "Hlavní rozhraní překladače"
 
+#. developer_name tag deprecated with Appstream 1.0
+#: data/org.gnome.Gtranslator.metainfo.xml.in.in:323
+#: data/org.gnome.Gtranslator.metainfo.xml.in.in:325
+msgid "Daniel García Moreno"
+msgstr "Daniel García Moreno"
+
 #: src/gtr-actions-app.c:86
 msgid ""
 "Translation file editing suite for localization of applications and "
@@ -245,30 +251,30 @@ msgstr ""
 "Miloslav Trmač <mitr@volny.cz>\n"
 "Marek Černocký <marek@manet.cz>"
 
-#: src/gtr-actions-file.c:97
+#: src/gtr-actions-file.c:95
 msgid "Could not update from template"
 msgstr "Nepodařilo se aktualizovat z šablony."
 
-#: src/gtr-actions-file.c:101 src/gtr-actions-file.c:172
+#: src/gtr-actions-file.c:99 src/gtr-actions-file.c:170
 #: src/gtr-actions-file.c:450 src/gtr-actions-file.c:472
 #: src/gtr-actions-file.c:511 src/gtr-actions-file.c:537
 #: src/gtr-actions-file.c:720 src/gtr-actions-file.c:763 src/gtr-dl-teams.c:163
-#: src/gtr-dl-teams.c:225 src/gtr-dl-teams.c:344 src/gtr-dl-teams.c:431
-#: src/gtr-dl-teams.c:569 src/gtr-dl-teams.c:580 src/gtr-dl-teams.c:592
-#: src/gtr-dl-teams.c:623 src/gtr-dl-teams.c:634 src/gtr-dl-teams.c:706
-#: src/gtr-tab.c:354 src/gtr-window.c:147 src/gtr-window.c:337
+#: src/gtr-dl-teams.c:224 src/gtr-dl-teams.c:343 src/gtr-dl-teams.c:430
+#: src/gtr-dl-teams.c:568 src/gtr-dl-teams.c:579 src/gtr-dl-teams.c:591
+#: src/gtr-dl-teams.c:622 src/gtr-dl-teams.c:633 src/gtr-dl-teams.c:705
+#: src/gtr-tab.c:355 src/gtr-window.c:147 src/gtr-window.c:337
 msgid "OK"
 msgstr "Budiž"
 
-#: src/gtr-actions-file.c:128
+#: src/gtr-actions-file.c:126
 msgid "msgmerge failed"
 msgstr "msgmerge se nezdařilo"
 
-#: src/gtr-actions-file.c:162
+#: src/gtr-actions-file.c:160
 msgid "Updated from Template"
 msgstr "Aktualizováno z šablony"
 
-#: src/gtr-actions-file.c:165
+#: src/gtr-actions-file.c:163
 #, c-format
 msgid ""
 "Messages: %d → %d (%+d)\n"
@@ -360,11 +366,11 @@ msgstr "Soubor byl nahrán."
 msgid "Save file as…"
 msgstr "Uložit soubor jako…"
 
-#: src/gtr-application.c:304
+#: src/gtr-application.c:301
 msgid "Fixed plurals"
 msgstr "Opravené množné číslo"
 
-#: src/gtr-close-confirmation-dialog.c:121 src/gtr-context.c:164
+#: src/gtr-close-confirmation-dialog.c:121 src/gtr-context.c:170
 #: src/gtr-preferences-dialog.c:452 src/gtr-profile-dialog.ui:15
 #: src/gtr-upload-dialog.ui:20
 msgid "_Cancel"
@@ -374,7 +380,7 @@ msgstr "_Zrušit"
 msgid "Close _Without Saving"
 msgstr "Zavřít _bez uložení"
 
-#: src/gtr-close-confirmation-dialog.c:123 src/gtr-context.c:165
+#: src/gtr-close-confirmation-dialog.c:123 src/gtr-context.c:171
 msgid "_Save"
 msgstr "_Uložit"
 
@@ -401,11 +407,11 @@ msgstr[1] ""
 "Jsou zde %d dokumenty bez uložených změn. Uložit změny před zavřením?"
 msgstr[2] "Je zde %d dokumentů bez uložených změn. Uložit změny před zavřením?"
 
-#: src/gtr-context.c:181
+#: src/gtr-context.c:187
 msgid "Edit Notes"
 msgstr "Upravit poznámky"
 
-#: src/gtr-context.c:549
+#: src/gtr-context.c:591
 msgid "Open in Browser"
 msgstr "Otevřít v prohlížeči"
 
@@ -418,50 +424,54 @@ msgid "Edit"
 msgstr "Upravit"
 
 #: src/gtr-context.ui:59
-msgid "Extracted comments"
-msgstr "Vybalené komentáře"
+msgid "Extracted Comments"
+msgstr "Vytažené komentáře"
 
-#: src/gtr-context.ui:84
+#: src/gtr-context.ui:85
+msgid "Previous Source Text"
+msgstr "Původní zdrojový text"
+
+#: src/gtr-context.ui:113
 msgid "Paths"
 msgstr "Cesty"
 
-#: src/gtr-dl-teams.c:224
+#: src/gtr-dl-teams.c:223
 msgid "Error loading module info"
 msgstr "Chyba během načítaní informací o modulu"
 
-#: src/gtr-dl-teams.c:430
+#: src/gtr-dl-teams.c:429
 msgid "Error loading file info"
 msgstr "Chyba během načítání informací o souboru"
 
-#: src/gtr-dl-teams.c:449
+#: src/gtr-dl-teams.c:448
 msgid "No file found"
 msgstr "Nebyl nalezen žádný soubor"
 
-#: src/gtr-dl-teams.c:456
+#: src/gtr-dl-teams.c:455
 msgid "No module state found."
 msgstr "Nebyl nalezen žádný stav modulu."
 
-#: src/gtr-dl-teams.c:568
+#: src/gtr-dl-teams.c:567
 msgid "Error loading file"
 msgstr "Chyba při načítání souboru"
 
-#: src/gtr-dl-teams.c:578 src/gtr-dl-teams.c:622
+#: src/gtr-dl-teams.c:577 src/gtr-dl-teams.c:621
 msgid "Error creating tmp file"
 msgstr "Chyba při vytváření souboru tmp"
 
-#: src/gtr-dl-teams.c:591
+#: src/gtr-dl-teams.c:590
 msgid "Error writing stream"
 msgstr "Chyba při psaní datového proudu"
 
-#: src/gtr-dl-teams.c:654
+#: src/gtr-dl-teams.c:653
 msgid "The file has been saved in your Downloads folder"
 msgstr "Soubor byl uložen do složky Stažené"
 
-#: src/gtr-dl-teams.c:705
+#: src/gtr-dl-teams.c:704
 msgid "Could not reserve module"
 msgstr "Nepodařilo se rezervovat modul"
 
-#: src/gtr-dl-teams.c:710
+#: src/gtr-dl-teams.c:709
 #, c-format
 msgid ""
 "%s\n"
@@ -472,7 +482,7 @@ msgstr ""
 "Možná jste si nenastavili svůj l10n.gnome.org token správně ve svém profilu "
 "nebo nemáte práva nahrát tento modul."
 
-#: src/gtr-dl-teams.c:722
+#: src/gtr-dl-teams.c:721
 msgid "The file has been successfully reserved"
 msgstr "Soubor byl úspěšně rezervován"
 
@@ -548,7 +558,7 @@ msgstr "Šablona překladu gettext"
 msgid "All files"
 msgstr "Všechny soubory"
 
-#: src/gtr-greeter.c:216 src/gtr-profile-dialog.c:129
+#: src/gtr-greeter.c:216 src/gtr-profile-dialog.c:133
 #, c-format
 msgid "GNOME Damned Lies integration token, go to your profile in %s to get it"
 msgstr ""
@@ -720,7 +730,7 @@ msgstr "Datum _změny souboru PO"
 msgid "Report message _bugs to"
 msgstr "Chy_by zpráv hlásit na"
 
-#: src/gtr-header-dialog.ui:109 src/gtr-upload-dialog.c:147
+#: src/gtr-header-dialog.ui:109 src/gtr-upload-dialog.c:151
 msgid "Comment"
 msgstr "Komentář"
 
@@ -768,27 +778,27 @@ msgstr "Originální zpráva"
 msgid "Translated Message"
 msgstr "Přeložená zpráva"
 
-#: src/gtr-po.c:469
+#: src/gtr-po.c:461
 #, c-format
 msgid "The file is empty"
 msgstr "Soubor je prázdný"
 
-#: src/gtr-po.c:478
+#: src/gtr-po.c:470
 #, c-format
 msgid "Failed opening file “%s”: %s"
 msgstr "Selhalo otevření souboru „%s“: %s"
 
-#: src/gtr-po.c:549
+#: src/gtr-po.c:541
 #, c-format
 msgid "Could not convert from charset “%s” to UTF-8"
 msgstr "Nezdařilo se převést znakové sady „%s“ do UTF-8"
 
-#: src/gtr-po.c:563 src/gtr-po.c:581
+#: src/gtr-po.c:555 src/gtr-po.c:573
 #, c-format
 msgid "Could not store temporary file for encoding conversion"
 msgstr "Nelze uložit dočasný soubor potřebný pro převod kódování"
 
-#: src/gtr-po.c:605
+#: src/gtr-po.c:597
 #, c-format
 msgid ""
 "All attempt to convert the file to UTF-8 has failed, use the msgconv or "
@@ -798,17 +808,17 @@ msgstr ""
 "Selhaly všechny pokusy o převod souboru do UTF-8; před otevřením souboru v "
 "Editoru překladů použijte program msgconv nebo iconv v příkazovém řádku."
 
-#: src/gtr-po.c:670
+#: src/gtr-po.c:662
 #, c-format
 msgid "Gettext returned a null message domain list."
 msgstr "Gettext vrátil prázdný seznam domény zpráv."
 
-#: src/gtr-po.c:717
+#: src/gtr-po.c:709
 #, c-format
 msgid "No messages obtained from parser."
 msgstr "Z analyzátoru nebyla získána žádná zpráva."
 
-#: src/gtr-po.c:783
+#: src/gtr-po.c:775
 #, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
@@ -819,17 +829,17 @@ msgstr ""
 "Soubory POT jsou generovány během procesu kompilace.\n"
 "Správný název pro váš soubor bude spíše „%s.po“."
 
-#: src/gtr-po.c:813
+#: src/gtr-po.c:805
 #, c-format
 msgid "The file %s is read-only, and can not be overwritten"
 msgstr "Soubor %s je pouze pro čtení a nelze jej přepsat"
 
-#: src/gtr-po.c:832 src/gtr-po.c:1183
+#: src/gtr-po.c:824 src/gtr-po.c:1175
 #, c-format
 msgid "There is an error in the PO file: %s"
 msgstr "Vyskytla se chyba v souboru PO: %s"
 
-#: src/gtr-po.c:843
+#: src/gtr-po.c:835
 #, c-format
 msgid "There was an error writing the PO file: %s"
 msgstr "Vyskytla se chyba při zápisu souboru PO: %s"
@@ -1028,39 +1038,39 @@ msgstr "Původní text"
 msgid "Translated text"
 msgstr "Přeložený text"
 
-#: src/gtr-tab.c:351
+#: src/gtr-tab.c:352
 msgid "There is an error in the message"
 msgstr "Ve zprávě se vyskytla chyba"
 
-#: src/gtr-tab.c:571 src/gtr-tab.c:708
+#: src/gtr-tab.c:571 src/gtr-tab.c:714
 msgid "fuzzy"
 msgstr "nepřesná"
 
-#: src/gtr-tab.c:738
+#: src/gtr-tab.c:744
 #, c-format
 msgid "Plural %d"
 msgstr "Množné číslo %d"
 
-#: src/gtr-tab.c:1470
+#: src/gtr-tab.c:1459
 msgid "Copied original to clipboard"
 msgstr "Originální text byl zkopírován do schránky"
 
-#: src/gtr-tab.c:1682
+#: src/gtr-tab.c:1736
 #, c-format
 msgid "Translated: %0.2f%%"
 msgstr "Přeloženo: %0.2f %%"
 
-#: src/gtr-tab.c:1683
+#: src/gtr-tab.c:1737
 #, c-format
 msgid "Translated: %d"
 msgstr "Přeložených: %d"
 
-#: src/gtr-tab.c:1684
+#: src/gtr-tab.c:1738
 #, c-format
 msgid "Untranslated: %d"
 msgstr "Nepřeložených: %d"
 
-#: src/gtr-tab.c:1685
+#: src/gtr-tab.c:1739
 #, c-format
 msgid "Fuzzy: %d"
 msgstr "Nepřesných: %d"
@@ -1142,11 +1152,11 @@ msgstr "Pokročilé nástroje"
 msgid "Fix plural messages"
 msgstr "Opravit záznamy v množném čísle"
 
-#: src/gtr-upload-dialog.c:199
+#: src/gtr-upload-dialog.c:203
 msgid "Uploading…"
 msgstr "Nahrává se…"
 
-#: src/gtr-upload-dialog.c:205
+#: src/gtr-upload-dialog.c:209
 msgid "Upload"
 msgstr "Nahrát"
 
@@ -1427,9 +1437,6 @@ msgstr ""
 
 #~ msgid "Translate and localize applications and libraries"
 #~ msgstr "Překládejte a lokalizujte aplikace a knihovny"
-
-#~ msgid "Daniel García Moreno"
-#~ msgstr "Daniel García Moreno"
 
 #~ msgid "Side panel switcher style"
 #~ msgstr "Styl přepínače postranního panelu"
