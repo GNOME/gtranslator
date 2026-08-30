@@ -2,7 +2,7 @@ project(
   'gtranslator',
   'c',
   version: '50.0',
-  license: 'GPL3+',
+  license: 'GPL-3.0-or-later',
   meson_version: '>= 1.7',
   default_options : [
     'buildtype=debugoptimized',
