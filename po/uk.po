@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator.master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2026-08-03 16:50+0000\n"
-"PO-Revision-Date: 2026-08-03 20:52+0300\n"
+"POT-Creation-Date: 2026-08-31 06:32+0000\n"
+"PO-Revision-Date: 2026-08-31 10:16+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -22,7 +22,7 @@ msgstr ""
 
 #: data/org.gnome.Gtranslator.desktop.in.in:2
 #: data/org.gnome.Gtranslator.metainfo.xml.in.in:7 src/gtr-actions-app.c:89
-#: src/gtr-application.c:505 src/gtr-window.c:196 src/gtr-window.c:442
+#: src/gtr-application.c:519 src/gtr-window.c:196 src/gtr-window.c:442
 msgid "Translation Editor"
 msgstr "Редактор перекладів"
 
@@ -244,30 +244,30 @@ msgstr ""
 "Сергій Панасенко <nitay@users.sourceforge.net>\n"
 "Sergiy Gavrylov <sergiovana@bigmir.net>"
 
-#: src/gtr-actions-file.c:97
+#: src/gtr-actions-file.c:95
 msgid "Could not update from template"
 msgstr "Не вдалося оновити з шаблону"
 
-#: src/gtr-actions-file.c:101 src/gtr-actions-file.c:172
+#: src/gtr-actions-file.c:99 src/gtr-actions-file.c:170
 #: src/gtr-actions-file.c:450 src/gtr-actions-file.c:472
 #: src/gtr-actions-file.c:511 src/gtr-actions-file.c:537
 #: src/gtr-actions-file.c:720 src/gtr-actions-file.c:763 src/gtr-dl-teams.c:163
-#: src/gtr-dl-teams.c:225 src/gtr-dl-teams.c:344 src/gtr-dl-teams.c:431
-#: src/gtr-dl-teams.c:569 src/gtr-dl-teams.c:580 src/gtr-dl-teams.c:592
-#: src/gtr-dl-teams.c:623 src/gtr-dl-teams.c:634 src/gtr-dl-teams.c:706
-#: src/gtr-tab.c:354 src/gtr-window.c:147 src/gtr-window.c:337
+#: src/gtr-dl-teams.c:224 src/gtr-dl-teams.c:343 src/gtr-dl-teams.c:430
+#: src/gtr-dl-teams.c:568 src/gtr-dl-teams.c:579 src/gtr-dl-teams.c:591
+#: src/gtr-dl-teams.c:622 src/gtr-dl-teams.c:633 src/gtr-dl-teams.c:705
+#: src/gtr-tab.c:355 src/gtr-window.c:147 src/gtr-window.c:337
 msgid "OK"
 msgstr "Гаразд"
 
-#: src/gtr-actions-file.c:128
+#: src/gtr-actions-file.c:126
 msgid "msgmerge failed"
 msgstr "Помилка msgmerge"
 
-#: src/gtr-actions-file.c:162
+#: src/gtr-actions-file.c:160
 msgid "Updated from Template"
 msgstr "Оновлено з шаблону"
 
-#: src/gtr-actions-file.c:165
+#: src/gtr-actions-file.c:163
 #, c-format
 msgid ""
 "Messages: %d → %d (%+d)\n"
@@ -360,11 +360,11 @@ msgstr "Файл вивантажено!"
 msgid "Save file as…"
 msgstr "Зберегти файл як…"
 
-#: src/gtr-application.c:304
+#: src/gtr-application.c:301
 msgid "Fixed plurals"
 msgstr "Виправлено форми множини"
 
-#: src/gtr-close-confirmation-dialog.c:121 src/gtr-context.c:169
+#: src/gtr-close-confirmation-dialog.c:121 src/gtr-context.c:170
 #: src/gtr-preferences-dialog.c:452 src/gtr-profile-dialog.ui:15
 #: src/gtr-upload-dialog.ui:20
 msgid "_Cancel"
@@ -374,7 +374,7 @@ msgstr "_Скасувати"
 msgid "Close _Without Saving"
 msgstr "Закрити б_ез збереження"
 
-#: src/gtr-close-confirmation-dialog.c:123 src/gtr-context.c:170
+#: src/gtr-close-confirmation-dialog.c:123 src/gtr-context.c:171
 msgid "_Save"
 msgstr "З_берегти"
 
@@ -401,11 +401,11 @@ msgstr[0] "%d документ з незбереженими змінами. З�
 msgstr[1] "%d документа з незбереженими змінами. Зберегти перед закриттям?"
 msgstr[2] "%d документів з незбереженими змінами. Зберегти перед закриттям?"
 
-#: src/gtr-context.c:186
+#: src/gtr-context.c:187
 msgid "Edit Notes"
 msgstr "Редагувати нотатки"
 
-#: src/gtr-context.c:581
+#: src/gtr-context.c:591
 msgid "Open in Browser"
 msgstr "Відкрити у браузері"
 
@@ -418,56 +418,54 @@ msgid "Edit"
 msgstr "Змінити"
 
 #: src/gtr-context.ui:59
-#| msgid "Extracted comments"
 msgid "Extracted Comments"
 msgstr "Видобуті коментарі"
 
-#: src/gtr-context.ui:84
-#| msgid "Previous Result"
+#: src/gtr-context.ui:85
 msgid "Previous Source Text"
 msgstr "Попередній початковий текст"
 
-#: src/gtr-context.ui:112
+#: src/gtr-context.ui:113
 msgid "Paths"
 msgstr "Шляхи"
 
-#: src/gtr-dl-teams.c:224
+#: src/gtr-dl-teams.c:223
 msgid "Error loading module info"
 msgstr "Помилка під час спроби завантажити дані модуля"
 
-#: src/gtr-dl-teams.c:430
+#: src/gtr-dl-teams.c:429
 msgid "Error loading file info"
 msgstr "Помилка під час спроби завантажити дані файла"
 
-#: src/gtr-dl-teams.c:449
+#: src/gtr-dl-teams.c:448
 msgid "No file found"
 msgstr "Файл не знайдено"
 
-#: src/gtr-dl-teams.c:456
+#: src/gtr-dl-teams.c:455
 msgid "No module state found."
 msgstr "Не знайдено стану модуля."
 
-#: src/gtr-dl-teams.c:568
+#: src/gtr-dl-teams.c:567
 msgid "Error loading file"
 msgstr "Помилка під час спроби завантажити файл"
 
-#: src/gtr-dl-teams.c:578 src/gtr-dl-teams.c:622
+#: src/gtr-dl-teams.c:577 src/gtr-dl-teams.c:621
 msgid "Error creating tmp file"
 msgstr "Помилка під час створення тимчасового файла"
 
-#: src/gtr-dl-teams.c:591
+#: src/gtr-dl-teams.c:590
 msgid "Error writing stream"
 msgstr "Помилка під час спроби записати потокові дані"
 
-#: src/gtr-dl-teams.c:654
+#: src/gtr-dl-teams.c:653
 msgid "The file has been saved in your Downloads folder"
 msgstr "Файл було збережено до вашої теки «Завантаження»"
 
-#: src/gtr-dl-teams.c:705
+#: src/gtr-dl-teams.c:704
 msgid "Could not reserve module"
 msgstr "Не вдалося зарезервувати модуль"
 
-#: src/gtr-dl-teams.c:710
+#: src/gtr-dl-teams.c:709
 #, c-format
 msgid ""
 "%s\n"
@@ -478,7 +476,7 @@ msgstr ""
 "Можливо, ви не налаштувати ваш l10n.gnome.org-жетон у вашому профілі або ви "
 "не маєте прав доступу до резервування цього модуля."
 
-#: src/gtr-dl-teams.c:722
+#: src/gtr-dl-teams.c:721
 msgid "The file has been successfully reserved"
 msgstr "Файл успішно зарезервовано"
 
@@ -554,7 +552,7 @@ msgstr "Шаблон перекладу Gettext"
 msgid "All files"
 msgstr "Усі файли"
 
-#: src/gtr-greeter.c:216 src/gtr-profile-dialog.c:129
+#: src/gtr-greeter.c:216 src/gtr-profile-dialog.c:133
 #, c-format
 msgid ""
 "GNOME Damned Lies integration token, go to your profile in %s to get it"
@@ -728,7 +726,7 @@ msgstr "Дата _зміни po-файла"
 msgid "Report message _bugs to"
 msgstr "Відправляти звіт про _помилки до"
 
-#: src/gtr-header-dialog.ui:109 src/gtr-upload-dialog.c:147
+#: src/gtr-header-dialog.ui:109 src/gtr-upload-dialog.c:151
 msgid "Comment"
 msgstr "Коментар"
 
@@ -776,27 +774,27 @@ msgstr "Початкове повідомлення"
 msgid "Translated Message"
 msgstr "Перекладене повідомлення"
 
-#: src/gtr-po.c:465
+#: src/gtr-po.c:461
 #, c-format
 msgid "The file is empty"
 msgstr "Файл порожній"
 
-#: src/gtr-po.c:474
+#: src/gtr-po.c:470
 #, c-format
 msgid "Failed opening file “%s”: %s"
 msgstr "Не вдалося відкрити файл «%s»: %s"
 
-#: src/gtr-po.c:545
+#: src/gtr-po.c:541
 #, c-format
 msgid "Could not convert from charset “%s” to UTF-8"
 msgstr "Не вдалося виконати перетворення з кодування «%s» до UTF-8"
 
-#: src/gtr-po.c:559 src/gtr-po.c:577
+#: src/gtr-po.c:555 src/gtr-po.c:573
 #, c-format
 msgid "Could not store temporary file for encoding conversion"
 msgstr "Не вдалося зберегти файл тимчасових даних для перетворення кодування"
 
-#: src/gtr-po.c:601
+#: src/gtr-po.c:597
 #, c-format
 msgid ""
 "All attempt to convert the file to UTF-8 has failed, use the msgconv or "
@@ -807,17 +805,17 @@ msgstr ""
 "Скористайтеся засобами командного рядка msgconv або iconv, перш ніж "
 "відкривати цей файл у редакторі перекладів GNOME."
 
-#: src/gtr-po.c:666
+#: src/gtr-po.c:662
 #, c-format
 msgid "Gettext returned a null message domain list."
 msgstr "Gettext повернув порожній список доменів."
 
-#: src/gtr-po.c:713
+#: src/gtr-po.c:709
 #, c-format
 msgid "No messages obtained from parser."
 msgstr "Жодного повідомлення не отримано від синтаксичного аналізатора."
 
-#: src/gtr-po.c:779
+#: src/gtr-po.c:775
 #, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
@@ -828,17 +826,17 @@ msgstr ""
 "Pot-файли створюються в процесі компіляції.\n"
 "Файл повинен мати назву, подібну до «%s.po»."
 
-#: src/gtr-po.c:809
+#: src/gtr-po.c:805
 #, c-format
 msgid "The file %s is read-only, and can not be overwritten"
 msgstr "Файл %s лише для читання і він не може бути перезаписаний"
 
-#: src/gtr-po.c:828 src/gtr-po.c:1179
+#: src/gtr-po.c:824 src/gtr-po.c:1175
 #, c-format
 msgid "There is an error in the PO file: %s"
 msgstr "Виявлено помилку у файлі PO: %s"
 
-#: src/gtr-po.c:839
+#: src/gtr-po.c:835
 #, c-format
 msgid "There was an error writing the PO file: %s"
 msgstr "Помилка запису PO-файла: %s"
@@ -1037,39 +1035,39 @@ msgstr "Початковий текст"
 msgid "Translated text"
 msgstr "Перекладений текст"
 
-#: src/gtr-tab.c:351
+#: src/gtr-tab.c:352
 msgid "There is an error in the message"
 msgstr "Помилка у повідомленні"
 
-#: src/gtr-tab.c:571 src/gtr-tab.c:708
+#: src/gtr-tab.c:571 src/gtr-tab.c:714
 msgid "fuzzy"
 msgstr "неточний"
 
-#: src/gtr-tab.c:738
+#: src/gtr-tab.c:744
 #, c-format
 msgid "Plural %d"
 msgstr "Форма множини %d"
 
-#: src/gtr-tab.c:1470
+#: src/gtr-tab.c:1459
 msgid "Copied original to clipboard"
 msgstr "Скопіювати початковий текст до буфера обміну даними"
 
-#: src/gtr-tab.c:1682
+#: src/gtr-tab.c:1736
 #, c-format
 msgid "Translated: %0.2f%%"
 msgstr "Перекладено: %0.2f%%"
 
-#: src/gtr-tab.c:1683
+#: src/gtr-tab.c:1737
 #, c-format
 msgid "Translated: %d"
 msgstr "Перекладених: %d"
 
-#: src/gtr-tab.c:1684
+#: src/gtr-tab.c:1738
 #, c-format
 msgid "Untranslated: %d"
 msgstr "Неперекладених: %d"
 
-#: src/gtr-tab.c:1685
+#: src/gtr-tab.c:1739
 #, c-format
 msgid "Fuzzy: %d"
 msgstr "Неточних: %d"
@@ -1151,11 +1149,11 @@ msgstr "Додаткові інструменти"
 msgid "Fix plural messages"
 msgstr "Виправити повідомлення із формами множини"
 
-#: src/gtr-upload-dialog.c:199
+#: src/gtr-upload-dialog.c:203
 msgid "Uploading…"
 msgstr "Вивантаження…"
 
-#: src/gtr-upload-dialog.c:205
+#: src/gtr-upload-dialog.c:209
 msgid "Upload"
 msgstr "Вивантажити"
 
@@ -1288,56 +1286,70 @@ msgid "Go to the next message"
 msgstr "Перейти до наступного повідомлення"
 
 #: src/shortcuts-dialog.ui:124
+#| msgctxt "shortcut window"
+#| msgid "Go to the previous untranslated message"
+msgctxt "shortcut window"
+msgid "Go to the previous plural form"
+msgstr "Перейти до попередньої форми множини"
+
+#: src/shortcuts-dialog.ui:130
+#| msgctxt "shortcut window"
+#| msgid "Go to the next untranslated message"
+msgctxt "shortcut window"
+msgid "Go to the next plural form"
+msgstr "Перейти до наступної форми множини"
+
+#: src/shortcuts-dialog.ui:136
 msgctxt "shortcut window"
 msgid "Go to the previous untranslated message"
 msgstr "Перейти до попереднього неперекладеного"
 
-#: src/shortcuts-dialog.ui:130
+#: src/shortcuts-dialog.ui:142
 msgctxt "shortcut window"
 msgid "Go to the next untranslated message"
 msgstr "Перейти до наступного неперекладеного"
 
-#: src/shortcuts-dialog.ui:138
+#: src/shortcuts-dialog.ui:150
 msgctxt "shortcut window group"
 msgid "Translation Memory"
 msgstr "Пам'ять перекладів"
 
-#: src/shortcuts-dialog.ui:142
+#: src/shortcuts-dialog.ui:154
 msgctxt "shortcut window"
 msgid "Build translation memory"
 msgstr "Зібрати пам'ять перекладів"
 
-#: src/shortcuts-dialog.ui:148
+#: src/shortcuts-dialog.ui:160
 msgctxt "shortcut window"
 msgid "Use 1st...9th suggestion"
 msgstr "Використати 1-у...9-у пропозицію"
 
-#: src/shortcuts-dialog.ui:156
+#: src/shortcuts-dialog.ui:168
 msgctxt "shortcut window group"
-msgid "Find & Replace"
-msgstr "Знайти і замінити"
-
-#: src/shortcuts-dialog.ui:160
-msgctxt "shortcut window"
-msgid "Find"
-msgstr "Знайти"
-
-#: src/shortcuts-dialog.ui:166
-msgctxt "shortcut window"
 msgid "Find & Replace"
 msgstr "Знайти і замінити"
 
 #: src/shortcuts-dialog.ui:172
 msgctxt "shortcut window"
+msgid "Find"
+msgstr "Знайти"
+
+#: src/shortcuts-dialog.ui:178
+msgctxt "shortcut window"
+msgid "Find & Replace"
+msgstr "Знайти і замінити"
+
+#: src/shortcuts-dialog.ui:184
+msgctxt "shortcut window"
 msgid "Forward-search"
 msgstr "Пошук далі"
 
-#: src/shortcuts-dialog.ui:178
+#: src/shortcuts-dialog.ui:190
 msgctxt "shortcut window"
 msgid "Backward-search"
 msgstr "Пошук позаду"
 
-#: src/shortcuts-dialog.ui:184
+#: src/shortcuts-dialog.ui:196
 msgctxt "shortcut window"
 msgid "Hide find & replace bar"
 msgstr "Приховати панель пошуку із заміною"
