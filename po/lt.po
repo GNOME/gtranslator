@@ -9,28 +9,179 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator HEAD\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2023-01-25 20:32+0000\n"
-"PO-Revision-Date: 2023-02-26 22:41+0200\n"
-"Last-Translator: Aurimas Černius <aurisc4@gmail.com>\n"
+"POT-Creation-Date: 2026-08-31 06:32+0000\n"
+"PO-Revision-Date: 2026-08-31 21:05+0300\n"
+"Last-Translator: Aurimas Černius <aurimas.cernius@mailo.com>\n"
 "Language-Team: Lietuvių <gnome-lt@lists.akl.lt>\n"
 "Language: lt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"(n%100<10 || n%100>=20) ? 1 : 2)\n"
-"X-Generator: Gtranslator 42.0\n"
+"(n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Poedit 3.9\n"
 
-#: data/org.gnome.Gtranslator.appdata.xml.in.in:7
-msgid "Gtranslator"
-msgstr "Gtranslator"
+#: data/org.gnome.Gtranslator.desktop.in.in:2
+#: data/org.gnome.Gtranslator.metainfo.xml.in.in:7 src/gtr-actions-app.c:89
+#: src/gtr-application.c:519 src/gtr-window.c:196 src/gtr-window.c:442
+msgid "Translation Editor"
+msgstr "Vertimų redaktorius"
 
-#: data/org.gnome.Gtranslator.appdata.xml.in.in:8
-#: data/org.gnome.Gtranslator.desktop.in.in:5
-msgid "Translate and localize applications and libraries"
-msgstr "Verskite ir lokalizuokite programas ir bibliotekas"
+#: data/org.gnome.Gtranslator.desktop.in.in:3
+msgid "PO File Editor"
+msgstr "PO failų redaktorius"
 
-#: data/org.gnome.Gtranslator.appdata.xml.in.in:10
+#: data/org.gnome.Gtranslator.desktop.in.in:4
+#: data/org.gnome.Gtranslator.metainfo.xml.in.in:8
+msgid "Translate apps in your language"
+msgstr "Verskite programas į savo kalbą"
+
+#: data/org.gnome.Gtranslator.desktop.in.in:14
+msgid "Gtranslator;Translation;Editor;Gettext;Write;"
+msgstr "Gtranslator;vertimas;redaktorius;Gettext;Rašymas;"
+
+#: data/org.gnome.Gtranslator.desktop.in.in:19 src/gtr-dl-teams.ui:7
+#: src/gtr-projects.ui:7 src/gtr-tab.ui:340
+msgid "New Window"
+msgstr "Naujas langas"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:21
+msgid "Warn if file contains fuzzy translations"
+msgstr "Įspėti, jei byloje yra neaiškių vertimų"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:22
+msgid ""
+"If true, warn the user when saving a PO translation file containing fuzzy "
+"strings."
+msgstr ""
+"Jei teigiama, įspėti naudotoją įrašant PO vertimą, turintį neaiškių eilučių."
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:29
+msgid "Whether to remove the obsolete entries upon saving"
+msgstr "Ar pašalinti pasenusius įrašus prie įrašant"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:30
+msgid ""
+"If true, the obsolete entries will be removed from the file after saving"
+msgstr "Jei teigiama, pasenę įrašai bus pašalinti iš failo įrašant"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:36
+msgid "Auto save files"
+msgstr "Automatiškai išsaugoti failus"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:37
+msgid "If true, automatically save files at specified intervals."
+msgstr "Jei teigiama, reguliariai automatiškai įrašyti failus."
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:43
+msgid "Auto save interval"
+msgstr "Automatinio išsaugojimo intervalas"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:44
+msgid "Interval in minutes at which to automatically save files."
+msgstr "Laiko tarpas minutėmis, po kurio automatiškai įrašyti failus."
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:50
+msgid "Create backup before saving"
+msgstr "Padaryti atsarginę kopiją prieš įrašant"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:51
+msgid "If true, create a backup copy of a file before saving it."
+msgstr "Jei teigiama, sukurti atsarginę failo kopiją prieš įrašant."
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:57
+msgid "Use profile values for header"
+msgstr "Naudoti profilio reikšmes antraštei"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:58
+msgid ""
+"If true, overwrite the values in the PO header with those in the active "
+"profile."
+msgstr ""
+"Jei teigiama, perrašyti PO antraštės reikšmes reikšmėmis iš aktyvaus "
+"profilio."
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:65
+msgid "Omit credits in header"
+msgstr "Praleisti autorystę antraštėje"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:66
+msgid ""
+"If true, the 'author <email> year' comment won't be added to the PO header's "
+"copyright."
+msgstr ""
+"Jei teigiama, komentaras „autorius <el. paštas> metai“ nebus pridėtas į PO "
+"antraštės autorystės dalį."
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:75
+msgid "Highlight syntax in edit fields"
+msgstr "Paryškinti sintaksę redagavimo laukuose"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:76
+msgid "If true, apply syntax highlighting to strings in edit fields."
+msgstr "Jei teigiama, pritaikyti sintaksės paryškinimą redagavimo laukuose."
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:82
+msgid "Make whitespace visible"
+msgstr "Vaizduoti nematomus simbolius"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:83
+msgid "If true, display whitespace in strings as representative symbols."
+msgstr "Jei teigiama, rodyti nematomus simbolius specialiais simboliais."
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:89
+msgid "Remove fuzzy status when message is changed"
+msgstr "Nuimti neaiškumo būseną užrašui pasikeitus"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:90
+msgid "If true, remove fuzzy status from translations when they are changed."
+msgstr "Jei teigiama, nuimti neaiškumo būseną užrašui pasikeitus."
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:96
+msgid "Check spelling"
+msgstr "Tikrinti rašybą"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:97
+msgid "If true, check the spelling of translated messages."
+msgstr "Jei teigiama, tikrinti išverstų užrašų rašybą."
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:108
+msgid "Message list sort order"
+msgstr "Užrašų sąrašo rikiavimo tvarka"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:109
+msgid ""
+"Sort order to use in the message list. Possible values are “status”, “id”, "
+"“original-text” and “translated-text”."
+msgstr ""
+"Rikiavimo tvarka užrašų sąraše. Galimos reikšmės yra „status“, „id“, "
+"„original-text“ ir „translated-text“."
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:116
+msgid "Show ID column"
+msgstr "Rodyti ID stulpelį"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:117
+msgid "If true, displays a column with the id of the message on the editor."
+msgstr "Jei teigiama, redaktoriuje bus rodomas eilutės id stulpelis."
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:128
+msgid "Window maximized"
+msgstr "Langas išdidintas"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:129
+msgid "Window maximized state"
+msgstr "Lango išdidinimo būsena"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:136
+msgid "Translation area height"
+msgstr "Vertimo srities aukštis"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:137
+msgid "Height of the translation area panel."
+msgstr "Vertimo srities skydelio aukštis."
+
+#: data/org.gnome.Gtranslator.metainfo.xml.in.in:10
 msgid ""
 "Gtranslator is an enhanced gettext po file editor for the GNOME desktop "
 "environment. It handles all forms of gettext po files and includes very "
@@ -46,7 +197,7 @@ msgstr ""
 "faile), lengvas judėjimas tarp eilučių ir jų redagavimas bei vertimų "
 "komentarai, kur tikslu."
 
-#: data/org.gnome.Gtranslator.appdata.xml.in.in:19
+#: data/org.gnome.Gtranslator.metainfo.xml.in.in:19
 msgid ""
 "Gtranslator includes also a plugin system with many interesting plugins like "
 "alternate language, insert tags, integration with subversion and a source "
@@ -56,184 +207,17 @@ msgstr ""
 "kaip papildoma kalba, žymų įterpimas, integracija su subversion bei pradinio "
 "kodo žiūryklė."
 
-#: data/org.gnome.Gtranslator.appdata.xml.in.in:161
+#: data/org.gnome.Gtranslator.metainfo.xml.in.in:34
+msgid "Translator's main interface"
+msgstr "Vertėjo pagrindinė sąsaja"
+
+#. developer_name tag deprecated with Appstream 1.0
+#: data/org.gnome.Gtranslator.metainfo.xml.in.in:323
+#: data/org.gnome.Gtranslator.metainfo.xml.in.in:325
 msgid "Daniel García Moreno"
 msgstr "Daniel García Moreno"
 
-#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:672
-#: src/gtr-notebook.ui:216 src/gtr-window.c:229 src/gtr-window.ui:25
-msgid "Translation Editor"
-msgstr "Vertimų redaktorius"
-
-#: data/org.gnome.Gtranslator.desktop.in.in:4
-msgid "PO File Editor"
-msgstr "PO failų redaktorius"
-
-#: data/org.gnome.Gtranslator.desktop.in.in:14
-msgid "Gtranslator;Translation;Editor;Gettext;Write;"
-msgstr "Gtranslator;vertimas;redaktorius;Gettext;Rašymas;"
-
-#: data/org.gnome.Gtranslator.gschema.xml.in:24
-msgid "Warn if file contains fuzzy translations"
-msgstr "Įspėti, jei byloje yra neaiškių vertimų"
-
-#: data/org.gnome.Gtranslator.gschema.xml.in:25
-msgid ""
-"If true, warn the user when saving a PO translation file containing fuzzy "
-"strings."
-msgstr ""
-"Jei teigiama, įspėti naudotoją įrašant PO vertimą, turintį neaiškių eilučių."
-
-#: data/org.gnome.Gtranslator.gschema.xml.in:32
-msgid "Whether to remove the obsolete entries upon saving"
-msgstr "Ar pašalinti pasenusius įrašus prie įrašant"
-
-#: data/org.gnome.Gtranslator.gschema.xml.in:33
-msgid ""
-"If true, the obsolete entries will be removed from the file after saving"
-msgstr "Jei teigiama, pasenę įrašai bus pašalinti iš failo įrašant"
-
-#: data/org.gnome.Gtranslator.gschema.xml.in:39
-msgid "Auto save files"
-msgstr "Automatiškai išsaugoti failus"
-
-#: data/org.gnome.Gtranslator.gschema.xml.in:40
-msgid "If true, automatically save files at specified intervals."
-msgstr "Jei teigiama, reguliariai automatiškai įrašyti failus."
-
-#: data/org.gnome.Gtranslator.gschema.xml.in:46
-msgid "Auto save interval"
-msgstr "Automatinio išsaugojimo intervalas"
-
-#: data/org.gnome.Gtranslator.gschema.xml.in:47
-msgid "Interval in minutes at which to automatically save files."
-msgstr "Laiko tarpas minutėmis, po kurio automatiškai įrašyti failus."
-
-#: data/org.gnome.Gtranslator.gschema.xml.in:53
-msgid "Create backup before saving"
-msgstr "Padaryti atsarginę kopiją prieš įrašant"
-
-#: data/org.gnome.Gtranslator.gschema.xml.in:54
-msgid "If true, create a backup copy of a file before saving it."
-msgstr "Jei teigiama, sukurti atsarginę failo kopiją prieš įrašant."
-
-#: data/org.gnome.Gtranslator.gschema.xml.in:60
-msgid "Use profile values for header"
-msgstr "Naudoti profilio reikšmes antraštei"
-
-#: data/org.gnome.Gtranslator.gschema.xml.in:61
-msgid ""
-"If true, overwrite the values in the PO header with those in the active "
-"profile."
-msgstr ""
-"Jei teigiama, perrašyti PO antraštės reikšmes reikšmėmis iš aktyvaus "
-"profilio."
-
-#: data/org.gnome.Gtranslator.gschema.xml.in:70
-msgid "Highlight syntax in edit fields"
-msgstr "Paryškinti sintaksę redagavimo laukuose"
-
-#: data/org.gnome.Gtranslator.gschema.xml.in:71
-msgid "If true, apply syntax highlighting to strings in edit fields."
-msgstr "Jei teigiama, pritaikyti sintaksės paryškinimą redagavimo laukuose"
-
-#: data/org.gnome.Gtranslator.gschema.xml.in:77
-msgid "Make whitespace visible"
-msgstr "Vaizduoti nematomus simbolius"
-
-#: data/org.gnome.Gtranslator.gschema.xml.in:78
-msgid "If true, display whitespace in strings as representative symbols."
-msgstr "Jei teigiama, rodyti nematomus simbolius specialiais simboliais."
-
-#: data/org.gnome.Gtranslator.gschema.xml.in:84
-msgid "Remove fuzzy status when message is changed"
-msgstr "Nuimti neaiškumo būseną užrašui pasikeitus"
-
-#: data/org.gnome.Gtranslator.gschema.xml.in:85
-msgid "If true, remove fuzzy status from translations when they are changed."
-msgstr "Jei teigiama, nuimti neaiškumo būseną užrašui pasikeitus."
-
-#: data/org.gnome.Gtranslator.gschema.xml.in:91
-msgid "Check spelling"
-msgstr "Tikrinti rašybą"
-
-#: data/org.gnome.Gtranslator.gschema.xml.in:92
-msgid "If true, check the spelling of translated messages."
-msgstr "Jei teigiama, tikrinti išverstų užrašų rašybą."
-
-#: data/org.gnome.Gtranslator.gschema.xml.in:103
-msgid "Side panel switcher style"
-msgstr "Šoninio polangio jungiklio stilius"
-
-#: data/org.gnome.Gtranslator.gschema.xml.in:104
-msgid "Style for switchers in the side panel."
-msgstr "Jungiklių stilius šoniniame polangyje."
-
-#: data/org.gnome.Gtranslator.gschema.xml.in:110
-msgid "Color scheme"
-msgstr "Spalvų schema"
-
-#: data/org.gnome.Gtranslator.gschema.xml.in:111
-msgid "Name of a gtksourceview color scheme to use for syntax highlighting."
-msgstr ""
-"Sintaksės paryškinimui naudojamos gtksourceview spalvų schemos pavadinimas."
-
-#: data/org.gnome.Gtranslator.gschema.xml.in:117
-msgid "Message list sort order"
-msgstr "Užrašų sąrašo rikiavimo tvarka"
-
-#: data/org.gnome.Gtranslator.gschema.xml.in:118
-msgid ""
-"Sort order to use in the message list. Possible values are “status”, “id”, "
-"“original-text” and “translated-text”."
-msgstr ""
-"Rikiavimo tvarka užrašų sąraše. Galimos reikšmės yra „status“, „id“, "
-"„original-text“ ir „translated-text“."
-
-#: data/org.gnome.Gtranslator.gschema.xml.in:153
-msgid "Active plugins"
-msgstr "Įjungti įskiepiai"
-
-#: data/org.gnome.Gtranslator.gschema.xml.in:154
-msgid ""
-"List of active plugins. It contains the “Location” of the active plugins. "
-"See the .gtranslator-plugin file for obtaining the “Location” of a given "
-"plugin."
-msgstr ""
-"Aktyvių įskiepių sąrašas. Jis turi aktyvių įskiepių „vietą“. Žiūrėkite į "
-"gtranslator-plugin failą, jei norite gauti įskiepio „vietą“."
-
-#: src/codeview/gtr-codeview.c:380
-msgid "Paths:"
-msgstr "Keliai:"
-
-#: src/codeview/gtr-viewer.c:73 src/gtr-header-dialog.c:323
-#: src/gtr-io-error-info-bar.c:161 src/gtr-preferences-dialog.c:664
-#: src/translation-memory/gtr-translation-memory-dialog.c:305
-msgid "_Close"
-msgstr "_Užverti"
-
-#: src/codeview/gtr-viewer.c:75
-msgid "Source Viewer"
-msgstr "Pradinio programos teksto peržiūra"
-
-#: src/codeview/gtr-viewer.ui:62
-msgid "Source code"
-msgstr "Pradinis programos tekstas"
-
-#: src/gtr-actions-app.c:58
-msgid "Current Maintainers"
-msgstr "Dabartiniai prižiūrėtojai"
-
-#: src/gtr-actions-app.c:62
-msgid "Previous Developers"
-msgstr "Ankstesni kūrėjai"
-
-#: src/gtr-actions-app.c:73
-msgid "Contributors"
-msgstr "Pagalbininkai"
-
-#: src/gtr-actions-app.c:98
+#: src/gtr-actions-app.c:86
 msgid ""
 "Translation file editing suite for localization of applications and "
 "libraries."
@@ -245,155 +229,151 @@ msgstr ""
 #. * Note to translators: put here your name and email so it will show
 #. * up in the "about" box
 #.
-#: src/gtr-actions-app.c:111
+#: src/gtr-actions-app.c:103
 msgid "translator-credits"
 msgstr ""
-"Aurimas Černius <aurisc4@gmail.com>\n"
+"Aurimas Černius <aurimas.cernius@mailo.com>\n"
 "Žygimantas Beručka <zygis@gnome.org>\n"
 "Gediminas Paulauskas <menesis@chatsubo.lt>"
 
-#: src/gtr-actions-app.c:114
-msgid "Translation Editor Web Site"
-msgstr "Vertimų redaktoriaus tinklalapis"
+#: src/gtr-actions-file.c:95
+msgid "Could not update from template"
+msgstr "Nepavyko atnaujinti pagal šabloną"
 
-#: src/gtr-actions-file.c:217
+#: src/gtr-actions-file.c:99 src/gtr-actions-file.c:170
+#: src/gtr-actions-file.c:450 src/gtr-actions-file.c:472
+#: src/gtr-actions-file.c:511 src/gtr-actions-file.c:537
+#: src/gtr-actions-file.c:720 src/gtr-actions-file.c:763 src/gtr-dl-teams.c:163
+#: src/gtr-dl-teams.c:224 src/gtr-dl-teams.c:343 src/gtr-dl-teams.c:430
+#: src/gtr-dl-teams.c:568 src/gtr-dl-teams.c:579 src/gtr-dl-teams.c:591
+#: src/gtr-dl-teams.c:622 src/gtr-dl-teams.c:633 src/gtr-dl-teams.c:705
+#: src/gtr-tab.c:355 src/gtr-window.c:147 src/gtr-window.c:337
+msgid "OK"
+msgstr "Gerai"
+
+#: src/gtr-actions-file.c:126
+msgid "msgmerge failed"
+msgstr "msgmerge klaida"
+
+#: src/gtr-actions-file.c:160
+msgid "Updated from Template"
+msgstr "Atnaujinta pagal šabloną"
+
+#: src/gtr-actions-file.c:163
 #, c-format
 msgid ""
-"Do you want to save changes to this file: <span weight=\"bold\" "
-"size=\"large\">%s</span>?"
+"Messages: %d → %d (%+d)\n"
+"Translated: %d → %d (%+d)\n"
+"Fuzzy: %d → %d (%+d)\n"
+"Untranslated: %d → %d (%+d)"
 msgstr ""
-"Ar norite įrašyti šio failo pakeitimus: <span weight=\"bold\" "
-"size=\"large\">%s</span>?"
+"Eilutės: %d → %d (%+d)\r\n"
+"Išverstos: %d → %d (%+d)\r\n"
+"Neaiškios: %d → %d (%+d)\r\n"
+"Neišverstos: %d → %d (%+d)"
 
-#: src/gtr-actions-file.c:223
-msgid "If you don't save, all your unsaved changes will be permanently lost."
-msgstr "Jei neįrašysite, visų jūsų pakeitimai bus negrįžtamai prarasti."
+#: src/gtr-actions-file.c:221
+msgid "msgmerge not found on PATH. Install gettext (msgmerge) and try again."
+msgstr ""
+"msgmerge nėra PATH. Įdiekite gettext (msgmerge) ir bandykite dar kartą."
 
-#: src/gtr-actions-file.c:226
-msgid "Save and open"
-msgstr "Įrašyti ir atverti"
+#: src/gtr-actions-file.c:247
+msgid "Failed to start msgmerge"
+msgstr "Nepavyko paleisti msgmerge"
 
-#: src/gtr-actions-file.c:227
+#: src/gtr-actions-file.c:263
+msgid "Select Template (.pot)"
+msgstr "Pasirinkite šabloną (.pot)"
+
+#: src/gtr-actions-file.c:278
+msgid "Gettext translation template (*.pot)"
+msgstr "Gettext vertimo šablonas (*.pot)"
+
+#: src/gtr-actions-file.c:306
+msgid "Please save the current file before updating from a template."
+msgstr "Įrašykite dabartinį failą prieš atnaujindami pagal šabloną."
+
+#: src/gtr-actions-file.c:373 src/gtr-close-confirmation-dialog.c:314
+msgid "Unsaved Changes"
+msgstr "Neįrašyti pakeitimai"
+
+#: src/gtr-actions-file.c:378
+#, c-format
+msgid "Do you want to write all the changes done to %s?"
+msgstr "Ar norite įrašyti visus %s pakeitimus?"
+
+#: src/gtr-actions-file.c:381
 msgid "Cancel"
 msgstr "Atsisakyti"
 
-#: src/gtr-actions-file.c:228
-msgid "Continue without saving"
+#: src/gtr-actions-file.c:382
+msgid "Continue Without Saving"
 msgstr "Tęsti neįrašant"
 
-#: src/gtr-actions-file.c:260
+#: src/gtr-actions-file.c:382
+msgid "Save and Open"
+msgstr "Įrašyti ir atverti"
+
+#: src/gtr-actions-file.c:404
 msgid "Open file for translation"
 msgstr "Atverti failą vertimui"
 
-#: src/gtr-actions-file.c:359
+#: src/gtr-actions-file.c:448
+msgid "Could not save file"
+msgstr "Nepavyko įrašyti failo"
+
+#: src/gtr-actions-file.c:509
 msgid "This file has already been uploaded"
 msgstr "Šis failas jau buvo nusiųstas"
 
-#: src/gtr-actions-file.c:382
+#: src/gtr-actions-file.c:525
+msgid "Couldn't upload the file"
+msgstr "Nepavyko nusiųsti failo"
+
+#: src/gtr-actions-file.c:528
 #, c-format
 msgid ""
-"An error occurred while uploading the file: %s\n"
+"%s\n"
 "Maybe you've not configured your <i>l10n.gnome.org</i> <b>token</b> "
 "correctly in your profile or you don't have permissions to upload this "
 "module."
 msgstr ""
-"Kilo klaida įkeliant failą: %s\n"
+"%s\n"
 "Galbūt teisingai nesukonfigūravote savo <i>l10n.gnome.org</i> <b>leksemos</"
 "b> savo profilyje arba neturite leidimų įkelti šį modulį."
 
-#: src/gtr-actions-file.c:395
+#: src/gtr-actions-file.c:536
 msgid "The file has been uploaded!"
 msgstr "Šis failas jau buvo nusiųstas!"
 
-#: src/gtr-actions-file.c:546
+#: src/gtr-actions-file.c:675
 msgid "Save file as…"
 msgstr "Įrašyti failą kaip…"
 
-#: src/gtr-assistant.c:128
-#, c-format
-msgid ""
-"Profile name: %s\n"
-"Translator name: %s\n"
-"Translator email: %s\n"
-"Language name: %s\n"
-"Team email: %s\n"
-"Language code: %s\n"
-"Character set: %s\n"
-"Transfer encoding: %s\n"
-"Plural form: %s\n"
-msgstr ""
-"Profilio pavadinimas: %s\n"
-"Vertėjo vardas: %s\n"
-"Vertėjo el. paštas: %s\n"
-"Kalbos pavadinimas: %s\n"
-"Komandos paštas: %s\n"
-"Kalbos kodas: %s\n"
-"Simbolių koduotė: %s\n"
-"Apsikeitimo koduotė: %s\n"
-"Daugiskaitinės formos: %s\n"
+#: src/gtr-application.c:301
+msgid "Fixed plurals"
+msgstr "Fiksuotos daugiskaitiniės"
 
-#: src/gtr-assistant.c:170
-msgid "This assistant will help you to create the main profile."
-msgstr "Pagalbininkas padės jums susikurti pagrindinį profilį."
-
-#: src/gtr-assistant.c:176
-msgid "Assistant"
-msgstr "Pagalbininkas"
-
-#: src/gtr-assistant.c:268
-msgid "Profile name"
-msgstr "Profilio pavadinimas"
-
-#: src/gtr-assistant.c:291
-msgid "Translator name"
-msgstr "Vertėjo vardas"
-
-#: src/gtr-assistant.c:314
-msgid "Translator email"
-msgstr "Vertėjo el. paštas"
-
-#: src/gtr-assistant.c:337
-msgid "Team email"
-msgstr "Komandos el. paštas"
-
-#: src/gtr-assistant.c:353 src/gtr-preferences-dialog.c:588
-msgid "Profile"
-msgstr "Profilis"
-
-#: src/gtr-assistant.c:447
-msgid "Language"
-msgstr "Kalba"
-
-#: src/gtr-assistant.c:469
-msgid "Confirmation"
-msgstr "Patvirtinimas"
-
-#: src/gtr-close-confirmation-dialog.c:123
-msgid "Close _without Saving"
-msgstr "Užverti _neįrašant"
-
-#: src/gtr-close-confirmation-dialog.c:126 src/gtr-context.c:108
-#: src/gtr-file-dialogs.c:47 src/gtr-jump-dialog.c:90
-#: src/gtr-preferences-dialog.c:460 src/gtr-profile-dialog.c:72
-#: src/translation-memory/gtr-translation-memory-dialog.c:105
+#: src/gtr-close-confirmation-dialog.c:121 src/gtr-context.c:170
+#: src/gtr-preferences-dialog.c:452 src/gtr-profile-dialog.ui:15
+#: src/gtr-upload-dialog.ui:20
 msgid "_Cancel"
 msgstr "_Atsisakyti"
 
-#: src/gtr-close-confirmation-dialog.c:128 src/gtr-context.c:106
-#: src/gtr-file-dialogs.c:46
+#: src/gtr-close-confirmation-dialog.c:122
+msgid "Close _Without Saving"
+msgstr "Užverti _neįrašant"
+
+#: src/gtr-close-confirmation-dialog.c:123 src/gtr-context.c:171
 msgid "_Save"
 msgstr "Į_rašyti"
 
-#: src/gtr-close-confirmation-dialog.c:155
-msgid "Question"
-msgstr "Klausimas"
-
-#: src/gtr-close-confirmation-dialog.c:371
+#: src/gtr-close-confirmation-dialog.c:271
 #, c-format
 msgid "Save the changes to document “%s” before closing?"
 msgstr "Įrašyti dokumento „%s“ pakeitimus prieš užveriant?"
 
-#: src/gtr-close-confirmation-dialog.c:543
+#: src/gtr-close-confirmation-dialog.c:285
 #, c-format
 msgid "Changes to %d document will be permanently lost."
 msgid_plural "Changes to %d documents will be permanently lost."
@@ -401,7 +381,7 @@ msgstr[0] "Pakeitimai %d dokumente bus negrįžtamai prarasti."
 msgstr[1] "Pakeitimai %d dokumentuose bus negrįžtamai prarasti."
 msgstr[2] "Pakeitimai %d dokumentų bus negrįžtamai prarasti."
 
-#: src/gtr-close-confirmation-dialog.c:550
+#: src/gtr-close-confirmation-dialog.c:292
 #, c-format
 msgid "There is %d document with unsaved changes. Save changes before closing?"
 msgid_plural ""
@@ -416,406 +396,397 @@ msgstr[2] ""
 "Yra %d dokumentų su neįrašytais pakeitimais. Įrašyti pakeitimus prie "
 "užveriant?"
 
-#: src/gtr-close-confirmation-dialog.c:571
-msgid "Docum_ents with unsaved changes:"
-msgstr "Dokum_entai su neįrašytais pakeitimais:"
+#: src/gtr-context.c:187
+msgid "Edit Notes"
+msgstr "Keisti pastabas"
 
-#: src/gtr-close-confirmation-dialog.c:575
-msgid "S_elect the documents you want to save:"
-msgstr "_Pasirinkite dokumentus, kuriuos norite įrašyti:"
+#: src/gtr-context.c:591
+msgid "Open in Browser"
+msgstr "Atverti naršyklėje"
 
-#: src/gtr-close-confirmation-dialog.c:595
-msgid "Saving has been disabled by the system administrator."
-msgstr "Įrašymo galimybę išjungė sistemos administratorius."
-
-#: src/gtr-close-confirmation-dialog.c:597
-msgid "If you don’t save, all your changes will be permanently lost."
-msgstr "Jei neįrašysite, visų jūsų pakeitimai bus negrįžtamai prarasti."
-
-#: src/gtr-context.c:101
+#: src/gtr-context.ui:25
 msgid "Notes"
 msgstr "Pastabos"
 
-#: src/gtr-context.c:305
-msgid "Notes:"
-msgstr "Pastabos:"
-
-#: src/gtr-context.c:313
-msgid "Add Note"
-msgstr "Pridėti pastabą"
-
-#: src/gtr-context.c:318
+#: src/gtr-context.ui:29 src/gtr-preferences-dialog.c:271
 msgid "Edit"
 msgstr "Keisti"
 
-#: src/gtr-context.c:363
-msgid "Extracted comments:"
-msgstr "Gauti komentarai:"
+#: src/gtr-context.ui:59
+msgid "Extracted Comments"
+msgstr "Išgauti komentarai"
 
-#: src/gtr-context.c:366
-msgid "Context:"
-msgstr "Kontekstas:"
+#: src/gtr-context.ui:85
+msgid "Previous Source Text"
+msgstr "Ankstesnis pradinis tekstas"
 
-#: src/gtr-context.c:369
-msgid "Format:"
-msgstr "Formatas:"
+#: src/gtr-context.ui:113
+msgid "Paths"
+msgstr "Keliai"
 
-#: src/gtr-dl-teams.c:447
+#: src/gtr-dl-teams.c:223
+msgid "Error loading module info"
+msgstr "Klaida įkeliant modulio informaciją"
+
+#: src/gtr-dl-teams.c:429
+msgid "Error loading file info"
+msgstr "Klaida įkeliant failo informaciją"
+
+#: src/gtr-dl-teams.c:448
+msgid "No file found"
+msgstr "Failas nerastas"
+
+#: src/gtr-dl-teams.c:455
 msgid "No module state found."
 msgstr "Nerasta modulio būsena."
 
-#: src/gtr-dl-teams.c:464
-#, c-format
-msgid "The current state is: %s"
-msgstr "Dabartinė būsena yra: %s"
+#: src/gtr-dl-teams.c:567
+msgid "Error loading file"
+msgstr "Klaida įkeliant failą"
 
-#: src/gtr-dl-teams.c:625
-#, c-format
-msgid "The file '%s' has been saved in %s"
-msgstr "Failas „%s“ buvo įrašytas %s"
+#: src/gtr-dl-teams.c:577 src/gtr-dl-teams.c:621
+msgid "Error creating tmp file"
+msgstr "Klaida sukuriant tmp failą"
 
-#: src/gtr-dl-teams.c:702
+#: src/gtr-dl-teams.c:590
+msgid "Error writing stream"
+msgstr "Klaida rašant į srautą"
+
+#: src/gtr-dl-teams.c:653
+msgid "The file has been saved in your Downloads folder"
+msgstr "Failas buvo įrašytas jūsų atsisiuntimų aplanke"
+
+#: src/gtr-dl-teams.c:704
+msgid "Could not reserve module"
+msgstr "Nepavyko rezervuoti modulio"
+
+#: src/gtr-dl-teams.c:709
 #, c-format
 msgid ""
-"An error occurred while reserving this module: %s\n"
-"Maybe you've not configured your <i>l10n.gnome.org</i> <b>token</b> "
-"correctly in your profile or you don't have permissions to reserve this "
-"module."
+"%s\n"
+"Maybe you've not configured your l10n.gnome.org token correctly in your "
+"profile or you don't have permissions to reserve this module."
 msgstr ""
-"Kilo klaida rezervuojant šį modulį: %s\n"
+"%s\n"
 "Galbūt teisingai nesukonfigūravote savo <i>l10n.gnome.org</i> <b>leksemos</"
 "b> savo profilyje arba neturite leidimų rezervuoti šį modulį."
 
-#: src/gtr-dl-teams.c:719
-#, c-format
-msgid "The file '%s.%s.%s.%s' has been successfully reserved"
-msgstr "Failas „%s.%s.%s.%s“ buvo sėkmingai rezervuotas"
+#: src/gtr-dl-teams.c:721
+msgid "The file has been successfully reserved"
+msgstr "Failas buvo sėkmingai rezervuotas"
 
-#: src/gtr-dl-teams.c:869
-msgid "Translation Team"
-msgstr "Vertėjų komanda"
-
-#: src/gtr-dl-teams.c:876
-msgid "Module"
-msgstr "Modulis"
-
-#: src/gtr-dl-teams.ui:85
-msgid "Select team, module, branch and domain to get the translation file."
-msgstr "Pasirinkite komandą, modulį, šaką ir domeną vertimų failui gauti."
-
-#: src/gtr-dl-teams.ui:106
-msgid "Reserve for translation"
-msgstr "Rezervuoti vertimui"
-
-#: src/gtr-dl-teams.ui:117
-msgid "Load file"
-msgstr "Įkelti failą"
-
-#: src/gtr-dl-teams.ui:136
-msgid "Load from Damned Lies"
-msgstr "Įkelti iš Damned Lies"
-
-#: src/gtr-dl-teams.ui:143 src/gtr-projects.ui:58
-msgid "Open…"
-msgstr "Atverti…"
-
-#: src/gtr-dl-teams.ui:166 src/gtr-notebook.ui:410 src/gtr-projects.ui:91
-msgid "Main Menu"
-msgstr "Pagrindinis meniu"
-
-#: src/gtr-dl-teams.ui:194 src/gtr-notebook.ui:151 src/gtr-projects.ui:119
-msgid "New window"
-msgstr "Naujas langas"
-
-#: src/gtr-dl-teams.ui:208 src/gtr-notebook.ui:160 src/gtr-projects.ui:133
+#: src/gtr-dl-teams.ui:11 src/gtr-projects.ui:11 src/gtr-tab.ui:344
 msgid "Preferences"
 msgstr "Nuostatos"
 
-#: src/gtr-dl-teams.ui:235 src/gtr-notebook.ui:177 src/gtr-projects.ui:174
+#: src/gtr-dl-teams.ui:17 src/gtr-projects.ui:21 src/gtr-tab.ui:350
 msgid "Keyboard Shortcuts"
 msgstr "Klaviatūros trumpiniai"
 
-#: src/gtr-dl-teams.ui:249 src/gtr-notebook.ui:186 src/gtr-projects.ui:188
-msgid "About"
-msgstr "Apie"
+#: src/gtr-dl-teams.ui:21 src/gtr-projects.ui:29 src/gtr-tab.ui:358
+msgid "About Translation Editor"
+msgstr "Apie GNOME vertimų redaktorių"
 
-#: src/gtr-dl-teams.ui:263 src/gtr-notebook.ui:204 src/gtr-projects.ui:216
-msgid "Quit"
-msgstr "Išeiti"
+#: src/gtr-dl-teams.ui:28 src/gtr-dl-teams.ui:49
+msgid "Load from Damned Lies"
+msgstr "Įkelti iš Damned Lies"
 
-#: src/gtr-file-dialogs.c:47
-msgid "_Open"
-msgstr "_Atverti"
+#: src/gtr-dl-teams.ui:41 src/gtr-projects.ui:49 src/gtr-tab.ui:47
+msgid "Main Menu"
+msgstr "Pagrindinis meniu"
+
+#: src/gtr-dl-teams.ui:70 src/gtr-languages-fetcher.ui:5
+msgid "Language"
+msgstr "Kalba"
+
+#: src/gtr-dl-teams.ui:75 src/gtr-header-dialog.ui:149
+msgid "Module"
+msgstr "Modulis"
+
+#: src/gtr-dl-teams.ui:80 src/gtr-header-dialog.ui:161
+msgid "Domain"
+msgstr "Domenas"
+
+#: src/gtr-dl-teams.ui:85 src/gtr-header-dialog.ui:155
+msgid "Branch"
+msgstr "Šaka"
+
+#: src/gtr-dl-teams.ui:93
+msgid "Reserve for translation"
+msgstr "Rezervuoti vertimui"
+
+#: src/gtr-dl-teams.ui:101
+msgid "Info"
+msgstr "Informacija"
+
+#: src/gtr-dl-teams.ui:104
+msgid "File"
+msgstr "Failas"
+
+#: src/gtr-dl-teams.ui:112
+msgid "Translation State"
+msgstr "Vertimo būsena"
+
+#: src/gtr-dl-teams.ui:120
+msgid "Stats"
+msgstr "Statistika"
+
+#: src/gtr-dl-teams.ui:133
+msgid "_Load File"
+msgstr "Įke_lti failą"
 
 #: src/gtr-file-dialogs.c:59
 msgid "Gettext translation"
 msgstr "Gettext vertimas"
 
-#: src/gtr-file-dialogs.c:68
+#: src/gtr-file-dialogs.c:67
 msgid "Gettext translation template"
 msgstr "Gettext vertimo šablonas"
 
-#: src/gtr-file-dialogs.c:73
+#: src/gtr-file-dialogs.c:71
 msgid "All files"
 msgstr "Visi failai"
 
-#: src/gtr-filter-selection.ui:61 src/gtr-filter-selection.ui:70
-#: src/gtr-lang-button.c:65
-msgid "Choose Language"
-msgstr "Pasirinkite kalbą"
+#: src/gtr-greeter.c:216 src/gtr-profile-dialog.c:133
+#, c-format
+msgid "GNOME Damned Lies integration token, go to your profile in %s to get it"
+msgstr ""
+"GNOME Damned Lies integracijos leksema, jai gauti eikite į savo profilį %s"
 
-#: src/gtr-header-dialog.c:325
+#: src/gtr-greeter.ui:5 src/gtr-greeter.ui:39
+msgid "Welcome to Translation Editor"
+msgstr "Sveiki pradėję naudoti vertimų redaktorių"
+
+#: src/gtr-greeter.ui:19
+msgid "_Next"
+msgstr "_Kitas"
+
+#: src/gtr-greeter.ui:35
+msgid "Welcome"
+msgstr "Sveiki"
+
+#: src/gtr-greeter.ui:41
+msgid ""
+"Before start to use the application, a profile should be created, but don't "
+"worry, the app will guide you to do it in a minute."
+msgstr ""
+"Prieš pradedant naudotis programa reikia sukurti profilį, bet "
+"nesijaudinkite, programa padės tai padaryti per minutę."
+
+#: src/gtr-greeter.ui:53
+msgid "Create Profile"
+msgstr "Sukurti profilį"
+
+#: src/gtr-greeter.ui:59 src/gtr-profile-dialog.ui:49
+msgid "Profile Information"
+msgstr "Profilio informacija"
+
+#: src/gtr-greeter.ui:62 src/gtr-greeter.ui:129 src/gtr-profile-dialog.ui:54
+msgid "Profile name"
+msgstr "Profilio pavadinimas"
+
+#: src/gtr-greeter.ui:63 src/gtr-profile-dialog.ui:55
+msgid "default"
+msgstr "numatyta"
+
+#: src/gtr-greeter.ui:71 src/gtr-profile-dialog.ui:63
+msgid "Translator Information"
+msgstr "Vertėjo informacija"
+
+#: src/gtr-greeter.ui:74 src/gtr-profile-dialog.ui:68
+msgid "Translator _name"
+msgstr "Vertėjo _vardas"
+
+#: src/gtr-greeter.ui:80 src/gtr-profile-dialog.ui:74
+msgid "Translator _email"
+msgstr "Vertėjo _el. paštas"
+
+#: src/gtr-greeter.ui:86 src/gtr-profile-dialog.ui:80
+msgid "Translation _team email"
+msgstr "Vertėjų _komandos el. paštas"
+
+#: src/gtr-greeter.ui:94 src/gtr-profile-dialog.ui:88
+msgid "Damned Lies Integration"
+msgstr "Damned Lies integracija"
+
+#: src/gtr-greeter.ui:97 src/gtr-profile-dialog.ui:93
+msgid "_Damned Lies auth token"
+msgstr "_Damned Lies prieigos leksema"
+
+#: src/gtr-greeter.ui:118 src/gtr-greeter.ui:124
+msgid "Confirmation"
+msgstr "Patvirtinimas"
+
+#: src/gtr-greeter.ui:134
+msgid "Translator name"
+msgstr "Vertėjo vardas"
+
+#: src/gtr-greeter.ui:139
+msgid "Translator email"
+msgstr "Vertėjo el. paštas"
+
+#: src/gtr-greeter.ui:144
+msgid "Team email"
+msgstr "Komandos el. paštas"
+
+#: src/gtr-greeter.ui:149
+msgid "Language name"
+msgstr "Kalba"
+
+#: src/gtr-greeter.ui:154 src/gtr-languages-fetcher.ui:14
+msgid "Language code"
+msgstr "Kalbos kodas"
+
+#: src/gtr-greeter.ui:159 src/gtr-languages-fetcher.ui:34
+msgid "Character set"
+msgstr "Simbolių koduotė"
+
+#: src/gtr-greeter.ui:164 src/gtr-languages-fetcher.ui:54
+msgid "Transfer encoding"
+msgstr "Apsikeitimo koduotė"
+
+#: src/gtr-greeter.ui:169
+msgid "Plural form"
+msgstr "Daugiskaitos formos"
+
+#: src/gtr-header-dialog.c:381 src/gtr-tab.ui:327
 msgid "Edit Header"
 msgstr "Keisti antraštę"
 
-#: src/gtr-header-dialog.ui:71
-msgid "Use my options to complete the following entries:"
-msgstr "Naudoti mano parametrus žemiau esantiems laukams užpildyti:"
+#: src/gtr-header-dialog.ui:10
+msgid "Translator"
+msgstr "Vertėjas"
 
-#: src/gtr-header-dialog.ui:95
-msgid "Translator’s _name:"
-msgstr "Vertėjo _vardas:"
+#: src/gtr-header-dialog.ui:14 src/gtr-header-dialog.ui:80
+#: src/gtr-header-dialog.ui:140 src/gtr-preferences-dialog.ui:13
+msgid "General"
+msgstr "Pagrindinės"
 
-#: src/gtr-header-dialog.ui:109
-msgid "Translator’s _email:"
-msgstr "Vertėjo _el. paštas:"
+#: src/gtr-header-dialog.ui:17
+msgid "Use my options to complete the following entries"
+msgstr "Naudoti mano parametrus žemiau esantiems laukams užpildyti"
 
-#: src/gtr-header-dialog.ui:123
-msgid "_Language:"
-msgstr "_Kalba:"
+#: src/gtr-header-dialog.ui:22
+msgid "Translator’s _name"
+msgstr "Vertėjo _vardas"
 
-#: src/gtr-header-dialog.ui:136
-msgid "Language _code:"
-msgstr "Kalbos k_odas:"
+#: src/gtr-header-dialog.ui:28
+msgid "Translator’s _email"
+msgstr "Vertėjo _el. paštas"
 
-#: src/gtr-header-dialog.ui:149
-msgid "Language _Team email:"
-msgstr "Kalbos _komandos el. paštas:"
-
-#: src/gtr-header-dialog.ui:162
-msgid "Char_set:"
-msgstr "_Simbolių koduotė:"
-
-#: src/gtr-header-dialog.ui:175
-msgid "Enc_oding:"
-msgstr "Kodu_otė:"
-
-#: src/gtr-header-dialog.ui:273
-msgid "Translator and Language"
-msgstr "Vertėjas ir kalba"
-
-#: src/gtr-header-dialog.ui:299
-msgid "Project Id _version:"
-msgstr "Projekto Id _versija:"
-
-#: src/gtr-header-dialog.ui:312
-msgid "Pot _file creation date:"
-msgstr "Pot _failo sukūrimo data:"
-
-#: src/gtr-header-dialog.ui:326
-msgid "Po file _revision date:"
-msgstr "Po failo _pakeitimo data:"
-
-#: src/gtr-header-dialog.ui:340
-msgid "Report message _bugs to:"
-msgstr "Kam pranešti apie užrašų _klaidas:"
-
-#: src/gtr-header-dialog.ui:409
-msgid "Project"
-msgstr "Projektas"
-
-#: src/gtr-header-dialog.ui:442
-msgid "Comment"
-msgstr "Komentaras:"
-
-#: src/gtr-header-dialog.ui:469
-msgid "DL Team:"
-msgstr "DL komanda:"
-
-#: src/gtr-header-dialog.ui:482
-msgid "DL Module:"
-msgstr "DL modulis"
-
-#: src/gtr-header-dialog.ui:496
-msgid "DL Branch:"
-msgstr "DL šaka:"
-
-#: src/gtr-header-dialog.ui:510
-msgid "DL Domain:"
-msgstr "DL domenas:"
-
-#: src/gtr-header-dialog.ui:524
-msgid "DL State:"
-msgstr "DL būsena"
-
-#: src/gtr-header-dialog.ui:602
-msgid "Damned Lies Info"
-msgstr "Damned Lies informacija"
-
-#: src/gtr-io-error-info-bar.c:155 src/gtr-jump-dialog.c:88
-#: src/gtr-profile-dialog.c:173 src/gtr-profile-dialog.c:178
-#: src/translation-memory/gtr-translation-memory-dialog.c:104
-msgid "_OK"
-msgstr "_Gerai"
-
-#: src/gtr-jump-dialog.c:92
-msgid "Go to Message"
-msgstr "Eiti į užrašą"
-
-#: src/gtr-jump-dialog.ui:33
-msgid "Enter message number:"
-msgstr "Įveskite užrašo numerį:"
-
-#: src/gtr-languages-fetcher.ui:49
+#: src/gtr-header-dialog.ui:34
 msgid "_Language"
 msgstr "_Kalba"
 
-#: src/gtr-languages-fetcher.ui:63
+#: src/gtr-header-dialog.ui:40
 msgid "Language _code"
 msgstr "Kalbos k_odas"
 
-#: src/gtr-languages-fetcher.ui:77
-msgid "Character _set"
-msgstr "_Koduotė:"
+#: src/gtr-header-dialog.ui:46
+msgid "Language _Team email"
+msgstr "Kalbos _komandos el. paštas"
 
-#: src/gtr-languages-fetcher.ui:91
-msgid "Transfer en_coding"
-msgstr "Apsikeitimo ko_duotė"
+#: src/gtr-header-dialog.ui:52
+msgid "Char_set"
+msgstr "_Simbolių koduotė"
 
-#: src/gtr-languages-fetcher.ui:105
+#: src/gtr-header-dialog.ui:58
+msgid "Enc_oding"
+msgstr "Kodu_otė"
+
+#: src/gtr-header-dialog.ui:64
 msgid "_Plural forms"
 msgstr "_Daugiskaitos formos"
 
-#: src/gtr-languages-fetcher.ui:203
-msgid "_Edit options manually"
-msgstr "R_edaguoti parametrus rankomis"
+#: src/gtr-header-dialog.ui:76
+msgid "Project"
+msgstr "Projektas"
 
-#: src/gtr-message-table.c:234
+#: src/gtr-header-dialog.ui:83
+msgid "Project Id _version"
+msgstr "Projekto Id _versija"
+
+#: src/gtr-header-dialog.ui:89
+msgid "Pot _file creation date"
+msgstr "Pot _failo sukūrimo data"
+
+#: src/gtr-header-dialog.ui:95
+msgid "Po file _revision date"
+msgstr "Po failo _pakeitimo data"
+
+#: src/gtr-header-dialog.ui:101
+msgid "Report message _bugs to"
+msgstr "Kam pranešti apie užrašų _klaidas"
+
+#: src/gtr-header-dialog.ui:109 src/gtr-upload-dialog.c:151
+msgid "Comment"
+msgstr "Komentaras"
+
+#: src/gtr-header-dialog.ui:136
+msgid "Damned Lies"
+msgstr "Damned Lies"
+
+#: src/gtr-header-dialog.ui:143
+msgid "Lang"
+msgstr "Kalba"
+
+#: src/gtr-header-dialog.ui:167
+msgid "State"
+msgstr "Būsena"
+
+#: src/gtr-header-dialog.ui:173
+msgid "VCS Browser"
+msgstr "VCS naršyklė"
+
+#: src/gtr-lang-combo-row.c:90
+msgid "Languages"
+msgstr "Kalbos"
+
+#: src/gtr-languages-fetcher.ui:11
+msgid "Edit options manually"
+msgstr "Redaguoti parametrus rankomis"
+
+#: src/gtr-languages-fetcher.ui:21
+msgid "Choose language code"
+msgstr "Pasirinkite kalbos kodą"
+
+#: src/gtr-languages-fetcher.ui:74
+msgid "Plural forms"
+msgstr "Daugiskaitos formos"
+
+#: src/gtr-languages-fetcher.ui:81
+msgid "Choose plural forms"
+msgstr "Pasirinkite daugiskaitos formas"
+
+#: src/gtr-message-table.ui:35
 msgid "Original Message"
 msgstr "Originalus tekstas"
 
-#: src/gtr-message-table.c:253
+#: src/gtr-message-table.ui:43
 msgid "Translated Message"
 msgstr "Išverstas tekstas"
 
-#: src/gtr-notebook.ui:26
-msgid "Order messages by"
-msgstr "Eilučių rikiavimo tvarka"
-
-#: src/gtr-notebook.ui:48
-msgid "Appearance in the original file"
-msgstr "Pradinio failo tvarka"
-
-#: src/gtr-notebook.ui:57
-msgid "Message status"
-msgstr "Eilutės būsena"
-
-#: src/gtr-notebook.ui:67
-msgid "Original message"
-msgstr "Originali tekstas"
-
-#: src/gtr-notebook.ui:77
-msgid "Translated message"
-msgstr "Išverstas tekstas"
-
-#: src/gtr-notebook.ui:105
-msgid "Find"
-msgstr "Ieškoti"
-
-#: src/gtr-notebook.ui:114
-msgid "Find and replace"
-msgstr "Rasti ir pakeisti"
-
-#: src/gtr-notebook.ui:123 src/gtr-projects.ui:147
-msgid "Build translation memory"
-msgstr "Sukurti vertimų atmintį"
-
-#: src/gtr-notebook.ui:133
-msgid "Edit header"
-msgstr "Keisti antraštę"
-
-#: src/gtr-notebook.ui:195 src/gtr-preferences-dialog.c:665
-#: src/gtr-projects.ui:202
-msgid "Help"
-msgstr "Žinynas"
-
-#: src/gtr-notebook.ui:227
-msgid "Open a new file (<Ctrl>o)"
-msgstr "Atidaryti naują failą (<Vald>o)"
-
-#: src/gtr-notebook.ui:241
-msgid "Open from Damned Lies (<Ctrl>d)"
-msgstr "Atverti iš Damned Lies (<Vald>d)"
-
-#: src/gtr-notebook.ui:272
-msgid "Undo (<Ctrl>z)"
-msgstr "Atšaukti (<Vald>z)"
-
-#: src/gtr-notebook.ui:288
-msgid "Redo (<Ctrl><Shift>z)"
-msgstr "Pakartoti (<Vald><Lyg2>z)"
-
-#: src/gtr-notebook.ui:318
-msgid "Previous message without translation (<Alt><Page Up>)"
-msgstr "Ankstesnė neišversta eilutė (<Alt><Psl aukštyn>)"
-
-#: src/gtr-notebook.ui:334
-msgid "Next message without translation (<Alt><Page Down>)"
-msgstr "Kita neišversta eilutė (<Alt><Psl žemyn>)"
-
-#: src/gtr-notebook.ui:361
-msgid "Toggle fuzzy state (<Ctrl>+u)"
-msgstr "Perjungti užrašo neaiškumo būseną (<Vald>+u)"
-
-#: src/gtr-notebook.ui:379
-msgid "Sort messages by"
-msgstr "Eilučių rikiavimo tvarka"
-
-#: src/gtr-notebook.ui:389
-msgid "Order by menu"
-msgstr "Rikiavimo meniu"
-
-#: src/gtr-notebook.ui:423
-msgid "Find (<Ctrl><f>)"
-msgstr "Rasti (<Vald><f>)"
-
-#: src/gtr-notebook.ui:453
-msgid "Save"
-msgstr "Įrašyti"
-
-#: src/gtr-notebook.ui:457
-msgid "Save the current file (<Ctrl>s)"
-msgstr "Įrašyti dabartinį failą (<Vald>s)"
-
-#: src/gtr-notebook.ui:466
-msgid "Save as (<Ctrl><Shift>s)"
-msgstr "Įrašyti kaip (<Vald><Lyg2>s)"
-
-#: src/gtr-notebook.ui:482
-msgid "Upload file (<Ctrl>b)"
-msgstr "Nusiųsti failą (<Vald>b)"
-
-#: src/gtr-po.c:509
+#: src/gtr-po.c:461
 #, c-format
 msgid "The file is empty"
 msgstr "Failas tuščias"
 
-#: src/gtr-po.c:518
+#: src/gtr-po.c:470
 #, c-format
 msgid "Failed opening file “%s”: %s"
 msgstr "Nepavyko atverti failo „%s“: %s"
 
-#: src/gtr-po.c:589
+#: src/gtr-po.c:541
 #, c-format
 msgid "Could not convert from charset “%s” to UTF-8"
 msgstr "Nepavyko konvertuoti iš „%s“ koduotės į UTF-8"
 
-#: src/gtr-po.c:605 src/gtr-po.c:624
+#: src/gtr-po.c:555 src/gtr-po.c:573
 #, c-format
 msgid "Could not store temporary file for encoding conversion"
 msgstr "Nepavyko išsaugoti laikino failo, skirto koduotės keitimui"
 
-#: src/gtr-po.c:655
+#: src/gtr-po.c:597
 #, c-format
 msgid ""
 "All attempt to convert the file to UTF-8 has failed, use the msgconv or "
@@ -826,17 +797,17 @@ msgstr ""
 "su gtranslator pabandykite naudoti komandinės eilutės įrankius msgconv ir "
 "iconv"
 
-#: src/gtr-po.c:723
+#: src/gtr-po.c:662
 #, c-format
 msgid "Gettext returned a null message domain list."
 msgstr "Gettext grąžino tuščią sričių sąrašą."
 
-#: src/gtr-po.c:770
+#: src/gtr-po.c:709
 #, c-format
 msgid "No messages obtained from parser."
 msgstr "Iš apdoroklio negauta jokių žinučių."
 
-#: src/gtr-po.c:824
+#: src/gtr-po.c:775
 #, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
@@ -847,508 +818,565 @@ msgstr ""
 "POT failai yra generuojami kompiliavimo metu.\n"
 "Jūsų failas turėtų būti pavadintas „%s.po“."
 
-#: src/gtr-po.c:852
+#: src/gtr-po.c:805
 #, c-format
 msgid "The file %s is read-only, and can not be overwritten"
 msgstr "Failas %s yra tik skaitymui ir negali būti perrašytas"
 
-#: src/gtr-po.c:871
+#: src/gtr-po.c:824 src/gtr-po.c:1175
 #, c-format
 msgid "There is an error in the PO file: %s"
 msgstr "Yra klaida PO faile: %s"
 
-#: src/gtr-po.c:883
+#: src/gtr-po.c:835
 #, c-format
 msgid "There was an error writing the PO file: %s"
 msgstr "Įvyko klaida įrašant PO failą: %s"
 
-#: src/gtr-preferences-dialog.c:436
+#: src/gtr-preferences-dialog.c:275
+msgid "Delete"
+msgstr "Trinti"
+
+#: src/gtr-preferences-dialog.c:435
 msgid "Impossible to remove the active profile"
 msgstr "Nepavyko pašalinti aktyvaus profilio"
 
-#: src/gtr-preferences-dialog.c:442
+#: src/gtr-preferences-dialog.c:436
 msgid "Another profile should be selected as active before"
 msgstr "Prieš tai reikia pasirinkti kitą profilį"
 
-#: src/gtr-preferences-dialog.c:455
+#: src/gtr-preferences-dialog.c:439
+msgid "_Ok"
+msgstr "_Gerai"
+
+#: src/gtr-preferences-dialog.c:447
 msgid "Are you sure you want to delete this profile?"
 msgstr "Ar tikrai norite ištrinti šį profilį?"
 
-#: src/gtr-preferences-dialog.c:463
+#: src/gtr-preferences-dialog.c:453
 msgid "_Delete"
 msgstr "_Trinti"
 
-#: src/gtr-preferences-dialog.c:594
-msgid "Active"
-msgstr "Aktyvus"
+#: src/gtr-preferences-dialog.ui:9
+msgid "F_iles"
+msgstr "Fa_ilai"
 
-#: src/gtr-preferences-dialog.c:667 src/gtr-preferences-dialog.ui:52
-msgid "Translation Editor Preferences"
-msgstr "Vertimų redaktoriaus nuostatos"
-
-#: src/gtr-preferences-dialog.ui:125
-msgid "General"
-msgstr "Pagrindinės"
-
-#: src/gtr-preferences-dialog.ui:144
+#: src/gtr-preferences-dialog.ui:16
 msgid "_Warn if PO file contains fuzzy translations"
 msgstr "_Įspėti, jei byloje yra neaiškių vertimų"
 
-#: src/gtr-preferences-dialog.ui:168
+#: src/gtr-preferences-dialog.ui:22
 msgid "_Remove obsolete entries on save"
 msgstr "_Pašalinti pasenusius įrašus įrašant"
 
-#: src/gtr-preferences-dialog.ui:190
+#: src/gtr-preferences-dialog.ui:30
 msgid "Autosave"
 msgstr "Automatinis įrašymas"
 
-#: src/gtr-preferences-dialog.ui:214
+#: src/gtr-preferences-dialog.ui:33
+msgid "_Activate auto save"
+msgstr "_Aktyvuoti automatinį įrašymą"
+
+#: src/gtr-preferences-dialog.ui:34
+msgid "Save the current file automatically"
+msgstr "Įrašyti dabartinį failą automatiškai"
+
+#: src/gtr-preferences-dialog.ui:40
+msgid "Autosave _Interval"
+msgstr "Automatinio įrašymo intervalas"
+
+#: src/gtr-preferences-dialog.ui:41
+msgid "Number of minutes to autosave"
+msgstr "Minučių skaičius automatiniam įrašymui"
+
+#: src/gtr-preferences-dialog.ui:56
 msgid "Create a _backup copy of files before saving"
 msgstr "Sukurti failų _atsargines kopijas prieš įrašant"
 
-#: src/gtr-preferences-dialog.ui:236
-msgid "_Autosave files every"
-msgstr "_Automatinio įrašymo intervalas:"
+#: src/gtr-preferences-dialog.ui:69
+msgid "_Editor"
+msgstr "R_edaktorius"
 
-#: src/gtr-preferences-dialog.ui:260
-msgid "_minutes"
-msgstr "_minutės"
-
-#: src/gtr-preferences-dialog.ui:318
-msgid "Files"
-msgstr "Failai"
-
-#: src/gtr-preferences-dialog.ui:345
+#: src/gtr-preferences-dialog.ui:73
 msgid "Text Display"
 msgstr "Teksto rodymas"
 
-#: src/gtr-preferences-dialog.ui:368
+#: src/gtr-preferences-dialog.ui:76
 msgid "_Highlight message syntax"
 msgstr "_Paryškinti užrašų sintaksę"
 
-#: src/gtr-preferences-dialog.ui:384
+#: src/gtr-preferences-dialog.ui:82
 msgid "Make _whitespace visible"
 msgstr "Vaizduoti nematomus _simbolius"
 
-#: src/gtr-preferences-dialog.ui:409
-msgid "Font:"
-msgstr "Šriftas:"
+#: src/gtr-preferences-dialog.ui:88
+msgid "_Font"
+msgstr "Šri_ftas"
 
-#: src/gtr-preferences-dialog.ui:421
-msgid "Choose the editor font"
-msgstr "Pasirinkite redaktoriaus šriftą"
-
-#: src/gtr-preferences-dialog.ui:463
+#: src/gtr-preferences-dialog.ui:106
 msgid "Contents"
 msgstr "Turinys"
 
-#: src/gtr-preferences-dialog.ui:486
+#: src/gtr-preferences-dialog.ui:109
 msgid "_Remove fuzzy status if message is changed"
 msgstr "_Nuimti neaiškumo būseną užrašui pasikeitus"
 
-#: src/gtr-preferences-dialog.ui:502
+#: src/gtr-preferences-dialog.ui:115
 msgid "Check _spelling"
 msgstr "Tikrinti _rašybą"
 
-#: src/gtr-preferences-dialog.ui:541
-msgid "Editor"
-msgstr "Redaktorius"
+#: src/gtr-preferences-dialog.ui:128
+msgid "_Profiles"
+msgstr "_Profiliai"
 
-#: src/gtr-preferences-dialog.ui:640
-msgid "Edit Profile"
-msgstr "Keisti profilį"
-
-#: src/gtr-preferences-dialog.ui:677
+#: src/gtr-preferences-dialog.ui:132
 msgid "Profiles"
 msgstr "Profiliai"
 
-#: src/gtr-profile-dialog.c:74
+#: src/gtr-preferences-dialog.ui:143
+msgid "_Add Profile"
+msgstr "Pri_dėti profilį"
+
+#: src/gtr-profile-dialog.ui:7
 msgid "Translation Editor Profile"
 msgstr "Vertimų redaktoriaus profilis"
 
-#: src/gtr-profile-dialog.ui:71
-msgid "_Name"
-msgstr "_Pavadinimas"
+#: src/gtr-profile-dialog.ui:22
+msgid "_OK"
+msgstr "_Gerai"
 
-#: src/gtr-profile-dialog.ui:99
-msgid "Profile Information"
-msgstr "Profilio informacija"
+#: src/gtr-projects.ui:15 src/gtr-tab.ui:323
+msgid "Build Translation Memory"
+msgstr "Sukurti vertimų atmintį"
 
-#: src/gtr-profile-dialog.ui:116
-msgid "Translator Information"
-msgstr "Vertėjo informacija"
+#: src/gtr-projects.ui:25 src/gtr-tab.ui:354
+msgid "Help"
+msgstr "Žinynas"
 
-#: src/gtr-profile-dialog.ui:134
-msgid "N_ame"
-msgstr "_Vardas"
+#: src/gtr-projects.ui:36
+msgid "Select po File"
+msgstr "Pasirinkite po failą"
 
-#: src/gtr-profile-dialog.ui:149
-msgid "_Email"
-msgstr "_El. paštas"
+#: src/gtr-projects.ui:57
+msgid "Open Translation File"
+msgstr "Atverti vertimų failą"
 
-#: src/gtr-profile-dialog.ui:163
-msgid "_Team email"
-msgstr "_Komandos el. paštas"
+#: src/gtr-projects.ui:58
+msgid "Drag and drop .po files here"
+msgstr "Numeskite .po failus čia"
 
-#: src/gtr-profile-dialog.ui:177
-msgid "_DL auth token"
-msgstr "_DL prieigos leksema"
+#: src/gtr-projects.ui:65
+msgid "_Open…"
+msgstr "_Atverti…"
 
-#: src/gtr-profile-dialog.ui:178
-msgid ""
-"GNOME Damned Lies integration token, go to your profile in https://l10n."
-"gnome.org/ to get it"
-msgstr ""
-"GNOME Damned Lies integracijos leksema, jai gauti eikite į savo profilį "
-"https://l10n.gnome.org/"
+#: src/gtr-projects.ui:76
+msgid "_Load from DL…"
+msgstr "Į_kelti iš DL…"
 
-#: src/gtr-profile-dialog.ui:240
-msgid "Language Settings"
-msgstr "Kalbos nustatymai"
+#: src/gtr-search-bar.ui:20
+msgid "Search"
+msgstr "Ieškoti"
 
-#: src/gtr-projects.ui:35
-msgid "Open a new .po file or drag & drop here"
-msgstr "Atverkite naują .po failą arba tempkite jį čia"
+#: src/gtr-search-bar.ui:35
+msgid "Previous Result"
+msgstr "Ankstesnis rezultatas"
 
-#: src/gtr-projects.ui:51
-msgid "Select a PO file"
-msgstr "Pasirinkite PO failą"
+#: src/gtr-search-bar.ui:41
+msgid "Next Result"
+msgstr "Kitas rezultatas"
 
-#: src/gtr-projects.ui:68
-msgid "Load from DL…"
-msgstr "Įkelti iš DL…"
-
-#: src/gtr-search-bar.c:414 src/gtr-search-bar.ui:212
-msgid "Case sensitive"
-msgstr "Skirti raidžių dydį"
-
-#: src/gtr-search-bar.c:419 src/gtr-search-bar.ui:226
-msgid "Match whole word only"
-msgstr "Ieškoti tik viso žodžio"
-
-#: src/gtr-search-bar.c:424
-msgid "Wrap around"
-msgstr "Apsupti"
-
-#: src/gtr-search-bar.c:429 src/gtr-search-bar.ui:254
-msgid "Original text"
-msgstr "Originalus tekstas"
-
-#: src/gtr-search-bar.c:434 src/gtr-search-bar.ui:268
-msgid "Translated text"
-msgstr "Išverstas tekstas"
-
-#: src/gtr-search-bar.ui:121
-msgid "Replace"
-msgstr "Pakeisti"
-
-#: src/gtr-search-bar.ui:133
-msgid "Replace All"
-msgstr "Pakeisti visus"
-
-#: src/gtr-search-bar.ui:153
+#: src/gtr-search-bar.ui:58
 msgid "Switch between Search and Search-and-Replace"
 msgstr "Persijungti tarp paieškos ir paieškos bei keitimo"
 
-#: src/gtr-search-bar.ui:173
+#: src/gtr-search-bar.ui:64
 msgid "Show or hide search options such as case sensitivity"
 msgstr "Rodyti arba slėpti tokius parametrus kaip raidžių dydis"
 
-#: src/gtr-search-bar.ui:240
-msgid "Wrap Around"
+#: src/gtr-search-bar.ui:90
+msgid "Replace"
+msgstr "Pakeisti"
+
+#: src/gtr-search-bar.ui:96
+msgid "_Replace"
+msgstr "_Pakeisti"
+
+#: src/gtr-search-bar.ui:103
+msgid "Replace _All"
+msgstr "Pakeisti _visus"
+
+#: src/gtr-search-bar.ui:121
+msgid "Case sensitive"
+msgstr "Skirti raidžių dydį"
+
+#: src/gtr-search-bar.ui:131
+msgid "Match whole word only"
+msgstr "Ieškoti tik viso žodžio"
+
+#: src/gtr-search-bar.ui:141
+msgid "Wrap around"
 msgstr "Apsupti"
 
-#: src/gtr-tab-label.c:280
-msgid "Close document"
-msgstr "Užverti dokumentą"
+#: src/gtr-search-bar.ui:151
+msgid "Original text"
+msgstr "Originalus tekstas"
 
-#: src/gtr-tab.c:419
-msgid "There is an error in the message:"
-msgstr "Užraše yra klaida:"
+#: src/gtr-search-bar.ui:161
+msgid "Translated text"
+msgstr "Išverstas tekstas"
 
-#: src/gtr-tab.c:632 src/gtr-tab.c:767
+#: src/gtr-tab.c:352
+msgid "There is an error in the message"
+msgstr "Užraše yra klaida"
+
+#: src/gtr-tab.c:571 src/gtr-tab.c:714
 msgid "fuzzy"
 msgstr "neaiškus"
 
-#: src/gtr-tab.c:797
+#: src/gtr-tab.c:744
 #, c-format
 msgid "Plural %d"
 msgstr "Daug. forma %d"
 
-#. Translators: Path to the document opened
-#: src/gtr-tab.c:1425
-msgid "Path:"
-msgstr "Kelias:"
+#: src/gtr-tab.c:1459
+msgid "Copied original to clipboard"
+msgstr "Originalas nukopijuotas į iškarpinę"
 
-#: src/gtr-tab.c:2090
+#: src/gtr-tab.c:1736
 #, c-format
 msgid "Translated: %0.2f%%"
 msgstr "Išversta: %0.2f%%"
 
-#: src/gtr-tab.c:2091
+#: src/gtr-tab.c:1737
 #, c-format
 msgid "Translated: %d"
 msgstr "Išversta: %d"
 
-#: src/gtr-tab.c:2092
+#: src/gtr-tab.c:1738
 #, c-format
 msgid "Untranslated: %d"
 msgstr "Neišversta: %d"
 
-#: src/gtr-tab.c:2093
+#: src/gtr-tab.c:1739
 #, c-format
 msgid "Fuzzy: %d"
 msgstr "Neaišku: %d"
 
-#: src/gtr-tab.ui:74
+#: src/gtr-tab.ui:14
+msgid "Previous message without translation"
+msgstr "Ankstesnis neišvestas užrašas"
+
+#: src/gtr-tab.ui:22
+msgid "Next message without translation"
+msgstr "Kitas neišvestas užrašas"
+
+#: src/gtr-tab.ui:37
+msgid "Toggle Fuzzy State"
+msgstr "Perjungti neaiškumo būseną"
+
+#: src/gtr-tab.ui:54
+msgid "Find"
+msgstr "Ieškoti"
+
+#: src/gtr-tab.ui:62
+msgid "Upload File"
+msgstr "Nusiųsti failą"
+
+#. <property name="ypad">5</property>
+#: src/gtr-tab.ui:127 src/gtr-tab.ui:308
 msgid "_Original Message"
 msgstr "_Originalus tekstas"
 
-#: src/gtr-tab.ui:166
+#: src/gtr-tab.ui:193
 msgid "Translate_d Text"
 msgstr "Iš_verstas tekstas"
 
-#: src/gtr-upload-dialog.c:61
-msgid "_Upload"
-msgstr "N_usiųsti"
+#: src/gtr-tab.ui:272
+msgid "Open a New File"
+msgstr "Atverti naują failą"
 
-#: src/gtr-upload-dialog.c:63
-msgid "Upload to Damned Lies"
-msgstr "Nusiųsti į Damned Lies"
+#: src/gtr-tab.ui:276
+msgid "Open from Damned Lies"
+msgstr "Atverti iš Damned Lies"
 
-#: src/gtr-upload-dialog.c:137
-msgid "Uploading..."
-msgstr "Siunčiama..."
+#: src/gtr-tab.ui:282
+msgid "Save"
+msgstr "Įrašyti"
 
-#: src/gtr-upload-dialog.c:143
+#: src/gtr-tab.ui:286
+msgid "Save As…"
+msgstr "Įrašyti taip…"
+
+#: src/gtr-tab.ui:290
+msgid "Update from Template…"
+msgstr "Atnaujinti pagal šabloną…"
+
+#: src/gtr-tab.ui:296
+msgid "So_rt Messages by…"
+msgstr "Eilučių _rikiavimo tvarka…"
+
+#: src/gtr-tab.ui:298
+msgid "_Order of Appearance"
+msgstr "_Eilės tvarką"
+
+#: src/gtr-tab.ui:303
+msgid "_Message Status"
+msgstr "_Užrašo būsena"
+
+#: src/gtr-tab.ui:313
+msgid "_Translated Message"
+msgstr "_Išverstas užrašas"
+
+#: src/gtr-tab.ui:319
+msgid "Show ID Column"
+msgstr "Rodyti ID stulpelį"
+
+#: src/gtr-tab.ui:331
+msgid "Advanced Tools"
+msgstr "Sudėtingesni įrankiai"
+
+#: src/gtr-tab.ui:333
+msgid "Fix plural messages"
+msgstr "Taisyti daugiskaitos formas"
+
+#: src/gtr-upload-dialog.c:203
+msgid "Uploading…"
+msgstr "Siunčiama…"
+
+#: src/gtr-upload-dialog.c:209
 msgid "Upload"
 msgstr "Nusiųsti"
 
-#: src/gtr-upload-dialog.ui:53
-msgid "comment:"
-msgstr "komentaras:"
+#: src/gtr-upload-dialog.ui:6
+msgid "Upload to Damned Lies"
+msgstr "Nusiųsti į Damned Lies"
+
+#: src/gtr-upload-dialog.ui:27
+msgid "_Upload"
+msgstr "N_usiųsti"
 
 #. Translators: this is the title of the window with a modified document
-#: src/gtr-window.c:214
+#: src/gtr-window.c:179
 #, c-format
 msgid "*%s — Translation Editor"
 msgstr "*%s – Vertimų redaktorius"
 
 #. Translators: this is the title of the window with a document opened
-#: src/gtr-window.c:220
+#: src/gtr-window.c:186
 #, c-format
 msgid "%s — Translation Editor"
 msgstr "%s – Vertimų redaktorius"
 
-#: src/help-overlay.ui:13
+#: src/gtr-window.c:336
+msgid "Could not Save"
+msgstr "Nepavyko įrašyti"
+
+#: src/gtr-window.c:348
+msgid "File saved"
+msgstr "Failas įrašytas"
+
+#: src/shortcuts-dialog.ui:6
 msgctxt "shortcut window group"
 msgid "General"
 msgstr "Esmė"
 
-#: src/help-overlay.ui:18
+#: src/shortcuts-dialog.ui:10
 msgctxt "shortcut window"
 msgid "Open file"
 msgstr "Atverti failą"
 
-#: src/help-overlay.ui:25
+#: src/shortcuts-dialog.ui:16
 msgctxt "shortcut window"
 msgid "Save the current file"
 msgstr "Įrašyti dabartinį failą"
 
-#: src/help-overlay.ui:32
+#: src/shortcuts-dialog.ui:22
 msgctxt "shortcut window"
 msgid "Save the current file as"
 msgstr "Įrašyti dabartinį failą kaip"
 
-#: src/help-overlay.ui:40
+#: src/shortcuts-dialog.ui:28
+msgctxt "shortcut window"
+msgid "Download from DL"
+msgstr "Atsisiųsti iš DL"
+
+#: src/shortcuts-dialog.ui:34
+msgctxt "shortcut window"
+msgid "Upload to DL"
+msgstr "Nusiųsti į DL"
+
+#: src/shortcuts-dialog.ui:40
 msgctxt "shortcut window"
 msgid "Preferences"
 msgstr "Nuostatos"
 
-#: src/help-overlay.ui:47
+#: src/shortcuts-dialog.ui:46
 msgctxt "shortcut window"
 msgid "Keyboard Shortcuts"
 msgstr "Klaviatūros trumpiniai"
 
-#: src/help-overlay.ui:54
+#: src/shortcuts-dialog.ui:52
 msgctxt "shortcut window"
 msgid "Help"
 msgstr "Žinynas"
 
-#: src/help-overlay.ui:61
+#: src/shortcuts-dialog.ui:58
+msgctxt "shortcut window"
+msgid "New Window"
+msgstr "Naujas langas"
+
+#: src/shortcuts-dialog.ui:63
+msgctxt "shortcut window"
+msgid "Close Window"
+msgstr "Užverti langą"
+
+#: src/shortcuts-dialog.ui:70
 msgctxt "shortcut window"
 msgid "Quit"
 msgstr "Išeiti"
 
-#: src/help-overlay.ui:71
+#: src/shortcuts-dialog.ui:78
 msgctxt "shortcut window group"
 msgid "Edit"
 msgstr "Keisti"
 
-#: src/help-overlay.ui:75
+#: src/shortcuts-dialog.ui:82
 msgctxt "shortcut window"
-msgid "Undo"
-msgstr "Atšaukti"
+msgid "Clear translation"
+msgstr "Išvalyti vertimą"
 
-#: src/help-overlay.ui:82
-msgctxt "shortcut window"
-msgid "Redo"
-msgstr "Pakartoti"
-
-#: src/help-overlay.ui:89
+#: src/shortcuts-dialog.ui:88
 msgctxt "shortcut window"
 msgid "Mark/Unmark as fuzzy"
 msgstr "Pažymėti/atžymėti kaip neaiškų"
 
-#: src/help-overlay.ui:96
+#: src/shortcuts-dialog.ui:94
 msgctxt "shortcut window"
 msgid "Copy original text to translation"
 msgstr "Kopijuoti originalų tekstą į vertimą"
 
-#: src/help-overlay.ui:106
+#: src/shortcuts-dialog.ui:100
+msgctxt "shortcut window"
+msgid "Copy original text to clipboard"
+msgstr "Kopijuoti originalų tekstą į iškarpinę"
+
+#: src/shortcuts-dialog.ui:108
 msgctxt "shortcut window group"
 msgid "Navigation"
 msgstr "Judėjimas"
 
-#: src/help-overlay.ui:110
+#: src/shortcuts-dialog.ui:112
 msgctxt "shortcut window"
 msgid "Go to the previous message"
 msgstr "Eiti į ankstesnę eilutę"
 
-#: src/help-overlay.ui:117
+#: src/shortcuts-dialog.ui:118
 msgctxt "shortcut window"
 msgid "Go to the next message"
 msgstr "Eiti į kitą eilutę"
 
-#: src/help-overlay.ui:124
+#: src/shortcuts-dialog.ui:124
+msgctxt "shortcut window"
+msgid "Go to the previous plural form"
+msgstr "Eiti į ankstesnę daugiskaitos formą"
+
+#: src/shortcuts-dialog.ui:130
+msgctxt "shortcut window"
+msgid "Go to the next plural form"
+msgstr "Eiti į kitą daugiskaitos formą"
+
+#: src/shortcuts-dialog.ui:136
 msgctxt "shortcut window"
 msgid "Go to the previous untranslated message"
 msgstr "Eiti į ankstesnę neišverstą eilutę"
 
-#: src/help-overlay.ui:131
+#: src/shortcuts-dialog.ui:142
 msgctxt "shortcut window"
 msgid "Go to the next untranslated message"
 msgstr "Eiti į kitą neišverstą eilutę"
 
-#: src/help-overlay.ui:141
+#: src/shortcuts-dialog.ui:150
 msgctxt "shortcut window group"
 msgid "Translation Memory"
 msgstr "Vertimų atmintis"
 
-#: src/help-overlay.ui:145
+#: src/shortcuts-dialog.ui:154
 msgctxt "shortcut window"
 msgid "Build translation memory"
 msgstr "Sukurti vertimų atmintį"
 
-#: src/help-overlay.ui:152
+#: src/shortcuts-dialog.ui:160
 msgctxt "shortcut window"
-msgid "Copy below"
-msgstr "Kopijuoti žemiau"
+msgid "Use 1st...9th suggestion"
+msgstr "Naudoti 1ą...9ą pasiūlymą"
 
-#: src/help-overlay.ui:162
+#: src/shortcuts-dialog.ui:168
 msgctxt "shortcut window group"
 msgid "Find & Replace"
 msgstr "Rasti ir pakeisti"
 
-#: src/help-overlay.ui:166
+#: src/shortcuts-dialog.ui:172
 msgctxt "shortcut window"
 msgid "Find"
 msgstr "Ieškoti"
 
-#: src/help-overlay.ui:173
+#: src/shortcuts-dialog.ui:178
 msgctxt "shortcut window"
 msgid "Find & Replace"
 msgstr "Rasti ir pakeisti"
 
-#: src/help-overlay.ui:180
+#: src/shortcuts-dialog.ui:184
 msgctxt "shortcut window"
 msgid "Forward-search"
 msgstr "Ieškoti pirmyn"
 
-#: src/help-overlay.ui:187
+#: src/shortcuts-dialog.ui:190
 msgctxt "shortcut window"
 msgid "Backward-search"
 msgstr "Ieškoti atgal"
 
-#: src/help-overlay.ui:194
+#: src/shortcuts-dialog.ui:196
 msgctxt "shortcut window"
 msgid "Hide find & replace bar"
 msgstr "Slėpti paieškos bei keitimo juostą"
 
-#: src/main.c:97
-msgid "— Edit PO files"
-msgstr "– Redaguoti PO failus"
-
-#: src/main.c:101
-#, c-format
-msgid ""
-"%s\n"
-"Run “%s --help” to see a full list of available command line options.\n"
-msgstr ""
-"%s\n"
-"Paleiskite „%s --help“ visam komandinės eilutės parametrų sąrašui gauti.\n"
-
-#: src/translation-memory/gtr-translation-memory-dialog.c:101
+#: src/translation-memory/gtr-translation-memory-dialog.c:80
 msgid "Select PO directory"
 msgstr "Pasirinkite PO katalogą"
 
-#: src/translation-memory/gtr-translation-memory-dialog.c:309
+#: src/translation-memory/gtr-translation-memory-dialog.ui:7
 msgid "Translation Editor Memory Manager"
 msgstr "Vertimų redaktoriaus atminties tvarkytuvė"
 
-#: src/translation-memory/gtr-translation-memory-dialog.ui:66
-msgid "Database:"
-msgstr "Duomenų bazė:"
+#: src/translation-memory/gtr-translation-memory-dialog.ui:43
+msgid "Database"
+msgstr "Duomenų bazė"
 
-#: src/translation-memory/gtr-translation-memory-dialog.ui:109
-msgid "Select the directory which contains PO files:"
-msgstr "Pasirinkite katalogą, kuriame yra PO failai:"
+#: src/translation-memory/gtr-translation-memory-dialog.ui:48
+msgid "Select the directory which contains PO files"
+msgstr "Pasirinkite katalogą, kuriame yra PO failai"
 
-#: src/translation-memory/gtr-translation-memory-dialog.ui:160
-msgid "Add to Database"
-msgstr "Pridėti į duomenų bazę"
+#: src/translation-memory/gtr-translation-memory-dialog.ui:60
+msgid "Use only files with this name"
+msgstr "Naudoti tik šio pavadinimo failus"
 
-#: src/translation-memory/gtr-translation-memory-dialog.ui:215
-msgid "Configuration:"
-msgstr "Konfigūracija:"
+#: src/translation-memory/gtr-translation-memory-dialog.ui:79
+msgid "_Add to Database"
+msgstr "Pri_dėti į duomenų bazę"
 
-#: src/translation-memory/gtr-translation-memory-dialog.ui:259
-msgid "Use only files with this name:"
-msgstr "Naudoti tik šio pavadinimo failus:"
-
-#: src/translation-memory/gtr-translation-memory-ui.c:255
-msgid "_Use this translation"
-msgstr "Na_udoti šį vertimą"
-
-#: src/translation-memory/gtr-translation-memory-ui.c:260
-msgid "_Remove"
-msgstr "Pa_šalinti"
-
-#: src/translation-memory/gtr-translation-memory-ui.c:371
-msgid "Shortcut"
-msgstr "Trumpinys"
-
-#: src/translation-memory/gtr-translation-memory-ui.c:380
-msgid "Level"
-msgstr "Lygmuo"
-
-#: src/translation-memory/gtr-translation-memory-ui.c:389
-msgid "String"
-msgstr "Eilutė"
-
-#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:5
+#: src/translation-memory/org.gnome.Gtranslator.plugins.translation-memory.gschema.xml.in:5
 msgid "PO directory"
 msgstr "PO katalogas"
 
-#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:6
+#: src/translation-memory/org.gnome.Gtranslator.plugins.translation-memory.gschema.xml.in:6
 msgid "Directory containing PO files to add to the translation memory."
 msgstr "Katalogas, kuriame yra PO failai, įtrauktini į vertimo atmintį."
 
-#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:12
+#: src/translation-memory/org.gnome.Gtranslator.plugins.translation-memory.gschema.xml.in:12
 msgid "Restrict search by filename"
 msgstr "Riboti paiešką failo vardu"
 
-#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:13
+#: src/translation-memory/org.gnome.Gtranslator.plugins.translation-memory.gschema.xml.in:13
 msgid ""
 "If true, only include files with a specified filename when searching the "
 "translation memory."
@@ -1356,21 +1384,21 @@ msgstr ""
 "Jei teigiama, įtraukti tik nurodyto pavadinimo failus ieškant vertimų "
 "atmintyje."
 
-#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:20
+#: src/translation-memory/org.gnome.Gtranslator.plugins.translation-memory.gschema.xml.in:20
 msgid "Filename to restrict search to"
 msgstr "Failo vardas paieškai apriboti"
 
-#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:21
+#: src/translation-memory/org.gnome.Gtranslator.plugins.translation-memory.gschema.xml.in:21
 msgid ""
 "Filename to which searching of the translation memory should be restricted."
 msgstr ""
 "Failo vardas, iki kurio turėtų būti apribota vertimo atminties paieška."
 
-#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:28
+#: src/translation-memory/org.gnome.Gtranslator.plugins.translation-memory.gschema.xml.in:28
 msgid "Maximum number of missing words"
 msgstr "Didžiausias trūkstamų žodžių skaičius"
 
-#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:29
+#: src/translation-memory/org.gnome.Gtranslator.plugins.translation-memory.gschema.xml.in:29
 msgid ""
 "Maximum number of words that can be missing from a message displayed as a "
 "match by the translation memory."
@@ -1378,11 +1406,11 @@ msgstr ""
 "Didžiausias žodžių, kurių gali trūkti, skaičius užraše, rodomame kaip "
 "sutapimas su vertimų atmintimi."
 
-#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:36
+#: src/translation-memory/org.gnome.Gtranslator.plugins.translation-memory.gschema.xml.in:36
 msgid "Maximum difference in message length"
 msgstr "Didžiausias užrašų ilgio skirtumas"
 
-#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:37
+#: src/translation-memory/org.gnome.Gtranslator.plugins.translation-memory.gschema.xml.in:37
 msgid ""
 "Maximum difference in length between messages displayed as matches by the "
 "translation memory."
@@ -1390,23 +1418,310 @@ msgstr ""
 "Didžiausias ilgio skirtumas tarp užrašų, rodomų kaip sutapimai su vertimų "
 "atmintimi."
 
+#~ msgid "Translate and localize applications and libraries"
+#~ msgstr "Verskite ir lokalizuokite programas ir bibliotekas"
+
+#~ msgid "Side panel switcher style"
+#~ msgstr "Šoninio polangio jungiklio stilius"
+
+#~ msgid "Style for switchers in the side panel."
+#~ msgstr "Jungiklių stilius šoniniame polangyje."
+
+#~ msgid "Color scheme"
+#~ msgstr "Spalvų schema"
+
+#~ msgid "Name of a gtksourceview color scheme to use for syntax highlighting."
+#~ msgstr ""
+#~ "Sintaksės paryškinimui naudojamos gtksourceview spalvų schemos "
+#~ "pavadinimas."
+
+#~ msgid "Active plugins"
+#~ msgstr "Įjungti įskiepiai"
+
+#~ msgid ""
+#~ "List of active plugins. It contains the “Location” of the active plugins. "
+#~ "See the .gtranslator-plugin file for obtaining the “Location” of a given "
+#~ "plugin."
+#~ msgstr ""
+#~ "Aktyvių įskiepių sąrašas. Jis turi aktyvių įskiepių „vietą“. Žiūrėkite į "
+#~ "gtranslator-plugin failą, jei norite gauti įskiepio „vietą“."
+
+#~ msgid "_Close"
+#~ msgstr "_Užverti"
+
+#~ msgid "Source Viewer"
+#~ msgstr "Pradinio programos teksto peržiūra"
+
+#~ msgid "Source code"
+#~ msgstr "Pradinis programos tekstas"
+
+#~ msgid "Current Maintainers"
+#~ msgstr "Dabartiniai prižiūrėtojai"
+
+#~ msgid "Previous Developers"
+#~ msgstr "Ankstesni kūrėjai"
+
+#~ msgid "Contributors"
+#~ msgstr "Pagalbininkai"
+
+#~ msgid "Translation Editor Web Site"
+#~ msgstr "Vertimų redaktoriaus tinklalapis"
+
+#, c-format
+#~ msgid ""
+#~ "Do you want to save changes to this file: <span weight=\"bold\" "
+#~ "size=\"large\">%s</span>?"
+#~ msgstr ""
+#~ "Ar norite įrašyti šio failo pakeitimus: <span weight=\"bold\" "
+#~ "size=\"large\">%s</span>?"
+
+#~ msgid ""
+#~ "If you don't save, all your unsaved changes will be permanently lost."
+#~ msgstr "Jei neįrašysite, visų jūsų pakeitimai bus negrįžtamai prarasti."
+
+#, c-format
+#~ msgid ""
+#~ "Profile name: %s\n"
+#~ "Translator name: %s\n"
+#~ "Translator email: %s\n"
+#~ "Language name: %s\n"
+#~ "Team email: %s\n"
+#~ "Language code: %s\n"
+#~ "Character set: %s\n"
+#~ "Transfer encoding: %s\n"
+#~ "Plural form: %s\n"
+#~ msgstr ""
+#~ "Profilio pavadinimas: %s\n"
+#~ "Vertėjo vardas: %s\n"
+#~ "Vertėjo el. paštas: %s\n"
+#~ "Kalbos pavadinimas: %s\n"
+#~ "Komandos paštas: %s\n"
+#~ "Kalbos kodas: %s\n"
+#~ "Simbolių koduotė: %s\n"
+#~ "Apsikeitimo koduotė: %s\n"
+#~ "Daugiskaitinės formos: %s\n"
+
+#~ msgid "This assistant will help you to create the main profile."
+#~ msgstr "Pagalbininkas padės jums susikurti pagrindinį profilį."
+
+#~ msgid "Assistant"
+#~ msgstr "Pagalbininkas"
+
+#~ msgid "Profile"
+#~ msgstr "Profilis"
+
+#~ msgid "Question"
+#~ msgstr "Klausimas"
+
+#~ msgid "Docum_ents with unsaved changes:"
+#~ msgstr "Dokum_entai su neįrašytais pakeitimais:"
+
+#~ msgid "S_elect the documents you want to save:"
+#~ msgstr "_Pasirinkite dokumentus, kuriuos norite įrašyti:"
+
+#~ msgid "Saving has been disabled by the system administrator."
+#~ msgstr "Įrašymo galimybę išjungė sistemos administratorius."
+
+#~ msgid "If you don’t save, all your changes will be permanently lost."
+#~ msgstr "Jei neįrašysite, visų jūsų pakeitimai bus negrįžtamai prarasti."
+
+#~ msgid "Notes:"
+#~ msgstr "Pastabos:"
+
+#~ msgid "Add Note"
+#~ msgstr "Pridėti pastabą"
+
+#~ msgid "Context:"
+#~ msgstr "Kontekstas:"
+
+#~ msgid "Format:"
+#~ msgstr "Formatas:"
+
+#, c-format
+#~ msgid "The current state is: %s"
+#~ msgstr "Dabartinė būsena yra: %s"
+
+#~ msgid "Select team, module, branch and domain to get the translation file."
+#~ msgstr "Pasirinkite komandą, modulį, šaką ir domeną vertimų failui gauti."
+
+#~ msgid "New window"
+#~ msgstr "Naujas langas"
+
+#~ msgid "About"
+#~ msgstr "Apie"
+
+#~ msgid "Quit"
+#~ msgstr "Išeiti"
+
+#~ msgid "_Open"
+#~ msgstr "_Atverti"
+
+#~ msgid "_Language:"
+#~ msgstr "_Kalba:"
+
+#~ msgid "Language _code:"
+#~ msgstr "Kalbos k_odas:"
+
+#~ msgid "DL Team:"
+#~ msgstr "DL komanda:"
+
+#~ msgid "DL Module:"
+#~ msgstr "DL modulis"
+
+#~ msgid "DL State:"
+#~ msgstr "DL būsena"
+
+#~ msgid "Go to Message"
+#~ msgstr "Eiti į užrašą"
+
+#~ msgid "Enter message number:"
+#~ msgstr "Įveskite užrašo numerį:"
+
+#~ msgid "Order messages by"
+#~ msgstr "Eilučių rikiavimo tvarka"
+
+#~ msgid "Appearance in the original file"
+#~ msgstr "Pradinio failo tvarka"
+
+#~ msgid "Translated message"
+#~ msgstr "Išverstas tekstas"
+
+#~ msgid "Find and replace"
+#~ msgstr "Rasti ir pakeisti"
+
+#~ msgid "Build translation memory"
+#~ msgstr "Sukurti vertimų atmintį"
+
+#~ msgid "Open a new file (<Ctrl>o)"
+#~ msgstr "Atidaryti naują failą (<Vald>o)"
+
+#~ msgid "Open from Damned Lies (<Ctrl>d)"
+#~ msgstr "Atverti iš Damned Lies (<Vald>d)"
+
+#~ msgid "Undo (<Ctrl>z)"
+#~ msgstr "Atšaukti (<Vald>z)"
+
+#~ msgid "Redo (<Ctrl><Shift>z)"
+#~ msgstr "Pakartoti (<Vald><Lyg2>z)"
+
+#~ msgid "Order by menu"
+#~ msgstr "Rikiavimo meniu"
+
+#~ msgid "Find (<Ctrl><f>)"
+#~ msgstr "Rasti (<Vald><f>)"
+
+#~ msgid "Save the current file (<Ctrl>s)"
+#~ msgstr "Įrašyti dabartinį failą (<Vald>s)"
+
+#~ msgid "Save as (<Ctrl><Shift>s)"
+#~ msgstr "Įrašyti kaip (<Vald><Lyg2>s)"
+
+#~ msgid "Upload file (<Ctrl>b)"
+#~ msgstr "Nusiųsti failą (<Vald>b)"
+
+#~ msgid "Active"
+#~ msgstr "Aktyvus"
+
+#~ msgid "Translation Editor Preferences"
+#~ msgstr "Vertimų redaktoriaus nuostatos"
+
+#~ msgid "_Autosave files every"
+#~ msgstr "_Automatinio įrašymo intervalas:"
+
+#~ msgid "_minutes"
+#~ msgstr "_minutės"
+
+#~ msgid "Choose the editor font"
+#~ msgstr "Pasirinkite redaktoriaus šriftą"
+
+#~ msgid "_Name"
+#~ msgstr "_Pavadinimas"
+
+#~ msgid "N_ame"
+#~ msgstr "_Vardas"
+
+#~ msgid "_Email"
+#~ msgstr "_El. paštas"
+
+#~ msgid "_Team email"
+#~ msgstr "_Komandos el. paštas"
+
+#~ msgid "Language Settings"
+#~ msgstr "Kalbos nustatymai"
+
+#~ msgid "Open a new .po file or drag & drop here"
+#~ msgstr "Atverkite naują .po failą arba tempkite jį čia"
+
+#~ msgid "Replace All"
+#~ msgstr "Pakeisti visus"
+
+#~ msgid "Wrap Around"
+#~ msgstr "Apsupti"
+
+#~ msgid "Close document"
+#~ msgstr "Užverti dokumentą"
+
+#~ msgid "Path:"
+#~ msgstr "Kelias:"
+
+#~ msgid "comment:"
+#~ msgstr "komentaras:"
+
+#~ msgctxt "shortcut window"
+#~ msgid "Undo"
+#~ msgstr "Atšaukti"
+
+#~ msgctxt "shortcut window"
+#~ msgid "Redo"
+#~ msgstr "Pakartoti"
+
+#~ msgctxt "shortcut window"
+#~ msgid "Copy below"
+#~ msgstr "Kopijuoti žemiau"
+
+#~ msgid "— Edit PO files"
+#~ msgstr "– Redaguoti PO failus"
+
+#, c-format
+#~ msgid ""
+#~ "%s\n"
+#~ "Run “%s --help” to see a full list of available command line options.\n"
+#~ msgstr ""
+#~ "%s\n"
+#~ "Paleiskite „%s --help“ visam komandinės eilutės parametrų sąrašui gauti.\n"
+
+#~ msgid "Database:"
+#~ msgstr "Duomenų bazė:"
+
+#~ msgid "Configuration:"
+#~ msgstr "Konfigūracija:"
+
+#~ msgid "_Use this translation"
+#~ msgstr "Na_udoti šį vertimą"
+
+#~ msgid "_Remove"
+#~ msgstr "Pa_šalinti"
+
+#~ msgid "Shortcut"
+#~ msgstr "Trumpinys"
+
+#~ msgid "Level"
+#~ msgstr "Lygmuo"
+
+#~ msgid "String"
+#~ msgstr "Eilutė"
+
 #~ msgid "Original-text"
 #~ msgstr "Originalus tekstas"
 
 #~ msgid "Translated-text"
 #~ msgstr "Išverstas tekstas"
 
-#~ msgid "_New Window"
-#~ msgstr "_Naujas langas"
-
 #~ msgid "_Preferences"
 #~ msgstr "_Nuostatos"
 
 #~ msgid "_Help"
 #~ msgstr "_Žinynas"
-
-#~ msgid "_About GNOME Translation Editor"
-#~ msgstr "_Apie GNOME vertimų redaktorių"
 
 #~ msgid "The file '%s.%s.%s.%s' has been uploaded!"
 #~ msgstr "Failas „%s.%s.%s.%s“ buvo nusiųstas!"
@@ -1575,9 +1890,6 @@ msgstr ""
 #~ msgid "Look up words in a dictionary."
 #~ msgstr "Ieškoti žodžių žodyne."
 
-#~ msgid "Database"
-#~ msgstr "Duomenų bazė"
-
 #~ msgid "Word database"
 #~ msgstr "Žodžių duomenų bazė"
 
@@ -1610,9 +1922,6 @@ msgstr ""
 
 #~ msgid "_Insert Params"
 #~ msgstr "_Įterpti parametrus"
-
-#~ msgid "_Next Tag"
-#~ msgstr "_Kita žyma"
 
 #~ msgid "Insert the next tag of the message"
 #~ msgstr "Įterpti kitą užrašo žymą"
@@ -1756,17 +2065,11 @@ msgstr ""
 #~ msgid "Insert Option nº %d"
 #~ msgstr "Įterpti parametrą nº %d"
 
-#~ msgid "_Build Translation Memory"
-#~ msgstr "_Sukurti vertimų atmintį"
-
 #~ msgid "_Translation Memory"
 #~ msgstr "_Vertimų atmintis"
 
 #~ msgid "Current Developers"
 #~ msgstr "Dabartiniai kūrėjai"
-
-#~ msgid "File saved."
-#~ msgstr "Failas įrašytas."
 
 #~ msgid "Files saved."
 #~ msgstr "Failai įrašyti."
@@ -1777,9 +2080,6 @@ msgstr ""
 #~ msgid "D_one"
 #~ msgstr "_Atlikta"
 
-#~ msgid "Status"
-#~ msgstr "Būsena"
-
 #~ msgid "ID"
 #~ msgstr "ID"
 
@@ -1788,12 +2088,6 @@ msgstr ""
 
 #~ msgid "Editor _font:"
 #~ msgstr "Redaktoriaus _šriftas:"
-
-#~ msgid "Replace _All"
-#~ msgstr "Pakeisti _visus"
-
-#~ msgid "_Replace"
-#~ msgstr "_Pakeisti"
 
 #~ msgid "_Search for: "
 #~ msgstr "_Ieškoti: "
@@ -1905,9 +2199,6 @@ msgstr ""
 #~ msgid "_View"
 #~ msgstr "_Rodymas"
 
-#~ msgid "_Search"
-#~ msgstr "_Ieškoti"
-
 #~ msgid "_Go"
 #~ msgstr "_Eiti"
 
@@ -1947,9 +2238,6 @@ msgstr ""
 #~ msgid "Paste the contents of the clipboard"
 #~ msgstr "Įdėti iš iškarpinės"
 
-#~ msgid "Clear the selected translation"
-#~ msgstr "Išvalyti pasirinktą vertimą"
-
 #~ msgid "Copy _Message to Translation"
 #~ msgstr "Kopijuoti _užrašą į vertimą"
 
@@ -1958,9 +2246,6 @@ msgstr ""
 
 #~ msgid "Show the Context panel"
 #~ msgstr "Rodyti konteksto polangį"
-
-#~ msgid "_Previous Message"
-#~ msgstr "_Ankstesnis užrašas"
 
 #~ msgid "Move back one message"
 #~ msgstr "Eiti vienu užrašu atgal"
@@ -2028,9 +2313,6 @@ msgstr ""
 #~ msgid "Close all open files"
 #~ msgstr "Užverti visus atvertus failus"
 
-#~ msgid "_Previous Document"
-#~ msgstr "_Ankstesnis dokumentas"
-
 #~ msgid "Activate previous document"
 #~ msgstr "Aktyvuoti ankstesnį dokumentą"
 
@@ -2039,9 +2321,6 @@ msgstr ""
 
 #~ msgid "Activate next document"
 #~ msgstr "Aktyvuoti kitą dokumentą"
-
-#~ msgid "Activate '%s'"
-#~ msgstr "Aktyvuoti „%s“"
 
 #~ msgid "Toolbar Editor"
 #~ msgstr "Įrankinės redaktorius"
