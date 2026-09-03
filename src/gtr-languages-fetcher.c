@@ -91,7 +91,7 @@ gtr_languages_fetcher_class_init (GtrLanguagesFetcherClass *klass)
                               gtr_marshal_VOID__VOIDv);
 
   gtk_widget_class_set_template_from_resource (widget_class,
-                                               "/org/gnome/Gtranslator/gtr-languages-fetcher.ui");
+                                               "/org/gnome/Gtranslator/ui/gtr-languages-fetcher.ui");
 
   gtk_widget_class_bind_template_child_private (widget_class, GtrLanguagesFetcher, language);
 

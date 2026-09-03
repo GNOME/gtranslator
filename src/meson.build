@@ -83,28 +83,6 @@ sources += gnome.mkenums_simple(
   sources: enum_headers,
 )
 
-resource_data = files(
-  'gtr-context.ui',
-  'gtr-header-dialog.ui',
-  'gtr-languages-fetcher.ui',
-  'gtr-message-table.ui',
-  'gtr-message-table-row.ui',
-  'gtr-preferences-dialog.ui',
-  'gtr-profile-dialog.ui',
-  'gtr-tab.ui',
-  'gtr-window.ui',
-  'gtr-search-bar.ui',
-  'gtr-upload-dialog.ui',
-)
-
-sources += gnome.compile_resources(
-  'gtr-resources',
-  'gtranslator.gresource.xml',
-  c_name: 'gtr',
-  dependencies: resource_data,
-  export: true,
-)
-
 #######################
 # Include directories #
 #######################

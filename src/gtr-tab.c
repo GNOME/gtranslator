@@ -978,7 +978,7 @@ gtr_tab_class_init (GtrTabClass * klass)
   g_object_class_install_properties (object_class, N_PROPERTIES, props);
 
   gtk_widget_class_set_template_from_resource (widget_class,
-                                               "/org/gnome/Gtranslator/gtr-tab.ui");
+                                               "/org/gnome/Gtranslator/ui/gtr-tab.ui");
 
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, message_table);
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, text_msgid);

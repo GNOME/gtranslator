@@ -94,7 +94,7 @@ gtr_profile_dialog_class_init (GtrProfileDialogClass *klass)
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
   gtk_widget_class_set_template_from_resource (widget_class,
-                                               "/org/gnome/Gtranslator/gtr-profile-dialog.ui");
+                                               "/org/gnome/Gtranslator/ui/gtr-profile-dialog.ui");
 
   gtk_widget_class_bind_template_child_private (widget_class, GtrProfileDialog, d_l_integration_group);
   gtk_widget_class_bind_template_child_private (widget_class, GtrProfileDialog, languages_fetcher);

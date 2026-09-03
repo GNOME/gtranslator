@@ -95,10 +95,30 @@ install_data(
   install_dir: join_paths(gtr_datadir, 'gtksourceview-5', 'language-specs'),
 )
 
+resource_data = files(
+  'ui/gtr-context.ui',
+  'ui/gtr-header-dialog.ui',
+  'ui/gtr-languages-fetcher.ui',
+  'ui/gtr-message-table.ui',
+  'ui/gtr-message-table-row.ui',
+  'ui/gtr-preferences-dialog.ui',
+  'ui/gtr-profile-dialog.ui',
+  'ui/gtr-tab.ui',
+  'ui/gtr-window.ui',
+  'ui/gtr-projects.ui',
+  'ui/gtr-dl-teams.ui',
+  'ui/shortcuts-dialog.ui',
+  'ui/gtr-search-bar.ui',
+  'ui/gtr-upload-dialog.ui',
+  'ui/gtr-greeter.ui',
+  'ui/gtr-translation-memory-dialog.ui',
+)
+resource_data += appstream_file
+
 data_resources = gnome.compile_resources(
   'gtr-data-resources',
   'org.gnome.Gtranslator.gresource.xml',
   c_name: 'gtr_data',
-  dependencies: [appstream_file],
+  dependencies: resource_data,
   export: true,
 )

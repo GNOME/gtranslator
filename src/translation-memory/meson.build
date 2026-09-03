@@ -9,16 +9,6 @@ translation_mem_sources = files(
   'gtr-translation-memory-utils.c',
 )
 
-resource_data = files('gtr-translation-memory-dialog.ui')
-
-translation_mem_sources += gnome.compile_resources(
-  'gtr-translation-memory-resources',
-  'gtr-translation-memory.gresource.xml',
-  dependencies: resource_data,
-  c_name: 'gtr_translation_memory',
-  export: true,
-)
-
 # GSettings schema
 translation_mem_schema_conf = configuration_data()
 translation_mem_schema_conf.set('GETTEXT_PACKAGE', meson.project_name())

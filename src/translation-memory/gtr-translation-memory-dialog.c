@@ -122,7 +122,7 @@ gtr_translation_memory_dialog_class_init (GtrTranslationMemoryDialogClass *klass
 
   gtk_widget_class_set_template_from_resource (
     widget_class,
-    "/org/gnome/Gtranslator/plugins/translation-memory/ui/gtr-translation-memory-dialog.ui"
+    "/org/gnome/Gtranslator/ui/gtr-translation-memory-dialog.ui"
   );
 
   gtk_widget_class_bind_template_child_private (widget_class, GtrTranslationMemoryDialog, directory);
