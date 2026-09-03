@@ -82,9 +82,6 @@ gtr_about_dialog (GtrWindow *window)
     NULL
   };
 
-  static const char comments[] =
-    N_("Translation file editing suite for localization of applications and libraries.");
-
   adw_show_about_dialog (GTK_WIDGET (window),
                          "application-name", _("Translation Editor"),
                          "application-icon", PACKAGE_APPID,
@@ -95,7 +92,6 @@ gtr_about_dialog (GtrWindow *window)
                          "license-type", GTK_LICENSE_GPL_3_0,
                          "developers", authors,
                          "documenters", documenters,
-                         "comments", _(comments),
                          /*
                           * Note to translators: put here your name and email so it will show
                           * up in the "about" box
