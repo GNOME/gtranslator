@@ -94,3 +94,11 @@ install_data(
   'sourceview/gtranslator.lang',
   install_dir: join_paths(gtr_datadir, 'gtksourceview-5', 'language-specs'),
 )
+
+data_resources = gnome.compile_resources(
+  'gtr-data-resources',
+  'org.gnome.Gtranslator.gresource.xml',
+  c_name: 'gtr_data',
+  dependencies: [appstream_file],
+  export: true,
+)

@@ -82,20 +82,17 @@ gtr_about_dialog (GtrWindow *window)
     NULL
   };
 
-  adw_show_about_dialog (GTK_WIDGET (window),
-                         "application-name", _("Translation Editor"),
-                         "application-icon", PACKAGE_APPID,
-                         "version", get_version (),
-                         "copyright", "© 2023 The GNOME Foundation",
-                         "website", PACKAGE_URL,
-                         "issue-url", PACKAGE_ISSUES_URL,
-                         "license-type", GTK_LICENSE_GPL_3_0,
-                         "developers", authors,
-                         "documenters", documenters,
-                         /*
-                          * Note to translators: put here your name and email so it will show
-                          * up in the "about" box
-                          */
-                         "translator-credits", _("translator-credits"),
-                         NULL);
+  adw_show_about_dialog_from_appdata (GTK_WIDGET (window),
+                                      "/org/gnome/Gtranslator/org.gnome.Gtranslator.metainfo.xml",
+                                      PACKAGE_VERSION,
+                                      "version", get_version (),
+                                      "copyright", "© 2023 The GNOME Foundation",
+                                      "developers", authors,
+                                      "documenters", documenters,
+                                      /*
+                                       * Note to translators: put here your name and email so it will show
+                                       * up in the "about" box
+                                       */
+                                      "translator-credits", _("translator-credits"),
+                                      NULL);
 }

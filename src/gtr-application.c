@@ -37,6 +37,7 @@
 
 #include "gtr-actions-app.h"
 #include "gtr-actions.h"
+#include "gtr-data-resources.h"
 #include "gtr-dirs.h"
 #include "gtr-language.h"
 #include "gtr-preferences-dialog.h"
@@ -523,6 +524,7 @@ gtr_application_startup (GApplication *application)
 
   g_resources_register (gtr_get_resource ());
   g_resources_register (gtr_translation_memory_get_resource ());
+  g_resources_register (gtr_data_get_resource ());
 
   gtk_source_init ();
 

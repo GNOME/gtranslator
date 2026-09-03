@@ -64,6 +64,8 @@ sources = files(
   'gtr-greeter.c',
 )
 
+sources += data_resources
+
 marshal = 'gtr-marshal'
 
 sources += gnome.genmarshal(
