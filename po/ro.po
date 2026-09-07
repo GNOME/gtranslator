@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator gnome-3-38\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2026-08-03 16:50+0000\n"
+"POT-Creation-Date: 2026-09-04 17:19+0000\n"
 "PO-Revision-Date: 2026-08-04 10:12+0200\n"
 "Last-Translator: Antonio Marin <gnmer.6qxyg@slmail.me>\n"
 "Language-Team: Romanian <gnomero-list@lists.sourceforge.net>\n"
@@ -28,8 +28,8 @@ msgstr ""
 "X-DL-State: Translating\n"
 
 #: data/org.gnome.Gtranslator.desktop.in.in:2
-#: data/org.gnome.Gtranslator.metainfo.xml.in.in:7 src/gtr-actions-app.c:89
-#: src/gtr-application.c:505 src/gtr-window.c:196 src/gtr-window.c:442
+#: data/org.gnome.Gtranslator.metainfo.xml.in.in:7 src/gtr-application.c:518
+#: src/gtr-window.c:196 src/gtr-window.c:442
 msgid "Translation Editor"
 msgstr "Modifică traduceri"
 
@@ -46,8 +46,8 @@ msgstr "Traduci aplicații în limba dorită"
 msgid "Gtranslator;Translation;Editor;Gettext;Write;"
 msgstr "Gtranslator;Translation;Editor;Gettext;Write;Traducere;Scriere;"
 
-#: data/org.gnome.Gtranslator.desktop.in.in:19 src/gtr-dl-teams.ui:7
-#: src/gtr-projects.ui:7 src/gtr-tab.ui:340
+#: data/org.gnome.Gtranslator.desktop.in.in:19 data/ui/gtr-dl-teams.ui:7
+#: data/ui/gtr-projects.ui:7 data/ui/gtr-tab.ui:340
 msgid "New Window"
 msgstr "Fereastră nouă"
 
@@ -235,48 +235,775 @@ msgstr "Intefața principală"
 msgid "Daniel García Moreno"
 msgstr "Daniel García Moreno"
 
-#: src/gtr-actions-app.c:86
+#: data/ui/gtr-context.ui:25
+msgid "Notes"
+msgstr "Observații"
+
+#: data/ui/gtr-context.ui:29 src/gtr-preferences-dialog.c:271
+msgid "Edit"
+msgstr "Modifică"
+
+#: data/ui/gtr-context.ui:59
+msgid "Extracted Comments"
+msgstr "Comentarii extrase"
+
+#: data/ui/gtr-context.ui:85
+msgid "Previous Source Text"
+msgstr "Textul sursă precedent"
+
+#: data/ui/gtr-context.ui:113
+msgid "Paths"
+msgstr "Căi"
+
+#: data/ui/gtr-dl-teams.ui:11 data/ui/gtr-projects.ui:11 data/ui/gtr-tab.ui:344
+msgid "Preferences"
+msgstr "Preferințe"
+
+#: data/ui/gtr-dl-teams.ui:17 data/ui/gtr-projects.ui:21 data/ui/gtr-tab.ui:350
+msgid "Keyboard Shortcuts"
+msgstr "Scurtături"
+
+#: data/ui/gtr-dl-teams.ui:21 data/ui/gtr-projects.ui:29 data/ui/gtr-tab.ui:358
+msgid "About Translation Editor"
+msgstr "Despre Modifică traduceri"
+
+#: data/ui/gtr-dl-teams.ui:28 data/ui/gtr-dl-teams.ui:49
+msgid "Load from Damned Lies"
+msgstr "Descarcă din Minciuni blestemate"
+
+#: data/ui/gtr-dl-teams.ui:41 data/ui/gtr-projects.ui:49 data/ui/gtr-tab.ui:47
+msgid "Main Menu"
+msgstr "Opțiuni"
+
+#: data/ui/gtr-dl-teams.ui:70 data/ui/gtr-languages-fetcher.ui:5
+msgid "Language"
+msgstr "Limba"
+
+#: data/ui/gtr-dl-teams.ui:75 data/ui/gtr-header-dialog.ui:149
+msgid "Module"
+msgstr "Modulul"
+
+#: data/ui/gtr-dl-teams.ui:80 data/ui/gtr-header-dialog.ui:161
+msgid "Domain"
+msgstr "Domeniul"
+
+#: data/ui/gtr-dl-teams.ui:85 data/ui/gtr-header-dialog.ui:155
+msgid "Branch"
+msgstr "Ramura"
+
+#: data/ui/gtr-dl-teams.ui:93
+msgid "Reserve for translation"
+msgstr "Rezervă pentru tradus"
+
+#: data/ui/gtr-dl-teams.ui:101
+msgid "Info"
+msgstr "Informații"
+
+#: data/ui/gtr-dl-teams.ui:104
+msgid "File"
+msgstr "Fișierul"
+
+#: data/ui/gtr-dl-teams.ui:112
+msgid "Translation State"
+msgstr "Starea traducerii"
+
+#: data/ui/gtr-dl-teams.ui:120
+msgid "Stats"
+msgstr "Statistici"
+
+#: data/ui/gtr-dl-teams.ui:133
+msgid "_Load File"
+msgstr "_Descarcă fișierul"
+
+#: data/ui/gtr-greeter.ui:5 data/ui/gtr-greeter.ui:39
+msgid "Welcome to Translation Editor"
+msgstr "Bun venit în Modifică traduceri"
+
+#: data/ui/gtr-greeter.ui:19
+msgid "_Next"
+msgstr "_Următorul"
+
+#: data/ui/gtr-greeter.ui:35
+msgid "Welcome"
+msgstr "Bun venit"
+
+#: data/ui/gtr-greeter.ui:41
 msgid ""
-"Translation file editing suite for localization of applications and "
-"libraries."
+"Before start to use the application, a profile should be created, but don't "
+"worry, the app will guide you to do it in a minute."
 msgstr ""
-"Program pentru modificarea fișierelor de traducere pentru aplicații și "
-"biblioteci."
+"Înainte de a începe folosirea acestei aplicații, trebuie creat un profil. "
+"Durează puțin și aplicația va oferi instrucțiuni pas cu pas."
+
+#: data/ui/gtr-greeter.ui:53
+msgid "Create Profile"
+msgstr "Creează profilul"
+
+#: data/ui/gtr-greeter.ui:59 data/ui/gtr-profile-dialog.ui:49
+msgid "Profile Information"
+msgstr "Informații despre profil"
+
+#: data/ui/gtr-greeter.ui:62 data/ui/gtr-greeter.ui:129
+#: data/ui/gtr-profile-dialog.ui:54
+msgid "Profile name"
+msgstr "Numele profilului"
+
+#: data/ui/gtr-greeter.ui:63 data/ui/gtr-profile-dialog.ui:55
+msgid "default"
+msgstr "prestabilit"
+
+#: data/ui/gtr-greeter.ui:71 data/ui/gtr-profile-dialog.ui:63
+msgid "Translator Information"
+msgstr "Informații despre traducător"
+
+#: data/ui/gtr-greeter.ui:74 data/ui/gtr-profile-dialog.ui:68
+msgid "Translator _name"
+msgstr "_Numele traducătorului"
+
+#: data/ui/gtr-greeter.ui:80 data/ui/gtr-profile-dialog.ui:74
+msgid "Translator _email"
+msgstr "E-mailul traducătorului"
+
+#: data/ui/gtr-greeter.ui:86 data/ui/gtr-profile-dialog.ui:80
+msgid "Translation _team email"
+msgstr "E-mailul echipei de _traducere"
+
+#: data/ui/gtr-greeter.ui:94 data/ui/gtr-profile-dialog.ui:88
+msgid "Damned Lies Integration"
+msgstr "Conectare la Minciuni blestemate"
+
+#: data/ui/gtr-greeter.ui:97 data/ui/gtr-profile-dialog.ui:93
+msgid "_Damned Lies auth token"
+msgstr "Co_d de autentificare Minciuni blestemate"
+
+#: data/ui/gtr-greeter.ui:118 data/ui/gtr-greeter.ui:124
+msgid "Confirmation"
+msgstr "Confirmare"
+
+#: data/ui/gtr-greeter.ui:134
+msgid "Translator name"
+msgstr "Numele traducătorului"
+
+#: data/ui/gtr-greeter.ui:139
+msgid "Translator email"
+msgstr "E-mailul traducătorului"
+
+#: data/ui/gtr-greeter.ui:144
+msgid "Team email"
+msgstr "E-mailul echipei"
+
+#: data/ui/gtr-greeter.ui:149
+msgid "Language name"
+msgstr "Numele limbii"
+
+#: data/ui/gtr-greeter.ui:154 data/ui/gtr-languages-fetcher.ui:14
+msgid "Language code"
+msgstr "Codul limbii"
+
+#: data/ui/gtr-greeter.ui:159 data/ui/gtr-languages-fetcher.ui:34
+msgid "Character set"
+msgstr "Caractere"
+
+#: data/ui/gtr-greeter.ui:164 data/ui/gtr-languages-fetcher.ui:54
+msgid "Transfer encoding"
+msgstr "Codarea transferului"
+
+#: data/ui/gtr-greeter.ui:169
+msgid "Plural form"
+msgstr "Forme de plural"
+
+#: data/ui/gtr-header-dialog.ui:10
+msgid "Translator"
+msgstr "Traducător"
+
+#: data/ui/gtr-header-dialog.ui:14 data/ui/gtr-header-dialog.ui:80
+#: data/ui/gtr-header-dialog.ui:140 data/ui/gtr-preferences-dialog.ui:13
+msgid "General"
+msgstr "Generale"
+
+#: data/ui/gtr-header-dialog.ui:17
+msgid "Use my options to complete the following entries"
+msgstr "Folosește datele personale pentru a completa"
+
+#: data/ui/gtr-header-dialog.ui:22
+msgid "Translator’s _name"
+msgstr "_Numele traducătorului"
+
+#: data/ui/gtr-header-dialog.ui:28
+msgid "Translator’s _email"
+msgstr "_E-mailul traducătorului"
+
+#: data/ui/gtr-header-dialog.ui:34
+msgid "_Language"
+msgstr "_Limba"
+
+#: data/ui/gtr-header-dialog.ui:40
+msgid "Language _code"
+msgstr "_Codul limbii"
+
+#: data/ui/gtr-header-dialog.ui:46
+msgid "Language _Team email"
+msgstr "E-mailul echipei de _traducere"
+
+#: data/ui/gtr-header-dialog.ui:52
+msgid "Char_set"
+msgstr "_Set de caractere"
+
+#: data/ui/gtr-header-dialog.ui:58
+msgid "Enc_oding"
+msgstr "C_odare"
+
+#: data/ui/gtr-header-dialog.ui:64
+msgid "_Plural forms"
+msgstr "Forme de _plural"
+
+#: data/ui/gtr-header-dialog.ui:76
+msgid "Project"
+msgstr "Proiectul"
+
+#: data/ui/gtr-header-dialog.ui:83
+msgid "Project Id _version"
+msgstr "_Versiunea ID-ului proiectului"
+
+#: data/ui/gtr-header-dialog.ui:89
+msgid "Pot _file creation date"
+msgstr "Data creării _fișierului pot"
+
+#: data/ui/gtr-header-dialog.ui:95
+msgid "Po file _revision date"
+msgstr "Data _reviziei fișierului po"
+
+#: data/ui/gtr-header-dialog.ui:101
+msgid "Report message _bugs to"
+msgstr "Raportează traduceri greșit_e la"
+
+#: data/ui/gtr-header-dialog.ui:109 src/gtr-upload-dialog.c:151
+msgid "Comment"
+msgstr "Comentariu"
+
+#: data/ui/gtr-header-dialog.ui:136
+msgid "Damned Lies"
+msgstr "Minciuni blestemate"
+
+#: data/ui/gtr-header-dialog.ui:143
+msgid "Lang"
+msgstr "Limba"
+
+#: data/ui/gtr-header-dialog.ui:167
+msgid "State"
+msgstr "Starea"
+
+#: data/ui/gtr-header-dialog.ui:173
+msgid "VCS Browser"
+msgstr "Navigator VCS"
+
+#: data/ui/gtr-languages-fetcher.ui:11
+msgid "Edit options manually"
+msgstr "Modifică manual opțiunile"
+
+#: data/ui/gtr-languages-fetcher.ui:21
+msgid "Choose language code"
+msgstr "Alege codul limbii"
+
+#: data/ui/gtr-languages-fetcher.ui:74
+msgid "Plural forms"
+msgstr "Forme de plural"
+
+#: data/ui/gtr-languages-fetcher.ui:81
+msgid "Choose plural forms"
+msgstr "Alege formele de plural"
+
+#: data/ui/gtr-message-table.ui:35
+msgid "Original Message"
+msgstr "Șirul original"
+
+#: data/ui/gtr-message-table.ui:43
+msgid "Translated Message"
+msgstr "Șirul tradus"
+
+#: data/ui/gtr-preferences-dialog.ui:9
+msgid "F_iles"
+msgstr "F_ișiere"
+
+#: data/ui/gtr-preferences-dialog.ui:16
+msgid "_Warn if PO file contains fuzzy translations"
+msgstr "_Atenționează dacă fișierul PO conține traduceri de revizuit"
+
+#: data/ui/gtr-preferences-dialog.ui:22
+msgid "_Remove obsolete entries on save"
+msgstr "Ște_rge la salvare șirurile abandonate"
+
+#: data/ui/gtr-preferences-dialog.ui:30
+msgid "Autosave"
+msgstr "Salvare automată"
+
+#: data/ui/gtr-preferences-dialog.ui:33
+msgid "_Activate auto save"
+msgstr "_Activează salvarea automată"
+
+#: data/ui/gtr-preferences-dialog.ui:34
+msgid "Save the current file automatically"
+msgstr "Salvează automat fișierul actual"
+
+#: data/ui/gtr-preferences-dialog.ui:40
+msgid "Autosave _Interval"
+msgstr "_Intervalul salvării automate"
+
+#: data/ui/gtr-preferences-dialog.ui:41
+msgid "Number of minutes to autosave"
+msgstr "Numărul de minute pentru salvarea automată"
+
+#: data/ui/gtr-preferences-dialog.ui:56
+msgid "Create a _backup copy of files before saving"
+msgstr "Creează o copie de _rezervă a fișierelor înainte de salvare"
+
+#: data/ui/gtr-preferences-dialog.ui:69
+msgid "_Editor"
+msgstr "_Editor"
+
+#: data/ui/gtr-preferences-dialog.ui:73
+msgid "Text Display"
+msgstr "Afișarea textului"
+
+#: data/ui/gtr-preferences-dialog.ui:76
+msgid "_Highlight message syntax"
+msgstr "_Evidențiază elementele șirului"
+
+#: data/ui/gtr-preferences-dialog.ui:82
+msgid "Make _whitespace visible"
+msgstr "Fă _vizibile spațiile"
+
+#: data/ui/gtr-preferences-dialog.ui:88
+msgid "_Font"
+msgstr "Tip de _caractere"
+
+#: data/ui/gtr-preferences-dialog.ui:106
+msgid "Contents"
+msgstr "Conținut"
+
+#: data/ui/gtr-preferences-dialog.ui:109
+msgid "_Remove fuzzy status if message is changed"
+msgstr "_Elimină starea „de revizuit” dacă mesajul este modificat"
+
+#: data/ui/gtr-preferences-dialog.ui:115
+msgid "Check _spelling"
+msgstr "Verifică _ortografia"
+
+#: data/ui/gtr-preferences-dialog.ui:128
+msgid "_Profiles"
+msgstr "_Profiluri"
+
+#: data/ui/gtr-preferences-dialog.ui:132
+msgid "Profiles"
+msgstr "Profiluri"
+
+#: data/ui/gtr-preferences-dialog.ui:143
+msgid "_Add Profile"
+msgstr "_Adaugă profilul"
+
+#: data/ui/gtr-profile-dialog.ui:7
+msgid "Translation Editor Profile"
+msgstr "Profil pentru Modifică traduceri"
+
+#: data/ui/gtr-profile-dialog.ui:15 data/ui/gtr-upload-dialog.ui:20
+#: src/gtr-close-confirmation-dialog.c:121 src/gtr-context.c:170
+#: src/gtr-preferences-dialog.c:452
+msgid "_Cancel"
+msgstr "_Anulează"
+
+#: data/ui/gtr-profile-dialog.ui:22
+msgid "_OK"
+msgstr "_Bine"
+
+#: data/ui/gtr-projects.ui:15 data/ui/gtr-tab.ui:323
+msgid "Build Translation Memory"
+msgstr "Generează memoria de traducere"
+
+#: data/ui/gtr-projects.ui:25 data/ui/gtr-tab.ui:354
+msgid "Help"
+msgstr "Ajutor"
+
+#: data/ui/gtr-projects.ui:36
+msgid "Select po File"
+msgstr "Alege fișierul PO"
+
+#: data/ui/gtr-projects.ui:57
+msgid "Open Translation File"
+msgstr "Deschide un fișier de tradus"
+
+#: data/ui/gtr-projects.ui:58
+msgid "Drag and drop .po files here"
+msgstr "Trage și așează aici fișiere .po"
+
+#: data/ui/gtr-projects.ui:65
+msgid "_Open…"
+msgstr "D_eschide…"
+
+#: data/ui/gtr-projects.ui:76
+msgid "_Load from DL…"
+msgstr "_Descarcă din MB…"
+
+#: data/ui/gtr-search-bar.ui:20
+msgid "Search"
+msgstr "Caută"
+
+#: data/ui/gtr-search-bar.ui:35
+msgid "Previous Result"
+msgstr "Rezultatul precedent"
+
+#: data/ui/gtr-search-bar.ui:41
+msgid "Next Result"
+msgstr "Rezultatul următor"
+
+#: data/ui/gtr-search-bar.ui:58
+msgid "Switch between Search and Search-and-Replace"
+msgstr "Schimbă între Caută și Caută-și-Înlocuiește"
+
+#: data/ui/gtr-search-bar.ui:64
+msgid "Show or hide search options such as case sensitivity"
+msgstr ""
+"Arată sau ascunde opțiunile de căutare cum ar fi cea care distinge majuscule"
+
+#: data/ui/gtr-search-bar.ui:90
+msgid "Replace"
+msgstr "Înlocuiește"
+
+#: data/ui/gtr-search-bar.ui:96
+msgid "_Replace"
+msgstr "Î_nlocuiește"
+
+#: data/ui/gtr-search-bar.ui:103
+msgid "Replace _All"
+msgstr "Înlocuiește _tot"
+
+#: data/ui/gtr-search-bar.ui:121
+msgid "Case sensitive"
+msgstr "Distinge majuscule"
+
+#: data/ui/gtr-search-bar.ui:131
+msgid "Match whole word only"
+msgstr "Doar cuvinte întregi"
+
+#: data/ui/gtr-search-bar.ui:141
+msgid "Wrap around"
+msgstr "Reia de la început"
+
+#: data/ui/gtr-search-bar.ui:151
+msgid "Original text"
+msgstr "Textul original"
+
+#: data/ui/gtr-search-bar.ui:161
+msgid "Translated text"
+msgstr "Textul tradus"
+
+#: data/ui/gtr-tab.ui:14
+msgid "Previous message without translation"
+msgstr "Șirul precedent fără traducere"
+
+#: data/ui/gtr-tab.ui:22
+msgid "Next message without translation"
+msgstr "Următorul șir fără traducere"
+
+#: data/ui/gtr-tab.ui:37
+msgid "Toggle Fuzzy State"
+msgstr "Schimbă starea „de revizuit”"
+
+#: data/ui/gtr-tab.ui:54
+msgid "Find"
+msgstr "Caută"
+
+#: data/ui/gtr-tab.ui:62
+msgid "Upload File"
+msgstr "Încarcă fișierul"
+
+#. <property name="ypad">5</property>
+#: data/ui/gtr-tab.ui:127 data/ui/gtr-tab.ui:308
+msgid "_Original Message"
+msgstr "Șirul _original"
+
+#: data/ui/gtr-tab.ui:193
+msgid "Translate_d Text"
+msgstr "Șirul tra_dus"
+
+#: data/ui/gtr-tab.ui:272
+msgid "Open a New File"
+msgstr "Deschide un fișier nou"
+
+#: data/ui/gtr-tab.ui:276
+msgid "Open from Damned Lies"
+msgstr "Deschide din Minciuni blestemate"
+
+#: data/ui/gtr-tab.ui:282
+msgid "Save"
+msgstr "Salvează"
+
+#: data/ui/gtr-tab.ui:286
+msgid "Save As…"
+msgstr "Salvează ca…"
+
+#: data/ui/gtr-tab.ui:290
+msgid "Update from Template…"
+msgstr "Actualizează din model…"
+
+#: data/ui/gtr-tab.ui:296
+msgid "So_rt Messages by…"
+msgstr "Aranjează șirurile după…"
+
+#: data/ui/gtr-tab.ui:298
+msgid "_Order of Appearance"
+msgstr "_Ordinea apariției"
+
+#: data/ui/gtr-tab.ui:303
+msgid "_Message Status"
+msgstr "Starea _mesajului"
+
+#: data/ui/gtr-tab.ui:313
+msgid "_Translated Message"
+msgstr "Mesajul _tradus"
+
+#: data/ui/gtr-tab.ui:319
+msgid "Show ID Column"
+msgstr "Afișează coloana ID"
+
+#: data/ui/gtr-tab.ui:327 src/gtr-header-dialog.c:381
+msgid "Edit Header"
+msgstr "Modifică antetul"
+
+#: data/ui/gtr-tab.ui:331
+msgid "Advanced Tools"
+msgstr "Instrumente avansate"
+
+#: data/ui/gtr-tab.ui:333
+msgid "Fix plural messages"
+msgstr "Corectează pluralul"
+
+#: data/ui/gtr-translation-memory-dialog.ui:7
+msgid "Translation Editor Memory Manager"
+msgstr "Administrator de memorie pentru aplicație"
+
+#: data/ui/gtr-translation-memory-dialog.ui:43
+msgid "Database"
+msgstr "Baza de date"
+
+#: data/ui/gtr-translation-memory-dialog.ui:48
+msgid "Select the directory which contains PO files"
+msgstr "Alege dosarul care conține fișierele PO"
+
+#: data/ui/gtr-translation-memory-dialog.ui:60
+msgid "Use only files with this name"
+msgstr "Folosește numai fișiere cu acest nume"
+
+#: data/ui/gtr-translation-memory-dialog.ui:79
+msgid "_Add to Database"
+msgstr "_Adaugă în baza de date"
+
+#: data/ui/gtr-upload-dialog.ui:6
+msgid "Upload to Damned Lies"
+msgstr "Încarcă în Minciuni blestemate"
+
+#: data/ui/gtr-upload-dialog.ui:27
+msgid "_Upload"
+msgstr "Î_ncarcă"
+
+#: data/ui/shortcuts-dialog.ui:6
+msgctxt "shortcut window group"
+msgid "General"
+msgstr "Generale"
+
+#: data/ui/shortcuts-dialog.ui:10
+msgctxt "shortcut window"
+msgid "Open file"
+msgstr "Deschide fișierul"
+
+#: data/ui/shortcuts-dialog.ui:16
+msgctxt "shortcut window"
+msgid "Save the current file"
+msgstr "Salvează fișierul actual"
+
+#: data/ui/shortcuts-dialog.ui:22
+msgctxt "shortcut window"
+msgid "Save the current file as"
+msgstr "Salvează fișierul actual ca"
+
+#: data/ui/shortcuts-dialog.ui:28
+msgctxt "shortcut window"
+msgid "Download from DL"
+msgstr "Descarcă din Minciuni blestemate"
+
+#: data/ui/shortcuts-dialog.ui:34
+msgctxt "shortcut window"
+msgid "Upload to DL"
+msgstr "Încarcă în Minciuni blestemate"
+
+#: data/ui/shortcuts-dialog.ui:40
+msgctxt "shortcut window"
+msgid "Preferences"
+msgstr "Preferințe"
+
+#: data/ui/shortcuts-dialog.ui:46
+msgctxt "shortcut window"
+msgid "Keyboard Shortcuts"
+msgstr "Scurtături"
+
+#: data/ui/shortcuts-dialog.ui:52
+msgctxt "shortcut window"
+msgid "Help"
+msgstr "Ajutor"
+
+#: data/ui/shortcuts-dialog.ui:58
+msgctxt "shortcut window"
+msgid "New Window"
+msgstr "Fereastră nouă"
+
+#: data/ui/shortcuts-dialog.ui:63
+msgctxt "shortcut window"
+msgid "Close Window"
+msgstr "Închide fereastra"
+
+#: data/ui/shortcuts-dialog.ui:70
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr "Închide"
+
+#: data/ui/shortcuts-dialog.ui:78
+msgctxt "shortcut window group"
+msgid "Edit"
+msgstr "Modifică"
+
+#: data/ui/shortcuts-dialog.ui:82
+msgctxt "shortcut window"
+msgid "Clear translation"
+msgstr "Șterge traducerea"
+
+#: data/ui/shortcuts-dialog.ui:88
+msgctxt "shortcut window"
+msgid "Mark/Unmark as fuzzy"
+msgstr "Adaugă/Elimină starea „de revizuit”"
+
+#: data/ui/shortcuts-dialog.ui:94
+msgctxt "shortcut window"
+msgid "Copy original text to translation"
+msgstr "Copiază textul original în traducere"
+
+#: data/ui/shortcuts-dialog.ui:100
+msgctxt "shortcut window"
+msgid "Copy original text to clipboard"
+msgstr "Copiază textul original"
+
+#: data/ui/shortcuts-dialog.ui:108
+msgctxt "shortcut window group"
+msgid "Navigation"
+msgstr "Navigare"
+
+#: data/ui/shortcuts-dialog.ui:112
+msgctxt "shortcut window"
+msgid "Go to the previous message"
+msgstr "Duce la șirul precedent"
+
+#: data/ui/shortcuts-dialog.ui:118
+msgctxt "shortcut window"
+msgid "Go to the next message"
+msgstr "Duce la șirul următor"
+
+#: data/ui/shortcuts-dialog.ui:124
+msgctxt "shortcut window"
+msgid "Go to the previous plural form"
+msgstr "Duce la pluralul precedent"
+
+#: data/ui/shortcuts-dialog.ui:130
+msgctxt "shortcut window"
+msgid "Go to the next plural form"
+msgstr "Duce la pluralul următor"
+
+#: data/ui/shortcuts-dialog.ui:136
+msgctxt "shortcut window"
+msgid "Go to the previous untranslated message"
+msgstr "Duce la șirul netradus precedent"
+
+#: data/ui/shortcuts-dialog.ui:142
+msgctxt "shortcut window"
+msgid "Go to the next untranslated message"
+msgstr "Duce la șirul netradus următor"
+
+#: data/ui/shortcuts-dialog.ui:150
+msgctxt "shortcut window group"
+msgid "Translation Memory"
+msgstr "Memoria de traducere"
+
+#: data/ui/shortcuts-dialog.ui:154
+msgctxt "shortcut window"
+msgid "Build translation memory"
+msgstr "Generează memoria de traducere"
+
+#: data/ui/shortcuts-dialog.ui:160
+msgctxt "shortcut window"
+msgid "Use 1st...9th suggestion"
+msgstr "Folosește sugestiile de la 1 la 9"
+
+#: data/ui/shortcuts-dialog.ui:168
+msgctxt "shortcut window group"
+msgid "Find & Replace"
+msgstr "Caută și înlocuiește"
+
+#: data/ui/shortcuts-dialog.ui:172
+msgctxt "shortcut window"
+msgid "Find"
+msgstr "Caută"
+
+#: data/ui/shortcuts-dialog.ui:178
+msgctxt "shortcut window"
+msgid "Find & Replace"
+msgstr "Caută și înlocuiește"
+
+#: data/ui/shortcuts-dialog.ui:184
+msgctxt "shortcut window"
+msgid "Forward-search"
+msgstr "Caută înainte"
+
+#: data/ui/shortcuts-dialog.ui:190
+msgctxt "shortcut window"
+msgid "Backward-search"
+msgstr "Caută înapoi"
+
+#: data/ui/shortcuts-dialog.ui:196
+msgctxt "shortcut window"
+msgid "Hide find & replace bar"
+msgstr "Ascunde bara „caută și înlocuiește”"
 
 #.
 #. * Note to translators: put here your name and email so it will show
 #. * up in the "about" box
 #.
-#: src/gtr-actions-app.c:103
+#: src/gtr-actions-app.c:96
 msgid "translator-credits"
 msgstr ""
 "Daniel Șerbănescu <daniel [at] serbanescu [dot] dk>\n"
 "Antonio Marin <gnmer.6qxyg@slmail.me>"
 
-#: src/gtr-actions-file.c:97
+#: src/gtr-actions-file.c:95
 msgid "Could not update from template"
 msgstr "Nu s-a putut actualiza din model"
 
-#: src/gtr-actions-file.c:101 src/gtr-actions-file.c:172
+#: src/gtr-actions-file.c:99 src/gtr-actions-file.c:170
 #: src/gtr-actions-file.c:450 src/gtr-actions-file.c:472
 #: src/gtr-actions-file.c:511 src/gtr-actions-file.c:537
 #: src/gtr-actions-file.c:720 src/gtr-actions-file.c:763 src/gtr-dl-teams.c:163
-#: src/gtr-dl-teams.c:225 src/gtr-dl-teams.c:344 src/gtr-dl-teams.c:431
-#: src/gtr-dl-teams.c:569 src/gtr-dl-teams.c:580 src/gtr-dl-teams.c:592
-#: src/gtr-dl-teams.c:623 src/gtr-dl-teams.c:634 src/gtr-dl-teams.c:706
-#: src/gtr-tab.c:354 src/gtr-window.c:147 src/gtr-window.c:337
+#: src/gtr-dl-teams.c:224 src/gtr-dl-teams.c:343 src/gtr-dl-teams.c:430
+#: src/gtr-dl-teams.c:568 src/gtr-dl-teams.c:579 src/gtr-dl-teams.c:591
+#: src/gtr-dl-teams.c:622 src/gtr-dl-teams.c:633 src/gtr-dl-teams.c:705
+#: src/gtr-tab.c:355 src/gtr-window.c:147 src/gtr-window.c:337
 msgid "OK"
 msgstr "Bine"
 
-#: src/gtr-actions-file.c:128
+#: src/gtr-actions-file.c:126
 msgid "msgmerge failed"
 msgstr "msgmerge nereușit"
 
-#: src/gtr-actions-file.c:162
+#: src/gtr-actions-file.c:160
 msgid "Updated from Template"
 msgstr "Actualizat din model"
 
-#: src/gtr-actions-file.c:165
+#: src/gtr-actions-file.c:163
 #, c-format
 msgid ""
 "Messages: %d → %d (%+d)\n"
@@ -368,21 +1095,15 @@ msgstr "Fișierul a fost încărcat!"
 msgid "Save file as…"
 msgstr "Salvează fișierul ca…"
 
-#: src/gtr-application.c:304
+#: src/gtr-application.c:300
 msgid "Fixed plurals"
 msgstr "Plural corect"
-
-#: src/gtr-close-confirmation-dialog.c:121 src/gtr-context.c:169
-#: src/gtr-preferences-dialog.c:452 src/gtr-profile-dialog.ui:15
-#: src/gtr-upload-dialog.ui:20
-msgid "_Cancel"
-msgstr "_Anulează"
 
 #: src/gtr-close-confirmation-dialog.c:122
 msgid "Close _Without Saving"
 msgstr "Închide _fără a salva"
 
-#: src/gtr-close-confirmation-dialog.c:123 src/gtr-context.c:170
+#: src/gtr-close-confirmation-dialog.c:123 src/gtr-context.c:171
 msgid "_Save"
 msgstr "_Salvează"
 
@@ -414,71 +1135,51 @@ msgstr[2] ""
 "%d de documente au modificări nesalvate. Se salvează modificările înainte de "
 "închidere?"
 
-#: src/gtr-context.c:186
+#: src/gtr-context.c:187
 msgid "Edit Notes"
 msgstr "Modifică observațiile"
 
-#: src/gtr-context.c:581
+#: src/gtr-context.c:591
 msgid "Open in Browser"
 msgstr "Deschide în navigator"
 
-#: src/gtr-context.ui:25
-msgid "Notes"
-msgstr "Observații"
-
-#: src/gtr-context.ui:29 src/gtr-preferences-dialog.c:271
-msgid "Edit"
-msgstr "Modifică"
-
-#: src/gtr-context.ui:59
-msgid "Extracted Comments"
-msgstr "Comentarii extrase"
-
-#: src/gtr-context.ui:84
-msgid "Previous Source Text"
-msgstr "Textul sursă precedent"
-
-#: src/gtr-context.ui:112
-msgid "Paths"
-msgstr "Căi"
-
-#: src/gtr-dl-teams.c:224
+#: src/gtr-dl-teams.c:223
 msgid "Error loading module info"
 msgstr "Eroare la încărcarea informațiilor despre modul"
 
-#: src/gtr-dl-teams.c:430
+#: src/gtr-dl-teams.c:429
 msgid "Error loading file info"
 msgstr "Eroare la încărcarea informațiilor despre fișier"
 
-#: src/gtr-dl-teams.c:449
+#: src/gtr-dl-teams.c:448
 msgid "No file found"
 msgstr "Niciun fișier"
 
-#: src/gtr-dl-teams.c:456
+#: src/gtr-dl-teams.c:455
 msgid "No module state found."
 msgstr "Nu a fost găsită starea modulului."
 
-#: src/gtr-dl-teams.c:568
+#: src/gtr-dl-teams.c:567
 msgid "Error loading file"
 msgstr "Eroare la încărcarea fișierului"
 
-#: src/gtr-dl-teams.c:578 src/gtr-dl-teams.c:622
+#: src/gtr-dl-teams.c:577 src/gtr-dl-teams.c:621
 msgid "Error creating tmp file"
 msgstr "Eroare la crearea fișierului temporar"
 
-#: src/gtr-dl-teams.c:591
+#: src/gtr-dl-teams.c:590
 msgid "Error writing stream"
 msgstr "Eroare la scrierea fluxului"
 
-#: src/gtr-dl-teams.c:654
+#: src/gtr-dl-teams.c:653
 msgid "The file has been saved in your Downloads folder"
 msgstr "Fișierul a fost salvat în dosarul cu descărcate"
 
-#: src/gtr-dl-teams.c:705
+#: src/gtr-dl-teams.c:704
 msgid "Could not reserve module"
 msgstr "Nu s-a putut rezerva modulul"
 
-#: src/gtr-dl-teams.c:710
+#: src/gtr-dl-teams.c:709
 #, c-format
 msgid ""
 "%s\n"
@@ -489,69 +1190,9 @@ msgstr ""
 "Probabil nu a fost stabilit corect codul l10n.gnome.org în profilul personal "
 "sau nu există permisiunea de a rezerva acest modul."
 
-#: src/gtr-dl-teams.c:722
+#: src/gtr-dl-teams.c:721
 msgid "The file has been successfully reserved"
 msgstr "Fișierul a fost rezervat cu succes"
-
-#: src/gtr-dl-teams.ui:11 src/gtr-projects.ui:11 src/gtr-tab.ui:344
-msgid "Preferences"
-msgstr "Preferințe"
-
-#: src/gtr-dl-teams.ui:17 src/gtr-projects.ui:21 src/gtr-tab.ui:350
-msgid "Keyboard Shortcuts"
-msgstr "Scurtături"
-
-#: src/gtr-dl-teams.ui:21 src/gtr-projects.ui:29 src/gtr-tab.ui:358
-msgid "About Translation Editor"
-msgstr "Despre Modifică traduceri"
-
-#: src/gtr-dl-teams.ui:28 src/gtr-dl-teams.ui:49
-msgid "Load from Damned Lies"
-msgstr "Descarcă din Minciuni blestemate"
-
-#: src/gtr-dl-teams.ui:41 src/gtr-projects.ui:49 src/gtr-tab.ui:47
-msgid "Main Menu"
-msgstr "Opțiuni"
-
-#: src/gtr-dl-teams.ui:70 src/gtr-languages-fetcher.ui:5
-msgid "Language"
-msgstr "Limba"
-
-#: src/gtr-dl-teams.ui:75 src/gtr-header-dialog.ui:149
-msgid "Module"
-msgstr "Modulul"
-
-#: src/gtr-dl-teams.ui:80 src/gtr-header-dialog.ui:161
-msgid "Domain"
-msgstr "Domeniul"
-
-#: src/gtr-dl-teams.ui:85 src/gtr-header-dialog.ui:155
-msgid "Branch"
-msgstr "Ramura"
-
-#: src/gtr-dl-teams.ui:93
-msgid "Reserve for translation"
-msgstr "Rezervă pentru tradus"
-
-#: src/gtr-dl-teams.ui:101
-msgid "Info"
-msgstr "Informații"
-
-#: src/gtr-dl-teams.ui:104
-msgid "File"
-msgstr "Fișierul"
-
-#: src/gtr-dl-teams.ui:112
-msgid "Translation State"
-msgstr "Starea traducerii"
-
-#: src/gtr-dl-teams.ui:120
-msgid "Stats"
-msgstr "Statistici"
-
-#: src/gtr-dl-teams.ui:133
-msgid "_Load File"
-msgstr "_Descarcă fișierul"
 
 #: src/gtr-file-dialogs.c:59
 msgid "Gettext translation"
@@ -565,247 +1206,38 @@ msgstr "Model de traducere Gettext"
 msgid "All files"
 msgstr "Toate fișierele"
 
-#: src/gtr-greeter.c:216 src/gtr-profile-dialog.c:129
+#: src/gtr-greeter.c:216 src/gtr-profile-dialog.c:133
 #, c-format
 msgid "GNOME Damned Lies integration token, go to your profile in %s to get it"
 msgstr ""
 "Codul de conectare la Minciuni blestemate GNOME. Accesează propriul profil "
 "în %s pentru a obține codul."
 
-#: src/gtr-greeter.ui:5 src/gtr-greeter.ui:39
-msgid "Welcome to Translation Editor"
-msgstr "Bun venit în Modifică traduceri"
-
-#: src/gtr-greeter.ui:19
-msgid "_Next"
-msgstr "_Următorul"
-
-#: src/gtr-greeter.ui:35
-msgid "Welcome"
-msgstr "Bun venit"
-
-#: src/gtr-greeter.ui:41
-msgid ""
-"Before start to use the application, a profile should be created, but don't "
-"worry, the app will guide you to do it in a minute."
-msgstr ""
-"Înainte de a începe folosirea acestei aplicații, trebuie creat un profil. "
-"Durează puțin și aplicația va oferi instrucțiuni pas cu pas."
-
-#: src/gtr-greeter.ui:53
-msgid "Create Profile"
-msgstr "Creează profilul"
-
-#: src/gtr-greeter.ui:59 src/gtr-profile-dialog.ui:49
-msgid "Profile Information"
-msgstr "Informații despre profil"
-
-#: src/gtr-greeter.ui:62 src/gtr-greeter.ui:129 src/gtr-profile-dialog.ui:54
-msgid "Profile name"
-msgstr "Numele profilului"
-
-#: src/gtr-greeter.ui:63 src/gtr-profile-dialog.ui:55
-msgid "default"
-msgstr "prestabilit"
-
-#: src/gtr-greeter.ui:71 src/gtr-profile-dialog.ui:63
-msgid "Translator Information"
-msgstr "Informații despre traducător"
-
-#: src/gtr-greeter.ui:74 src/gtr-profile-dialog.ui:68
-msgid "Translator _name"
-msgstr "_Numele traducătorului"
-
-#: src/gtr-greeter.ui:80 src/gtr-profile-dialog.ui:74
-msgid "Translator _email"
-msgstr "E-mailul traducătorului"
-
-#: src/gtr-greeter.ui:86 src/gtr-profile-dialog.ui:80
-msgid "Translation _team email"
-msgstr "E-mailul echipei de _traducere"
-
-#: src/gtr-greeter.ui:94 src/gtr-profile-dialog.ui:88
-msgid "Damned Lies Integration"
-msgstr "Conectare la Minciuni blestemate"
-
-#: src/gtr-greeter.ui:97 src/gtr-profile-dialog.ui:93
-msgid "_Damned Lies auth token"
-msgstr "Co_d de autentificare Minciuni blestemate"
-
-#: src/gtr-greeter.ui:118 src/gtr-greeter.ui:124
-msgid "Confirmation"
-msgstr "Confirmare"
-
-#: src/gtr-greeter.ui:134
-msgid "Translator name"
-msgstr "Numele traducătorului"
-
-#: src/gtr-greeter.ui:139
-msgid "Translator email"
-msgstr "E-mailul traducătorului"
-
-#: src/gtr-greeter.ui:144
-msgid "Team email"
-msgstr "E-mailul echipei"
-
-#: src/gtr-greeter.ui:149
-msgid "Language name"
-msgstr "Numele limbii"
-
-#: src/gtr-greeter.ui:154 src/gtr-languages-fetcher.ui:14
-msgid "Language code"
-msgstr "Codul limbii"
-
-#: src/gtr-greeter.ui:159 src/gtr-languages-fetcher.ui:34
-msgid "Character set"
-msgstr "Caractere"
-
-#: src/gtr-greeter.ui:164 src/gtr-languages-fetcher.ui:54
-msgid "Transfer encoding"
-msgstr "Codarea transferului"
-
-#: src/gtr-greeter.ui:169
-msgid "Plural form"
-msgstr "Forme de plural"
-
-#: src/gtr-header-dialog.c:381 src/gtr-tab.ui:327
-msgid "Edit Header"
-msgstr "Modifică antetul"
-
-#: src/gtr-header-dialog.ui:10
-msgid "Translator"
-msgstr "Traducător"
-
-#: src/gtr-header-dialog.ui:14 src/gtr-header-dialog.ui:80
-#: src/gtr-header-dialog.ui:140 src/gtr-preferences-dialog.ui:13
-msgid "General"
-msgstr "Generale"
-
-#: src/gtr-header-dialog.ui:17
-msgid "Use my options to complete the following entries"
-msgstr "Folosește datele personale pentru a completa"
-
-#: src/gtr-header-dialog.ui:22
-msgid "Translator’s _name"
-msgstr "_Numele traducătorului"
-
-#: src/gtr-header-dialog.ui:28
-msgid "Translator’s _email"
-msgstr "_E-mailul traducătorului"
-
-#: src/gtr-header-dialog.ui:34
-msgid "_Language"
-msgstr "_Limba"
-
-#: src/gtr-header-dialog.ui:40
-msgid "Language _code"
-msgstr "_Codul limbii"
-
-#: src/gtr-header-dialog.ui:46
-msgid "Language _Team email"
-msgstr "E-mailul echipei de _traducere"
-
-#: src/gtr-header-dialog.ui:52
-msgid "Char_set"
-msgstr "_Set de caractere"
-
-#: src/gtr-header-dialog.ui:58
-msgid "Enc_oding"
-msgstr "C_odare"
-
-#: src/gtr-header-dialog.ui:64
-msgid "_Plural forms"
-msgstr "Forme de _plural"
-
-#: src/gtr-header-dialog.ui:76
-msgid "Project"
-msgstr "Proiectul"
-
-#: src/gtr-header-dialog.ui:83
-msgid "Project Id _version"
-msgstr "_Versiunea ID-ului proiectului"
-
-#: src/gtr-header-dialog.ui:89
-msgid "Pot _file creation date"
-msgstr "Data creării _fișierului pot"
-
-#: src/gtr-header-dialog.ui:95
-msgid "Po file _revision date"
-msgstr "Data _reviziei fișierului po"
-
-#: src/gtr-header-dialog.ui:101
-msgid "Report message _bugs to"
-msgstr "Raportează traduceri greșit_e la"
-
-#: src/gtr-header-dialog.ui:109 src/gtr-upload-dialog.c:147
-msgid "Comment"
-msgstr "Comentariu"
-
-#: src/gtr-header-dialog.ui:136
-msgid "Damned Lies"
-msgstr "Minciuni blestemate"
-
-#: src/gtr-header-dialog.ui:143
-msgid "Lang"
-msgstr "Limba"
-
-#: src/gtr-header-dialog.ui:167
-msgid "State"
-msgstr "Starea"
-
-#: src/gtr-header-dialog.ui:173
-msgid "VCS Browser"
-msgstr "Navigator VCS"
-
 #: src/gtr-lang-combo-row.c:90
 msgid "Languages"
 msgstr "Limba"
 
-#: src/gtr-languages-fetcher.ui:11
-msgid "Edit options manually"
-msgstr "Modifică manual opțiunile"
-
-#: src/gtr-languages-fetcher.ui:21
-msgid "Choose language code"
-msgstr "Alege codul limbii"
-
-#: src/gtr-languages-fetcher.ui:74
-msgid "Plural forms"
-msgstr "Forme de plural"
-
-#: src/gtr-languages-fetcher.ui:81
-msgid "Choose plural forms"
-msgstr "Alege formele de plural"
-
-#: src/gtr-message-table.ui:35
-msgid "Original Message"
-msgstr "Șirul original"
-
-#: src/gtr-message-table.ui:43
-msgid "Translated Message"
-msgstr "Șirul tradus"
-
-#: src/gtr-po.c:465
+#: src/gtr-po.c:461
 #, c-format
 msgid "The file is empty"
 msgstr "Fișierul este gol"
 
-#: src/gtr-po.c:474
+#: src/gtr-po.c:470
 #, c-format
 msgid "Failed opening file “%s”: %s"
 msgstr "Eșec la deschiderea fișierului „%s”: %s"
 
-#: src/gtr-po.c:545
+#: src/gtr-po.c:541
 #, c-format
 msgid "Could not convert from charset “%s” to UTF-8"
 msgstr "Nu s-a putut converti din setul de caractere „%s” în UTF-8"
 
-#: src/gtr-po.c:559 src/gtr-po.c:577
+#: src/gtr-po.c:555 src/gtr-po.c:573
 #, c-format
 msgid "Could not store temporary file for encoding conversion"
 msgstr "Nu s-a putut stoca fișierul temporar pentru conversia codării"
 
-#: src/gtr-po.c:601
+#: src/gtr-po.c:597
 #, c-format
 msgid ""
 "All attempt to convert the file to UTF-8 has failed, use the msgconv or "
@@ -816,17 +1248,17 @@ msgstr ""
 "instrumentele msgconv sau iconv pentru linia de comandă înainte de a "
 "deschide acest fișier cu Modifică traduceri GNOME"
 
-#: src/gtr-po.c:666
+#: src/gtr-po.c:662
 #, c-format
 msgid "Gettext returned a null message domain list."
 msgstr "Gettex a restituit o listă goală de domenii."
 
-#: src/gtr-po.c:713
+#: src/gtr-po.c:709
 #, c-format
 msgid "No messages obtained from parser."
 msgstr "Niciun mesaj obținut de la parser."
 
-#: src/gtr-po.c:779
+#: src/gtr-po.c:775
 #, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
@@ -837,17 +1269,17 @@ msgstr ""
 "Fișierele pot sunt generate de procesul de compilare.\n"
 "Fișierul ar trebui să se numească „%s.po”."
 
-#: src/gtr-po.c:809
+#: src/gtr-po.c:805
 #, c-format
 msgid "The file %s is read-only, and can not be overwritten"
 msgstr "Fișierul %s este doar de citit, și nu poate fi suprascris"
 
-#: src/gtr-po.c:828 src/gtr-po.c:1179
+#: src/gtr-po.c:824 src/gtr-po.c:1175
 #, c-format
 msgid "There is an error in the PO file: %s"
 msgstr "Există o eroare în fișierul PO: %s"
 
-#: src/gtr-po.c:839
+#: src/gtr-po.c:835
 #, c-format
 msgid "There was an error writing the PO file: %s"
 msgstr "A fost o eroare la scrierea fișierului PO: %s"
@@ -876,304 +1308,50 @@ msgstr "Se șterge acest profil?"
 msgid "_Delete"
 msgstr "Ș_terge"
 
-#: src/gtr-preferences-dialog.ui:9
-msgid "F_iles"
-msgstr "F_ișiere"
-
-#: src/gtr-preferences-dialog.ui:16
-msgid "_Warn if PO file contains fuzzy translations"
-msgstr "_Atenționează dacă fișierul PO conține traduceri de revizuit"
-
-#: src/gtr-preferences-dialog.ui:22
-msgid "_Remove obsolete entries on save"
-msgstr "Ște_rge la salvare șirurile abandonate"
-
-#: src/gtr-preferences-dialog.ui:30
-msgid "Autosave"
-msgstr "Salvare automată"
-
-#: src/gtr-preferences-dialog.ui:33
-msgid "_Activate auto save"
-msgstr "_Activează salvarea automată"
-
-#: src/gtr-preferences-dialog.ui:34
-msgid "Save the current file automatically"
-msgstr "Salvează automat fișierul actual"
-
-#: src/gtr-preferences-dialog.ui:40
-msgid "Autosave _Interval"
-msgstr "_Intervalul salvării automate"
-
-#: src/gtr-preferences-dialog.ui:41
-msgid "Number of minutes to autosave"
-msgstr "Numărul de minute pentru salvarea automată"
-
-#: src/gtr-preferences-dialog.ui:56
-msgid "Create a _backup copy of files before saving"
-msgstr "Creează o copie de _rezervă a fișierelor înainte de salvare"
-
-#: src/gtr-preferences-dialog.ui:69
-msgid "_Editor"
-msgstr "_Editor"
-
-#: src/gtr-preferences-dialog.ui:73
-msgid "Text Display"
-msgstr "Afișarea textului"
-
-#: src/gtr-preferences-dialog.ui:76
-msgid "_Highlight message syntax"
-msgstr "_Evidențiază elementele șirului"
-
-#: src/gtr-preferences-dialog.ui:82
-msgid "Make _whitespace visible"
-msgstr "Fă _vizibile spațiile"
-
-#: src/gtr-preferences-dialog.ui:88
-msgid "_Font"
-msgstr "Tip de _caractere"
-
-#: src/gtr-preferences-dialog.ui:106
-msgid "Contents"
-msgstr "Conținut"
-
-#: src/gtr-preferences-dialog.ui:109
-msgid "_Remove fuzzy status if message is changed"
-msgstr "_Elimină starea „de revizuit” dacă mesajul este modificat"
-
-#: src/gtr-preferences-dialog.ui:115
-msgid "Check _spelling"
-msgstr "Verifică _ortografia"
-
-#: src/gtr-preferences-dialog.ui:128
-msgid "_Profiles"
-msgstr "_Profiluri"
-
-#: src/gtr-preferences-dialog.ui:132
-msgid "Profiles"
-msgstr "Profiluri"
-
-#: src/gtr-preferences-dialog.ui:143
-msgid "_Add Profile"
-msgstr "_Adaugă profilul"
-
-#: src/gtr-profile-dialog.ui:7
-msgid "Translation Editor Profile"
-msgstr "Profil pentru Modifică traduceri"
-
-#: src/gtr-profile-dialog.ui:22
-msgid "_OK"
-msgstr "_Bine"
-
-#: src/gtr-projects.ui:15 src/gtr-tab.ui:323
-msgid "Build Translation Memory"
-msgstr "Generează memoria de traducere"
-
-#: src/gtr-projects.ui:25 src/gtr-tab.ui:354
-msgid "Help"
-msgstr "Ajutor"
-
-#: src/gtr-projects.ui:36
-msgid "Select po File"
-msgstr "Alege fișierul PO"
-
-#: src/gtr-projects.ui:57
-msgid "Open Translation File"
-msgstr "Deschide un fișier de tradus"
-
-#: src/gtr-projects.ui:58
-msgid "Drag and drop .po files here"
-msgstr "Trage și așează aici fișiere .po"
-
-#: src/gtr-projects.ui:65
-msgid "_Open…"
-msgstr "D_eschide…"
-
-#: src/gtr-projects.ui:76
-msgid "_Load from DL…"
-msgstr "_Descarcă din MB…"
-
-#: src/gtr-search-bar.ui:20
-msgid "Search"
-msgstr "Caută"
-
-#: src/gtr-search-bar.ui:35
-msgid "Previous Result"
-msgstr "Rezultatul precedent"
-
-#: src/gtr-search-bar.ui:41
-msgid "Next Result"
-msgstr "Rezultatul următor"
-
-#: src/gtr-search-bar.ui:58
-msgid "Switch between Search and Search-and-Replace"
-msgstr "Schimbă între Caută și Caută-și-Înlocuiește"
-
-#: src/gtr-search-bar.ui:64
-msgid "Show or hide search options such as case sensitivity"
-msgstr ""
-"Arată sau ascunde opțiunile de căutare cum ar fi cea care distinge majuscule"
-
-#: src/gtr-search-bar.ui:90
-msgid "Replace"
-msgstr "Înlocuiește"
-
-#: src/gtr-search-bar.ui:96
-msgid "_Replace"
-msgstr "Î_nlocuiește"
-
-#: src/gtr-search-bar.ui:103
-msgid "Replace _All"
-msgstr "Înlocuiește _tot"
-
-#: src/gtr-search-bar.ui:121
-msgid "Case sensitive"
-msgstr "Distinge majuscule"
-
-#: src/gtr-search-bar.ui:131
-msgid "Match whole word only"
-msgstr "Doar cuvinte întregi"
-
-#: src/gtr-search-bar.ui:141
-msgid "Wrap around"
-msgstr "Reia de la început"
-
-#: src/gtr-search-bar.ui:151
-msgid "Original text"
-msgstr "Textul original"
-
-#: src/gtr-search-bar.ui:161
-msgid "Translated text"
-msgstr "Textul tradus"
-
-#: src/gtr-tab.c:351
+#: src/gtr-tab.c:352
 msgid "There is an error in the message"
 msgstr "Șirul conține o eroare"
 
-#: src/gtr-tab.c:571 src/gtr-tab.c:708
+#: src/gtr-tab.c:571 src/gtr-tab.c:714
 msgid "fuzzy"
 msgstr "de revizuit"
 
-#: src/gtr-tab.c:738
+#: src/gtr-tab.c:744
 #, c-format
 msgid "Plural %d"
 msgstr "Plural %d"
 
-#: src/gtr-tab.c:1470
+#: src/gtr-tab.c:1459
 msgid "Copied original to clipboard"
 msgstr "Originalul a fost copiat"
 
-#: src/gtr-tab.c:1682
+#: src/gtr-tab.c:1736
 #, c-format
 msgid "Translated: %0.2f%%"
 msgstr "Traduse: %0.2f%%"
 
-#: src/gtr-tab.c:1683
+#: src/gtr-tab.c:1737
 #, c-format
 msgid "Translated: %d"
 msgstr "Traduse: %d"
 
-#: src/gtr-tab.c:1684
+#: src/gtr-tab.c:1738
 #, c-format
 msgid "Untranslated: %d"
 msgstr "Netraduse: %d"
 
-#: src/gtr-tab.c:1685
+#: src/gtr-tab.c:1739
 #, c-format
 msgid "Fuzzy: %d"
 msgstr "De revizuit: %d"
 
-#: src/gtr-tab.ui:14
-msgid "Previous message without translation"
-msgstr "Șirul precedent fără traducere"
-
-#: src/gtr-tab.ui:22
-msgid "Next message without translation"
-msgstr "Următorul șir fără traducere"
-
-#: src/gtr-tab.ui:37
-msgid "Toggle Fuzzy State"
-msgstr "Schimbă starea „de revizuit”"
-
-#: src/gtr-tab.ui:54
-msgid "Find"
-msgstr "Caută"
-
-#: src/gtr-tab.ui:62
-msgid "Upload File"
-msgstr "Încarcă fișierul"
-
-#. <property name="ypad">5</property>
-#: src/gtr-tab.ui:127 src/gtr-tab.ui:308
-msgid "_Original Message"
-msgstr "Șirul _original"
-
-#: src/gtr-tab.ui:193
-msgid "Translate_d Text"
-msgstr "Șirul tra_dus"
-
-#: src/gtr-tab.ui:272
-msgid "Open a New File"
-msgstr "Deschide un fișier nou"
-
-#: src/gtr-tab.ui:276
-msgid "Open from Damned Lies"
-msgstr "Deschide din Minciuni blestemate"
-
-#: src/gtr-tab.ui:282
-msgid "Save"
-msgstr "Salvează"
-
-#: src/gtr-tab.ui:286
-msgid "Save As…"
-msgstr "Salvează ca…"
-
-#: src/gtr-tab.ui:290
-msgid "Update from Template…"
-msgstr "Actualizează din model…"
-
-#: src/gtr-tab.ui:296
-msgid "So_rt Messages by…"
-msgstr "Aranjează șirurile după…"
-
-#: src/gtr-tab.ui:298
-msgid "_Order of Appearance"
-msgstr "_Ordinea apariției"
-
-#: src/gtr-tab.ui:303
-msgid "_Message Status"
-msgstr "Starea _mesajului"
-
-#: src/gtr-tab.ui:313
-msgid "_Translated Message"
-msgstr "Mesajul _tradus"
-
-#: src/gtr-tab.ui:319
-msgid "Show ID Column"
-msgstr "Afișează coloana ID"
-
-#: src/gtr-tab.ui:331
-msgid "Advanced Tools"
-msgstr "Instrumente avansate"
-
-#: src/gtr-tab.ui:333
-msgid "Fix plural messages"
-msgstr "Corectează pluralul"
-
-#: src/gtr-upload-dialog.c:199
+#: src/gtr-upload-dialog.c:203
 msgid "Uploading…"
 msgstr "Se încarcă…"
 
-#: src/gtr-upload-dialog.c:205
+#: src/gtr-upload-dialog.c:209
 msgid "Upload"
 msgstr "Încarcă"
-
-#: src/gtr-upload-dialog.ui:6
-msgid "Upload to Damned Lies"
-msgstr "Încarcă în Minciuni blestemate"
-
-#: src/gtr-upload-dialog.ui:27
-msgid "_Upload"
-msgstr "Î_ncarcă"
 
 #. Translators: this is the title of the window with a modified document
 #: src/gtr-window.c:179
@@ -1195,184 +1373,9 @@ msgstr "Nu se poate salva"
 msgid "File saved"
 msgstr "Fișier salvat"
 
-#: src/shortcuts-dialog.ui:6
-msgctxt "shortcut window group"
-msgid "General"
-msgstr "Generale"
-
-#: src/shortcuts-dialog.ui:10
-msgctxt "shortcut window"
-msgid "Open file"
-msgstr "Deschide fișierul"
-
-#: src/shortcuts-dialog.ui:16
-msgctxt "shortcut window"
-msgid "Save the current file"
-msgstr "Salvează fișierul actual"
-
-#: src/shortcuts-dialog.ui:22
-msgctxt "shortcut window"
-msgid "Save the current file as"
-msgstr "Salvează fișierul actual ca"
-
-#: src/shortcuts-dialog.ui:28
-msgctxt "shortcut window"
-msgid "Download from DL"
-msgstr "Descarcă din Minciuni blestemate"
-
-#: src/shortcuts-dialog.ui:34
-msgctxt "shortcut window"
-msgid "Upload to DL"
-msgstr "Încarcă în Minciuni blestemate"
-
-#: src/shortcuts-dialog.ui:40
-msgctxt "shortcut window"
-msgid "Preferences"
-msgstr "Preferințe"
-
-#: src/shortcuts-dialog.ui:46
-msgctxt "shortcut window"
-msgid "Keyboard Shortcuts"
-msgstr "Scurtături"
-
-#: src/shortcuts-dialog.ui:52
-msgctxt "shortcut window"
-msgid "Help"
-msgstr "Ajutor"
-
-#: src/shortcuts-dialog.ui:58
-msgctxt "shortcut window"
-msgid "New Window"
-msgstr "Fereastră nouă"
-
-#: src/shortcuts-dialog.ui:63
-msgctxt "shortcut window"
-msgid "Close Window"
-msgstr "Închide fereastra"
-
-#: src/shortcuts-dialog.ui:70
-msgctxt "shortcut window"
-msgid "Quit"
-msgstr "Închide"
-
-#: src/shortcuts-dialog.ui:78
-msgctxt "shortcut window group"
-msgid "Edit"
-msgstr "Modifică"
-
-#: src/shortcuts-dialog.ui:82
-msgctxt "shortcut window"
-msgid "Clear translation"
-msgstr "Șterge traducerea"
-
-#: src/shortcuts-dialog.ui:88
-msgctxt "shortcut window"
-msgid "Mark/Unmark as fuzzy"
-msgstr "Adaugă/Elimină starea „de revizuit”"
-
-#: src/shortcuts-dialog.ui:94
-msgctxt "shortcut window"
-msgid "Copy original text to translation"
-msgstr "Copiază textul original în traducere"
-
-#: src/shortcuts-dialog.ui:100
-msgctxt "shortcut window"
-msgid "Copy original text to clipboard"
-msgstr "Copiază textul original"
-
-#: src/shortcuts-dialog.ui:108
-msgctxt "shortcut window group"
-msgid "Navigation"
-msgstr "Navigare"
-
-#: src/shortcuts-dialog.ui:112
-msgctxt "shortcut window"
-msgid "Go to the previous message"
-msgstr "Duce la șirul precedent"
-
-#: src/shortcuts-dialog.ui:118
-msgctxt "shortcut window"
-msgid "Go to the next message"
-msgstr "Duce la șirul următor"
-
-#: src/shortcuts-dialog.ui:124
-msgctxt "shortcut window"
-msgid "Go to the previous untranslated message"
-msgstr "Duce la șirul netradus precedent"
-
-#: src/shortcuts-dialog.ui:130
-msgctxt "shortcut window"
-msgid "Go to the next untranslated message"
-msgstr "Duce la șirul netradus următor"
-
-#: src/shortcuts-dialog.ui:138
-msgctxt "shortcut window group"
-msgid "Translation Memory"
-msgstr "Memoria de traducere"
-
-#: src/shortcuts-dialog.ui:142
-msgctxt "shortcut window"
-msgid "Build translation memory"
-msgstr "Generează memoria de traducere"
-
-#: src/shortcuts-dialog.ui:148
-msgctxt "shortcut window"
-msgid "Use 1st...9th suggestion"
-msgstr "Folosește sugestiile de la 1 la 9"
-
-#: src/shortcuts-dialog.ui:156
-msgctxt "shortcut window group"
-msgid "Find & Replace"
-msgstr "Caută și înlocuiește"
-
-#: src/shortcuts-dialog.ui:160
-msgctxt "shortcut window"
-msgid "Find"
-msgstr "Caută"
-
-#: src/shortcuts-dialog.ui:166
-msgctxt "shortcut window"
-msgid "Find & Replace"
-msgstr "Caută și înlocuiește"
-
-#: src/shortcuts-dialog.ui:172
-msgctxt "shortcut window"
-msgid "Forward-search"
-msgstr "Caută înainte"
-
-#: src/shortcuts-dialog.ui:178
-msgctxt "shortcut window"
-msgid "Backward-search"
-msgstr "Caută înapoi"
-
-#: src/shortcuts-dialog.ui:184
-msgctxt "shortcut window"
-msgid "Hide find & replace bar"
-msgstr "Ascunde bara „caută și înlocuiește”"
-
 #: src/translation-memory/gtr-translation-memory-dialog.c:80
 msgid "Select PO directory"
 msgstr "Alege un dosar PO"
-
-#: src/translation-memory/gtr-translation-memory-dialog.ui:7
-msgid "Translation Editor Memory Manager"
-msgstr "Administrator de memorie pentru aplicație"
-
-#: src/translation-memory/gtr-translation-memory-dialog.ui:43
-msgid "Database"
-msgstr "Baza de date"
-
-#: src/translation-memory/gtr-translation-memory-dialog.ui:48
-msgid "Select the directory which contains PO files"
-msgstr "Alege dosarul care conține fișierele PO"
-
-#: src/translation-memory/gtr-translation-memory-dialog.ui:60
-msgid "Use only files with this name"
-msgstr "Folosește numai fișiere cu acest nume"
-
-#: src/translation-memory/gtr-translation-memory-dialog.ui:79
-msgid "_Add to Database"
-msgstr "_Adaugă în baza de date"
 
 #: src/translation-memory/org.gnome.Gtranslator.plugins.translation-memory.gschema.xml.in:5
 msgid "PO directory"
