@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2026-08-03 16:50+0000\n"
-"PO-Revision-Date: 2026-08-03 21:13+0200\n"
+"POT-Creation-Date: 2026-09-04 17:19+0000\n"
+"PO-Revision-Date: 2026-09-07 09:53+0200\n"
 "Last-Translator: Anders Jonsson <anders.jonsson@norsjovallen.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "Language: sv\n"
@@ -23,8 +23,8 @@ msgstr ""
 "X-Generator: Poedit 3.9\n"
 
 #: data/org.gnome.Gtranslator.desktop.in.in:2
-#: data/org.gnome.Gtranslator.metainfo.xml.in.in:7 src/gtr-actions-app.c:89
-#: src/gtr-application.c:505 src/gtr-window.c:196 src/gtr-window.c:442
+#: data/org.gnome.Gtranslator.metainfo.xml.in.in:7 src/gtr-application.c:518
+#: src/gtr-window.c:196 src/gtr-window.c:442
 msgid "Translation Editor"
 msgstr "Översättningsredigerare"
 
@@ -43,8 +43,8 @@ msgstr "Översätt program på ditt språk"
 msgid "Gtranslator;Translation;Editor;Gettext;Write;"
 msgstr "Gtranslator;Översättning;Redigerare;Gettext;Skriv;"
 
-#: data/org.gnome.Gtranslator.desktop.in.in:19 src/gtr-dl-teams.ui:7
-#: src/gtr-projects.ui:7 src/gtr-tab.ui:340
+#: data/org.gnome.Gtranslator.desktop.in.in:19 data/ui/gtr-dl-teams.ui:7
+#: data/ui/gtr-projects.ui:7 data/ui/gtr-tab.ui:340
 msgid "New Window"
 msgstr "Nytt fönster"
 
@@ -230,21 +230,815 @@ msgstr "Översättarens huvudgränssnitt"
 msgid "Daniel García Moreno"
 msgstr "Daniel García Moreno"
 
-# src/about.c:60
-#: src/gtr-actions-app.c:86
+#: data/ui/gtr-context.ui:25
+msgid "Notes"
+msgstr "Anteckningar"
+
+# src/menus.c:315 src/menus.c:316
+#: data/ui/gtr-context.ui:29 src/gtr-preferences-dialog.c:271
+msgid "Edit"
+msgstr "Redigera"
+
+# src/sidebar.c:107
+#: data/ui/gtr-context.ui:59
+msgid "Extracted Comments"
+msgstr "Extraherade kommentarer"
+
+#: data/ui/gtr-context.ui:85
+msgid "Previous Source Text"
+msgstr "Föregående källtext"
+
+#: data/ui/gtr-context.ui:113
+msgid "Paths"
+msgstr "Sökvägar"
+
+# src/dialogs.c:574
+#: data/ui/gtr-dl-teams.ui:11 data/ui/gtr-projects.ui:11 data/ui/gtr-tab.ui:344
+msgid "Preferences"
+msgstr "Inställningar"
+
+#: data/ui/gtr-dl-teams.ui:17 data/ui/gtr-projects.ui:21 data/ui/gtr-tab.ui:350
+msgid "Keyboard Shortcuts"
+msgstr "Tangentbordsgenvägar"
+
+#: data/ui/gtr-dl-teams.ui:21 data/ui/gtr-projects.ui:29 data/ui/gtr-tab.ui:358
+msgid "About Translation Editor"
+msgstr "Om Översättningsredigerare"
+
+#: data/ui/gtr-dl-teams.ui:28 data/ui/gtr-dl-teams.ui:49
+msgid "Load from Damned Lies"
+msgstr "Läs in från Förbannade lögner (Damned Lies)"
+
+#: data/ui/gtr-dl-teams.ui:41 data/ui/gtr-projects.ui:49 data/ui/gtr-tab.ui:47
+msgid "Main Menu"
+msgstr "Huvudmeny"
+
+# src/header_stuff.c:515 src/prefs.c:137
+#: data/ui/gtr-dl-teams.ui:70 data/ui/gtr-languages-fetcher.ui:5
+msgid "Language"
+msgstr "Språk"
+
+#: data/ui/gtr-dl-teams.ui:75 data/ui/gtr-header-dialog.ui:149
+msgid "Module"
+msgstr "Modul"
+
+#: data/ui/gtr-dl-teams.ui:80 data/ui/gtr-header-dialog.ui:161
+msgid "Domain"
+msgstr "Domän"
+
+#: data/ui/gtr-dl-teams.ui:85 data/ui/gtr-header-dialog.ui:155
+msgid "Branch"
+msgstr "Gren"
+
+#: data/ui/gtr-dl-teams.ui:93
+msgid "Reserve for translation"
+msgstr "Reservera för översättning"
+
+#: data/ui/gtr-dl-teams.ui:101
+msgid "Info"
+msgstr "Info"
+
+# data/ui/nautilus-gtranslator-view-ui.xml.h:4
+#: data/ui/gtr-dl-teams.ui:104
+msgid "File"
+msgstr "Fil"
+
+#: data/ui/gtr-dl-teams.ui:112
+msgid "Translation State"
+msgstr "Översättningstillstånd"
+
+#: data/ui/gtr-dl-teams.ui:120
+msgid "Stats"
+msgstr "Statistik"
+
+# data/ui/nautilus-gtranslator-view-ui.xml.h:4
+#: data/ui/gtr-dl-teams.ui:133
+msgid "_Load File"
+msgstr "_Läs in fil"
+
+#: data/ui/gtr-greeter.ui:5 data/ui/gtr-greeter.ui:39
+msgid "Welcome to Translation Editor"
+msgstr "Välkommen till Översättningsredigerare"
+
+#: data/ui/gtr-greeter.ui:19
+msgid "_Next"
+msgstr "_Nästa"
+
+#: data/ui/gtr-greeter.ui:35
+msgid "Welcome"
+msgstr "Välkommen"
+
+#: data/ui/gtr-greeter.ui:41
 msgid ""
-"Translation file editing suite for localization of applications and "
-"libraries."
+"Before start to use the application, a profile should be created, but don't "
+"worry, the app will guide you to do it in a minute."
 msgstr ""
-"Svit för redigering av översättningsfiler för lokalanpassning av program och "
-"bibliotek."
+"Innan programmet börjar användas ska en profil skapas, men programmet kommer "
+"snart guida dig genom detta, så oroa dig inte."
+
+#: data/ui/gtr-greeter.ui:53
+msgid "Create Profile"
+msgstr "Skapa profil"
+
+# src/prefs.c:108
+#: data/ui/gtr-greeter.ui:59 data/ui/gtr-profile-dialog.ui:49
+msgid "Profile Information"
+msgstr "Profilinformation"
+
+# src/prefs.c:108
+#: data/ui/gtr-greeter.ui:62 data/ui/gtr-greeter.ui:129
+#: data/ui/gtr-profile-dialog.ui:54
+msgid "Profile name"
+msgstr "Profilnamn"
+
+#: data/ui/gtr-greeter.ui:63 data/ui/gtr-profile-dialog.ui:55
+msgid "default"
+msgstr "standard"
+
+# src/prefs.c:108
+#: data/ui/gtr-greeter.ui:71 data/ui/gtr-profile-dialog.ui:63
+msgid "Translator Information"
+msgstr "Översättarinformation"
+
+# src/header_stuff.c:509
+#: data/ui/gtr-greeter.ui:74 data/ui/gtr-profile-dialog.ui:68
+msgid "Translator _name"
+msgstr "Översättarens _namn"
+
+# src/header_stuff.c:512
+#: data/ui/gtr-greeter.ui:80 data/ui/gtr-profile-dialog.ui:74
+msgid "Translator _email"
+msgstr "Översättarens _e-post"
+
+#: data/ui/gtr-greeter.ui:86 data/ui/gtr-profile-dialog.ui:80
+msgid "Translation _team email"
+msgstr "Översättnings_gruppens e-post"
+
+#: data/ui/gtr-greeter.ui:94 data/ui/gtr-profile-dialog.ui:88
+msgid "Damned Lies Integration"
+msgstr "Damned Lies-integration"
+
+#: data/ui/gtr-greeter.ui:97 data/ui/gtr-profile-dialog.ui:93
+msgid "_Damned Lies auth token"
+msgstr "_Damned Lies-autentiseringstoken"
+
+# src/prefs.c:108
+#: data/ui/gtr-greeter.ui:118 data/ui/gtr-greeter.ui:124
+msgid "Confirmation"
+msgstr "Bekräftelse"
+
+# src/header_stuff.c:509
+#: data/ui/gtr-greeter.ui:134
+msgid "Translator name"
+msgstr "Översättarens namn"
+
+# src/header_stuff.c:512
+#: data/ui/gtr-greeter.ui:139
+msgid "Translator email"
+msgstr "Översättarens e-post"
+
+#: data/ui/gtr-greeter.ui:144
+msgid "Team email"
+msgstr "Gruppens e-post"
+
+# src/header_stuff.c:515 src/prefs.c:137
+#: data/ui/gtr-greeter.ui:149
+msgid "Language name"
+msgstr "Språknamn"
+
+# src/prefs.c:141
+#: data/ui/gtr-greeter.ui:154 data/ui/gtr-languages-fetcher.ui:14
+msgid "Language code"
+msgstr "Språkkod"
+
+# src/header_stuff.c:524 src/prefs.c:150
+#: data/ui/gtr-greeter.ui:159 data/ui/gtr-languages-fetcher.ui:34
+msgid "Character set"
+msgstr "Teckenuppsättning"
+
+#: data/ui/gtr-greeter.ui:164 data/ui/gtr-languages-fetcher.ui:54
+msgid "Transfer encoding"
+msgstr "Överföringskodning"
+
+# src/menus.c:135 src/menus.c:367
+#: data/ui/gtr-greeter.ui:169
+msgid "Plural form"
+msgstr "Pluralform"
+
+# src/prefs.c:239
+#: data/ui/gtr-header-dialog.ui:10
+msgid "Translator"
+msgstr "Översättare"
+
+# src/header_stuff.c:486
+#: data/ui/gtr-header-dialog.ui:14 data/ui/gtr-header-dialog.ui:80
+#: data/ui/gtr-header-dialog.ui:140 data/ui/gtr-preferences-dialog.ui:13
+msgid "General"
+msgstr "Allmänt"
+
+# src/header_stuff.c:496
+#: data/ui/gtr-header-dialog.ui:17
+msgid "Use my options to complete the following entries"
+msgstr "Använd mina alternativ för att fylla i följande poster"
+
+# src/header_stuff.c:509
+#: data/ui/gtr-header-dialog.ui:22
+msgid "Translator’s _name"
+msgstr "Översättarens _namn"
+
+# src/header_stuff.c:512
+#: data/ui/gtr-header-dialog.ui:28
+msgid "Translator’s _email"
+msgstr "Översättarens _e-post"
+
+# src/header_stuff.c:515 src/prefs.c:137
+#: data/ui/gtr-header-dialog.ui:34
+msgid "_Language"
+msgstr "_Språk"
+
+# src/prefs.c:141
+#: data/ui/gtr-header-dialog.ui:40
+msgid "Language _code"
+msgstr "Språk_kod"
+
+# src/header_stuff.c:520
+#: data/ui/gtr-header-dialog.ui:46
+msgid "Language _Team email"
+msgstr "Språkgru_ppens e-post"
+
+# src/header_stuff.c:524 src/prefs.c:150
+#: data/ui/gtr-header-dialog.ui:52
+msgid "Char_set"
+msgstr "Teckenta_bell"
+
+# src/header_stuff.c:528 src/prefs.c:154
+#: data/ui/gtr-header-dialog.ui:58
+msgid "Enc_oding"
+msgstr "Teckenk_odning"
+
+# src/menus.c:135 src/menus.c:367
+#: data/ui/gtr-header-dialog.ui:64
+msgid "_Plural forms"
+msgstr "_Pluralformer"
+
+# src/header_stuff.c:443 src/header_stuff.c:448
+#: data/ui/gtr-header-dialog.ui:76
+msgid "Project"
+msgstr "Projekt"
+
+# src/header_stuff.c:471
+#: data/ui/gtr-header-dialog.ui:83
+msgid "Project Id _version"
+msgstr "Projekt-id-_version"
+
+# src/header_stuff.c:474
+#: data/ui/gtr-header-dialog.ui:89
+msgid "Pot _file creation date"
+msgstr "Pot-_filen skapades"
+
+# src/header_stuff.c:479
+#: data/ui/gtr-header-dialog.ui:95
+msgid "Po file _revision date"
+msgstr "Po-filen _reviderades"
+
+#: data/ui/gtr-header-dialog.ui:101
+msgid "Report message _bugs to"
+msgstr "Rapportera _fel i meddelanden till"
+
+# src/header_stuff.c:462
+#: data/ui/gtr-header-dialog.ui:109 src/gtr-upload-dialog.c:151
+msgid "Comment"
+msgstr "Kommentar"
+
+#: data/ui/gtr-header-dialog.ui:136
+msgid "Damned Lies"
+msgstr "Förbannade lögner"
+
+# src/header_stuff.c:515 src/prefs.c:137
+#: data/ui/gtr-header-dialog.ui:143
+msgid "Lang"
+msgstr "Språk"
+
+#: data/ui/gtr-header-dialog.ui:167
+msgid "State"
+msgstr "Tillstånd"
+
+#: data/ui/gtr-header-dialog.ui:173
+msgid "VCS Browser"
+msgstr "Versionshanteringsbläddrare"
+
+#: data/ui/gtr-languages-fetcher.ui:11
+msgid "Edit options manually"
+msgstr "Redigera alternativ manuellt"
+
+# src/header_stuff.c:515 src/prefs.c:137
+#: data/ui/gtr-languages-fetcher.ui:21
+msgid "Choose language code"
+msgstr "Välj språkkod"
+
+# src/menus.c:135 src/menus.c:367
+#: data/ui/gtr-languages-fetcher.ui:74
+msgid "Plural forms"
+msgstr "Pluralformer"
+
+# src/menus.c:135 src/menus.c:367
+#: data/ui/gtr-languages-fetcher.ui:81
+msgid "Choose plural forms"
+msgstr "Välj pluralformer"
+
+#: data/ui/gtr-message-table.ui:35
+msgid "Original Message"
+msgstr "Källtext"
+
+# src/dialogs.c:496 src/dialogs.c:594 src/gui.c:398
+#: data/ui/gtr-message-table.ui:43
+msgid "Translated Message"
+msgstr "Översatt text"
+
+#: data/ui/gtr-preferences-dialog.ui:9
+msgid "F_iles"
+msgstr "F_iler"
+
+# src/prefs.c:166
+#: data/ui/gtr-preferences-dialog.ui:16
+msgid "_Warn if PO file contains fuzzy translations"
+msgstr "_Varna om po-filen innehåller luddiga översättningar"
+
+#: data/ui/gtr-preferences-dialog.ui:22
+msgid "_Remove obsolete entries on save"
+msgstr "_Ta bort föråldrade poster vid sparande"
+
+# src/prefs.c:114
+#: data/ui/gtr-preferences-dialog.ui:30
+msgid "Autosave"
+msgstr "Spara automatiskt"
+
+#: data/ui/gtr-preferences-dialog.ui:33
+msgid "_Activate auto save"
+msgstr "_Aktivera automatisk sparning"
+
+#: data/ui/gtr-preferences-dialog.ui:34
+msgid "Save the current file automatically"
+msgstr "Spara aktuell fil automatiskt"
+
+#: data/ui/gtr-preferences-dialog.ui:40
+msgid "Autosave _Interval"
+msgstr "_Intervall för att spara automatiskt"
+
+#: data/ui/gtr-preferences-dialog.ui:41
+msgid "Number of minutes to autosave"
+msgstr "Antal minuter innan automatisk sparning"
+
+#: data/ui/gtr-preferences-dialog.ui:56
+msgid "Create a _backup copy of files before saving"
+msgstr "Säkerhets_kopiera filer innan de sparas"
+
+# src/menus.c:315 src/menus.c:316
+#: data/ui/gtr-preferences-dialog.ui:69
+msgid "_Editor"
+msgstr "R_edigerare"
+
+#: data/ui/gtr-preferences-dialog.ui:73
+msgid "Text Display"
+msgstr "Textvisning"
+
+#: data/ui/gtr-preferences-dialog.ui:76
+msgid "_Highlight message syntax"
+msgstr "_Markeringssyntax för meddelande"
+
+#: data/ui/gtr-preferences-dialog.ui:82
+msgid "Make _whitespace visible"
+msgstr "Gör alla _tecken synliga"
+
+#: data/ui/gtr-preferences-dialog.ui:88
+msgid "_Font"
+msgstr "_Typsnitt"
+
+# src/dialogs.c:508 src/dialogs.c:588
+#: data/ui/gtr-preferences-dialog.ui:106
+msgid "Contents"
+msgstr "Innehåll"
+
+# src/prefs.c:162
+#: data/ui/gtr-preferences-dialog.ui:109
+msgid "_Remove fuzzy status if message is changed"
+msgstr "Ta _bort luddig status om meddelandet har ändrats"
+
+#: data/ui/gtr-preferences-dialog.ui:115
+msgid "Check _spelling"
+msgstr "Kontrollera _stavning"
+
+# data/ui/nautilus-gtranslator-view-ui.xml.h:4
+#: data/ui/gtr-preferences-dialog.ui:128
+msgid "_Profiles"
+msgstr "_Profiler"
+
+# data/ui/nautilus-gtranslator-view-ui.xml.h:4
+#: data/ui/gtr-preferences-dialog.ui:132
+msgid "Profiles"
+msgstr "Profiler"
+
+# data/ui/nautilus-gtranslator-view-ui.xml.h:4
+#: data/ui/gtr-preferences-dialog.ui:143
+msgid "_Add Profile"
+msgstr "_Lägg till profil"
+
+# src/dialogs.c:390
+#: data/ui/gtr-profile-dialog.ui:7
+msgid "Translation Editor Profile"
+msgstr "Översättningsredigerarprofil"
+
+#: data/ui/gtr-profile-dialog.ui:15 data/ui/gtr-upload-dialog.ui:20
+#: src/gtr-close-confirmation-dialog.c:121 src/gtr-context.c:170
+#: src/gtr-preferences-dialog.c:452
+msgid "_Cancel"
+msgstr "A_vbryt"
+
+#: data/ui/gtr-profile-dialog.ui:22
+msgid "_OK"
+msgstr "_OK"
+
+#: data/ui/gtr-projects.ui:15 data/ui/gtr-tab.ui:323
+msgid "Build Translation Memory"
+msgstr "Bygg översättningsminne"
+
+#: data/ui/gtr-projects.ui:25 data/ui/gtr-tab.ui:354
+msgid "Help"
+msgstr "Hjälp"
+
+#: data/ui/gtr-projects.ui:36
+msgid "Select po File"
+msgstr "Välj po-fil"
+
+#: data/ui/gtr-projects.ui:57
+msgid "Open Translation File"
+msgstr "Öppna översättningsfil"
+
+#: data/ui/gtr-projects.ui:58
+msgid "Drag and drop .po files here"
+msgstr "Dra och släpp .po-filer här"
+
+#: data/ui/gtr-projects.ui:65
+msgid "_Open…"
+msgstr "Ö_ppna…"
+
+#: data/ui/gtr-projects.ui:76
+msgid "_Load from DL…"
+msgstr "_Läs in från DL…"
+
+#: data/ui/gtr-search-bar.ui:20
+msgid "Search"
+msgstr "Sök"
+
+#: data/ui/gtr-search-bar.ui:35
+msgid "Previous Result"
+msgstr "Föregående resultat"
+
+#: data/ui/gtr-search-bar.ui:41
+msgid "Next Result"
+msgstr "Nästa resultat"
+
+#: data/ui/gtr-search-bar.ui:58
+msgid "Switch between Search and Search-and-Replace"
+msgstr "Växla mellan Sök och Sök-och-ersätt"
+
+#: data/ui/gtr-search-bar.ui:64
+msgid "Show or hide search options such as case sensitivity"
+msgstr "Visa eller dölj alternativ så som skiftlägeskänslighet"
+
+# src/dialogs.c:575 src/menus.c:362
+#: data/ui/gtr-search-bar.ui:90
+msgid "Replace"
+msgstr "Ersätt"
+
+# src/dialogs.c:575 src/menus.c:362
+#: data/ui/gtr-search-bar.ui:96
+msgid "_Replace"
+msgstr "_Ersätt"
+
+# src/dialogs.c:576
+#: data/ui/gtr-search-bar.ui:103
+msgid "Replace _All"
+msgstr "Ersätt _alla"
+
+#: data/ui/gtr-search-bar.ui:121
+msgid "Case sensitive"
+msgstr "Skiftlägeskänslig"
+
+#: data/ui/gtr-search-bar.ui:131
+msgid "Match whole word only"
+msgstr "Matcha endast hela ord"
+
+#: data/ui/gtr-search-bar.ui:141
+msgid "Wrap around"
+msgstr "Börja om från början"
+
+# src/prefs.c:235
+#: data/ui/gtr-search-bar.ui:151
+msgid "Original text"
+msgstr "Källtext"
+
+# src/dialogs.c:496 src/dialogs.c:594 src/gui.c:398
+#: data/ui/gtr-search-bar.ui:161
+msgid "Translated text"
+msgstr "Översatt text"
+
+#: data/ui/gtr-tab.ui:14
+msgid "Previous message without translation"
+msgstr "Föregående meddelande utan översättning"
+
+#: data/ui/gtr-tab.ui:22
+msgid "Next message without translation"
+msgstr "Nästa meddelande utan översättning"
+
+#: data/ui/gtr-tab.ui:37
+msgid "Toggle Fuzzy State"
+msgstr "Växla luddigt tillstånd"
+
+#: data/ui/gtr-tab.ui:54
+msgid "Find"
+msgstr "Sök"
+
+#: data/ui/gtr-tab.ui:62
+msgid "Upload File"
+msgstr "Skicka fil"
+
+# src/prefs.c:235
+#. <property name="ypad">5</property>
+#: data/ui/gtr-tab.ui:127 data/ui/gtr-tab.ui:308
+msgid "_Original Message"
+msgstr "_Källtext"
+
+# src/dialogs.c:496 src/dialogs.c:594 src/gui.c:398
+#: data/ui/gtr-tab.ui:193
+msgid "Translate_d Text"
+msgstr "_Översatt text"
+
+#: data/ui/gtr-tab.ui:272
+msgid "Open a New File"
+msgstr "Öppna en ny fil"
+
+#: data/ui/gtr-tab.ui:276
+msgid "Open from Damned Lies"
+msgstr "Öppna från Förbannade lögner (Damned Lies)"
+
+#: data/ui/gtr-tab.ui:282
+msgid "Save"
+msgstr "Spara"
+
+# src/menus.c:281
+#: data/ui/gtr-tab.ui:286
+msgid "Save As…"
+msgstr "Spara som…"
+
+#: data/ui/gtr-tab.ui:290
+msgid "Update from Template…"
+msgstr "Uppdatera från mall…"
+
+# src/dialogs.c:401
+#: data/ui/gtr-tab.ui:296
+msgid "So_rt Messages by…"
+msgstr "So_rtera meddelanden efter…"
+
+#: data/ui/gtr-tab.ui:298
+msgid "_Order of Appearance"
+msgstr "_Ordning som de förekommer"
+
+#: data/ui/gtr-tab.ui:303
+msgid "_Message Status"
+msgstr "_Meddelandestatus"
+
+# src/dialogs.c:496 src/dialogs.c:594 src/gui.c:398
+#: data/ui/gtr-tab.ui:313
+msgid "_Translated Message"
+msgstr "Ö_versatt text"
+
+#: data/ui/gtr-tab.ui:319
+msgid "Show ID Column"
+msgstr "Visa ID-kolumn"
+
+#: data/ui/gtr-tab.ui:327 src/gtr-header-dialog.c:381
+msgid "Edit Header"
+msgstr "Redigera po-filshuvud"
+
+#: data/ui/gtr-tab.ui:331
+msgid "Advanced Tools"
+msgstr "Avancerade verktyg"
+
+#: data/ui/gtr-tab.ui:333
+msgid "Fix plural messages"
+msgstr "Fixa pluralmeddelanden"
+
+#: data/ui/gtr-translation-memory-dialog.ui:7
+msgid "Translation Editor Memory Manager"
+msgstr "Hanterare för översättningsminne"
+
+# src/prefs.c:114
+#: data/ui/gtr-translation-memory-dialog.ui:43
+msgid "Database"
+msgstr "Databas"
+
+#: data/ui/gtr-translation-memory-dialog.ui:48
+msgid "Select the directory which contains PO files"
+msgstr "Välj katalogen som innehåller PO-filer"
+
+#: data/ui/gtr-translation-memory-dialog.ui:60
+msgid "Use only files with this name"
+msgstr "Använd endast filer med detta namn"
+
+#: data/ui/gtr-translation-memory-dialog.ui:79
+msgid "_Add to Database"
+msgstr "_Lägg till i databas"
+
+#: data/ui/gtr-upload-dialog.ui:6
+msgid "Upload to Damned Lies"
+msgstr "Skicka till Förbannade lögner (Damned Lies)"
+
+#: data/ui/gtr-upload-dialog.ui:27
+msgid "_Upload"
+msgstr "S_kicka"
+
+# src/header_stuff.c:486
+#: data/ui/shortcuts-dialog.ui:6
+msgctxt "shortcut window group"
+msgid "General"
+msgstr "Allmänt"
+
+#: data/ui/shortcuts-dialog.ui:10
+msgctxt "shortcut window"
+msgid "Open file"
+msgstr "Öppna fil"
+
+#: data/ui/shortcuts-dialog.ui:16
+msgctxt "shortcut window"
+msgid "Save the current file"
+msgstr "Spara aktuell fil"
+
+#: data/ui/shortcuts-dialog.ui:22
+msgctxt "shortcut window"
+msgid "Save the current file as"
+msgstr "Spara aktuell fil som"
+
+#: data/ui/shortcuts-dialog.ui:28
+msgctxt "shortcut window"
+msgid "Download from DL"
+msgstr "Hämta från DL"
+
+#: data/ui/shortcuts-dialog.ui:34
+msgctxt "shortcut window"
+msgid "Upload to DL"
+msgstr "Skicka till DL"
+
+# src/dialogs.c:574
+#: data/ui/shortcuts-dialog.ui:40
+msgctxt "shortcut window"
+msgid "Preferences"
+msgstr "Inställningar"
+
+#: data/ui/shortcuts-dialog.ui:46
+msgctxt "shortcut window"
+msgid "Keyboard Shortcuts"
+msgstr "Tangentbordsgenvägar"
+
+#: data/ui/shortcuts-dialog.ui:52
+msgctxt "shortcut window"
+msgid "Help"
+msgstr "Hjälp"
+
+#: data/ui/shortcuts-dialog.ui:58
+msgctxt "shortcut window"
+msgid "New Window"
+msgstr "Nytt fönster"
+
+#: data/ui/shortcuts-dialog.ui:63
+msgctxt "shortcut window"
+msgid "Close Window"
+msgstr "Stäng fönster"
+
+#: data/ui/shortcuts-dialog.ui:70
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr "Avsluta"
+
+# src/menus.c:315 src/menus.c:316
+#: data/ui/shortcuts-dialog.ui:78
+msgctxt "shortcut window group"
+msgid "Edit"
+msgstr "Redigera"
+
+# src/menus.c:349
+#: data/ui/shortcuts-dialog.ui:82
+msgctxt "shortcut window"
+msgid "Clear translation"
+msgstr "Töm översättning"
+
+#: data/ui/shortcuts-dialog.ui:88
+msgctxt "shortcut window"
+msgid "Mark/Unmark as fuzzy"
+msgstr "Markera/Avmarkera som luddig"
+
+#: data/ui/shortcuts-dialog.ui:94
+msgctxt "shortcut window"
+msgid "Copy original text to translation"
+msgstr "Kopiera originaltext till översättning"
+
+#: data/ui/shortcuts-dialog.ui:100
+msgctxt "shortcut window"
+msgid "Copy original text to clipboard"
+msgstr "Kopiera originaltext till urklipp"
+
+#: data/ui/shortcuts-dialog.ui:108
+msgctxt "shortcut window group"
+msgid "Navigation"
+msgstr "Navigering"
+
+# src/menus.c:195 src/menus.c:337
+#: data/ui/shortcuts-dialog.ui:112
+msgctxt "shortcut window"
+msgid "Go to the previous message"
+msgstr "Gå till föregående meddelande"
+
+# src/menus.c:195 src/menus.c:337
+#: data/ui/shortcuts-dialog.ui:118
+msgctxt "shortcut window"
+msgid "Go to the next message"
+msgstr "Gå till nästa meddelande"
+
+# src/menus.c:217 src/menus.c:342
+#: data/ui/shortcuts-dialog.ui:124
+msgctxt "shortcut window"
+msgid "Go to the previous plural form"
+msgstr "Gå till föregående pluralform"
+
+# src/menus.c:216
+#: data/ui/shortcuts-dialog.ui:130
+msgctxt "shortcut window"
+msgid "Go to the next plural form"
+msgstr "Gå till nästa pluralform"
+
+# src/menus.c:217 src/menus.c:342
+#: data/ui/shortcuts-dialog.ui:136
+msgctxt "shortcut window"
+msgid "Go to the previous untranslated message"
+msgstr "Gå till föregående oöversatta meddelande"
+
+# src/menus.c:216
+#: data/ui/shortcuts-dialog.ui:142
+msgctxt "shortcut window"
+msgid "Go to the next untranslated message"
+msgstr "Gå till nästa oöversatta meddelande"
+
+#: data/ui/shortcuts-dialog.ui:150
+msgctxt "shortcut window group"
+msgid "Translation Memory"
+msgstr "Översättningsminne"
+
+#: data/ui/shortcuts-dialog.ui:154
+msgctxt "shortcut window"
+msgid "Build translation memory"
+msgstr "Bygg översättningsminne"
+
+#: data/ui/shortcuts-dialog.ui:160
+msgctxt "shortcut window"
+msgid "Use 1st...9th suggestion"
+msgstr "Använd 1:a till 9:e förslag"
+
+#: data/ui/shortcuts-dialog.ui:168
+msgctxt "shortcut window group"
+msgid "Find & Replace"
+msgstr "Sök & ersätt"
+
+#: data/ui/shortcuts-dialog.ui:172
+msgctxt "shortcut window"
+msgid "Find"
+msgstr "Sök"
+
+#: data/ui/shortcuts-dialog.ui:178
+msgctxt "shortcut window"
+msgid "Find & Replace"
+msgstr "Sök & ersätt"
+
+#: data/ui/shortcuts-dialog.ui:184
+msgctxt "shortcut window"
+msgid "Forward-search"
+msgstr "Framåtsök"
+
+#: data/ui/shortcuts-dialog.ui:190
+msgctxt "shortcut window"
+msgid "Backward-search"
+msgstr "Bakåtsök"
+
+#: data/ui/shortcuts-dialog.ui:196
+msgctxt "shortcut window"
+msgid "Hide find & replace bar"
+msgstr "Dölj Sök och ersätt-rad"
 
 # src/menus.c:265
 #.
 #. * Note to translators: put here your name and email so it will show
 #. * up in the "about" box
 #.
-#: src/gtr-actions-app.c:103
+#: src/gtr-actions-app.c:96
 msgid "translator-credits"
 msgstr ""
 "Daniel Nylander <po@danielnylander.se>\n"
@@ -256,30 +1050,30 @@ msgstr ""
 "Skicka synpunkter på översättningen till\n"
 "<tp-sv@listor.tp-sv.se>."
 
-#: src/gtr-actions-file.c:97
+#: src/gtr-actions-file.c:95
 msgid "Could not update from template"
 msgstr "Kunde inte uppdatera från mall"
 
-#: src/gtr-actions-file.c:101 src/gtr-actions-file.c:172
+#: src/gtr-actions-file.c:99 src/gtr-actions-file.c:170
 #: src/gtr-actions-file.c:450 src/gtr-actions-file.c:472
 #: src/gtr-actions-file.c:511 src/gtr-actions-file.c:537
 #: src/gtr-actions-file.c:720 src/gtr-actions-file.c:763 src/gtr-dl-teams.c:163
-#: src/gtr-dl-teams.c:225 src/gtr-dl-teams.c:344 src/gtr-dl-teams.c:431
-#: src/gtr-dl-teams.c:569 src/gtr-dl-teams.c:580 src/gtr-dl-teams.c:592
-#: src/gtr-dl-teams.c:623 src/gtr-dl-teams.c:634 src/gtr-dl-teams.c:706
-#: src/gtr-tab.c:354 src/gtr-window.c:147 src/gtr-window.c:337
+#: src/gtr-dl-teams.c:224 src/gtr-dl-teams.c:343 src/gtr-dl-teams.c:430
+#: src/gtr-dl-teams.c:568 src/gtr-dl-teams.c:579 src/gtr-dl-teams.c:591
+#: src/gtr-dl-teams.c:622 src/gtr-dl-teams.c:633 src/gtr-dl-teams.c:705
+#: src/gtr-tab.c:355 src/gtr-window.c:147 src/gtr-window.c:337
 msgid "OK"
 msgstr "OK"
 
-#: src/gtr-actions-file.c:128
+#: src/gtr-actions-file.c:126
 msgid "msgmerge failed"
 msgstr "msgmerge misslyckades"
 
-#: src/gtr-actions-file.c:162
+#: src/gtr-actions-file.c:160
 msgid "Updated from Template"
 msgstr "Uppdaterad från mall"
 
-#: src/gtr-actions-file.c:165
+#: src/gtr-actions-file.c:163
 #, c-format
 msgid ""
 "Messages: %d → %d (%+d)\n"
@@ -373,21 +1167,15 @@ msgstr "Filen har skickats!"
 msgid "Save file as…"
 msgstr "Spara fil som…"
 
-#: src/gtr-application.c:304
+#: src/gtr-application.c:300
 msgid "Fixed plurals"
 msgstr "Fixade pluralformer"
-
-#: src/gtr-close-confirmation-dialog.c:121 src/gtr-context.c:169
-#: src/gtr-preferences-dialog.c:452 src/gtr-profile-dialog.ui:15
-#: src/gtr-upload-dialog.ui:20
-msgid "_Cancel"
-msgstr "A_vbryt"
 
 #: src/gtr-close-confirmation-dialog.c:122
 msgid "Close _Without Saving"
 msgstr "Stäng _utan att spara"
 
-#: src/gtr-close-confirmation-dialog.c:123 src/gtr-context.c:170
+#: src/gtr-close-confirmation-dialog.c:123 src/gtr-context.c:171
 msgid "_Save"
 msgstr "_Spara"
 
@@ -415,73 +1203,51 @@ msgstr[1] ""
 "Det finns %d dokument med osparade ändringar. Spara ändringar innan "
 "stängning?"
 
-#: src/gtr-context.c:186
+#: src/gtr-context.c:187
 msgid "Edit Notes"
 msgstr "Redigera anteckningar"
 
-#: src/gtr-context.c:581
+#: src/gtr-context.c:591
 msgid "Open in Browser"
 msgstr "Öppna i bläddrare"
 
-#: src/gtr-context.ui:25
-msgid "Notes"
-msgstr "Anteckningar"
-
-# src/menus.c:315 src/menus.c:316
-#: src/gtr-context.ui:29 src/gtr-preferences-dialog.c:271
-msgid "Edit"
-msgstr "Redigera"
-
-# src/sidebar.c:107
-#: src/gtr-context.ui:59
-msgid "Extracted Comments"
-msgstr "Extraherade kommentarer"
-
-#: src/gtr-context.ui:84
-msgid "Previous Source Text"
-msgstr "Föregående källtext"
-
-#: src/gtr-context.ui:112
-msgid "Paths"
-msgstr "Sökvägar"
-
-#: src/gtr-dl-teams.c:224
+#: src/gtr-dl-teams.c:223
 msgid "Error loading module info"
 msgstr "Fel vid inläsning av modulinfo"
 
-#: src/gtr-dl-teams.c:430
+#: src/gtr-dl-teams.c:429
 msgid "Error loading file info"
 msgstr "Fel vid inläsning av filinfo"
 
-#: src/gtr-dl-teams.c:449
+#: src/gtr-dl-teams.c:448
 msgid "No file found"
 msgstr "Ingen fil hittades"
 
-#: src/gtr-dl-teams.c:456
+#: src/gtr-dl-teams.c:455
 msgid "No module state found."
 msgstr "Inget modultillstånd hittades."
 
-#: src/gtr-dl-teams.c:568
+#: src/gtr-dl-teams.c:567
 msgid "Error loading file"
 msgstr "Fel vid inläsning av fil"
 
-#: src/gtr-dl-teams.c:578 src/gtr-dl-teams.c:622
+#: src/gtr-dl-teams.c:577 src/gtr-dl-teams.c:621
 msgid "Error creating tmp file"
 msgstr "Fel vid skapande av temporärfil"
 
-#: src/gtr-dl-teams.c:591
+#: src/gtr-dl-teams.c:590
 msgid "Error writing stream"
 msgstr "Fel vid skrivning av ström"
 
-#: src/gtr-dl-teams.c:654
+#: src/gtr-dl-teams.c:653
 msgid "The file has been saved in your Downloads folder"
 msgstr "Filen har sparats i din hämtningsmapp"
 
-#: src/gtr-dl-teams.c:705
+#: src/gtr-dl-teams.c:704
 msgid "Could not reserve module"
 msgstr "Kunde inte reservera modul"
 
-#: src/gtr-dl-teams.c:710
+#: src/gtr-dl-teams.c:709
 #, c-format
 msgid ""
 "%s\n"
@@ -492,73 +1258,9 @@ msgstr ""
 "Du har kanske inte konfigurerat din token för l10n.gnome.org korrekt i din "
 "profil, eller så har du inte rättighet att reservera denna modul."
 
-#: src/gtr-dl-teams.c:722
+#: src/gtr-dl-teams.c:721
 msgid "The file has been successfully reserved"
 msgstr "Lyckades reservera filen"
-
-# src/dialogs.c:574
-#: src/gtr-dl-teams.ui:11 src/gtr-projects.ui:11 src/gtr-tab.ui:344
-msgid "Preferences"
-msgstr "Inställningar"
-
-#: src/gtr-dl-teams.ui:17 src/gtr-projects.ui:21 src/gtr-tab.ui:350
-msgid "Keyboard Shortcuts"
-msgstr "Tangentbordsgenvägar"
-
-#: src/gtr-dl-teams.ui:21 src/gtr-projects.ui:29 src/gtr-tab.ui:358
-msgid "About Translation Editor"
-msgstr "Om Översättningsredigerare"
-
-#: src/gtr-dl-teams.ui:28 src/gtr-dl-teams.ui:49
-msgid "Load from Damned Lies"
-msgstr "Läs in från Förbannade lögner (Damned Lies)"
-
-#: src/gtr-dl-teams.ui:41 src/gtr-projects.ui:49 src/gtr-tab.ui:47
-msgid "Main Menu"
-msgstr "Huvudmeny"
-
-# src/header_stuff.c:515 src/prefs.c:137
-#: src/gtr-dl-teams.ui:70 src/gtr-languages-fetcher.ui:5
-msgid "Language"
-msgstr "Språk"
-
-#: src/gtr-dl-teams.ui:75 src/gtr-header-dialog.ui:149
-msgid "Module"
-msgstr "Modul"
-
-#: src/gtr-dl-teams.ui:80 src/gtr-header-dialog.ui:161
-msgid "Domain"
-msgstr "Domän"
-
-#: src/gtr-dl-teams.ui:85 src/gtr-header-dialog.ui:155
-msgid "Branch"
-msgstr "Gren"
-
-#: src/gtr-dl-teams.ui:93
-msgid "Reserve for translation"
-msgstr "Reservera för översättning"
-
-#: src/gtr-dl-teams.ui:101
-msgid "Info"
-msgstr "Info"
-
-# data/ui/nautilus-gtranslator-view-ui.xml.h:4
-#: src/gtr-dl-teams.ui:104
-msgid "File"
-msgstr "Fil"
-
-#: src/gtr-dl-teams.ui:112
-msgid "Translation State"
-msgstr "Översättningstillstånd"
-
-#: src/gtr-dl-teams.ui:120
-msgid "Stats"
-msgstr "Statistik"
-
-# data/ui/nautilus-gtranslator-view-ui.xml.h:4
-#: src/gtr-dl-teams.ui:133
-msgid "_Load File"
-msgstr "_Läs in fil"
 
 # src/menus.c:349
 #: src/gtr-file-dialogs.c:59
@@ -574,281 +1276,39 @@ msgstr "Gettext-översättningsmall"
 msgid "All files"
 msgstr "Alla filer"
 
-#: src/gtr-greeter.c:216 src/gtr-profile-dialog.c:129
+#: src/gtr-greeter.c:216 src/gtr-profile-dialog.c:133
 #, c-format
 msgid "GNOME Damned Lies integration token, go to your profile in %s to get it"
 msgstr ""
 "Integrationstoken till GNOME Damned Lies, gå till din profil på %s för att "
 "få den"
 
-#: src/gtr-greeter.ui:5 src/gtr-greeter.ui:39
-msgid "Welcome to Translation Editor"
-msgstr "Välkommen till Översättningsredigerare"
-
-#: src/gtr-greeter.ui:19
-msgid "_Next"
-msgstr "_Nästa"
-
-#: src/gtr-greeter.ui:35
-msgid "Welcome"
-msgstr "Välkommen"
-
-#: src/gtr-greeter.ui:41
-msgid ""
-"Before start to use the application, a profile should be created, but don't "
-"worry, the app will guide you to do it in a minute."
-msgstr ""
-"Innan programmet börjar användas ska en profil skapas, men programmet kommer "
-"snart guida dig genom detta, så oroa dig inte."
-
-#: src/gtr-greeter.ui:53
-msgid "Create Profile"
-msgstr "Skapa profil"
-
-# src/prefs.c:108
-#: src/gtr-greeter.ui:59 src/gtr-profile-dialog.ui:49
-msgid "Profile Information"
-msgstr "Profilinformation"
-
-# src/prefs.c:108
-#: src/gtr-greeter.ui:62 src/gtr-greeter.ui:129 src/gtr-profile-dialog.ui:54
-msgid "Profile name"
-msgstr "Profilnamn"
-
-#: src/gtr-greeter.ui:63 src/gtr-profile-dialog.ui:55
-msgid "default"
-msgstr "standard"
-
-# src/prefs.c:108
-#: src/gtr-greeter.ui:71 src/gtr-profile-dialog.ui:63
-msgid "Translator Information"
-msgstr "Översättarinformation"
-
-# src/header_stuff.c:509
-#: src/gtr-greeter.ui:74 src/gtr-profile-dialog.ui:68
-msgid "Translator _name"
-msgstr "Översättarens _namn"
-
-# src/header_stuff.c:512
-#: src/gtr-greeter.ui:80 src/gtr-profile-dialog.ui:74
-msgid "Translator _email"
-msgstr "Översättarens _e-post"
-
-#: src/gtr-greeter.ui:86 src/gtr-profile-dialog.ui:80
-msgid "Translation _team email"
-msgstr "Översättnings_gruppens e-post"
-
-#: src/gtr-greeter.ui:94 src/gtr-profile-dialog.ui:88
-msgid "Damned Lies Integration"
-msgstr "Damned Lies-integration"
-
-#: src/gtr-greeter.ui:97 src/gtr-profile-dialog.ui:93
-msgid "_Damned Lies auth token"
-msgstr "_Damned Lies-autentiseringstoken"
-
-# src/prefs.c:108
-#: src/gtr-greeter.ui:118 src/gtr-greeter.ui:124
-msgid "Confirmation"
-msgstr "Bekräftelse"
-
-# src/header_stuff.c:509
-#: src/gtr-greeter.ui:134
-msgid "Translator name"
-msgstr "Översättarens namn"
-
-# src/header_stuff.c:512
-#: src/gtr-greeter.ui:139
-msgid "Translator email"
-msgstr "Översättarens e-post"
-
-#: src/gtr-greeter.ui:144
-msgid "Team email"
-msgstr "Gruppens e-post"
-
-# src/header_stuff.c:515 src/prefs.c:137
-#: src/gtr-greeter.ui:149
-msgid "Language name"
-msgstr "Språknamn"
-
-# src/prefs.c:141
-#: src/gtr-greeter.ui:154 src/gtr-languages-fetcher.ui:14
-msgid "Language code"
-msgstr "Språkkod"
-
-# src/header_stuff.c:524 src/prefs.c:150
-#: src/gtr-greeter.ui:159 src/gtr-languages-fetcher.ui:34
-msgid "Character set"
-msgstr "Teckenuppsättning"
-
-#: src/gtr-greeter.ui:164 src/gtr-languages-fetcher.ui:54
-msgid "Transfer encoding"
-msgstr "Överföringskodning"
-
-# src/menus.c:135 src/menus.c:367
-#: src/gtr-greeter.ui:169
-msgid "Plural form"
-msgstr "Pluralform"
-
-#: src/gtr-header-dialog.c:381 src/gtr-tab.ui:327
-msgid "Edit Header"
-msgstr "Redigera po-filshuvud"
-
-# src/prefs.c:239
-#: src/gtr-header-dialog.ui:10
-msgid "Translator"
-msgstr "Översättare"
-
-# src/header_stuff.c:486
-#: src/gtr-header-dialog.ui:14 src/gtr-header-dialog.ui:80
-#: src/gtr-header-dialog.ui:140 src/gtr-preferences-dialog.ui:13
-msgid "General"
-msgstr "Allmänt"
-
-# src/header_stuff.c:496
-#: src/gtr-header-dialog.ui:17
-msgid "Use my options to complete the following entries"
-msgstr "Använd mina alternativ för att fylla i följande poster"
-
-# src/header_stuff.c:509
-#: src/gtr-header-dialog.ui:22
-msgid "Translator’s _name"
-msgstr "Översättarens _namn"
-
-# src/header_stuff.c:512
-#: src/gtr-header-dialog.ui:28
-msgid "Translator’s _email"
-msgstr "Översättarens _e-post"
-
-# src/header_stuff.c:515 src/prefs.c:137
-#: src/gtr-header-dialog.ui:34
-msgid "_Language"
-msgstr "_Språk"
-
-# src/prefs.c:141
-#: src/gtr-header-dialog.ui:40
-msgid "Language _code"
-msgstr "Språk_kod"
-
-# src/header_stuff.c:520
-#: src/gtr-header-dialog.ui:46
-msgid "Language _Team email"
-msgstr "Språkgru_ppens e-post"
-
-# src/header_stuff.c:524 src/prefs.c:150
-#: src/gtr-header-dialog.ui:52
-msgid "Char_set"
-msgstr "Teckenta_bell"
-
-# src/header_stuff.c:528 src/prefs.c:154
-#: src/gtr-header-dialog.ui:58
-msgid "Enc_oding"
-msgstr "Teckenk_odning"
-
-# src/menus.c:135 src/menus.c:367
-#: src/gtr-header-dialog.ui:64
-msgid "_Plural forms"
-msgstr "_Pluralformer"
-
-# src/header_stuff.c:443 src/header_stuff.c:448
-#: src/gtr-header-dialog.ui:76
-msgid "Project"
-msgstr "Projekt"
-
-# src/header_stuff.c:471
-#: src/gtr-header-dialog.ui:83
-msgid "Project Id _version"
-msgstr "Projekt-id-_version"
-
-# src/header_stuff.c:474
-#: src/gtr-header-dialog.ui:89
-msgid "Pot _file creation date"
-msgstr "Pot-_filen skapades"
-
-# src/header_stuff.c:479
-#: src/gtr-header-dialog.ui:95
-msgid "Po file _revision date"
-msgstr "Po-filen _reviderades"
-
-#: src/gtr-header-dialog.ui:101
-msgid "Report message _bugs to"
-msgstr "Rapportera _fel i meddelanden till"
-
-# src/header_stuff.c:462
-#: src/gtr-header-dialog.ui:109 src/gtr-upload-dialog.c:147
-msgid "Comment"
-msgstr "Kommentar"
-
-#: src/gtr-header-dialog.ui:136
-msgid "Damned Lies"
-msgstr "Förbannade lögner"
-
-# src/header_stuff.c:515 src/prefs.c:137
-#: src/gtr-header-dialog.ui:143
-msgid "Lang"
-msgstr "Språk"
-
-#: src/gtr-header-dialog.ui:167
-msgid "State"
-msgstr "Tillstånd"
-
-#: src/gtr-header-dialog.ui:173
-msgid "VCS Browser"
-msgstr "Versionshanteringsbläddrare"
-
 # src/header_stuff.c:515 src/prefs.c:137
 #: src/gtr-lang-combo-row.c:90
 msgid "Languages"
 msgstr "Språk"
 
-#: src/gtr-languages-fetcher.ui:11
-msgid "Edit options manually"
-msgstr "Redigera alternativ manuellt"
-
-# src/header_stuff.c:515 src/prefs.c:137
-#: src/gtr-languages-fetcher.ui:21
-msgid "Choose language code"
-msgstr "Välj språkkod"
-
-# src/menus.c:135 src/menus.c:367
-#: src/gtr-languages-fetcher.ui:74
-msgid "Plural forms"
-msgstr "Pluralformer"
-
-# src/menus.c:135 src/menus.c:367
-#: src/gtr-languages-fetcher.ui:81
-msgid "Choose plural forms"
-msgstr "Välj pluralformer"
-
-#: src/gtr-message-table.ui:35
-msgid "Original Message"
-msgstr "Källtext"
-
-# src/dialogs.c:496 src/dialogs.c:594 src/gui.c:398
-#: src/gtr-message-table.ui:43
-msgid "Translated Message"
-msgstr "Översatt text"
-
-#: src/gtr-po.c:465
+#: src/gtr-po.c:461
 #, c-format
 msgid "The file is empty"
 msgstr "Filen är tom"
 
-#: src/gtr-po.c:474
+#: src/gtr-po.c:470
 #, c-format
 msgid "Failed opening file “%s”: %s"
 msgstr "Misslyckades med att öppna filen ”%s”: %s"
 
-#: src/gtr-po.c:545
+#: src/gtr-po.c:541
 #, c-format
 msgid "Could not convert from charset “%s” to UTF-8"
 msgstr "Kunde inte konvertera teckentabell ”%s” till UTF-8"
 
-#: src/gtr-po.c:559 src/gtr-po.c:577
+#: src/gtr-po.c:555 src/gtr-po.c:573
 #, c-format
 msgid "Could not store temporary file for encoding conversion"
 msgstr "Kunde inte lagra temporär fil för teckentabellskonvertering"
 
-#: src/gtr-po.c:601
+#: src/gtr-po.c:597
 #, c-format
 msgid ""
 "All attempt to convert the file to UTF-8 has failed, use the msgconv or "
@@ -859,17 +1319,17 @@ msgstr ""
 "kommandoradsverktygen msgconv eller iconv, innan filen öppnas med GNOME "
 "Översättningsredigerare"
 
-#: src/gtr-po.c:666
+#: src/gtr-po.c:662
 #, c-format
 msgid "Gettext returned a null message domain list."
 msgstr "Gettext returnerade ett noll meddelande domänlista."
 
-#: src/gtr-po.c:713
+#: src/gtr-po.c:709
 #, c-format
 msgid "No messages obtained from parser."
 msgstr "Inga meddelanden hämtades från tolkare."
 
-#: src/gtr-po.c:779
+#: src/gtr-po.c:775
 #, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
@@ -880,17 +1340,17 @@ msgstr ""
 "Pot-filer genereras av kompileringsprocessen.\n"
 "Din fil bör troligtvis kallas ”%s.po”."
 
-#: src/gtr-po.c:809
+#: src/gtr-po.c:805
 #, c-format
 msgid "The file %s is read-only, and can not be overwritten"
 msgstr "Filen %s är skrivskyddad och kan inte skrivas över"
 
-#: src/gtr-po.c:828 src/gtr-po.c:1179
+#: src/gtr-po.c:824 src/gtr-po.c:1175
 #, c-format
 msgid "There is an error in the PO file: %s"
 msgstr "Det finns ett fel i PO-filen: %s"
 
-#: src/gtr-po.c:839
+#: src/gtr-po.c:835
 #, c-format
 msgid "There was an error writing the PO file: %s"
 msgstr "Det inträffade ett fel vid skrivning av PO-filen: %s"
@@ -919,327 +1379,55 @@ msgstr "Vill du verkligen ta bort denna profil?"
 msgid "_Delete"
 msgstr "_Ta bort"
 
-#: src/gtr-preferences-dialog.ui:9
-msgid "F_iles"
-msgstr "F_iler"
-
-# src/prefs.c:166
-#: src/gtr-preferences-dialog.ui:16
-msgid "_Warn if PO file contains fuzzy translations"
-msgstr "_Varna om po-filen innehåller luddiga översättningar"
-
-#: src/gtr-preferences-dialog.ui:22
-msgid "_Remove obsolete entries on save"
-msgstr "_Ta bort föråldrade poster vid sparande"
-
-# src/prefs.c:114
-#: src/gtr-preferences-dialog.ui:30
-msgid "Autosave"
-msgstr "Spara automatiskt"
-
-#: src/gtr-preferences-dialog.ui:33
-msgid "_Activate auto save"
-msgstr "_Aktivera automatisk sparning"
-
-#: src/gtr-preferences-dialog.ui:34
-msgid "Save the current file automatically"
-msgstr "Spara aktuell fil automatiskt"
-
-#: src/gtr-preferences-dialog.ui:40
-msgid "Autosave _Interval"
-msgstr "_Intervall för att spara automatiskt"
-
-#: src/gtr-preferences-dialog.ui:41
-msgid "Number of minutes to autosave"
-msgstr "Antal minuter innan automatisk sparning"
-
-#: src/gtr-preferences-dialog.ui:56
-msgid "Create a _backup copy of files before saving"
-msgstr "Säkerhets_kopiera filer innan de sparas"
-
-# src/menus.c:315 src/menus.c:316
-#: src/gtr-preferences-dialog.ui:69
-msgid "_Editor"
-msgstr "R_edigerare"
-
-#: src/gtr-preferences-dialog.ui:73
-msgid "Text Display"
-msgstr "Textvisning"
-
-#: src/gtr-preferences-dialog.ui:76
-msgid "_Highlight message syntax"
-msgstr "_Markeringssyntax för meddelande"
-
-#: src/gtr-preferences-dialog.ui:82
-msgid "Make _whitespace visible"
-msgstr "Gör alla _tecken synliga"
-
-#: src/gtr-preferences-dialog.ui:88
-msgid "_Font"
-msgstr "_Typsnitt"
-
-# src/dialogs.c:508 src/dialogs.c:588
-#: src/gtr-preferences-dialog.ui:106
-msgid "Contents"
-msgstr "Innehåll"
-
-# src/prefs.c:162
-#: src/gtr-preferences-dialog.ui:109
-msgid "_Remove fuzzy status if message is changed"
-msgstr "Ta _bort luddig status om meddelandet har ändrats"
-
-#: src/gtr-preferences-dialog.ui:115
-msgid "Check _spelling"
-msgstr "Kontrollera _stavning"
-
-# data/ui/nautilus-gtranslator-view-ui.xml.h:4
-#: src/gtr-preferences-dialog.ui:128
-msgid "_Profiles"
-msgstr "_Profiler"
-
-# data/ui/nautilus-gtranslator-view-ui.xml.h:4
-#: src/gtr-preferences-dialog.ui:132
-msgid "Profiles"
-msgstr "Profiler"
-
-# data/ui/nautilus-gtranslator-view-ui.xml.h:4
-#: src/gtr-preferences-dialog.ui:143
-msgid "_Add Profile"
-msgstr "_Lägg till profil"
-
-# src/dialogs.c:390
-#: src/gtr-profile-dialog.ui:7
-msgid "Translation Editor Profile"
-msgstr "Översättningsredigerarprofil"
-
-#: src/gtr-profile-dialog.ui:22
-msgid "_OK"
-msgstr "_OK"
-
-#: src/gtr-projects.ui:15 src/gtr-tab.ui:323
-msgid "Build Translation Memory"
-msgstr "Bygg översättningsminne"
-
-#: src/gtr-projects.ui:25 src/gtr-tab.ui:354
-msgid "Help"
-msgstr "Hjälp"
-
-#: src/gtr-projects.ui:36
-msgid "Select po File"
-msgstr "Välj po-fil"
-
-#: src/gtr-projects.ui:57
-msgid "Open Translation File"
-msgstr "Öppna översättningsfil"
-
-#: src/gtr-projects.ui:58
-msgid "Drag and drop .po files here"
-msgstr "Dra och släpp .po-filer här"
-
-#: src/gtr-projects.ui:65
-msgid "_Open…"
-msgstr "Ö_ppna…"
-
-#: src/gtr-projects.ui:76
-msgid "_Load from DL…"
-msgstr "_Läs in från DL…"
-
-#: src/gtr-search-bar.ui:20
-msgid "Search"
-msgstr "Sök"
-
-#: src/gtr-search-bar.ui:35
-msgid "Previous Result"
-msgstr "Föregående resultat"
-
-#: src/gtr-search-bar.ui:41
-msgid "Next Result"
-msgstr "Nästa resultat"
-
-#: src/gtr-search-bar.ui:58
-msgid "Switch between Search and Search-and-Replace"
-msgstr "Växla mellan Sök och Sök-och-ersätt"
-
-#: src/gtr-search-bar.ui:64
-msgid "Show or hide search options such as case sensitivity"
-msgstr "Visa eller dölj alternativ så som skiftlägeskänslighet"
-
-# src/dialogs.c:575 src/menus.c:362
-#: src/gtr-search-bar.ui:90
-msgid "Replace"
-msgstr "Ersätt"
-
-# src/dialogs.c:575 src/menus.c:362
-#: src/gtr-search-bar.ui:96
-msgid "_Replace"
-msgstr "_Ersätt"
-
-# src/dialogs.c:576
-#: src/gtr-search-bar.ui:103
-msgid "Replace _All"
-msgstr "Ersätt _alla"
-
-#: src/gtr-search-bar.ui:121
-msgid "Case sensitive"
-msgstr "Skiftlägeskänslig"
-
-#: src/gtr-search-bar.ui:131
-msgid "Match whole word only"
-msgstr "Matcha endast hela ord"
-
-#: src/gtr-search-bar.ui:141
-msgid "Wrap around"
-msgstr "Börja om från början"
-
-# src/prefs.c:235
-#: src/gtr-search-bar.ui:151
-msgid "Original text"
-msgstr "Källtext"
-
-# src/dialogs.c:496 src/dialogs.c:594 src/gui.c:398
-#: src/gtr-search-bar.ui:161
-msgid "Translated text"
-msgstr "Översatt text"
-
-#: src/gtr-tab.c:351
+#: src/gtr-tab.c:352
 msgid "There is an error in the message"
 msgstr "Det finns ett fel i meddelandet"
 
 # src/gui.c:385 src/gui.c:389 src/menus.c:348
-#: src/gtr-tab.c:571 src/gtr-tab.c:708
+#: src/gtr-tab.c:571 src/gtr-tab.c:714
 msgid "fuzzy"
 msgstr "luddig"
 
-#: src/gtr-tab.c:738
+#: src/gtr-tab.c:744
 #, c-format
 msgid "Plural %d"
 msgstr "Pluralis %d"
 
-#: src/gtr-tab.c:1470
+#: src/gtr-tab.c:1459
 msgid "Copied original to clipboard"
 msgstr "Kopierade original till urklipp"
 
 # src/dialogs.c:496 src/dialogs.c:594 src/gui.c:398
-#: src/gtr-tab.c:1682
+#: src/gtr-tab.c:1736
 #, c-format
 msgid "Translated: %0.2f%%"
 msgstr "Översatt: %0.2f%%"
 
 # src/dialogs.c:496 src/dialogs.c:594 src/gui.c:398
-#: src/gtr-tab.c:1683
+#: src/gtr-tab.c:1737
 #, c-format
 msgid "Translated: %d"
 msgstr "Översatt: %d"
 
 # src/gui.c:407 src/gui.c:409
-#: src/gtr-tab.c:1684
+#: src/gtr-tab.c:1738
 #, c-format
 msgid "Untranslated: %d"
 msgstr "Oöversatt: %d"
 
 # src/gui.c:385 src/gui.c:389 src/menus.c:348
-#: src/gtr-tab.c:1685
+#: src/gtr-tab.c:1739
 #, c-format
 msgid "Fuzzy: %d"
 msgstr "Luddigt: %d"
 
-#: src/gtr-tab.ui:14
-msgid "Previous message without translation"
-msgstr "Föregående meddelande utan översättning"
-
-#: src/gtr-tab.ui:22
-msgid "Next message without translation"
-msgstr "Nästa meddelande utan översättning"
-
-#: src/gtr-tab.ui:37
-msgid "Toggle Fuzzy State"
-msgstr "Växla luddigt tillstånd"
-
-#: src/gtr-tab.ui:54
-msgid "Find"
-msgstr "Sök"
-
-#: src/gtr-tab.ui:62
-msgid "Upload File"
-msgstr "Skicka fil"
-
-# src/prefs.c:235
-#. <property name="ypad">5</property>
-#: src/gtr-tab.ui:127 src/gtr-tab.ui:308
-msgid "_Original Message"
-msgstr "_Källtext"
-
-# src/dialogs.c:496 src/dialogs.c:594 src/gui.c:398
-#: src/gtr-tab.ui:193
-msgid "Translate_d Text"
-msgstr "_Översatt text"
-
-#: src/gtr-tab.ui:272
-msgid "Open a New File"
-msgstr "Öppna en ny fil"
-
-#: src/gtr-tab.ui:276
-msgid "Open from Damned Lies"
-msgstr "Öppna från Förbannade lögner (Damned Lies)"
-
-#: src/gtr-tab.ui:282
-msgid "Save"
-msgstr "Spara"
-
-# src/menus.c:281
-#: src/gtr-tab.ui:286
-msgid "Save As…"
-msgstr "Spara som…"
-
-#: src/gtr-tab.ui:290
-msgid "Update from Template…"
-msgstr "Uppdatera från mall…"
-
-# src/dialogs.c:401
-#: src/gtr-tab.ui:296
-msgid "So_rt Messages by…"
-msgstr "So_rtera meddelanden efter…"
-
-#: src/gtr-tab.ui:298
-msgid "_Order of Appearance"
-msgstr "_Ordning som de förekommer"
-
-#: src/gtr-tab.ui:303
-msgid "_Message Status"
-msgstr "_Meddelandestatus"
-
-# src/dialogs.c:496 src/dialogs.c:594 src/gui.c:398
-#: src/gtr-tab.ui:313
-msgid "_Translated Message"
-msgstr "Ö_versatt text"
-
-#: src/gtr-tab.ui:319
-msgid "Show ID Column"
-msgstr "Visa ID-kolumn"
-
-#: src/gtr-tab.ui:331
-msgid "Advanced Tools"
-msgstr "Avancerade verktyg"
-
-#: src/gtr-tab.ui:333
-msgid "Fix plural messages"
-msgstr "Fixa pluralmeddelanden"
-
-#: src/gtr-upload-dialog.c:199
+#: src/gtr-upload-dialog.c:203
 msgid "Uploading…"
 msgstr "Skickar…"
 
-#: src/gtr-upload-dialog.c:205
+#: src/gtr-upload-dialog.c:209
 msgid "Upload"
 msgstr "Skicka"
-
-#: src/gtr-upload-dialog.ui:6
-msgid "Upload to Damned Lies"
-msgstr "Skicka till Förbannade lögner (Damned Lies)"
-
-#: src/gtr-upload-dialog.ui:27
-msgid "_Upload"
-msgstr "S_kicka"
 
 # src/prefs.c:239
 #. Translators: this is the title of the window with a modified document
@@ -1263,193 +1451,9 @@ msgstr "Kunde inte spara"
 msgid "File saved"
 msgstr "Filen sparades"
 
-# src/header_stuff.c:486
-#: src/shortcuts-dialog.ui:6
-msgctxt "shortcut window group"
-msgid "General"
-msgstr "Allmänt"
-
-#: src/shortcuts-dialog.ui:10
-msgctxt "shortcut window"
-msgid "Open file"
-msgstr "Öppna fil"
-
-#: src/shortcuts-dialog.ui:16
-msgctxt "shortcut window"
-msgid "Save the current file"
-msgstr "Spara aktuell fil"
-
-#: src/shortcuts-dialog.ui:22
-msgctxt "shortcut window"
-msgid "Save the current file as"
-msgstr "Spara aktuell fil som"
-
-#: src/shortcuts-dialog.ui:28
-msgctxt "shortcut window"
-msgid "Download from DL"
-msgstr "Hämta från DL"
-
-#: src/shortcuts-dialog.ui:34
-msgctxt "shortcut window"
-msgid "Upload to DL"
-msgstr "Skicka till DL"
-
-# src/dialogs.c:574
-#: src/shortcuts-dialog.ui:40
-msgctxt "shortcut window"
-msgid "Preferences"
-msgstr "Inställningar"
-
-#: src/shortcuts-dialog.ui:46
-msgctxt "shortcut window"
-msgid "Keyboard Shortcuts"
-msgstr "Tangentbordsgenvägar"
-
-#: src/shortcuts-dialog.ui:52
-msgctxt "shortcut window"
-msgid "Help"
-msgstr "Hjälp"
-
-#: src/shortcuts-dialog.ui:58
-msgctxt "shortcut window"
-msgid "New Window"
-msgstr "Nytt fönster"
-
-#: src/shortcuts-dialog.ui:63
-msgctxt "shortcut window"
-msgid "Close Window"
-msgstr "Stäng fönster"
-
-#: src/shortcuts-dialog.ui:70
-msgctxt "shortcut window"
-msgid "Quit"
-msgstr "Avsluta"
-
-# src/menus.c:315 src/menus.c:316
-#: src/shortcuts-dialog.ui:78
-msgctxt "shortcut window group"
-msgid "Edit"
-msgstr "Redigera"
-
-# src/menus.c:349
-#: src/shortcuts-dialog.ui:82
-msgctxt "shortcut window"
-msgid "Clear translation"
-msgstr "Töm översättning"
-
-#: src/shortcuts-dialog.ui:88
-msgctxt "shortcut window"
-msgid "Mark/Unmark as fuzzy"
-msgstr "Markera/Avmarkera som luddig"
-
-#: src/shortcuts-dialog.ui:94
-msgctxt "shortcut window"
-msgid "Copy original text to translation"
-msgstr "Kopiera originaltext till översättning"
-
-#: src/shortcuts-dialog.ui:100
-msgctxt "shortcut window"
-msgid "Copy original text to clipboard"
-msgstr "Kopiera originaltext till urklipp"
-
-#: src/shortcuts-dialog.ui:108
-msgctxt "shortcut window group"
-msgid "Navigation"
-msgstr "Navigering"
-
-# src/menus.c:195 src/menus.c:337
-#: src/shortcuts-dialog.ui:112
-msgctxt "shortcut window"
-msgid "Go to the previous message"
-msgstr "Gå till föregående meddelande"
-
-# src/menus.c:195 src/menus.c:337
-#: src/shortcuts-dialog.ui:118
-msgctxt "shortcut window"
-msgid "Go to the next message"
-msgstr "Gå till nästa meddelande"
-
-# src/menus.c:217 src/menus.c:342
-#: src/shortcuts-dialog.ui:124
-msgctxt "shortcut window"
-msgid "Go to the previous untranslated message"
-msgstr "Gå till föregående oöversatta meddelande"
-
-# src/menus.c:216
-#: src/shortcuts-dialog.ui:130
-msgctxt "shortcut window"
-msgid "Go to the next untranslated message"
-msgstr "Gå till nästa oöversatta meddelande"
-
-#: src/shortcuts-dialog.ui:138
-msgctxt "shortcut window group"
-msgid "Translation Memory"
-msgstr "Översättningsminne"
-
-#: src/shortcuts-dialog.ui:142
-msgctxt "shortcut window"
-msgid "Build translation memory"
-msgstr "Bygg översättningsminne"
-
-#: src/shortcuts-dialog.ui:148
-msgctxt "shortcut window"
-msgid "Use 1st...9th suggestion"
-msgstr "Använd 1:a till 9:e förslag"
-
-#: src/shortcuts-dialog.ui:156
-msgctxt "shortcut window group"
-msgid "Find & Replace"
-msgstr "Sök & ersätt"
-
-#: src/shortcuts-dialog.ui:160
-msgctxt "shortcut window"
-msgid "Find"
-msgstr "Sök"
-
-#: src/shortcuts-dialog.ui:166
-msgctxt "shortcut window"
-msgid "Find & Replace"
-msgstr "Sök & ersätt"
-
-#: src/shortcuts-dialog.ui:172
-msgctxt "shortcut window"
-msgid "Forward-search"
-msgstr "Framåtsök"
-
-#: src/shortcuts-dialog.ui:178
-msgctxt "shortcut window"
-msgid "Backward-search"
-msgstr "Bakåtsök"
-
-#: src/shortcuts-dialog.ui:184
-msgctxt "shortcut window"
-msgid "Hide find & replace bar"
-msgstr "Dölj Sök och ersätt-rad"
-
 #: src/translation-memory/gtr-translation-memory-dialog.c:80
 msgid "Select PO directory"
 msgstr "Välj PO-katalog"
-
-#: src/translation-memory/gtr-translation-memory-dialog.ui:7
-msgid "Translation Editor Memory Manager"
-msgstr "Hanterare för översättningsminne"
-
-# src/prefs.c:114
-#: src/translation-memory/gtr-translation-memory-dialog.ui:43
-msgid "Database"
-msgstr "Databas"
-
-#: src/translation-memory/gtr-translation-memory-dialog.ui:48
-msgid "Select the directory which contains PO files"
-msgstr "Välj katalogen som innehåller PO-filer"
-
-#: src/translation-memory/gtr-translation-memory-dialog.ui:60
-msgid "Use only files with this name"
-msgstr "Använd endast filer med detta namn"
-
-#: src/translation-memory/gtr-translation-memory-dialog.ui:79
-msgid "_Add to Database"
-msgstr "_Lägg till i databas"
 
 #: src/translation-memory/org.gnome.Gtranslator.plugins.translation-memory.gschema.xml.in:5
 msgid "PO directory"
@@ -1503,6 +1507,14 @@ msgid ""
 msgstr ""
 "Maximal skillnad i längd mellan meddelanden visade som träffar av "
 "översättningsminnet."
+
+# src/about.c:60
+#~ msgid ""
+#~ "Translation file editing suite for localization of applications and "
+#~ "libraries."
+#~ msgstr ""
+#~ "Svit för redigering av översättningsfiler för lokalanpassning av program "
+#~ "och bibliotek."
 
 #~ msgid "Path:"
 #~ msgstr "Sökväg:"
