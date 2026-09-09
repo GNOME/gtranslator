@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2026-03-08 09:18+0000\n"
-"PO-Revision-Date: 2026-03-11 15:05+0100\n"
+"POT-Creation-Date: 2026-09-04 17:19+0000\n"
+"PO-Revision-Date: 2026-09-09 20:26+0200\n"
 "Last-Translator: Balázs Úr <ur.balazs at fsf dot hu>\n"
 "Language-Team: Hungarian <openscope at fsf dot hu>\n"
 "Language: hu\n"
@@ -21,20 +21,187 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 25.08.1\n"
+"X-Generator: Lokalize 25.12.3\n"
 
-#: data/org.gnome.Gtranslator.appdata.xml.in.in:7
-#: data/org.gnome.Gtranslator.desktop.in.in:2 src/gtr-actions-app.c:89
-#: src/gtr-application.c:513 src/gtr-window.c:206 src/gtr-window.c:452
+#: data/org.gnome.Gtranslator.desktop.in.in:2
+#: data/org.gnome.Gtranslator.metainfo.xml.in.in:7 src/gtr-application.c:518
+#: src/gtr-window.c:196 src/gtr-window.c:442
 msgid "Translation Editor"
 msgstr "Fordításszerkesztő"
 
-#: data/org.gnome.Gtranslator.appdata.xml.in.in:8
+#: data/org.gnome.Gtranslator.desktop.in.in:3
+msgid "PO File Editor"
+msgstr "PO-fájlszerkesztő"
+
 #: data/org.gnome.Gtranslator.desktop.in.in:4
+#: data/org.gnome.Gtranslator.metainfo.xml.in.in:8
 msgid "Translate apps in your language"
 msgstr "Alkalmazások fordítás a saját nyelvére"
 
-#: data/org.gnome.Gtranslator.appdata.xml.in.in:10
+#: data/org.gnome.Gtranslator.desktop.in.in:14
+msgid "Gtranslator;Translation;Editor;Gettext;Write;"
+msgstr "Gtranslator;fordítás;szerkesztő;gettext;írás;"
+
+#: data/org.gnome.Gtranslator.desktop.in.in:19 data/ui/gtr-dl-teams.ui:7
+#: data/ui/gtr-projects.ui:7 data/ui/gtr-tab.ui:340
+msgid "New Window"
+msgstr "Új ablak"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:21
+msgid "Warn if file contains fuzzy translations"
+msgstr "Figyelmeztetés, ha a fájl tartalmaz ellenőrzendő fordításokat"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:22
+msgid ""
+"If true, warn the user when saving a PO translation file containing fuzzy "
+"strings."
+msgstr ""
+"Ha be van állítva, figyelmezteti a felhasználót, ha a PO-fájl mentésekor "
+"ellenőrzendő karakterláncok vannak."
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:29
+msgid "Whether to remove the obsolete entries upon saving"
+msgstr "Az elavult bejegyzések el legyenek-e távolítva mentéskor"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:30
+msgid ""
+"If true, the obsolete entries will be removed from the file after saving"
+msgstr ""
+"Ha igaz, akkor az elavult bejegyzések el lesznek távolítva a fájlból a "
+"mentés után"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:36
+msgid "Auto save files"
+msgstr "Fájlok automatikus mentése"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:37
+msgid "If true, automatically save files at specified intervals."
+msgstr ""
+"Ha be van állítva, akkor automatikusan menti a fájlokat a megadott "
+"időközönként."
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:43
+msgid "Auto save interval"
+msgstr "Automatikus mentés időköze"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:44
+msgid "Interval in minutes at which to automatically save files."
+msgstr "A fájlok automatikus mentésének időköze percben."
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:50
+msgid "Create backup before saving"
+msgstr "Biztonsági mentés készítése mentés előtt"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:51
+msgid "If true, create a backup copy of a file before saving it."
+msgstr ""
+"Ha be van állítva, akkor biztonsági mentést készít a fájl mentése előtt."
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:57
+msgid "Use profile values for header"
+msgstr "Használja a profil értékeit a fejléchez"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:58
+msgid ""
+"If true, overwrite the values in the PO header with those in the active "
+"profile."
+msgstr ""
+"Ha be van állítva, felülírja a PO-fájl fejlécében lévő adatokat az aktuális "
+"profil adataival."
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:65
+msgid "Omit credits in header"
+msgstr "A fejlécben lévő köszönetnyilvánítás kihagyása"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:66
+msgid ""
+"If true, the 'author <email> year' comment won't be added to the PO header's "
+"copyright."
+msgstr ""
+"Ha igaz, akkor a „szerző <e-mail> év” megjegyzés nem kerül hozzáadásra a PO "
+"fejlécének szerzői jogi információiba."
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:75
+msgid "Highlight syntax in edit fields"
+msgstr "Szintaxiskiemelése a szerkesztőmezőkben"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:76
+msgid "If true, apply syntax highlighting to strings in edit fields."
+msgstr ""
+"Ha be van állítva, engedélyezi a karakterláncok szintaxiskiemelését a "
+"szerkesztőmezőkben."
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:82
+msgid "Make whitespace visible"
+msgstr "Üres helyek láthatóvá tétele"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:83
+msgid "If true, display whitespace in strings as representative symbols."
+msgstr ""
+"Ha be van állítva, az üres helyeket jellegzetes karakterekkel helyettesíti a "
+"karakterláncokban."
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:89
+msgid "Remove fuzzy status when message is changed"
+msgstr "Ellenőrzendő állapot törlése az üzenet megváltozásakor"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:90
+msgid "If true, remove fuzzy status from translations when they are changed."
+msgstr ""
+"Ha be van állítva, eltávolítja az ellenőrzendő állapotot a fordításról, "
+"amikor az megváltozik."
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:96
+msgid "Check spelling"
+msgstr "Helyesírás ellenőrzése"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:97
+msgid "If true, check the spelling of translated messages."
+msgstr ""
+"Ha be van állítva, akkor ellenőrzi a lefordított üzenetek helyesírását."
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:108
+msgid "Message list sort order"
+msgstr "Üzenetlista rendezési elve"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:109
+msgid ""
+"Sort order to use in the message list. Possible values are “status”, “id”, "
+"“original-text” and “translated-text”."
+msgstr ""
+"Az üzenetlistánál használt rendezési sorrend. Lehetséges értékek: „status” "
+"(állapot), „id” (azonosító), „original-text” (eredeti szöveg) és „translated-"
+"text” (lefordított szöveg)."
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:116
+msgid "Show ID column"
+msgstr "Azonosító oszlop megjelenítése"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:117
+msgid "If true, displays a column with the id of the message on the editor."
+msgstr ""
+"Ha igaz, akkor megjeleníti az üzenet azonosítóját tartalmazó oszlopot a "
+"szerkesztőben."
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:128
+msgid "Window maximized"
+msgstr "Teljes méretű ablak"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:129
+msgid "Window maximized state"
+msgstr "A teljes méretű ablak állapota"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:136
+#| msgid "Translation _team email"
+msgid "Translation area height"
+msgstr "Fordítási terület magassága"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:137
+#| msgid "Gettext translation template"
+msgid "Height of the translation area panel."
+msgstr "A fordítási terület paneljének magassága."
+
+#: data/org.gnome.Gtranslator.metainfo.xml.in.in:10
 msgid ""
 "Gtranslator is an enhanced gettext po file editor for the GNOME desktop "
 "environment. It handles all forms of gettext po files and includes very "
@@ -50,7 +217,7 @@ msgstr ""
 "üzenetek áttekintéséhez a PO-fájlban), egyszerű navigáció és a fordítás "
 "fordítási üzeneteinek és megjegyzéseinek szerkesztése, ahol pontos."
 
-#: data/org.gnome.Gtranslator.appdata.xml.in.in:19
+#: data/org.gnome.Gtranslator.metainfo.xml.in.in:19
 msgid ""
 "Gtranslator includes also a plugin system with many interesting plugins like "
 "alternate language, insert tags, integration with subversion and a source "
@@ -60,180 +227,764 @@ msgstr ""
 "bővítménnyel, úgymint alternatív nyelv, címkék beszúrása, integráció a "
 "subversion verziókezelővel és forráskód megjelenítő."
 
-#: data/org.gnome.Gtranslator.appdata.xml.in.in:34
-msgid "Translators's main interface"
-msgstr "A fordítók fő felülete"
+#: data/org.gnome.Gtranslator.metainfo.xml.in.in:34
+#| msgid "Translators's main interface"
+msgid "Translator's main interface"
+msgstr "A fordító fő felülete"
 
-#: data/org.gnome.Gtranslator.desktop.in.in:3
-msgid "PO File Editor"
-msgstr "PO-fájlszerkesztő"
+#. developer_name tag deprecated with Appstream 1.0
+#: data/org.gnome.Gtranslator.metainfo.xml.in.in:323
+#: data/org.gnome.Gtranslator.metainfo.xml.in.in:325
+msgid "Daniel García Moreno"
+msgstr "Daniel García Moreno"
 
-#: data/org.gnome.Gtranslator.desktop.in.in:14
-msgid "Gtranslator;Translation;Editor;Gettext;Write;"
-msgstr "Gtranslator;fordítás;szerkesztő;gettext;írás;"
+#: data/ui/gtr-context.ui:25
+msgid "Notes"
+msgstr "Jegyzetek"
 
-#: data/org.gnome.Gtranslator.desktop.in.in:19 src/gtr-dl-teams.ui:7
-#: src/gtr-projects.ui:7 src/gtr-tab.ui:340
+#: data/ui/gtr-context.ui:29 src/gtr-preferences-dialog.c:271
+msgid "Edit"
+msgstr "Szerkesztés"
+
+#: data/ui/gtr-context.ui:59
+#| msgid "Extracted comments"
+msgid "Extracted Comments"
+msgstr "Kinyert megjegyzések"
+
+#: data/ui/gtr-context.ui:85
+#| msgid "Previous Result"
+msgid "Previous Source Text"
+msgstr "Előző forrásszöveg"
+
+#: data/ui/gtr-context.ui:113
+msgid "Paths"
+msgstr "Útvonalak"
+
+#: data/ui/gtr-dl-teams.ui:11 data/ui/gtr-projects.ui:11 data/ui/gtr-tab.ui:344
+msgid "Preferences"
+msgstr "Beállítások"
+
+#: data/ui/gtr-dl-teams.ui:17 data/ui/gtr-projects.ui:21 data/ui/gtr-tab.ui:350
+msgid "Keyboard Shortcuts"
+msgstr "Gyorsbillentyűk"
+
+#: data/ui/gtr-dl-teams.ui:21 data/ui/gtr-projects.ui:29 data/ui/gtr-tab.ui:358
+msgid "About Translation Editor"
+msgstr "A Fordításszerkesztő névjegye"
+
+#: data/ui/gtr-dl-teams.ui:28 data/ui/gtr-dl-teams.ui:49
+msgid "Load from Damned Lies"
+msgstr "Betöltés a Szemenszedett hazugságokról"
+
+#: data/ui/gtr-dl-teams.ui:41 data/ui/gtr-projects.ui:49 data/ui/gtr-tab.ui:47
+msgid "Main Menu"
+msgstr "Főmenü"
+
+#: data/ui/gtr-dl-teams.ui:70 data/ui/gtr-languages-fetcher.ui:5
+msgid "Language"
+msgstr "Nyelv"
+
+#: data/ui/gtr-dl-teams.ui:75 data/ui/gtr-header-dialog.ui:149
+msgid "Module"
+msgstr "Modul"
+
+#: data/ui/gtr-dl-teams.ui:80 data/ui/gtr-header-dialog.ui:161
+msgid "Domain"
+msgstr "Tartomány"
+
+#: data/ui/gtr-dl-teams.ui:85 data/ui/gtr-header-dialog.ui:155
+msgid "Branch"
+msgstr "Ág"
+
+#: data/ui/gtr-dl-teams.ui:93
+msgid "Reserve for translation"
+msgstr "Lefoglalás fordításhoz"
+
+#: data/ui/gtr-dl-teams.ui:101
+msgid "Info"
+msgstr "Információ"
+
+#: data/ui/gtr-dl-teams.ui:104
+msgid "File"
+msgstr "Fájl"
+
+#: data/ui/gtr-dl-teams.ui:112
+msgid "Translation State"
+msgstr "Fordítás állapota"
+
+#: data/ui/gtr-dl-teams.ui:120
+msgid "Stats"
+msgstr "Statisztikák"
+
+#: data/ui/gtr-dl-teams.ui:133
+msgid "_Load File"
+msgstr "Fájl _betöltése"
+
+#: data/ui/gtr-greeter.ui:5 data/ui/gtr-greeter.ui:39
+msgid "Welcome to Translation Editor"
+msgstr "Üdvözli a Fordításszerkesztő!"
+
+#: data/ui/gtr-greeter.ui:19
+msgid "_Next"
+msgstr "_Következő"
+
+#: data/ui/gtr-greeter.ui:35
+msgid "Welcome"
+msgstr "Üdvözöljük"
+
+#: data/ui/gtr-greeter.ui:41
+msgid ""
+"Before start to use the application, a profile should be created, but don't "
+"worry, the app will guide you to do it in a minute."
+msgstr ""
+"Az alkalmazás használatának megkezdése előtt létre kell hozni egy profilt, "
+"de ne aggódjon, az alkalmazás egy perc alatt végigvezeti a folyamaton."
+
+#: data/ui/gtr-greeter.ui:53
+msgid "Create Profile"
+msgstr "Profil létrehozása"
+
+#: data/ui/gtr-greeter.ui:59 data/ui/gtr-profile-dialog.ui:49
+msgid "Profile Information"
+msgstr "Profiladatok"
+
+#: data/ui/gtr-greeter.ui:62 data/ui/gtr-greeter.ui:129
+#: data/ui/gtr-profile-dialog.ui:54
+msgid "Profile name"
+msgstr "Profil neve"
+
+#: data/ui/gtr-greeter.ui:63 data/ui/gtr-profile-dialog.ui:55
+msgid "default"
+msgstr "alapértelmezett"
+
+#: data/ui/gtr-greeter.ui:71 data/ui/gtr-profile-dialog.ui:63
+msgid "Translator Information"
+msgstr "A fordító adatai"
+
+#: data/ui/gtr-greeter.ui:74 data/ui/gtr-profile-dialog.ui:68
+msgid "Translator _name"
+msgstr "Fordító _neve"
+
+#: data/ui/gtr-greeter.ui:80 data/ui/gtr-profile-dialog.ui:74
+msgid "Translator _email"
+msgstr "Fordító _e-mail címe"
+
+#: data/ui/gtr-greeter.ui:86 data/ui/gtr-profile-dialog.ui:80
+msgid "Translation _team email"
+msgstr "Fordító_csapat e-mail-címe"
+
+#: data/ui/gtr-greeter.ui:94 data/ui/gtr-profile-dialog.ui:88
+msgid "Damned Lies Integration"
+msgstr "Szemenszedett hazugságok integráció"
+
+#: data/ui/gtr-greeter.ui:97 data/ui/gtr-profile-dialog.ui:93
+msgid "_Damned Lies auth token"
+msgstr "_Szemenszedett hazugságok hitelesítési token"
+
+#: data/ui/gtr-greeter.ui:118 data/ui/gtr-greeter.ui:124
+msgid "Confirmation"
+msgstr "Megerősítés"
+
+#: data/ui/gtr-greeter.ui:134
+msgid "Translator name"
+msgstr "Fordító neve"
+
+#: data/ui/gtr-greeter.ui:139
+msgid "Translator email"
+msgstr "Fordító e-mail címe"
+
+#: data/ui/gtr-greeter.ui:144
+msgid "Team email"
+msgstr "Csapat e-mail címe"
+
+#: data/ui/gtr-greeter.ui:149
+msgid "Language name"
+msgstr "Nyelv neve"
+
+#: data/ui/gtr-greeter.ui:154 data/ui/gtr-languages-fetcher.ui:14
+msgid "Language code"
+msgstr "Nyelv kódja"
+
+#: data/ui/gtr-greeter.ui:159 data/ui/gtr-languages-fetcher.ui:34
+msgid "Character set"
+msgstr "Karakterkészlet"
+
+#: data/ui/gtr-greeter.ui:164 data/ui/gtr-languages-fetcher.ui:54
+msgid "Transfer encoding"
+msgstr "Átviteli kódolás"
+
+#: data/ui/gtr-greeter.ui:169
+msgid "Plural form"
+msgstr "Többes számú alak"
+
+#: data/ui/gtr-header-dialog.ui:10
+msgid "Translator"
+msgstr "Fordító"
+
+#: data/ui/gtr-header-dialog.ui:14 data/ui/gtr-header-dialog.ui:80
+#: data/ui/gtr-header-dialog.ui:140 data/ui/gtr-preferences-dialog.ui:13
+msgid "General"
+msgstr "Általános"
+
+#: data/ui/gtr-header-dialog.ui:17
+msgid "Use my options to complete the following entries"
+msgstr "Használja a beállításaimat a következő bejegyzések kitöltéséhez"
+
+#: data/ui/gtr-header-dialog.ui:22
+msgid "Translator’s _name"
+msgstr "Fordító _neve"
+
+#: data/ui/gtr-header-dialog.ui:28
+msgid "Translator’s _email"
+msgstr "Fordító _e-mail címe"
+
+#: data/ui/gtr-header-dialog.ui:34
+msgid "_Language"
+msgstr "Ny_elv"
+
+#: data/ui/gtr-header-dialog.ui:40
+msgid "Language _code"
+msgstr "Nyelv _kódja"
+
+#: data/ui/gtr-header-dialog.ui:46
+msgid "Language _Team email"
+msgstr "Nyelvi _csapat e-mail-címe"
+
+#: data/ui/gtr-header-dialog.ui:52
+msgid "Char_set"
+msgstr "Karaterké_szlet"
+
+#: data/ui/gtr-header-dialog.ui:58
+msgid "Enc_oding"
+msgstr "Kód_olás"
+
+#: data/ui/gtr-header-dialog.ui:64
+msgid "_Plural forms"
+msgstr "_Többes számú alakok"
+
+#: data/ui/gtr-header-dialog.ui:76
+msgid "Project"
+msgstr "Projekt"
+
+#: data/ui/gtr-header-dialog.ui:83
+msgid "Project Id _version"
+msgstr "Projektazonosító, _verzió"
+
+#: data/ui/gtr-header-dialog.ui:89
+msgid "Pot _file creation date"
+msgstr "POT-_fájl létrehozási dátuma"
+
+#: data/ui/gtr-header-dialog.ui:95
+msgid "Po file _revision date"
+msgstr "PO-fájl _felülvizsgálati dátuma"
+
+#: data/ui/gtr-header-dialog.ui:101
+msgid "Report message _bugs to"
+msgstr "Üzenet_hibák küldése ide"
+
+#: data/ui/gtr-header-dialog.ui:109 src/gtr-upload-dialog.c:151
+msgid "Comment"
+msgstr "Megjegyzés"
+
+#: data/ui/gtr-header-dialog.ui:136
+msgid "Damned Lies"
+msgstr "Szemenszedett hazugságok"
+
+#: data/ui/gtr-header-dialog.ui:143
+msgid "Lang"
+msgstr "Nyelv"
+
+#: data/ui/gtr-header-dialog.ui:167
+msgid "State"
+msgstr "Állapot"
+
+#: data/ui/gtr-header-dialog.ui:173
+msgid "VCS Browser"
+msgstr "Verziókövető rendszer böngésző"
+
+#: data/ui/gtr-languages-fetcher.ui:11
+msgid "Edit options manually"
+msgstr "Beállítások kézi szerkesztése"
+
+#: data/ui/gtr-languages-fetcher.ui:21
+msgid "Choose language code"
+msgstr "Nyelvkód kiválasztása"
+
+#: data/ui/gtr-languages-fetcher.ui:74
+msgid "Plural forms"
+msgstr "Többes számú alakok"
+
+#: data/ui/gtr-languages-fetcher.ui:81
+msgid "Choose plural forms"
+msgstr "Többes számú alakok kiválasztása"
+
+#: data/ui/gtr-message-table.ui:35
+msgid "Original Message"
+msgstr "Eredeti üzenet"
+
+#: data/ui/gtr-message-table.ui:43
+msgid "Translated Message"
+msgstr "Lefordított üzenet"
+
+#: data/ui/gtr-preferences-dialog.ui:9
+msgid "F_iles"
+msgstr "_Fájlok"
+
+#: data/ui/gtr-preferences-dialog.ui:16
+msgid "_Warn if PO file contains fuzzy translations"
+msgstr "_Figyelmeztetés, ha a PO-fájl tartalmaz ellenőrzendő fordításokat"
+
+#: data/ui/gtr-preferences-dialog.ui:22
+msgid "_Remove obsolete entries on save"
+msgstr "_Elavult bejegyzések eltávolítása mentéskor"
+
+#: data/ui/gtr-preferences-dialog.ui:30
+msgid "Autosave"
+msgstr "Automatikus mentés"
+
+#: data/ui/gtr-preferences-dialog.ui:33
+msgid "_Activate auto save"
+msgstr "Automatikus mentés _bekapcsolása"
+
+#: data/ui/gtr-preferences-dialog.ui:34
+msgid "Save the current file automatically"
+msgstr "A jelenlegi fájl automatikus mentése"
+
+#: data/ui/gtr-preferences-dialog.ui:40
+msgid "Autosave _Interval"
+msgstr "Automatikus mentés _időköze"
+
+#: data/ui/gtr-preferences-dialog.ui:41
+msgid "Number of minutes to autosave"
+msgstr "Percek száma az automatikus mentéshez"
+
+#: data/ui/gtr-preferences-dialog.ui:56
+msgid "Create a _backup copy of files before saving"
+msgstr "_Biztonsági mentés készítése a fájlok mentése előtt"
+
+#: data/ui/gtr-preferences-dialog.ui:69
+msgid "_Editor"
+msgstr "_Szerkesztő"
+
+#: data/ui/gtr-preferences-dialog.ui:73
+msgid "Text Display"
+msgstr "Szövegmegjelenítés"
+
+#: data/ui/gtr-preferences-dialog.ui:76
+msgid "_Highlight message syntax"
+msgstr "Üzenetszintaxis _kiemelése"
+
+#: data/ui/gtr-preferences-dialog.ui:82
+msgid "Make _whitespace visible"
+msgstr "Üres h_elyek láthatóvá tétele"
+
+#: data/ui/gtr-preferences-dialog.ui:88
+msgid "_Font"
+msgstr "_Betűkészlet"
+
+#: data/ui/gtr-preferences-dialog.ui:106
+msgid "Contents"
+msgstr "Tartalom"
+
+#: data/ui/gtr-preferences-dialog.ui:109
+msgid "_Remove fuzzy status if message is changed"
+msgstr "Ellenő_rzendő állapot eltávolítása, ha az üzenet módosult"
+
+#: data/ui/gtr-preferences-dialog.ui:115
+msgid "Check _spelling"
+msgstr "Helyesírás-ellenőrzé_s"
+
+#: data/ui/gtr-preferences-dialog.ui:128
+msgid "_Profiles"
+msgstr "_Profilok"
+
+#: data/ui/gtr-preferences-dialog.ui:132
+msgid "Profiles"
+msgstr "Profilok"
+
+#: data/ui/gtr-preferences-dialog.ui:143
+msgid "_Add Profile"
+msgstr "Profil _hozzáadása"
+
+#: data/ui/gtr-profile-dialog.ui:7
+msgid "Translation Editor Profile"
+msgstr "Fordításszerkesztő profil"
+
+#: data/ui/gtr-profile-dialog.ui:15 data/ui/gtr-upload-dialog.ui:20
+#: src/gtr-close-confirmation-dialog.c:121 src/gtr-context.c:170
+#: src/gtr-preferences-dialog.c:452
+msgid "_Cancel"
+msgstr "_Mégse"
+
+#: data/ui/gtr-profile-dialog.ui:22
+msgid "_OK"
+msgstr "_OK"
+
+#: data/ui/gtr-projects.ui:15 data/ui/gtr-tab.ui:323
+msgid "Build Translation Memory"
+msgstr "Fordítási memória építése"
+
+#: data/ui/gtr-projects.ui:25 data/ui/gtr-tab.ui:354
+msgid "Help"
+msgstr "Súgó"
+
+#: data/ui/gtr-projects.ui:36
+msgid "Select po File"
+msgstr "PO-fájl kiválasztása"
+
+#: data/ui/gtr-projects.ui:57
+msgid "Open Translation File"
+msgstr "Fordítási fájl megnyitása"
+
+#: data/ui/gtr-projects.ui:58
+msgid "Drag and drop .po files here"
+msgstr "Fogjon meg és ejtsen ide PO-fájlokat"
+
+#: data/ui/gtr-projects.ui:65
+msgid "_Open…"
+msgstr "_Megnyitás…"
+
+#: data/ui/gtr-projects.ui:76
+msgid "_Load from DL…"
+msgstr "_Betöltés az SzH-ról…"
+
+#: data/ui/gtr-search-bar.ui:20
+msgid "Search"
+msgstr "Keresés"
+
+#: data/ui/gtr-search-bar.ui:35
+msgid "Previous Result"
+msgstr "Előző találat"
+
+#: data/ui/gtr-search-bar.ui:41
+msgid "Next Result"
+msgstr "Következő találat"
+
+#: data/ui/gtr-search-bar.ui:58
+msgid "Switch between Search and Search-and-Replace"
+msgstr "Váltás a Keresés és a Keresés és csere között"
+
+#: data/ui/gtr-search-bar.ui:64
+msgid "Show or hide search options such as case sensitivity"
+msgstr ""
+"A keresési beállítások megjelenítése vagy elrejtése, mint például a kis- és "
+"nagybetűk megkülönböztetése"
+
+#: data/ui/gtr-search-bar.ui:90
+msgid "Replace"
+msgstr "Csere"
+
+#: data/ui/gtr-search-bar.ui:96
+msgid "_Replace"
+msgstr "_Csere"
+
+#: data/ui/gtr-search-bar.ui:103
+msgid "Replace _All"
+msgstr "Öss_zes cseréje"
+
+#: data/ui/gtr-search-bar.ui:121
+msgid "Case sensitive"
+msgstr "Kis- és nagybetűk megkülönböztetése"
+
+#: data/ui/gtr-search-bar.ui:131
+msgid "Match whole word only"
+msgstr "Illesztés csak teljes szóra"
+
+#: data/ui/gtr-search-bar.ui:141
+msgid "Wrap around"
+msgstr "Körkörös keresés"
+
+#: data/ui/gtr-search-bar.ui:151
+msgid "Original text"
+msgstr "Eredeti szöveg"
+
+#: data/ui/gtr-search-bar.ui:161
+msgid "Translated text"
+msgstr "Lefordított szöveg"
+
+#: data/ui/gtr-tab.ui:14
+msgid "Previous message without translation"
+msgstr "Előző fordítás nélküli üzenet"
+
+#: data/ui/gtr-tab.ui:22
+msgid "Next message without translation"
+msgstr "Következő fordítás nélküli üzenet"
+
+#: data/ui/gtr-tab.ui:37
+msgid "Toggle Fuzzy State"
+msgstr "Ellenőrzendő állapot átkapcsolása"
+
+#: data/ui/gtr-tab.ui:54
+msgid "Find"
+msgstr "Keresés"
+
+#: data/ui/gtr-tab.ui:62
+msgid "Upload File"
+msgstr "Fájl feltöltése"
+
+#. <property name="ypad">5</property>
+#: data/ui/gtr-tab.ui:127 data/ui/gtr-tab.ui:308
+msgid "_Original Message"
+msgstr "_Eredeti üzenet"
+
+#: data/ui/gtr-tab.ui:193
+msgid "Translate_d Text"
+msgstr "Lefor_dított szöveg"
+
+#: data/ui/gtr-tab.ui:272
+msgid "Open a New File"
+msgstr "Új fájl megnyitása"
+
+#: data/ui/gtr-tab.ui:276
+msgid "Open from Damned Lies"
+msgstr "Megnyitás a Szemenszedett hazugságokról"
+
+#: data/ui/gtr-tab.ui:282
+msgid "Save"
+msgstr "Mentés"
+
+#: data/ui/gtr-tab.ui:286
+msgid "Save As…"
+msgstr "Mentés másként…"
+
+#: data/ui/gtr-tab.ui:290
+msgid "Update from Template…"
+msgstr "Frissítés sablonból…"
+
+#: data/ui/gtr-tab.ui:296
+msgid "So_rt Messages by…"
+msgstr "Üzenetek _rendezési szempontja…"
+
+#: data/ui/gtr-tab.ui:298
+msgid "_Order of Appearance"
+msgstr "Megjelenés s_orrendje"
+
+#: data/ui/gtr-tab.ui:303
+msgid "_Message Status"
+msgstr "Ü_zenet állapota"
+
+#: data/ui/gtr-tab.ui:313
+msgid "_Translated Message"
+msgstr "_Lefordított üzenet"
+
+#: data/ui/gtr-tab.ui:319
+msgid "Show ID Column"
+msgstr "Azonosító oszlop megjelenítése"
+
+#: data/ui/gtr-tab.ui:327 src/gtr-header-dialog.c:381
+msgid "Edit Header"
+msgstr "Fejléc szerkesztése"
+
+#: data/ui/gtr-tab.ui:331
+msgid "Advanced Tools"
+msgstr "Speciális eszközök"
+
+#: data/ui/gtr-tab.ui:333
+msgid "Fix plural messages"
+msgstr "Többes számú üzenetek javítása"
+
+#: data/ui/gtr-translation-memory-dialog.ui:7
+msgid "Translation Editor Memory Manager"
+msgstr "Fordításszerkesztő fordításimemória-kezelő"
+
+#: data/ui/gtr-translation-memory-dialog.ui:43
+msgid "Database"
+msgstr "Adatbázis"
+
+#: data/ui/gtr-translation-memory-dialog.ui:48
+msgid "Select the directory which contains PO files"
+msgstr "Válassza ki a PO-fájlokat tartalmazó könyvtárat"
+
+#: data/ui/gtr-translation-memory-dialog.ui:60
+msgid "Use only files with this name"
+msgstr "Csak ilyen nevű fájlok használata"
+
+#: data/ui/gtr-translation-memory-dialog.ui:79
+msgid "_Add to Database"
+msgstr "_Hozzáadás az adatbázishoz"
+
+#: data/ui/gtr-upload-dialog.ui:6
+msgid "Upload to Damned Lies"
+msgstr "Feltöltés a Szemenszedett hazugságokra"
+
+#: data/ui/gtr-upload-dialog.ui:27
+msgid "_Upload"
+msgstr "_Feltöltés"
+
+#: data/ui/shortcuts-dialog.ui:6
+msgctxt "shortcut window group"
+msgid "General"
+msgstr "Általános"
+
+#: data/ui/shortcuts-dialog.ui:10
+msgctxt "shortcut window"
+msgid "Open file"
+msgstr "Fájl megnyitása"
+
+#: data/ui/shortcuts-dialog.ui:16
+msgctxt "shortcut window"
+msgid "Save the current file"
+msgstr "Jelenlegi fájl mentése"
+
+#: data/ui/shortcuts-dialog.ui:22
+msgctxt "shortcut window"
+msgid "Save the current file as"
+msgstr "Jelenlegi fájl mentése más néven"
+
+#: data/ui/shortcuts-dialog.ui:28
+msgctxt "shortcut window"
+msgid "Download from DL"
+msgstr "Letöltés az SzH-ról…"
+
+#: data/ui/shortcuts-dialog.ui:34
+msgctxt "shortcut window"
+msgid "Upload to DL"
+msgstr "Feltöltés az SzH-ra"
+
+#: data/ui/shortcuts-dialog.ui:40
+msgctxt "shortcut window"
+msgid "Preferences"
+msgstr "Beállítások"
+
+#: data/ui/shortcuts-dialog.ui:46
+msgctxt "shortcut window"
+msgid "Keyboard Shortcuts"
+msgstr "Gyorsbillentyűk"
+
+#: data/ui/shortcuts-dialog.ui:52
+msgctxt "shortcut window"
+msgid "Help"
+msgstr "Súgó"
+
+#: data/ui/shortcuts-dialog.ui:58
+msgctxt "shortcut window"
 msgid "New Window"
 msgstr "Új ablak"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:22
-msgid "Warn if file contains fuzzy translations"
-msgstr "Figyelmeztetés, ha a fájl tartalmaz ellenőrzendő fordításokat"
+#: data/ui/shortcuts-dialog.ui:63
+msgctxt "shortcut window"
+msgid "Close Window"
+msgstr "Ablak bezárása"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:23
-msgid ""
-"If true, warn the user when saving a PO translation file containing fuzzy "
-"strings."
-msgstr ""
-"Ha be van állítva, figyelmezteti a felhasználót, ha a PO-fájl mentésekor "
-"ellenőrzendő karakterláncok vannak."
+#: data/ui/shortcuts-dialog.ui:70
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr "Kilépés"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:30
-msgid "Whether to remove the obsolete entries upon saving"
-msgstr "Az elavult bejegyzések el legyenek-e távolítva mentéskor"
+#: data/ui/shortcuts-dialog.ui:78
+msgctxt "shortcut window group"
+msgid "Edit"
+msgstr "Szerkesztés"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:31
-msgid ""
-"If true, the obsolete entries will be removed from the file after saving"
-msgstr ""
-"Ha igaz, akkor az elavult bejegyzések el lesznek távolítva a fájlból a "
-"mentés után"
+#: data/ui/shortcuts-dialog.ui:82
+msgctxt "shortcut window"
+msgid "Clear translation"
+msgstr "Fordítás törlése"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:37
-msgid "Auto save files"
-msgstr "Fájlok automatikus mentése"
+#: data/ui/shortcuts-dialog.ui:88
+msgctxt "shortcut window"
+msgid "Mark/Unmark as fuzzy"
+msgstr "Megjelölés ellenőrzendőként vagy megjelölés törlése"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:38
-msgid "If true, automatically save files at specified intervals."
-msgstr ""
-"Ha be van állítva, akkor automatikusan menti a fájlokat a megadott "
-"időközönként."
+#: data/ui/shortcuts-dialog.ui:94
+msgctxt "shortcut window"
+msgid "Copy original text to translation"
+msgstr "Eredeti szöveg másolása a fordításba"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:44
-msgid "Auto save interval"
-msgstr "Automatikus mentés időköze"
+#: data/ui/shortcuts-dialog.ui:100
+msgctxt "shortcut window"
+msgid "Copy original text to clipboard"
+msgstr "Eredeti szöveg másolása a vágólapra"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:45
-msgid "Interval in minutes at which to automatically save files."
-msgstr "A fájlok automatikus mentésének időköze percben."
+#: data/ui/shortcuts-dialog.ui:108
+msgctxt "shortcut window group"
+msgid "Navigation"
+msgstr "Navigáció"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:51
-msgid "Create backup before saving"
-msgstr "Biztonsági mentés készítése mentés előtt"
+#: data/ui/shortcuts-dialog.ui:112
+msgctxt "shortcut window"
+msgid "Go to the previous message"
+msgstr "Ugrás az előző üzenetre"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:52
-msgid "If true, create a backup copy of a file before saving it."
-msgstr ""
-"Ha be van állítva, akkor biztonsági mentést készít a fájl mentése előtt."
+#: data/ui/shortcuts-dialog.ui:118
+msgctxt "shortcut window"
+msgid "Go to the next message"
+msgstr "Ugrás a következő üzenetre"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:58
-msgid "Use profile values for header"
-msgstr "Használja a profil értékeit a fejléchez"
+#: data/ui/shortcuts-dialog.ui:124
+#| msgctxt "shortcut window"
+#| msgid "Go to the previous untranslated message"
+msgctxt "shortcut window"
+msgid "Go to the previous plural form"
+msgstr "Ugrás az előző többes számú alakhoz"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:59
-msgid ""
-"If true, overwrite the values in the PO header with those in the active "
-"profile."
-msgstr ""
-"Ha be van állítva, felülírja a PO-fájl fejlécében lévő adatokat az aktuális "
-"profil adataival."
+#: data/ui/shortcuts-dialog.ui:130
+#| msgctxt "shortcut window"
+#| msgid "Go to the next untranslated message"
+msgctxt "shortcut window"
+msgid "Go to the next plural form"
+msgstr "Ugrás a következő többes számú alakhoz"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:66
-msgid "Omit credits in header"
-msgstr "A fejlécben lévő köszönetnyilvánítás kihagyása"
+#: data/ui/shortcuts-dialog.ui:136
+msgctxt "shortcut window"
+msgid "Go to the previous untranslated message"
+msgstr "Ugrás az előző lefordítatlan üzenetre"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:67
-msgid ""
-"If true, the 'author <email> year' comment won't be added to the PO header's "
-"copyright."
-msgstr ""
-"Ha igaz, akkor a „szerző <e-mail> év” megjegyzés nem kerül hozzáadásra a PO "
-"fejlécének szerzői jogi információiba."
+#: data/ui/shortcuts-dialog.ui:142
+msgctxt "shortcut window"
+msgid "Go to the next untranslated message"
+msgstr "Ugrás a következő lefordítatlan üzenetre"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:76
-msgid "Highlight syntax in edit fields"
-msgstr "Szintaxiskiemelése a szerkesztőmezőkben"
+#: data/ui/shortcuts-dialog.ui:150
+msgctxt "shortcut window group"
+msgid "Translation Memory"
+msgstr "Fordítási memória"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:77
-msgid "If true, apply syntax highlighting to strings in edit fields."
-msgstr ""
-"Ha be van állítva, engedélyezi a karakterláncok szintaxiskiemelését a "
-"szerkesztőmezőkben."
+#: data/ui/shortcuts-dialog.ui:154
+msgctxt "shortcut window"
+msgid "Build translation memory"
+msgstr "Fordítási memória építése"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:83
-msgid "Make whitespace visible"
-msgstr "Üres helyek láthatóvá tétele"
+#: data/ui/shortcuts-dialog.ui:160
+msgctxt "shortcut window"
+msgid "Use 1st...9th suggestion"
+msgstr "1-9. javaslat használata"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:84
-msgid "If true, display whitespace in strings as representative symbols."
-msgstr ""
-"Ha be van állítva, az üres helyeket jellegzetes karakterekkel helyettesíti a "
-"karakterláncokban."
+#: data/ui/shortcuts-dialog.ui:168
+msgctxt "shortcut window group"
+msgid "Find & Replace"
+msgstr "Keresés és csere"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:90
-msgid "Remove fuzzy status when message is changed"
-msgstr "Ellenőrzendő állapot törlése az üzenet megváltozásakor"
+#: data/ui/shortcuts-dialog.ui:172
+msgctxt "shortcut window"
+msgid "Find"
+msgstr "Keresés"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:91
-msgid "If true, remove fuzzy status from translations when they are changed."
-msgstr ""
-"Ha be van állítva, eltávolítja az ellenőrzendő állapotot a fordításról, "
-"amikor az megváltozik."
+#: data/ui/shortcuts-dialog.ui:178
+msgctxt "shortcut window"
+msgid "Find & Replace"
+msgstr "Keresés és csere"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:97
-msgid "Check spelling"
-msgstr "Helyesírás ellenőrzése"
+#: data/ui/shortcuts-dialog.ui:184
+msgctxt "shortcut window"
+msgid "Forward-search"
+msgstr "Keresés előre"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:98
-msgid "If true, check the spelling of translated messages."
-msgstr ""
-"Ha be van állítva, akkor ellenőrzi a lefordított üzenetek helyesírását."
+#: data/ui/shortcuts-dialog.ui:190
+msgctxt "shortcut window"
+msgid "Backward-search"
+msgstr "Keresés vissza"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:109
-msgid "Message list sort order"
-msgstr "Üzenetlista rendezési elve"
-
-#: data/org.gnome.Gtranslator.gschema.xml.in:110
-msgid ""
-"Sort order to use in the message list. Possible values are “status”, “id”, "
-"“original-text” and “translated-text”."
-msgstr ""
-"Az üzenetlistánál használt rendezési sorrend. Lehetséges értékek: „status” "
-"(állapot), „id” (azonosító), „original-text” (eredeti szöveg) és „translated-"
-"text” (lefordított szöveg)."
-
-#: data/org.gnome.Gtranslator.gschema.xml.in:117
-msgid "Show ID column"
-msgstr "Azonosító oszlop megjelenítése"
-
-#: data/org.gnome.Gtranslator.gschema.xml.in:118
-msgid "If true, displays a column with the id of the message on the editor."
-msgstr ""
-"Ha igaz, akkor megjeleníti az üzenet azonosítóját tartalmazó oszlopot a "
-"szerkesztőben."
-
-#: data/org.gnome.Gtranslator.gschema.xml.in:129
-msgid "Window maximized"
-msgstr "Teljes méretű ablak"
-
-#: data/org.gnome.Gtranslator.gschema.xml.in:130
-msgid "Window maximized state"
-msgstr "A teljes méretű ablak állapota"
-
-#: src/gtr-actions-app.c:86
-msgid ""
-"Translation file editing suite for localization of applications and "
-"libraries."
-msgstr ""
-"Fordításifájl-szerkesztő program alkalmazások és programkönyvtárak "
-"honosításához."
+#: data/ui/shortcuts-dialog.ui:196
+msgctxt "shortcut window"
+msgid "Hide find & replace bar"
+msgstr "Keresés és csere sáv elrejtése"
 
 #.
 #. * Note to translators: put here your name and email so it will show
 #. * up in the "about" box
 #.
-#: src/gtr-actions-app.c:103
+#: src/gtr-actions-app.c:96
 msgid "translator-credits"
 msgstr ""
 "Griechisch Erika <griechisch.erika at gmail dot com>\n"
@@ -243,19 +994,18 @@ msgstr ""
 "Meskó Balázs <mesko.balazs at fsf dot hu>\n"
 "Úr Balázs <ur.balazs at fsf dot hu>"
 
-#: src/gtr-actions-file.c:94
+#: src/gtr-actions-file.c:95
 msgid "Could not update from template"
 msgstr "Nem sikerült frissíteni a sablonból"
 
-#: src/gtr-actions-file.c:98 src/gtr-actions-file.c:171
-#: src/gtr-actions-file.c:455 src/gtr-actions-file.c:477
-#: src/gtr-actions-file.c:516 src/gtr-actions-file.c:542
-#: src/gtr-actions-file.c:726 src/gtr-actions-file.c:769
-#: src/gtr-actions-file.c:927 src/gtr-dl-teams.c:165 src/gtr-dl-teams.c:227
-#: src/gtr-dl-teams.c:346 src/gtr-dl-teams.c:434 src/gtr-dl-teams.c:574
-#: src/gtr-dl-teams.c:585 src/gtr-dl-teams.c:597 src/gtr-dl-teams.c:628
-#: src/gtr-dl-teams.c:639 src/gtr-dl-teams.c:711 src/gtr-tab.c:349
-#: src/gtr-window.c:157 src/gtr-window.c:347
+#: src/gtr-actions-file.c:99 src/gtr-actions-file.c:170
+#: src/gtr-actions-file.c:450 src/gtr-actions-file.c:472
+#: src/gtr-actions-file.c:511 src/gtr-actions-file.c:537
+#: src/gtr-actions-file.c:720 src/gtr-actions-file.c:763 src/gtr-dl-teams.c:163
+#: src/gtr-dl-teams.c:224 src/gtr-dl-teams.c:343 src/gtr-dl-teams.c:430
+#: src/gtr-dl-teams.c:568 src/gtr-dl-teams.c:579 src/gtr-dl-teams.c:591
+#: src/gtr-dl-teams.c:622 src/gtr-dl-teams.c:633 src/gtr-dl-teams.c:705
+#: src/gtr-tab.c:355 src/gtr-window.c:147 src/gtr-window.c:337
 msgid "OK"
 msgstr "Rendben"
 
@@ -263,11 +1013,11 @@ msgstr "Rendben"
 msgid "msgmerge failed"
 msgstr "Az msgmerge sikertelen"
 
-#: src/gtr-actions-file.c:161
+#: src/gtr-actions-file.c:160
 msgid "Updated from Template"
 msgstr "Frissítve a sablonból"
 
-#: src/gtr-actions-file.c:164
+#: src/gtr-actions-file.c:163
 #, c-format
 msgid ""
 "Messages: %d → %d (%+d)\n"
@@ -280,66 +1030,66 @@ msgstr ""
 "Ellenőrzendő: %d → %d (%+d)\n"
 "Lefordítatlan: %d → %d (%+d)"
 
-#: src/gtr-actions-file.c:222
+#: src/gtr-actions-file.c:221
 msgid "msgmerge not found on PATH. Install gettext (msgmerge) and try again."
 msgstr ""
 "Az msgmerge nem található a PATH környezeti változóban. Telepítse a gettext "
 "(msgmerge) csomagot, és próbálja meg újra."
 
-#: src/gtr-actions-file.c:248
+#: src/gtr-actions-file.c:247
 msgid "Failed to start msgmerge"
 msgstr "Nem sikerült az msgmerge indítása"
 
-#: src/gtr-actions-file.c:265
+#: src/gtr-actions-file.c:263
 msgid "Select Template (.pot)"
 msgstr "Sablon kiválasztása (.pot)"
 
-#: src/gtr-actions-file.c:280
+#: src/gtr-actions-file.c:278
 msgid "Gettext translation template (*.pot)"
 msgstr "Gettext fordítási sablon (*.pot)"
 
-#: src/gtr-actions-file.c:311
+#: src/gtr-actions-file.c:306
 msgid "Please save the current file before updating from a template."
 msgstr "Mentse el a jelenlegi fájlt, mielőtt frissítene egy sablonból."
 
-#: src/gtr-actions-file.c:378 src/gtr-close-confirmation-dialog.c:338
+#: src/gtr-actions-file.c:373 src/gtr-close-confirmation-dialog.c:314
 msgid "Unsaved Changes"
 msgstr "Mentetlen változtatások"
 
-#: src/gtr-actions-file.c:383
+#: src/gtr-actions-file.c:378
 #, c-format
 msgid "Do you want to write all the changes done to %s?"
 msgstr "Szeretné kiírni az összes elvégzett változtatást ide: %s?"
 
-#: src/gtr-actions-file.c:386
+#: src/gtr-actions-file.c:381
 msgid "Cancel"
 msgstr "Mégse"
 
-#: src/gtr-actions-file.c:387
+#: src/gtr-actions-file.c:382
 msgid "Continue Without Saving"
 msgstr "Folytatás mentés nélkül"
 
-#: src/gtr-actions-file.c:387
+#: src/gtr-actions-file.c:382
 msgid "Save and Open"
 msgstr "Mentés és megnyitás"
 
-#: src/gtr-actions-file.c:409
+#: src/gtr-actions-file.c:404
 msgid "Open file for translation"
 msgstr "Fájl megnyitása fordításhoz"
 
-#: src/gtr-actions-file.c:453
+#: src/gtr-actions-file.c:448
 msgid "Could not save file"
 msgstr "Nem sikerült elmenteni a fájlt"
 
-#: src/gtr-actions-file.c:514
+#: src/gtr-actions-file.c:509
 msgid "This file has already been uploaded"
 msgstr "Ez a fájl már fel lett töltve"
 
-#: src/gtr-actions-file.c:530
+#: src/gtr-actions-file.c:525
 msgid "Couldn't upload the file"
 msgstr "Nem sikerült feltölteni a fájlt"
 
-#: src/gtr-actions-file.c:533
+#: src/gtr-actions-file.c:528
 #, c-format
 msgid ""
 "%s\n"
@@ -351,45 +1101,39 @@ msgstr ""
 "Talán nem állította be megfelelően az <i>l10n.gnome.org</i> <b>tokenjét</b> "
 "a profiljában, vagy nincs jogosultsága a modul feltöltéséhez."
 
-#: src/gtr-actions-file.c:541
+#: src/gtr-actions-file.c:536
 msgid "The file has been uploaded!"
 msgstr "A fájl fel lett töltve."
 
-#: src/gtr-actions-file.c:681
+#: src/gtr-actions-file.c:675
 msgid "Save file as…"
 msgstr "Fájl mentése másként…"
 
-#: src/gtr-application.c:312
+#: src/gtr-application.c:300
 msgid "Fixed plurals"
 msgstr "Rögzített többes számok"
 
-#: src/gtr-close-confirmation-dialog.c:122 src/gtr-context.c:161
-#: src/gtr-preferences-dialog.c:450 src/gtr-profile-dialog.ui:15
-#: src/gtr-upload-dialog.ui:20
-msgid "_Cancel"
-msgstr "_Mégse"
-
-#: src/gtr-close-confirmation-dialog.c:123
+#: src/gtr-close-confirmation-dialog.c:122
 msgid "Close _Without Saving"
 msgstr "Bezárás mentés _nélkül"
 
-#: src/gtr-close-confirmation-dialog.c:124 src/gtr-context.c:162
+#: src/gtr-close-confirmation-dialog.c:123 src/gtr-context.c:171
 msgid "_Save"
 msgstr "_Mentés"
 
-#: src/gtr-close-confirmation-dialog.c:295
+#: src/gtr-close-confirmation-dialog.c:271
 #, c-format
 msgid "Save the changes to document “%s” before closing?"
 msgstr "Menti a változtatásokat a(z) „%s” dokumentumba bezárása előtt?"
 
-#: src/gtr-close-confirmation-dialog.c:309
+#: src/gtr-close-confirmation-dialog.c:285
 #, c-format
 msgid "Changes to %d document will be permanently lost."
 msgid_plural "Changes to %d documents will be permanently lost."
 msgstr[0] "%d dokumentum változtatásai végleg elvesznek."
 msgstr[1] "%d dokumentum változtatásai végleg elvesznek."
 
-#: src/gtr-close-confirmation-dialog.c:316
+#: src/gtr-close-confirmation-dialog.c:292
 #, c-format
 msgid "There is %d document with unsaved changes. Save changes before closing?"
 msgid_plural ""
@@ -401,67 +1145,51 @@ msgstr[1] ""
 "%d dokumentum nem mentett módosításokat tartalmaz. El szeretné menteni a "
 "változtatásokat bezárás előtt?"
 
-#: src/gtr-context.c:178
+#: src/gtr-context.c:187
 msgid "Edit Notes"
 msgstr "Jegyzetek szerkesztése"
 
-#: src/gtr-context.c:532
+#: src/gtr-context.c:591
 msgid "Open in Browser"
 msgstr "Megnyitás a böngészőben"
 
-#: src/gtr-context.ui:28
-msgid "Notes"
-msgstr "Jegyzetek"
-
-#: src/gtr-context.ui:32 src/gtr-preferences-dialog.c:268
-msgid "Edit"
-msgstr "Szerkesztés"
-
-#: src/gtr-context.ui:62
-msgid "Extracted comments"
-msgstr "Kinyert megjegyzések"
-
-#: src/gtr-context.ui:87
-msgid "Paths"
-msgstr "Útvonalak"
-
-#: src/gtr-dl-teams.c:226
+#: src/gtr-dl-teams.c:223
 msgid "Error loading module info"
 msgstr "Hiba a modul információinak betöltésekor"
 
-#: src/gtr-dl-teams.c:433
+#: src/gtr-dl-teams.c:429
 msgid "Error loading file info"
 msgstr "Hiba a fájl információinak betöltésekor"
 
-#: src/gtr-dl-teams.c:452
+#: src/gtr-dl-teams.c:448
 msgid "No file found"
 msgstr "Nem található fájl"
 
-#: src/gtr-dl-teams.c:461
+#: src/gtr-dl-teams.c:455
 msgid "No module state found."
 msgstr "Nem található modulállapot."
 
-#: src/gtr-dl-teams.c:573
+#: src/gtr-dl-teams.c:567
 msgid "Error loading file"
 msgstr "Hiba a fájl betöltésekor"
 
-#: src/gtr-dl-teams.c:583 src/gtr-dl-teams.c:627
+#: src/gtr-dl-teams.c:577 src/gtr-dl-teams.c:621
 msgid "Error creating tmp file"
 msgstr "Hiba az ideiglenes fájl létrehozásakor"
 
-#: src/gtr-dl-teams.c:596
+#: src/gtr-dl-teams.c:590
 msgid "Error writing stream"
 msgstr "Hiba az adatfolyam írásakor"
 
-#: src/gtr-dl-teams.c:659
+#: src/gtr-dl-teams.c:653
 msgid "The file has been saved in your Downloads folder"
 msgstr "A fájl a Letöltések mappába lett mentve"
 
-#: src/gtr-dl-teams.c:710
+#: src/gtr-dl-teams.c:704
 msgid "Could not reserve module"
 msgstr "Nem sikerült lefoglalni a modult"
 
-#: src/gtr-dl-teams.c:715
+#: src/gtr-dl-teams.c:709
 #, c-format
 msgid ""
 "%s\n"
@@ -472,324 +1200,57 @@ msgstr ""
 "Talán nem állította be megfelelően az l10n.gnome.org tokenjét a profiljában, "
 "vagy nincs jogosultsága a modul lefoglalásához."
 
-#: src/gtr-dl-teams.c:727
+#: src/gtr-dl-teams.c:721
 msgid "The file has been successfully reserved"
 msgstr "A fájl sikeresen lefoglalásra került"
 
-#: src/gtr-dl-teams.ui:11 src/gtr-projects.ui:11 src/gtr-tab.ui:344
-msgid "Preferences"
-msgstr "Beállítások"
-
-#: src/gtr-dl-teams.ui:17 src/gtr-projects.ui:21 src/gtr-tab.ui:350
-msgid "Keyboard Shortcuts"
-msgstr "Gyorsbillentyűk"
-
-#: src/gtr-dl-teams.ui:21 src/gtr-projects.ui:29 src/gtr-tab.ui:358
-msgid "About Translation Editor"
-msgstr "A Fordításszerkesztő névjegye"
-
-#: src/gtr-dl-teams.ui:28 src/gtr-dl-teams.ui:49
-msgid "Load from Damned Lies"
-msgstr "Betöltés a Szemenszedett hazugságokról"
-
-#: src/gtr-dl-teams.ui:41 src/gtr-projects.ui:49 src/gtr-tab.ui:47
-msgid "Main Menu"
-msgstr "Főmenü"
-
-#: src/gtr-dl-teams.ui:70 src/gtr-languages-fetcher.ui:5
-msgid "Language"
-msgstr "Nyelv"
-
-#: src/gtr-dl-teams.ui:75 src/gtr-header-dialog.ui:149
-msgid "Module"
-msgstr "Modul"
-
-#: src/gtr-dl-teams.ui:80 src/gtr-header-dialog.ui:161
-msgid "Domain"
-msgstr "Tartomány"
-
-#: src/gtr-dl-teams.ui:85 src/gtr-header-dialog.ui:155
-msgid "Branch"
-msgstr "Ág"
-
-#: src/gtr-dl-teams.ui:93
-msgid "Reserve for translation"
-msgstr "Lefoglalás fordításhoz"
-
-#: src/gtr-dl-teams.ui:101
-msgid "Info"
-msgstr "Információ"
-
-#: src/gtr-dl-teams.ui:104
-msgid "File"
-msgstr "Fájl"
-
-#: src/gtr-dl-teams.ui:112
-msgid "Translation State"
-msgstr "Fordítás állapota"
-
-#: src/gtr-dl-teams.ui:120
-msgid "Stats"
-msgstr "Statisztikák"
-
-#: src/gtr-dl-teams.ui:133
-msgid "_Load File"
-msgstr "Fájl _betöltése"
-
-#: src/gtr-file-dialogs.c:57
+#: src/gtr-file-dialogs.c:59
 msgid "Gettext translation"
 msgstr "Gettext fordítás"
 
-#: src/gtr-file-dialogs.c:65
+#: src/gtr-file-dialogs.c:67
 msgid "Gettext translation template"
 msgstr "Gettext fordítási sablon"
 
-#: src/gtr-file-dialogs.c:69
+#: src/gtr-file-dialogs.c:71
 msgid "All files"
 msgstr "Minden fájl"
 
-#: src/gtr-greeter.ui:5 src/gtr-greeter.ui:39
-msgid "Welcome to Translation Editor"
-msgstr "Üdvözli a Fordításszerkesztő!"
-
-#: src/gtr-greeter.ui:19
-msgid "_Next"
-msgstr "_Következő"
-
-#: src/gtr-greeter.ui:35
-msgid "Welcome"
-msgstr "Üdvözöljük"
-
-#: src/gtr-greeter.ui:41
-msgid ""
-"Before start to use the application, a profile should be created, but don't "
-"worry, the app will guide you to do it in a minute."
+#: src/gtr-greeter.c:216 src/gtr-profile-dialog.c:133
+#, c-format
+#| msgid ""
+#| "GNOME Damned Lies integration token, go to your profile in https://"
+#| "l10n.gnome.org/ to get it"
+msgid "GNOME Damned Lies integration token, go to your profile in %s to get it"
 msgstr ""
-"Az alkalmazás használatának megkezdése előtt létre kell hozni egy profilt, "
-"de ne aggódjon, az alkalmazás egy perc alatt végigvezeti a folyamaton."
+"A GNOME Szemenszedett hazugságok integrációs tokenje, menjen a %s címen lévő p"
+"rofiljához a beszerzéséhez"
 
-#: src/gtr-greeter.ui:53
-msgid "Create Profile"
-msgstr "Profil létrehozása"
-
-#: src/gtr-greeter.ui:59 src/gtr-profile-dialog.ui:49
-msgid "Profile Information"
-msgstr "Profiladatok"
-
-#: src/gtr-greeter.ui:62 src/gtr-greeter.ui:130 src/gtr-profile-dialog.ui:54
-msgid "Profile name"
-msgstr "Profil neve"
-
-#: src/gtr-greeter.ui:63 src/gtr-profile-dialog.ui:55
-msgid "default"
-msgstr "alapértelmezett"
-
-#: src/gtr-greeter.ui:71 src/gtr-profile-dialog.ui:63
-msgid "Translator Information"
-msgstr "A fordító adatai"
-
-#: src/gtr-greeter.ui:74 src/gtr-profile-dialog.ui:68
-msgid "Translator _name"
-msgstr "Fordító _neve"
-
-#: src/gtr-greeter.ui:80 src/gtr-profile-dialog.ui:74
-msgid "Translator _email"
-msgstr "Fordító _e-mail címe"
-
-#: src/gtr-greeter.ui:86 src/gtr-profile-dialog.ui:80
-msgid "Translation _team email"
-msgstr "Fordító_csapat e-mail-címe"
-
-#: src/gtr-greeter.ui:94 src/gtr-profile-dialog.ui:88
-msgid "Damned Lies Integration"
-msgstr "Szemenszedett hazugságok integráció"
-
-#: src/gtr-greeter.ui:95 src/gtr-profile-dialog.ui:89
-msgid ""
-"GNOME Damned Lies integration token, go to your profile in https://"
-"l10n.gnome.org/ to get it"
-msgstr ""
-"A GNOME Szemenszedett hazugságok integrációs tokenje. Menjen a https://"
-"l10n.gnome.org/ címen lévő profiljához a beszerzéséhez."
-
-#: src/gtr-greeter.ui:98 src/gtr-profile-dialog.ui:94
-msgid "_Damned Lies auth token"
-msgstr "_Szemenszedett hazugságok hitelesítési token"
-
-#: src/gtr-greeter.ui:119 src/gtr-greeter.ui:125
-msgid "Confirmation"
-msgstr "Megerősítés"
-
-#: src/gtr-greeter.ui:135
-msgid "Translator name"
-msgstr "Fordító neve"
-
-#: src/gtr-greeter.ui:140
-msgid "Translator email"
-msgstr "Fordító e-mail címe"
-
-#: src/gtr-greeter.ui:145
-msgid "Team email"
-msgstr "Csapat e-mail címe"
-
-#: src/gtr-greeter.ui:150
-msgid "Language name"
-msgstr "Nyelv neve"
-
-#: src/gtr-greeter.ui:155 src/gtr-languages-fetcher.ui:14
-msgid "Language code"
-msgstr "Nyelv kódja"
-
-#: src/gtr-greeter.ui:160 src/gtr-languages-fetcher.ui:34
-msgid "Character set"
-msgstr "Karakterkészlet"
-
-#: src/gtr-greeter.ui:165 src/gtr-languages-fetcher.ui:54
-msgid "Transfer encoding"
-msgstr "Átviteli kódolás"
-
-#: src/gtr-greeter.ui:170
-msgid "Plural form"
-msgstr "Többes számú alak"
-
-#: src/gtr-header-dialog.c:379 src/gtr-tab.ui:327
-msgid "Edit Header"
-msgstr "Fejléc szerkesztése"
-
-#: src/gtr-header-dialog.ui:10
-msgid "Translator"
-msgstr "Fordító"
-
-#: src/gtr-header-dialog.ui:14 src/gtr-header-dialog.ui:80
-#: src/gtr-header-dialog.ui:140 src/gtr-preferences-dialog.ui:13
-msgid "General"
-msgstr "Általános"
-
-#: src/gtr-header-dialog.ui:17
-msgid "Use my options to complete the following entries"
-msgstr "Használja a beállításaimat a következő bejegyzések kitöltéséhez"
-
-#: src/gtr-header-dialog.ui:22
-msgid "Translator’s _name"
-msgstr "Fordító _neve"
-
-#: src/gtr-header-dialog.ui:28
-msgid "Translator’s _email"
-msgstr "Fordító _e-mail címe"
-
-#: src/gtr-header-dialog.ui:34
-msgid "_Language"
-msgstr "Ny_elv"
-
-#: src/gtr-header-dialog.ui:40
-msgid "Language _code"
-msgstr "Nyelv _kódja"
-
-#: src/gtr-header-dialog.ui:46
-msgid "Language _Team email"
-msgstr "Nyelvi _csapat e-mail-címe"
-
-#: src/gtr-header-dialog.ui:52
-msgid "Char_set"
-msgstr "Karaterké_szlet"
-
-#: src/gtr-header-dialog.ui:58
-msgid "Enc_oding"
-msgstr "Kód_olás"
-
-#: src/gtr-header-dialog.ui:64
-msgid "_Plural forms"
-msgstr "_Többes számú alakok"
-
-#: src/gtr-header-dialog.ui:76
-msgid "Project"
-msgstr "Projekt"
-
-#: src/gtr-header-dialog.ui:83
-msgid "Project Id _version"
-msgstr "Projektazonosító, _verzió"
-
-#: src/gtr-header-dialog.ui:89
-msgid "Pot _file creation date"
-msgstr "POT-_fájl létrehozási dátuma"
-
-#: src/gtr-header-dialog.ui:95
-msgid "Po file _revision date"
-msgstr "PO-fájl _felülvizsgálati dátuma"
-
-#: src/gtr-header-dialog.ui:101
-msgid "Report message _bugs to"
-msgstr "Üzenet_hibák küldése ide"
-
-#: src/gtr-header-dialog.ui:109 src/gtr-upload-dialog.c:146
-msgid "Comment"
-msgstr "Megjegyzés"
-
-#: src/gtr-header-dialog.ui:136
-msgid "Damned Lies"
-msgstr "Szemenszedett hazugságok"
-
-#: src/gtr-header-dialog.ui:143
-msgid "Lang"
-msgstr "Nyelv"
-
-#: src/gtr-header-dialog.ui:167
-msgid "State"
-msgstr "Állapot"
-
-#: src/gtr-header-dialog.ui:173
-msgid "VCS Browser"
-msgstr "Verziókövető rendszer böngésző"
-
-#: src/gtr-lang-combo-row.c:89
+#: src/gtr-lang-combo-row.c:90
 msgid "Languages"
 msgstr "Nyelvek"
 
-#: src/gtr-languages-fetcher.ui:11
-msgid "Edit options manually"
-msgstr "Beállítások kézi szerkesztése"
-
-#: src/gtr-languages-fetcher.ui:21
-msgid "Choose language code"
-msgstr "Nyelvkód kiválasztása"
-
-#: src/gtr-languages-fetcher.ui:74
-msgid "Plural forms"
-msgstr "Többes számú alakok"
-
-#: src/gtr-languages-fetcher.ui:81
-msgid "Choose plural forms"
-msgstr "Többes számú alakok kiválasztása"
-
-#: src/gtr-message-table.ui:35
-msgid "Original Message"
-msgstr "Eredeti üzenet"
-
-#: src/gtr-message-table.ui:43
-msgid "Translated Message"
-msgstr "Lefordított üzenet"
-
-#: src/gtr-po.c:483
+#: src/gtr-po.c:461
 #, c-format
 msgid "The file is empty"
 msgstr "Ez a fájl üres"
 
-#: src/gtr-po.c:492
+#: src/gtr-po.c:470
 #, c-format
 msgid "Failed opening file “%s”: %s"
 msgstr "A(z) „%s” fájl megnyitása sikertelen: %s"
 
-#: src/gtr-po.c:563
+#: src/gtr-po.c:541
 #, c-format
 msgid "Could not convert from charset “%s” to UTF-8"
 msgstr "Nem sikerült átalakítani „%s” karakterkészletről UTF-8-ra"
 
-#: src/gtr-po.c:579 src/gtr-po.c:598
+#: src/gtr-po.c:555 src/gtr-po.c:573
 #, c-format
 msgid "Could not store temporary file for encoding conversion"
 msgstr "Nem sikerült tárolni az ideiglenes fájlt a kódolás átalakításához"
 
-#: src/gtr-po.c:629
+#: src/gtr-po.c:597
 #, c-format
 msgid ""
 "All attempt to convert the file to UTF-8 has failed, use the msgconv or "
@@ -800,17 +1261,17 @@ msgstr ""
 "használja az msgconv vagy az iconv parancssori eszközt, mielőtt megnyitja a "
 "fájlt a GNOME Fordításszerkesztővel."
 
-#: src/gtr-po.c:701
+#: src/gtr-po.c:662
 #, c-format
 msgid "Gettext returned a null message domain list."
 msgstr "A gettext üres üzenettartomány-listát adott vissza."
 
-#: src/gtr-po.c:751
+#: src/gtr-po.c:709
 #, c-format
 msgid "No messages obtained from parser."
 msgstr "Nem érkezett üzenet az értelmezőtől."
 
-#: src/gtr-po.c:817
+#: src/gtr-po.c:775
 #, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
@@ -821,576 +1282,128 @@ msgstr ""
 "A POT-fájlok a binárissá fordítás során jönnek létre.\n"
 "A fájlt valószínűleg „%s.po” néven kellene elmentenie."
 
-#: src/gtr-po.c:847
+#: src/gtr-po.c:805
 #, c-format
 msgid "The file %s is read-only, and can not be overwritten"
 msgstr "A(z) „%s” fájl csak olvasható, nem lehet felülírni"
 
-#: src/gtr-po.c:866 src/gtr-po.c:1409
+#: src/gtr-po.c:824 src/gtr-po.c:1175
 #, c-format
 msgid "There is an error in the PO file: %s"
 msgstr "Hiba van a PO-fájlban: %s"
 
-#: src/gtr-po.c:877
+#: src/gtr-po.c:835
 #, c-format
 msgid "There was an error writing the PO file: %s"
 msgstr "Hiba történt a PO-fájl írásakor: %s"
 
-#: src/gtr-preferences-dialog.c:272
+#: src/gtr-preferences-dialog.c:275
 msgid "Delete"
 msgstr "Törlés"
 
-#: src/gtr-preferences-dialog.c:433
+#: src/gtr-preferences-dialog.c:435
 msgid "Impossible to remove the active profile"
 msgstr "Az aktív profilt nem lehet eltávolítani"
 
-#: src/gtr-preferences-dialog.c:434
+#: src/gtr-preferences-dialog.c:436
 msgid "Another profile should be selected as active before"
 msgstr "Először ki kell választani egy másik profilt aktívként"
 
-#: src/gtr-preferences-dialog.c:437
+#: src/gtr-preferences-dialog.c:439
 msgid "_Ok"
 msgstr "_Rendben"
 
-#: src/gtr-preferences-dialog.c:445
+#: src/gtr-preferences-dialog.c:447
 msgid "Are you sure you want to delete this profile?"
 msgstr "Biztosan törölni szeretné ezt a profilt?"
 
-#: src/gtr-preferences-dialog.c:451
+#: src/gtr-preferences-dialog.c:453
 msgid "_Delete"
 msgstr "_Törlés"
 
-#: src/gtr-preferences-dialog.ui:9
-msgid "F_iles"
-msgstr "_Fájlok"
-
-#: src/gtr-preferences-dialog.ui:16
-msgid "_Warn if PO file contains fuzzy translations"
-msgstr "_Figyelmeztetés, ha a PO-fájl tartalmaz ellenőrzendő fordításokat"
-
-#: src/gtr-preferences-dialog.ui:22
-msgid "_Remove obsolete entries on save"
-msgstr "_Elavult bejegyzések eltávolítása mentéskor"
-
-#: src/gtr-preferences-dialog.ui:30
-msgid "Autosave"
-msgstr "Automatikus mentés"
-
-#: src/gtr-preferences-dialog.ui:33
-msgid "_Activate auto save"
-msgstr "Automatikus mentés _bekapcsolása"
-
-#: src/gtr-preferences-dialog.ui:34
-msgid "Save the current file automatically"
-msgstr "A jelenlegi fájl automatikus mentése"
-
-#: src/gtr-preferences-dialog.ui:40
-msgid "Autosave _Interval"
-msgstr "Automatikus mentés _időköze"
-
-#: src/gtr-preferences-dialog.ui:41
-msgid "Number of minutes to autosave"
-msgstr "Percek száma az automatikus mentéshez"
-
-#: src/gtr-preferences-dialog.ui:56
-msgid "Create a _backup copy of files before saving"
-msgstr "_Biztonsági mentés készítése a fájlok mentése előtt"
-
-#: src/gtr-preferences-dialog.ui:69
-msgid "_Editor"
-msgstr "_Szerkesztő"
-
-#: src/gtr-preferences-dialog.ui:73
-msgid "Text Display"
-msgstr "Szövegmegjelenítés"
-
-#: src/gtr-preferences-dialog.ui:76
-msgid "_Highlight message syntax"
-msgstr "Üzenetszintaxis _kiemelése"
-
-#: src/gtr-preferences-dialog.ui:82
-msgid "Make _whitespace visible"
-msgstr "Üres h_elyek láthatóvá tétele"
-
-#: src/gtr-preferences-dialog.ui:88
-msgid "_Font"
-msgstr "_Betűkészlet"
-
-#: src/gtr-preferences-dialog.ui:106
-msgid "Contents"
-msgstr "Tartalom"
-
-#: src/gtr-preferences-dialog.ui:109
-msgid "_Remove fuzzy status if message is changed"
-msgstr "Ellenő_rzendő állapot eltávolítása, ha az üzenet módosult"
-
-#: src/gtr-preferences-dialog.ui:115
-msgid "Check _spelling"
-msgstr "Helyesírás-ellenőrzé_s"
-
-#: src/gtr-preferences-dialog.ui:128
-msgid "_Profiles"
-msgstr "_Profilok"
-
-#: src/gtr-preferences-dialog.ui:132
-msgid "Profiles"
-msgstr "Profilok"
-
-#: src/gtr-preferences-dialog.ui:143
-msgid "_Add Profile"
-msgstr "Profil _hozzáadása"
-
-#: src/gtr-profile-dialog.ui:7
-msgid "Translation Editor Profile"
-msgstr "Fordításszerkesztő profil"
-
-#: src/gtr-profile-dialog.ui:22
-msgid "_OK"
-msgstr "_OK"
-
-#: src/gtr-projects.ui:15 src/gtr-tab.ui:323
-msgid "Build Translation Memory"
-msgstr "Fordítási memória építése"
-
-#: src/gtr-projects.ui:25 src/gtr-tab.ui:354
-msgid "Help"
-msgstr "Súgó"
-
-#: src/gtr-projects.ui:36
-msgid "Select po File"
-msgstr "PO-fájl kiválasztása"
-
-#: src/gtr-projects.ui:57
-msgid "Open Translation File"
-msgstr "Fordítási fájl megnyitása"
-
-#: src/gtr-projects.ui:58
-msgid "Drag and drop .po files here"
-msgstr "Fogjon meg és ejtsen ide PO-fájlokat"
-
-#: src/gtr-projects.ui:65
-msgid "_Open…"
-msgstr "_Megnyitás…"
-
-#: src/gtr-projects.ui:76
-msgid "_Load from DL…"
-msgstr "_Betöltés az SzH-ról…"
-
-#: src/gtr-search-bar.ui:20
-msgid "Search"
-msgstr "Keresés"
-
-#: src/gtr-search-bar.ui:35
-msgid "Previous Result"
-msgstr "Előző találat"
-
-#: src/gtr-search-bar.ui:41
-msgid "Next Result"
-msgstr "Következő találat"
-
-#: src/gtr-search-bar.ui:58
-msgid "Switch between Search and Search-and-Replace"
-msgstr "Váltás a Keresés és a Keresés és csere között"
-
-#: src/gtr-search-bar.ui:64
-msgid "Show or hide search options such as case sensitivity"
-msgstr ""
-"A keresési beállítások megjelenítése vagy elrejtése, mint például a kis- és "
-"nagybetűk megkülönböztetése"
-
-#: src/gtr-search-bar.ui:90
-msgid "Replace"
-msgstr "Csere"
-
-#: src/gtr-search-bar.ui:96
-msgid "_Replace"
-msgstr "_Csere"
-
-#: src/gtr-search-bar.ui:103
-msgid "Replace _All"
-msgstr "Öss_zes cseréje"
-
-#: src/gtr-search-bar.ui:121
-msgid "Case sensitive"
-msgstr "Kis- és nagybetűk megkülönböztetése"
-
-#: src/gtr-search-bar.ui:131
-msgid "Match whole word only"
-msgstr "Illesztés csak teljes szóra"
-
-#: src/gtr-search-bar.ui:141
-msgid "Wrap around"
-msgstr "Körkörös keresés"
-
-#: src/gtr-search-bar.ui:151
-msgid "Original text"
-msgstr "Eredeti szöveg"
-
-#: src/gtr-search-bar.ui:161
-msgid "Translated text"
-msgstr "Lefordított szöveg"
-
-#: src/gtr-tab.c:346
+#: src/gtr-tab.c:352
 msgid "There is an error in the message"
 msgstr "Egy hiba van az üzenetben"
 
-#: src/gtr-tab.c:565 src/gtr-tab.c:708
+#: src/gtr-tab.c:571 src/gtr-tab.c:714
 msgid "fuzzy"
 msgstr "ellenőrzendő"
 
-#: src/gtr-tab.c:738
+#: src/gtr-tab.c:744
 #, c-format
 msgid "Plural %d"
 msgstr "%d. többes szám"
 
-#. Translators: Path to the document opened
-#: src/gtr-tab.c:1299
-msgid "Path:"
-msgstr "Elérési út:"
-
-#: src/gtr-tab.c:1549
+#: src/gtr-tab.c:1459
 msgid "Copied original to clipboard"
 msgstr "Eredeti másolva a vágólapra"
 
-#: src/gtr-tab.c:1988
+#: src/gtr-tab.c:1736
 #, c-format
 msgid "Translated: %0.2f%%"
 msgstr "Lefordítva: %0.2f%%"
 
-#: src/gtr-tab.c:1989
+#: src/gtr-tab.c:1737
 #, c-format
 msgid "Translated: %d"
 msgstr "Lefordított: %d"
 
-#: src/gtr-tab.c:1990
+#: src/gtr-tab.c:1738
 #, c-format
 msgid "Untranslated: %d"
 msgstr "Lefordítatlan: %d"
 
-#: src/gtr-tab.c:1991
+#: src/gtr-tab.c:1739
 #, c-format
 msgid "Fuzzy: %d"
 msgstr "Ellenőrzendő: %d"
 
-#: src/gtr-tab.ui:14
-msgid "Previous message without translation"
-msgstr "Előző fordítás nélküli üzenet"
-
-#: src/gtr-tab.ui:22
-msgid "Next message without translation"
-msgstr "Következő fordítás nélküli üzenet"
-
-#: src/gtr-tab.ui:37
-msgid "Toggle Fuzzy State"
-msgstr "Ellenőrzendő állapot átkapcsolása"
-
-#: src/gtr-tab.ui:54
-msgid "Find"
-msgstr "Keresés"
-
-#: src/gtr-tab.ui:62
-msgid "Upload File"
-msgstr "Fájl feltöltése"
-
-#. <property name="ypad">5</property>
-#: src/gtr-tab.ui:127 src/gtr-tab.ui:308
-msgid "_Original Message"
-msgstr "_Eredeti üzenet"
-
-#: src/gtr-tab.ui:193
-msgid "Translate_d Text"
-msgstr "Lefor_dított szöveg"
-
-#: src/gtr-tab.ui:272
-msgid "Open a New File"
-msgstr "Új fájl megnyitása"
-
-#: src/gtr-tab.ui:276
-msgid "Open from Damned Lies"
-msgstr "Megnyitás a Szemenszedett hazugságokról"
-
-#: src/gtr-tab.ui:282
-msgid "Save"
-msgstr "Mentés"
-
-#: src/gtr-tab.ui:286
-msgid "Save As…"
-msgstr "Mentés másként…"
-
-#: src/gtr-tab.ui:290
-msgid "Update from Template…"
-msgstr "Frissítés sablonból…"
-
-#: src/gtr-tab.ui:296
-msgid "So_rt Messages by…"
-msgstr "Üzenetek _rendezési szempontja…"
-
-#: src/gtr-tab.ui:298
-msgid "_Order of Appearance"
-msgstr "Megjelenés s_orrendje"
-
-#: src/gtr-tab.ui:303
-msgid "_Message Status"
-msgstr "Ü_zenet állapota"
-
-#: src/gtr-tab.ui:313
-msgid "_Translated Message"
-msgstr "_Lefordított üzenet"
-
-#: src/gtr-tab.ui:319
-msgid "Show ID Column"
-msgstr "Azonosító oszlop megjelenítése"
-
-#: src/gtr-tab.ui:331
-msgid "Advanced Tools"
-msgstr "Speciális eszközök"
-
-#: src/gtr-tab.ui:333
-msgid "Fix plural messages"
-msgstr "Többes számú üzenetek javítása"
-
-#: src/gtr-upload-dialog.c:198
-msgid "Uploading..."
+#: src/gtr-upload-dialog.c:203
+#| msgid "Uploading..."
+msgid "Uploading…"
 msgstr "Feltöltés…"
 
-#: src/gtr-upload-dialog.c:204
+#: src/gtr-upload-dialog.c:209
 msgid "Upload"
 msgstr "Feltöltés"
 
-#: src/gtr-upload-dialog.ui:6
-msgid "Upload to Damned Lies"
-msgstr "Feltöltés a Szemenszedett hazugságokra"
-
-#: src/gtr-upload-dialog.ui:27
-msgid "_Upload"
-msgstr "_Feltöltés"
-
 #. Translators: this is the title of the window with a modified document
-#: src/gtr-window.c:189
+#: src/gtr-window.c:179
 #, c-format
 msgid "*%s — Translation Editor"
 msgstr "*%s – Fordításszerkesztő"
 
 #. Translators: this is the title of the window with a document opened
-#: src/gtr-window.c:196
+#: src/gtr-window.c:186
 #, c-format
 msgid "%s — Translation Editor"
 msgstr "%s – Fordításszerkesztő"
 
-#: src/gtr-window.c:346
+#: src/gtr-window.c:336
 msgid "Could not Save"
 msgstr "Nem sikerült menteni"
 
-#: src/gtr-window.c:358
+#: src/gtr-window.c:348
 msgid "File saved"
 msgstr "A fájl elmentve"
 
-#: src/main.c:97
-msgid "— Edit PO files"
-msgstr "– PO-fájlok szerkesztése"
-
-#: src/main.c:101
-#, c-format
-msgid ""
-"%s\n"
-"Run “%s --help” to see a full list of available command line options.\n"
-msgstr ""
-"%s\n"
-"Az elérhető parancssori kapcsolók teljes listájáért adja ki a „%s --help” "
-"parancsot.\n"
-
-#: src/shortcuts-dialog.ui:6
-msgctxt "shortcut window group"
-msgid "General"
-msgstr "Általános"
-
-#: src/shortcuts-dialog.ui:10
-msgctxt "shortcut window"
-msgid "Open file"
-msgstr "Fájl megnyitása"
-
-#: src/shortcuts-dialog.ui:16
-msgctxt "shortcut window"
-msgid "Save the current file"
-msgstr "Jelenlegi fájl mentése"
-
-#: src/shortcuts-dialog.ui:22
-msgctxt "shortcut window"
-msgid "Save the current file as"
-msgstr "Jelenlegi fájl mentése más néven"
-
-#: src/shortcuts-dialog.ui:28
-msgctxt "shortcut window"
-msgid "Download from DL"
-msgstr "Letöltés az SzH-ról…"
-
-#: src/shortcuts-dialog.ui:34
-msgctxt "shortcut window"
-msgid "Upload to DL"
-msgstr "Feltöltés az SzH-ra"
-
-#: src/shortcuts-dialog.ui:40
-msgctxt "shortcut window"
-msgid "Preferences"
-msgstr "Beállítások"
-
-#: src/shortcuts-dialog.ui:46
-msgctxt "shortcut window"
-msgid "Keyboard Shortcuts"
-msgstr "Gyorsbillentyűk"
-
-#: src/shortcuts-dialog.ui:52
-msgctxt "shortcut window"
-msgid "Help"
-msgstr "Súgó"
-
-#: src/shortcuts-dialog.ui:58
-msgctxt "shortcut window"
-msgid "New Window"
-msgstr "Új ablak"
-
-#: src/shortcuts-dialog.ui:63
-msgctxt "shortcut window"
-msgid "Close Window"
-msgstr "Ablak bezárása"
-
-#: src/shortcuts-dialog.ui:70
-msgctxt "shortcut window"
-msgid "Quit"
-msgstr "Kilépés"
-
-#: src/shortcuts-dialog.ui:78
-msgctxt "shortcut window group"
-msgid "Edit"
-msgstr "Szerkesztés"
-
-#: src/shortcuts-dialog.ui:82
-msgctxt "shortcut window"
-msgid "Clear translation"
-msgstr "Fordítás törlése"
-
-#: src/shortcuts-dialog.ui:88
-msgctxt "shortcut window"
-msgid "Mark/Unmark as fuzzy"
-msgstr "Megjelölés ellenőrzendőként vagy megjelölés törlése"
-
-#: src/shortcuts-dialog.ui:94
-msgctxt "shortcut window"
-msgid "Copy original text to translation"
-msgstr "Eredeti szöveg másolása a fordításba"
-
-#: src/shortcuts-dialog.ui:100
-msgctxt "shortcut window"
-msgid "Copy original text to clipboard"
-msgstr "Eredeti szöveg másolása a vágólapra"
-
-#: src/shortcuts-dialog.ui:108
-msgctxt "shortcut window group"
-msgid "Navigation"
-msgstr "Navigáció"
-
-#: src/shortcuts-dialog.ui:112
-msgctxt "shortcut window"
-msgid "Go to the previous message"
-msgstr "Ugrás az előző üzenetre"
-
-#: src/shortcuts-dialog.ui:118
-msgctxt "shortcut window"
-msgid "Go to the next message"
-msgstr "Ugrás a következő üzenetre"
-
-#: src/shortcuts-dialog.ui:124
-msgctxt "shortcut window"
-msgid "Go to the previous untranslated message"
-msgstr "Ugrás az előző lefordítatlan üzenetre"
-
-#: src/shortcuts-dialog.ui:130
-msgctxt "shortcut window"
-msgid "Go to the next untranslated message"
-msgstr "Ugrás a következő lefordítatlan üzenetre"
-
-#: src/shortcuts-dialog.ui:138
-msgctxt "shortcut window group"
-msgid "Translation Memory"
-msgstr "Fordítási memória"
-
-#: src/shortcuts-dialog.ui:142
-msgctxt "shortcut window"
-msgid "Build translation memory"
-msgstr "Fordítási memória építése"
-
-#: src/shortcuts-dialog.ui:148
-msgctxt "shortcut window"
-msgid "Use 1st...9th suggestion"
-msgstr "1-9. javaslat használata"
-
-#: src/shortcuts-dialog.ui:156
-msgctxt "shortcut window group"
-msgid "Find & Replace"
-msgstr "Keresés és csere"
-
-#: src/shortcuts-dialog.ui:160
-msgctxt "shortcut window"
-msgid "Find"
-msgstr "Keresés"
-
-#: src/shortcuts-dialog.ui:166
-msgctxt "shortcut window"
-msgid "Find & Replace"
-msgstr "Keresés és csere"
-
-#: src/shortcuts-dialog.ui:172
-msgctxt "shortcut window"
-msgid "Forward-search"
-msgstr "Keresés előre"
-
-#: src/shortcuts-dialog.ui:178
-msgctxt "shortcut window"
-msgid "Backward-search"
-msgstr "Keresés vissza"
-
-#: src/shortcuts-dialog.ui:184
-msgctxt "shortcut window"
-msgid "Hide find & replace bar"
-msgstr "Keresés és csere sáv elrejtése"
-
-#: src/translation-memory/gtr-translation-memory-dialog.c:77
+#: src/translation-memory/gtr-translation-memory-dialog.c:80
 msgid "Select PO directory"
 msgstr "Válasszon PO könyvtárat"
 
-#: src/translation-memory/gtr-translation-memory-dialog.ui:7
-msgid "Translation Editor Memory Manager"
-msgstr "Fordításszerkesztő fordításimemória-kezelő"
-
-#: src/translation-memory/gtr-translation-memory-dialog.ui:43
-msgid "Database"
-msgstr "Adatbázis"
-
-#: src/translation-memory/gtr-translation-memory-dialog.ui:48
-msgid "Select the directory which contains PO files"
-msgstr "Válassza ki a PO-fájlokat tartalmazó könyvtárat"
-
-#: src/translation-memory/gtr-translation-memory-dialog.ui:60
-msgid "Use only files with this name"
-msgstr "Csak ilyen nevű fájlok használata"
-
-#: src/translation-memory/gtr-translation-memory-dialog.ui:79
-msgid "_Add to Database"
-msgstr "_Hozzáadás az adatbázishoz"
-
-#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:5
+#: src/translation-memory/org.gnome.Gtranslator.plugins.translation-memory.gschema.xml.in:5
 msgid "PO directory"
 msgstr "PO könyvtár"
 
-#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:6
+#: src/translation-memory/org.gnome.Gtranslator.plugins.translation-memory.gschema.xml.in:6
 msgid "Directory containing PO files to add to the translation memory."
 msgstr "A fordítási memóriához adandó PO-fájlokat tartalmazó könyvtár."
 
-#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:12
+#: src/translation-memory/org.gnome.Gtranslator.plugins.translation-memory.gschema.xml.in:12
 msgid "Restrict search by filename"
 msgstr "Fájlnévre szűkített keresés"
 
-#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:13
+#: src/translation-memory/org.gnome.Gtranslator.plugins.translation-memory.gschema.xml.in:13
 msgid ""
 "If true, only include files with a specified filename when searching the "
 "translation memory."
@@ -1398,20 +1411,20 @@ msgstr ""
 "Ha be van állítva, akkor csak az adott nevű fájlok használata a fordítási "
 "memóriában kereséshez."
 
-#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:20
+#: src/translation-memory/org.gnome.Gtranslator.plugins.translation-memory.gschema.xml.in:20
 msgid "Filename to restrict search to"
 msgstr "Keresés korlátozása ezen fájlnévre"
 
-#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:21
+#: src/translation-memory/org.gnome.Gtranslator.plugins.translation-memory.gschema.xml.in:21
 msgid ""
 "Filename to which searching of the translation memory should be restricted."
 msgstr "A fordítási memóriában keresés korlátozása ezen fájlnévre."
 
-#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:28
+#: src/translation-memory/org.gnome.Gtranslator.plugins.translation-memory.gschema.xml.in:28
 msgid "Maximum number of missing words"
 msgstr "A hiányzó szavak legnagyobb száma"
 
-#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:29
+#: src/translation-memory/org.gnome.Gtranslator.plugins.translation-memory.gschema.xml.in:29
 msgid ""
 "Maximum number of words that can be missing from a message displayed as a "
 "match by the translation memory."
@@ -1419,11 +1432,11 @@ msgstr ""
 "Szavak legnagyobb száma, amelyek hiányozhatnak egy, a fordítási memória "
 "által találatként megjelenített üzenetből."
 
-#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:36
+#: src/translation-memory/org.gnome.Gtranslator.plugins.translation-memory.gschema.xml.in:36
 msgid "Maximum difference in message length"
 msgstr "Az üzenetek hosszának legnagyobb különbsége"
 
-#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:37
+#: src/translation-memory/org.gnome.Gtranslator.plugins.translation-memory.gschema.xml.in:37
 msgid ""
 "Maximum difference in length between messages displayed as matches by the "
 "translation memory."
