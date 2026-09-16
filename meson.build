@@ -1,7 +1,7 @@
 project(
   'gtranslator',
   'c',
-  version: '50.0',
+  version: '51.0',
   license: 'GPL-3.0-or-later',
   meson_version: '>= 1.7',
   default_options : [
