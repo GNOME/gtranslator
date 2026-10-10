@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator gnome-3-38\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2026-09-04 17:19+0000\n"
-"PO-Revision-Date: 2026-08-04 10:12+0200\n"
+"POT-Creation-Date: 2026-10-06 21:03+0000\n"
+"PO-Revision-Date: 2026-10-10 21:51+0300\n"
 "Last-Translator: Antonio Marin <gnmer.6qxyg@slmail.me>\n"
 "Language-Team: Romanian <gnomero-list@lists.sourceforge.net>\n"
 "Language: ro\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
 "20)) ? 1 : 2);\n"
-"X-Generator: Gtranslator 50.0\n"
+"X-Generator: Gtranslator 51.0\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-DL-VCS-Web: https://gitlab.gnome.org/GNOME/gtranslator/\n"
 "X-DL-Lang: ro\n"
@@ -147,7 +147,7 @@ msgstr ""
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:89
 msgid "Remove fuzzy status when message is changed"
-msgstr "Elimină starea „de revizuit” când mesajul este modificat"
+msgstr "Elimină starea „de revizuit” când șirul este modificat"
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:90
 msgid "If true, remove fuzzy status from translations when they are changed."
@@ -211,8 +211,8 @@ msgstr ""
 "Gtranslator este o aplicație de modificat fișiere PO, bazată pe gettext, "
 "pentru interfața GNOME. Administrează toate formele de fișiere po și include "
 "caracteristici folositoare precum căutare/înlocuire, memorie de traducere, "
-"profiluri diferite pentru traducător, tabel de mesaje (pentru a avea o "
-"vedere de ansamblu a traducerilor/mesajelor din fișierul PO), navigare "
+"profiluri diferite pentru traducător, tabel cu șiruri (pentru a avea o "
+"vedere de ansamblu a traducerilor/șirurilor din fișierul PO), navigare "
 "facilă și modificarea traducerii și a comentariilor unde este nevoie."
 
 #: data/org.gnome.Gtranslator.metainfo.xml.in.in:19
@@ -230,8 +230,8 @@ msgid "Translator's main interface"
 msgstr "Intefața principală"
 
 #. developer_name tag deprecated with Appstream 1.0
-#: data/org.gnome.Gtranslator.metainfo.xml.in.in:323
-#: data/org.gnome.Gtranslator.metainfo.xml.in.in:325
+#: data/org.gnome.Gtranslator.metainfo.xml.in.in:341
+#: data/org.gnome.Gtranslator.metainfo.xml.in.in:343
 msgid "Daniel García Moreno"
 msgstr "Daniel García Moreno"
 
@@ -293,7 +293,7 @@ msgstr "Ramura"
 
 #: data/ui/gtr-dl-teams.ui:93
 msgid "Reserve for translation"
-msgstr "Rezervă pentru tradus"
+msgstr "Rezervă pentru traducere"
 
 #: data/ui/gtr-dl-teams.ui:101
 msgid "Info"
@@ -583,7 +583,7 @@ msgstr "Conținut"
 
 #: data/ui/gtr-preferences-dialog.ui:109
 msgid "_Remove fuzzy status if message is changed"
-msgstr "_Elimină starea „de revizuit” dacă mesajul este modificat"
+msgstr "_Elimină starea „de revizuit” dacă șirul este modificat"
 
 #: data/ui/gtr-preferences-dialog.ui:115
 msgid "Check _spelling"
@@ -755,11 +755,11 @@ msgstr "_Ordinea apariției"
 
 #: data/ui/gtr-tab.ui:303
 msgid "_Message Status"
-msgstr "Starea _mesajului"
+msgstr "Starea șir_ului"
 
 #: data/ui/gtr-tab.ui:313
 msgid "_Translated Message"
-msgstr "Mesajul _tradus"
+msgstr "Șirul _tradus"
 
 #: data/ui/gtr-tab.ui:319
 msgid "Show ID Column"
@@ -1256,7 +1256,7 @@ msgstr "Gettex a restituit o listă goală de domenii."
 #: src/gtr-po.c:709
 #, c-format
 msgid "No messages obtained from parser."
-msgstr "Niciun mesaj obținut de la parser."
+msgstr "Nu s-au găsit șiruri în fișierul cu traduceri."
 
 #: src/gtr-po.c:775
 #, c-format
@@ -1417,8 +1417,8 @@ msgid ""
 "Maximum number of words that can be missing from a message displayed as a "
 "match by the translation memory."
 msgstr ""
-"Numărul maxim de cuvinte care pot lipsi din șirul afișat de memoria de "
-"traduceri ca potrivire."
+"Numărul maxim de cuvinte care pot lipsi dintr-un șir pentru ca acesta să fie "
+"afișat ca potrivire de către memoria de traducere."
 
 #: src/translation-memory/org.gnome.Gtranslator.plugins.translation-memory.gschema.xml.in:36
 msgid "Maximum difference in message length"
