@@ -49,7 +49,7 @@ on_uri_launch (GObject *object, GAsyncResult *result, gpointer user_data)
   g_app_info_launch_default_for_uri_finish (result, &error);
 
   if (error)
-    g_error ("Could not open help: %s", error->message);
+    g_warning ("Could not open help: %s", error->message);
 }
 
 char *

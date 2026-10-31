@@ -782,12 +782,12 @@ prepare_statement (sqlite3    *db,
 
   if (rc != SQLITE_OK)
     {
-      g_error ("gtr-gda.c: prepare_statement: "
-               "sqlite3_prepare_v2 failed.\n"
-               "query: %s\n"
-               "error message: %s\n",
-               query,
-               sqlite3_errmsg (db));
+      g_warning ("gtr-gda.c: prepare_statement: "
+                 "sqlite3_prepare_v2 failed.\n"
+                 "query: %s\n"
+                 "error message: %s\n",
+                 query,
+                 sqlite3_errmsg (db));
     }
   return statement;
 }

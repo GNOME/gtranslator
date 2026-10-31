@@ -780,7 +780,7 @@ on_launch (GObject *object, GAsyncResult *result, gpointer user_data)
   gtk_uri_launcher_launch_finish (GTK_URI_LAUNCHER (object), result, &error);
 
   if (error)
-    g_error ("Could not open uri: %s", error->message);
+    g_warning ("Could not open uri: %s", error->message);
 }
 
 void

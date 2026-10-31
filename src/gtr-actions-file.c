@@ -452,7 +452,7 @@ save_dialog_response_cb (GObject *source, GAsyncResult *res, void *user_data)
                                              "ok");
       adw_dialog_present (ADW_DIALOG (alert_dialog), GTK_WIDGET (window));
 
-      g_error ("Could not save file: %s", save_error->message);
+      g_warning ("Could not save file: %s", save_error->message);
 
       return;
     }

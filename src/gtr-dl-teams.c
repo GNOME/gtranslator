@@ -646,7 +646,7 @@ gtr_dl_teams_download_file_done (GObject *object, GAsyncResult *result, gpointer
       // Save to update the headers
       gtr_po_save_file (po, &po_error);
       if (po_error)
-        g_error ("Could not save po file %s", po_error->message);
+        g_warning ("Could not save po file %s", po_error->message);
 
       gtr_window_set_po (priv->main_window, po);
       tab = gtr_window_get_active_tab (priv->main_window);
